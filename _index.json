@@ -1,0 +1,35 @@
+{
+  "schema": "puff_share_index",
+  "schemaVersion": 1,
+  "generatedAt": "2026-09-21T08:17:33.232Z",
+  "folders": [
+    {
+      "count": 1
+    },
+    {
+      "name": "装扮",
+      "count": 1
+    }
+  ],
+  "entries": [
+    {
+      "name": "装扮",
+      "type": "dir",
+      "path": "资源/装扮",
+      "files": [],
+      "images": [],
+      "description": "",
+      "updatedAt": "2026-09-21T16:16:10+08:00"
+    },
+    {
+      "folder": "装扮",
+      "name": "欢迎",
+      "type": "dir",
+      "path": "资源/装扮/欢迎",
+      "files": [],
+      "images": [],
+      "description": "Puff 资源集市测试资源。在 App 里点「一键应用」或浏览同目录下的文件即可。",
+      "updatedAt": "2026-09-21T16:16:10+08:00"
+    }
+  ]
+}
