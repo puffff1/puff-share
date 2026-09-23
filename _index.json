@@ -1,7 +1,7 @@
 {
   "schema": "puff_share_index",
   "schemaVersion": 1,
-  "generatedAt": "2026-09-23T11:29:31.335Z",
+  "generatedAt": "2026-09-23T13:25:03.579Z",
   "folders": [
     {
       "name": "App",
@@ -13,6 +13,10 @@
     },
     {
       "name": "其他",
+      "count": 1
+    },
+    {
+      "name": "插件",
       "count": 1
     },
     {
@@ -110,6 +114,20 @@
         "夜间",
         "气泡"
       ]
+    },
+    {
+      "folder": "插件",
+      "name": "puff代码编辑器",
+      "type": "dir",
+      "path": "资源/插件/puff代码编辑器",
+      "files": [
+        "资源/插件/puff代码编辑器/puff_h.js"
+      ],
+      "images": [
+        "资源/插件/puff代码编辑器/b.jpg"
+      ],
+      "description": "",
+      "updatedAt": "2026-09-23T21:24:50+08:00"
     },
     {
       "folder": "美化",
