@@ -1,7 +1,7 @@
 {
   "schema": "puff_share_index",
   "schemaVersion": 1,
-  "generatedAt": "2026-09-23T15:51:24.442Z",
+  "generatedAt": "2026-09-23T17:38:34.989Z",
   "folders": [
     {
       "name": "App",
@@ -21,7 +21,7 @@
     },
     {
       "name": "美化",
-      "count": 4
+      "count": 8
     },
     {
       "name": "表情包",
@@ -195,6 +195,64 @@
       "updatedAt": "2026-09-23T10:09:27+08:00",
       "access": "like",
       "tags": []
+    },
+    {
+      "folder": "美化",
+      "name": "樱桃粉白",
+      "type": "dir",
+      "path": "资源/美化/樱桃粉白",
+      "files": [
+        "资源/美化/樱桃粉白/樱桃粉白.json"
+      ],
+      "images": [
+        "资源/美化/樱桃粉白/1000114074.jpg",
+        "资源/美化/樱桃粉白/封面.jpg"
+      ],
+      "description": "",
+      "updatedAt": "2026-09-24T01:37:51+08:00"
+    },
+    {
+      "folder": "美化",
+      "name": "樱桃粉白列表",
+      "type": "dir",
+      "path": "资源/美化/樱桃粉白列表",
+      "files": [
+        "资源/美化/樱桃粉白列表/樱桃粉白列表.json"
+      ],
+      "images": [
+        "资源/美化/樱桃粉白列表/封面.jpg"
+      ],
+      "description": "",
+      "updatedAt": "2026-09-24T01:38:20+08:00"
+    },
+    {
+      "folder": "美化",
+      "name": "樱桃粉白对话",
+      "type": "dir",
+      "path": "资源/美化/樱桃粉白对话",
+      "files": [
+        "资源/美化/樱桃粉白对话/樱桃粉白对话.json"
+      ],
+      "images": [
+        "资源/美化/樱桃粉白对话/封面.jpg"
+      ],
+      "description": "",
+      "updatedAt": "2026-09-24T01:38:12+08:00"
+    },
+    {
+      "folder": "美化",
+      "name": "樱桃粉白线下",
+      "type": "dir",
+      "path": "资源/美化/樱桃粉白线下",
+      "files": [
+        "资源/美化/樱桃粉白线下/樱桃粉白线下.json"
+      ],
+      "images": [
+        "资源/美化/樱桃粉白线下/1000114078.jpg",
+        "资源/美化/樱桃粉白线下/封面.jpg"
+      ],
+      "description": "",
+      "updatedAt": "2026-09-24T01:38:05+08:00"
     },
     {
       "folder": "美化",
