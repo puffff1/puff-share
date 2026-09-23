@@ -53,21 +53,7 @@ function walkResourceTree() {
           if (HIDDEN.has(name)) continue;
           scanDir(abs, [RESOURCE_ROOT, name]);
         } else if (relParts.length === 1) {
-          const folder = relParts[1];
-          const entryMap = ensureFolder(folder);
-          const key = `dir:${rel}`;
-          if (!entryMap.has(key)) {
-            entryMap.set(key, {
-              folder,
-              name,
-              type: 'dir',
-              path: rel,
-              files: [],
-              images: [],
-              description: '',
-              updatedAt: gitTime(rel),
-            });
-          }
+          if (HIDDEN.has(name)) continue;
           scanDir(abs, relParts.concat(name));
         } else if (relParts.length === 2) {
           scanDir(abs, relParts.concat(name));
@@ -131,6 +117,24 @@ function walkResourceTree() {
   }
 
   scanDir(rootPath, [RESOURCE_ROOT]);
+
+  for (const entryMap of folderMap.values()) {
+    for (const entry of entryMap.values()) {
+      try {
+        const meta = JSON.parse(readFileSync(join(ROOT, entry.path, '.meta.json'), 'utf8'));
+        if (typeof meta.author === 'string' && meta.author.trim()) entry.author = meta.author.trim();
+        if (typeof meta.description === 'string' && meta.description.trim()) {
+          entry.description = meta.description.trim().slice(0, 500);
+        }
+        if (typeof meta.access === 'string' && meta.access.trim()) entry.access = meta.access.trim();
+        if (Array.isArray(meta.tags)) {
+          entry.tags = meta.tags.map((tag) => String(tag || '').trim()).filter(Boolean).slice(0, 8);
+        }
+      } catch {
+        /* 没有侧写信息 */
+      }
+    }
+  }
 
   const folders = [];
   const entries = [];
