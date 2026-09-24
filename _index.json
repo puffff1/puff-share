@@ -1,7 +1,7 @@
 {
   "schema": "puff_share_index",
   "schemaVersion": 1,
-  "generatedAt": "2026-09-24T11:22:49.939Z",
+  "generatedAt": "2026-09-24T11:44:20.288Z",
   "folders": [
     {
       "name": "App",
@@ -21,7 +21,7 @@
     },
     {
       "name": "美化",
-      "count": 12
+      "count": 13
     },
     {
       "name": "表情包",
@@ -312,6 +312,24 @@
       ],
       "description": "",
       "updatedAt": "2026-09-24T01:38:05+08:00"
+    },
+    {
+      "folder": "美化",
+      "name": "淡淡蓝粉黄ios玻璃线下美化",
+      "type": "dir",
+      "path": "资源/美化/淡淡蓝粉黄ios玻璃线下美化",
+      "files": [
+        "资源/美化/淡淡蓝粉黄ios玻璃线下美化/淡粉ios玻璃线下美化.json",
+        "资源/美化/淡淡蓝粉黄ios玻璃线下美化/淡蓝ios玻璃线下美化.json",
+        "资源/美化/淡淡蓝粉黄ios玻璃线下美化/淡黄ios玻璃线下美化.json"
+      ],
+      "images": [
+        "资源/美化/淡淡蓝粉黄ios玻璃线下美化/1000058037.jpg",
+        "资源/美化/淡淡蓝粉黄ios玻璃线下美化/1000058038.jpg",
+        "资源/美化/淡淡蓝粉黄ios玻璃线下美化/封面.jpg"
+      ],
+      "description": "",
+      "updatedAt": "2026-09-24T19:44:07+08:00"
     },
     {
       "folder": "美化",
