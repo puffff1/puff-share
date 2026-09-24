@@ -1,11 +1,11 @@
 {
   "schema": "puff_share_index",
   "schemaVersion": 1,
-  "generatedAt": "2026-09-24T01:53:12.928Z",
+  "generatedAt": "2026-09-24T05:15:50.500Z",
   "folders": [
     {
       "name": "App",
-      "count": 1
+      "count": 2
     },
     {
       "name": "世界书",
@@ -50,6 +50,21 @@
       ],
       "description": "",
       "updatedAt": "2026-09-23T18:13:26+08:00"
+    },
+    {
+      "folder": "App",
+      "name": "相册APP",
+      "type": "dir",
+      "path": "资源/App/相册APP",
+      "files": [
+        "资源/App/相册APP/js"
+      ],
+      "images": [
+        "资源/App/相册APP/Screenshot_2026-09-23-17-37-13-171_os.puff.app.jpg",
+        "资源/App/相册APP/b.jpg"
+      ],
+      "description": "",
+      "updatedAt": "2026-09-24T13:15:29+08:00"
     },
     {
       "folder": "世界书",
