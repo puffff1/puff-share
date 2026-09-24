@@ -1,7 +1,7 @@
 {
   "schema": "puff_share_index",
   "schemaVersion": 1,
-  "generatedAt": "2026-09-24T05:47:58.115Z",
+  "generatedAt": "2026-09-24T07:01:20.853Z",
   "folders": [
     {
       "name": "App",
@@ -25,7 +25,7 @@
     },
     {
       "name": "表情包",
-      "count": 2
+      "count": 3
     },
     {
       "name": "装扮",
@@ -340,6 +340,20 @@
       ],
       "description": "",
       "updatedAt": "2026-09-24T06:29:18+08:00"
+    },
+    {
+      "folder": "表情包",
+      "name": "ganadi",
+      "type": "dir",
+      "path": "资源/表情包/ganadi",
+      "files": [
+        "资源/表情包/ganadi/Ganadi狗_表情包_有预览_.docx"
+      ],
+      "images": [
+        "资源/表情包/ganadi/DM-20260915213503-031.png"
+      ],
+      "description": "",
+      "updatedAt": "2026-09-24T15:01:04+08:00"
     },
     {
       "folder": "表情包",
