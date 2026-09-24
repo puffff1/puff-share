@@ -1,7 +1,7 @@
 {
   "schema": "puff_share_index",
   "schemaVersion": 1,
-  "generatedAt": "2026-09-24T10:47:05.422Z",
+  "generatedAt": "2026-09-24T11:22:49.939Z",
   "folders": [
     {
       "name": "App",
@@ -33,7 +33,7 @@
     },
     {
       "name": "角色卡",
-      "count": 7
+      "count": 8
     }
   ],
   "entries": [
@@ -469,6 +469,21 @@
       ],
       "description": "",
       "updatedAt": "2026-09-23T21:56:21+08:00"
+    },
+    {
+      "folder": "角色卡",
+      "name": "崽崽｜在puff养一个6岁小孩吧",
+      "type": "dir",
+      "path": "资源/角色卡/崽崽｜在puff养一个6岁小孩吧",
+      "files": [
+        "资源/角色卡/崽崽｜在puff养一个6岁小孩吧/真_小孩_崽崽_角色卡_V2_by世界上最幸运的人.docx"
+      ],
+      "images": [
+        "资源/角色卡/崽崽｜在puff养一个6岁小孩吧/Screenshot_20260924_185246.jpg",
+        "资源/角色卡/崽崽｜在puff养一个6岁小孩吧/封面.png"
+      ],
+      "description": "",
+      "updatedAt": "2026-09-24T19:22:35+08:00"
     },
     {
       "folder": "角色卡",
