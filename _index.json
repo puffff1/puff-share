@@ -1,7 +1,7 @@
 {
   "schema": "puff_share_index",
   "schemaVersion": 1,
-  "generatedAt": "2026-09-24T11:44:20.288Z",
+  "generatedAt": "2026-09-24T13:20:52.731Z",
   "folders": [
     {
       "name": "App",
@@ -25,7 +25,7 @@
     },
     {
       "name": "表情包",
-      "count": 5
+      "count": 6
     },
     {
       "name": "装扮",
@@ -434,6 +434,20 @@
       ],
       "description": "",
       "updatedAt": "2026-09-24T18:46:38+08:00"
+    },
+    {
+      "folder": "表情包",
+      "name": "熊猫饺子表情包",
+      "type": "dir",
+      "path": "资源/表情包/熊猫饺子表情包",
+      "files": [
+        "资源/表情包/熊猫饺子表情包/zP.docx"
+      ],
+      "images": [
+        "资源/表情包/熊猫饺子表情包/21140.png"
+      ],
+      "description": "",
+      "updatedAt": "2026-09-24T21:20:38+08:00"
     },
     {
       "folder": "表情包",
