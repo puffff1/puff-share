@@ -1,7 +1,7 @@
 {
   "schema": "puff_share_index",
   "schemaVersion": 1,
-  "generatedAt": "2026-09-24T01:35:24.783Z",
+  "generatedAt": "2026-09-24T01:53:12.928Z",
   "folders": [
     {
       "name": "App",
@@ -289,13 +289,14 @@
       "path": "资源/美化/深渊美学",
       "files": [
         "资源/美化/深渊美学/深渊美学.json",
-        "资源/美化/深渊美学/深渊美学_夜间.json"
+        "资源/美化/深渊美学/深渊美学_夜间.json",
+        "资源/美化/深渊美学/筑紫字体_旧宋.json"
       ],
       "images": [
         "资源/美化/深渊美学/封面.png"
       ],
       "description": "",
-      "updatedAt": "2026-09-24T09:35:07+08:00"
+      "updatedAt": "2026-09-24T09:52:55+08:00"
     },
     {
       "folder": "美化",
