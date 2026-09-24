@@ -1,7 +1,7 @@
 {
   "schema": "puff_share_index",
   "schemaVersion": 1,
-  "generatedAt": "2026-09-24T13:46:34.122Z",
+  "generatedAt": "2026-09-24T15:56:21.244Z",
   "folders": [
     {
       "name": "App",
@@ -25,7 +25,7 @@
     },
     {
       "name": "表情包",
-      "count": 6
+      "count": 7
     },
     {
       "name": "装扮",
@@ -402,6 +402,20 @@
       ],
       "description": "",
       "updatedAt": "2026-09-24T18:46:49+08:00"
+    },
+    {
+      "folder": "表情包",
+      "name": "galgame状态栏表情包",
+      "type": "dir",
+      "path": "资源/表情包/galgame状态栏表情包",
+      "files": [
+        "资源/表情包/galgame状态栏表情包/glagame状态栏表情包.docx"
+      ],
+      "images": [
+        "资源/表情包/galgame状态栏表情包/IMG_7279.png"
+      ],
+      "description": "",
+      "updatedAt": "2026-09-24T23:56:04+08:00"
     },
     {
       "folder": "表情包",
