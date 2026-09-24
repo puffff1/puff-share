@@ -1,7 +1,7 @@
 {
   "schema": "puff_share_index",
   "schemaVersion": 1,
-  "generatedAt": "2026-09-24T00:56:32.827Z",
+  "generatedAt": "2026-09-24T00:57:00.943Z",
   "folders": [
     {
       "name": "App",
@@ -290,9 +290,11 @@
       "files": [
         "资源/美化/测试/旧_男朋友没我会死怎么办by心心_QQ浏览器压缩包.zip"
       ],
-      "images": [],
+      "images": [
+        "资源/美化/测试/封面.jpg"
+      ],
       "description": "",
-      "updatedAt": "2026-09-24T08:56:15+08:00"
+      "updatedAt": "2026-09-24T08:56:46+08:00"
     },
     {
       "folder": "美化",
