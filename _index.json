@@ -1,7 +1,7 @@
 {
   "schema": "puff_share_index",
   "schemaVersion": 1,
-  "generatedAt": "2026-09-24T01:03:04.849Z",
+  "generatedAt": "2026-09-24T01:19:39.817Z",
   "folders": [
     {
       "name": "App",
@@ -21,7 +21,7 @@
     },
     {
       "name": "美化",
-      "count": 10
+      "count": 11
     },
     {
       "name": "表情包",
@@ -281,6 +281,20 @@
       ],
       "description": "",
       "updatedAt": "2026-09-24T01:38:05+08:00"
+    },
+    {
+      "folder": "美化",
+      "name": "深渊美学",
+      "type": "dir",
+      "path": "资源/美化/深渊美学",
+      "files": [
+        "资源/美化/深渊美学/深渊美学.json"
+      ],
+      "images": [
+        "资源/美化/深渊美学/封面.png"
+      ],
+      "description": "",
+      "updatedAt": "2026-09-24T09:19:23+08:00"
     },
     {
       "folder": "美化",
