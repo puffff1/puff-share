@@ -1,7 +1,7 @@
 {
   "schema": "puff_share_index",
   "schemaVersion": 1,
-  "generatedAt": "2026-09-24T00:57:33.452Z",
+  "generatedAt": "2026-09-24T01:02:38.409Z",
   "folders": [
     {
       "name": "App",
@@ -21,7 +21,7 @@
     },
     {
       "name": "美化",
-      "count": 10
+      "count": 11
     },
     {
       "name": "表情包",
@@ -155,6 +155,18 @@
       ],
       "description": "",
       "updatedAt": "2026-09-23T21:24:50+08:00"
+    },
+    {
+      "folder": "美化",
+      "name": "1",
+      "type": "dir",
+      "path": "资源/美化/1",
+      "files": [],
+      "images": [
+        "资源/美化/1/封面.jpg"
+      ],
+      "description": "",
+      "updatedAt": "2026-09-24T09:02:22+08:00"
     },
     {
       "folder": "美化",
