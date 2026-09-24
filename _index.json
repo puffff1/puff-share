@@ -1,7 +1,7 @@
 {
   "schema": "puff_share_index",
   "schemaVersion": 1,
-  "generatedAt": "2026-09-24T09:36:21.820Z",
+  "generatedAt": "2026-09-24T10:47:05.422Z",
   "folders": [
     {
       "name": "App",
@@ -25,7 +25,7 @@
     },
     {
       "name": "表情包",
-      "count": 3
+      "count": 5
     },
     {
       "name": "装扮",
@@ -373,6 +373,20 @@
     },
     {
       "folder": "表情包",
+      "name": "PigMimi猪咪系列3D小老鼠表情包-16张-有预览",
+      "type": "dir",
+      "path": "资源/表情包/PigMimi猪咪系列3D小老鼠表情包-16张-有预览",
+      "files": [
+        "资源/表情包/PigMimi猪咪系列3D小老鼠表情包-16张-有预览/PigMimi猪咪系列3D小老鼠表情包-16张-有预览_1_.docx"
+      ],
+      "images": [
+        "资源/表情包/PigMimi猪咪系列3D小老鼠表情包-16张-有预览/Image_1790246401916_296.png"
+      ],
+      "description": "",
+      "updatedAt": "2026-09-24T18:46:49+08:00"
+    },
+    {
+      "folder": "表情包",
       "name": "ganadi",
       "type": "dir",
       "path": "资源/表情包/ganadi",
@@ -384,6 +398,24 @@
       ],
       "description": "",
       "updatedAt": "2026-09-24T15:01:04+08:00"
+    },
+    {
+      "folder": "表情包",
+      "name": "应援小白人／软萌小狗／MEJOO小狗 三套表情包",
+      "type": "dir",
+      "path": "资源/表情包/应援小白人／软萌小狗／MEJOO小狗 三套表情包",
+      "files": [
+        "资源/表情包/应援小白人／软萌小狗／MEJOO小狗 三套表情包/IDOL_cheer应援小白人-24张-有预览.docx",
+        "资源/表情包/应援小白人／软萌小狗／MEJOO小狗 三套表情包/MEJOO小狗表情包-24p-有预览.docx",
+        "资源/表情包/应援小白人／软萌小狗／MEJOO小狗 三套表情包/kkiwoong软萌小狗表情包-44p-有预览.docx"
+      ],
+      "images": [
+        "资源/表情包/应援小白人／软萌小狗／MEJOO小狗 三套表情包/Image_1790246125295_943.png",
+        "资源/表情包/应援小白人／软萌小狗／MEJOO小狗 三套表情包/Image_1790246129245_171.png",
+        "资源/表情包/应援小白人／软萌小狗／MEJOO小狗 三套表情包/Image_1790246131745_930.png"
+      ],
+      "description": "",
+      "updatedAt": "2026-09-24T18:46:38+08:00"
     },
     {
       "folder": "表情包",
