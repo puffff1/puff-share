@@ -1,7 +1,7 @@
 {
   "schema": "puff_share_index",
   "schemaVersion": 1,
-  "generatedAt": "2026-09-25T08:08:02.562Z",
+  "generatedAt": "2026-09-25T08:21:22.105Z",
   "folders": [
     {
       "name": "App",
@@ -21,7 +21,7 @@
     },
     {
       "name": "美化",
-      "count": 16
+      "count": 17
     },
     {
       "name": "表情包",
@@ -400,6 +400,22 @@
       ],
       "description": "",
       "updatedAt": "2026-09-24T06:29:18+08:00"
+    },
+    {
+      "folder": "美化",
+      "name": "薄薄薄巧",
+      "type": "dir",
+      "path": "资源/美化/薄薄薄巧",
+      "files": [
+        "资源/美化/薄薄薄巧/薄薄薄巧_无猫耳版_.json",
+        "资源/美化/薄薄薄巧/薄薄薄巧_猫耳来袭版_.json"
+      ],
+      "images": [
+        "资源/美化/薄薄薄巧/Screenshot_20260925_155030_com.microsoft.emmx_edit_2609141470431559.jpg",
+        "资源/美化/薄薄薄巧/封面.jpg"
+      ],
+      "description": "",
+      "updatedAt": "2026-09-25T16:21:05+08:00"
     },
     {
       "folder": "美化",
