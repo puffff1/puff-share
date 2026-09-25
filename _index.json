@@ -1,7 +1,7 @@
 {
   "schema": "puff_share_index",
   "schemaVersion": 1,
-  "generatedAt": "2026-09-25T14:55:52.440Z",
+  "generatedAt": "2026-09-25T15:38:26.613Z",
   "folders": [
     {
       "name": "App",
@@ -21,7 +21,7 @@
     },
     {
       "name": "美化",
-      "count": 17
+      "count": 18
     },
     {
       "name": "表情包",
@@ -372,6 +372,18 @@
       ],
       "description": "",
       "updatedAt": "2026-09-23T18:13:14+08:00"
+    },
+    {
+      "folder": "美化",
+      "name": "蓝白渐变",
+      "type": "dir",
+      "path": "资源/美化/蓝白渐变",
+      "files": [
+        "资源/美化/蓝白渐变/puff_chat_theme.json"
+      ],
+      "images": [],
+      "description": "",
+      "updatedAt": "2026-09-25T23:38:07+08:00"
     },
     {
       "folder": "美化",
