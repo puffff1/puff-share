@@ -1,0 +1,14 @@
+{
+  "kind": "puff-chat-list-css-preset",
+  "version": 1,
+  "name": "薄荷巧克力斜纹列表(背景需自己填写URL)",
+  "exportedAt": 1790357447027,
+  "presets": [
+    {
+      "id": "lcss_muh8l1m1_ju6m1",
+      "name": "薄荷巧克力斜纹列表(背景需要自己填写URL)",
+      "createdAt": "2026-09-25T17:30:23.977Z",
+      "css": "/* Puff · 消息列表完整默认\n   作用于即时消息列表（非线下入口）。变量 + 行内各块类名。\n   只想改顶栏 / 表体 / 行样式时，用「短模板」更省事。 */\n\n/* ========== A. 变量 ========== */\n.chat-app {\n  --dress-list-sheet-radius: 20px;\n  --dress-list-row-pad-y: 12px;\n  --dress-list-row-pad-x: 14px;\n  --dress-list-preview-size: 11px;\n  --dress-list-name-size: 0.9375rem;\n  --dress-list-unread-bg: var(--ink);\n  --dress-list-unread-fg: #fff;\n}\n\nhtml[data-theme=\"dark\"] .chat-app {\n  --dress-list-unread-bg: #f0f0f0;\n  --dress-list-unread-fg: #1a1a1a;\n}\n\n/* ========== B. 页面壳 / 顶栏 ========== */\n.chat-app {\n}\n.chat-inbox {\n  padding-top: 2px;\n}\n.chat-head,\n.chat-head-inbox {\n}\n.chat-inbox-top {\n}\n.chat-inbox-title {\n}\n.chat-inbox-filter {\n}\n.chat-inbox-filter button {\n}\n.chat-inbox-filter button.on {\n}\n\n/* ========== C. 表体 ========== */\n.chat-list-sheet {\n  border-radius: var(--dress-list-sheet-radius);\n  overflow: hidden;\n  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.05);\n}\n.chat-scroll {\n}\n\n/* ========== D. 会话行 ========== */\n.chat-row-wrap {\n}\n.chat-row-wrap.is-pinned {\n}\n.chat-row-wrap.is-swiping,\n.chat-row-wrap.is-actions-open {\n}\n.chat-row-slider {\n}\n.chat-row {\n  padding: var(--dress-list-row-pad-y) var(--dress-list-row-pad-x);\n}\n.chat-row-main {\n}\n.chat-row-top {\n}\n.chat-row-top strong {\n  font-size: var(--dress-list-name-size);\n}\n.chat-row-pin-mark {\n}\n.chat-row-preview {\n  font-size: var(--dress-list-preview-size);\n  line-height: 1.45;\n}\n.chat-row-preview.has-unread {\n}\n.chat-row-meta {\n}\n.chat-row-unread {\n  background: var(--dress-list-unread-bg);\n  color: var(--dress-list-unread-fg);\n}\n.chat-ava-list {\n}\n\n/* ========== E. 侧滑操作 ========== */\n.chat-row-actions {\n}\n.chat-row-action {\n}\n.chat-row-action.is-pin {\n}\n.chat-row-action.is-delete {\n}\n\n/* ========== F. 空态 / 底栏 Tab（可选） ========== */\n.chat-zero {\n}\n.chat-tabdock {\n}\n.chat-tabdock-pill {\n}"
+    }
+  ]
+}
