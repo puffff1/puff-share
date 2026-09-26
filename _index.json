@@ -1,7 +1,7 @@
 {
   "schema": "puff_share_index",
   "schemaVersion": 1,
-  "generatedAt": "2026-09-25T17:22:16.369Z",
+  "generatedAt": "2026-09-26T02:14:49.441Z",
   "folders": [
     {
       "name": "App",
@@ -9,7 +9,7 @@
     },
     {
       "name": "世界书",
-      "count": 4
+      "count": 6
     },
     {
       "name": "其他",
@@ -17,7 +17,7 @@
     },
     {
       "name": "插件",
-      "count": 1
+      "count": 2
     },
     {
       "name": "美化",
@@ -141,6 +141,34 @@
       "updatedAt": "2026-09-24T06:28:19+08:00"
     },
     {
+      "folder": "世界书",
+      "name": "现代娱乐圈设定",
+      "type": "dir",
+      "path": "资源/世界书/现代娱乐圈设定",
+      "files": [
+        "资源/世界书/现代娱乐圈设定/现代娱乐圈设定.docx"
+      ],
+      "images": [
+        "资源/世界书/现代娱乐圈设定/封面.jpg"
+      ],
+      "description": "",
+      "updatedAt": "2026-09-26T10:14:28+08:00"
+    },
+    {
+      "folder": "世界书",
+      "name": "防升华+用户的世界不只有char",
+      "type": "dir",
+      "path": "资源/世界书/防升华+用户的世界不只有char",
+      "files": [
+        "资源/世界书/防升华+用户的世界不只有char/防升华_用户的世界不止有char_by泮个终于.txt"
+      ],
+      "images": [
+        "资源/世界书/防升华+用户的世界不只有char/封面.jpg"
+      ],
+      "description": "",
+      "updatedAt": "2026-09-26T10:14:20+08:00"
+    },
+    {
       "folder": "其他",
       "name": "kkt",
       "type": "dir",
@@ -186,6 +214,20 @@
       ],
       "description": "",
       "updatedAt": "2026-09-24T16:01:44+08:00"
+    },
+    {
+      "folder": "插件",
+      "name": "戳一戳",
+      "type": "dir",
+      "path": "资源/插件/戳一戳",
+      "files": [
+        "资源/插件/戳一戳/202609252345.js"
+      ],
+      "images": [
+        "资源/插件/戳一戳/b.jpg"
+      ],
+      "description": "",
+      "updatedAt": "2026-09-26T10:14:35+08:00"
     },
     {
       "folder": "美化",
