@@ -1,7 +1,7 @@
 {
   "schema": "puff_share_index",
   "schemaVersion": 1,
-  "generatedAt": "2026-09-26T16:13:26.559Z",
+  "generatedAt": "2026-09-26T18:38:49.033Z",
   "folders": [
     {
       "name": "App",
@@ -21,7 +21,7 @@
     },
     {
       "name": "美化",
-      "count": 22
+      "count": 23
     },
     {
       "name": "表情包",
@@ -326,6 +326,22 @@
       "updatedAt": "2026-09-23T10:09:27+08:00",
       "access": "like",
       "tags": []
+    },
+    {
+      "folder": "美化",
+      "name": "微信日夜间·聊天界面美化",
+      "type": "dir",
+      "path": "资源/美化/微信日夜间·聊天界面美化",
+      "files": [
+        "资源/美化/微信日夜间·聊天界面美化/Puff_微信夜间版.docx",
+        "资源/美化/微信日夜间·聊天界面美化/Puff_微信日间版聊天界面.docx"
+      ],
+      "images": [
+        "资源/美化/微信日夜间·聊天界面美化/15330.jpg",
+        "资源/美化/微信日夜间·聊天界面美化/封面.jpg"
+      ],
+      "description": "",
+      "updatedAt": "2026-09-27T02:38:33+08:00"
     },
     {
       "folder": "美化",
