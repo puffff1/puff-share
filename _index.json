@@ -1,7 +1,7 @@
 {
   "schema": "puff_share_index",
   "schemaVersion": 1,
-  "generatedAt": "2026-09-27T03:16:29.770Z",
+  "generatedAt": "2026-09-27T05:00:48.267Z",
   "folders": [
     {
       "name": "App",
@@ -885,12 +885,14 @@
       "type": "dir",
       "path": "资源/预设/清清你的char／嬷u",
       "files": [
-        "资源/预设/清清你的char／嬷u/5.0_清清你的char_-清清_.nuopreset.json_2",
-        "资源/预设/清清你的char／嬷u/5.0_清清你的char_-清清_1_.json"
+        "资源/预设/清清你的char／嬷u/5.0_清清你的char_-清清_.json",
+        "资源/预设/清清你的char／嬷u/清清预设必带思维链.docx"
       ],
-      "images": [],
+      "images": [
+        "资源/预设/清清你的char／嬷u/封面.jpg"
+      ],
       "description": "",
-      "updatedAt": "2026-09-27T11:16:11+08:00"
+      "updatedAt": "2026-09-27T13:00:30+08:00"
     }
   ]
 }
