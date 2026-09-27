@@ -1,7 +1,7 @@
 {
   "schema": "puff_share_index",
   "schemaVersion": 1,
-  "generatedAt": "2026-09-26T18:38:49.033Z",
+  "generatedAt": "2026-09-27T03:16:29.770Z",
   "folders": [
     {
       "name": "App",
@@ -37,7 +37,7 @@
     },
     {
       "name": "预设",
-      "count": 1
+      "count": 2
     }
   ],
   "entries": [
@@ -878,6 +878,19 @@
       "images": [],
       "description": "",
       "updatedAt": "2026-09-26T18:29:59+08:00"
+    },
+    {
+      "folder": "预设",
+      "name": "清清你的char／嬷u",
+      "type": "dir",
+      "path": "资源/预设/清清你的char／嬷u",
+      "files": [
+        "资源/预设/清清你的char／嬷u/5.0_清清你的char_-清清_.nuopreset.json_2",
+        "资源/预设/清清你的char／嬷u/5.0_清清你的char_-清清_1_.json"
+      ],
+      "images": [],
+      "description": "",
+      "updatedAt": "2026-09-27T11:16:11+08:00"
     }
   ]
 }
