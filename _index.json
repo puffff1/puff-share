@@ -1,7 +1,7 @@
 {
   "schema": "puff_share_index",
   "schemaVersion": 1,
-  "generatedAt": "2026-09-27T22:57:46.375Z",
+  "generatedAt": "2026-09-27T22:58:06.987Z",
   "folders": [
     {
       "name": "App",
@@ -79,9 +79,11 @@
       "files": [
         "资源/App/每日塔罗运势⭐️/每日塔罗_.js"
       ],
-      "images": [],
+      "images": [
+        "资源/App/每日塔罗运势⭐️/封面.jpeg"
+      ],
       "description": "",
-      "updatedAt": "2026-09-28T06:57:30+08:00"
+      "updatedAt": "2026-09-28T06:57:52+08:00"
     },
     {
       "folder": "App",
