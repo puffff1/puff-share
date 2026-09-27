@@ -1,7 +1,7 @@
 {
   "schema": "puff_share_index",
   "schemaVersion": 1,
-  "generatedAt": "2026-09-27T07:12:30.715Z",
+  "generatedAt": "2026-09-27T07:19:09.521Z",
   "folders": [
     {
       "name": "App",
@@ -355,7 +355,7 @@
         "资源/美化/来自星星的艺术家/封面.png"
       ],
       "description": "",
-      "updatedAt": "2026-09-27T15:12:14+08:00"
+      "updatedAt": "2026-09-27T15:18:53+08:00"
     },
     {
       "folder": "美化",
