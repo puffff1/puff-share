@@ -1,7 +1,7 @@
 {
   "schema": "puff_share_index",
   "schemaVersion": 1,
-  "generatedAt": "2026-09-28T15:50:29.683Z",
+  "generatedAt": "2026-09-28T17:01:36.180Z",
   "folders": [
     {
       "name": "App",
@@ -25,7 +25,7 @@
     },
     {
       "name": "表情包",
-      "count": 7
+      "count": 8
     },
     {
       "name": "装扮",
@@ -791,6 +791,20 @@
       ],
       "description": "",
       "updatedAt": "2026-09-24T18:46:38+08:00"
+    },
+    {
+      "folder": "表情包",
+      "name": "手绘仓鼠表情包",
+      "type": "dir",
+      "path": "资源/表情包/手绘仓鼠表情包",
+      "files": [
+        "资源/表情包/手绘仓鼠表情包/hamucyutan手绘仓鼠表情包-40张-有预览_1_.docx"
+      ],
+      "images": [
+        "资源/表情包/手绘仓鼠表情包/Image_1789318998126_880.jpg"
+      ],
+      "description": "",
+      "updatedAt": "2026-09-29T01:01:18+08:00"
     },
     {
       "folder": "表情包",
