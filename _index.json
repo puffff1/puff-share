@@ -1,7 +1,7 @@
 {
   "schema": "puff_share_index",
   "schemaVersion": 1,
-  "generatedAt": "2026-09-28T17:01:36.180Z",
+  "generatedAt": "2026-09-28T17:02:03.688Z",
   "folders": [
     {
       "name": "App",
@@ -25,7 +25,7 @@
     },
     {
       "name": "表情包",
-      "count": 8
+      "count": 9
     },
     {
       "name": "装扮",
@@ -773,6 +773,20 @@
       ],
       "description": "",
       "updatedAt": "2026-09-24T15:01:04+08:00"
+    },
+    {
+      "folder": "表情包",
+      "name": "大蛋黄",
+      "type": "dir",
+      "path": "资源/表情包/大蛋黄",
+      "files": [
+        "资源/表情包/大蛋黄/大蛋黄表情包24张_古早手绘_.docx"
+      ],
+      "images": [
+        "资源/表情包/大蛋黄/Image_1790605938545_592.png"
+      ],
+      "description": "",
+      "updatedAt": "2026-09-29T01:01:44+08:00"
     },
     {
       "folder": "表情包",
