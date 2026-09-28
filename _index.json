@@ -1,7 +1,7 @@
 {
   "schema": "puff_share_index",
   "schemaVersion": 1,
-  "generatedAt": "2026-09-28T17:02:03.688Z",
+  "generatedAt": "2026-09-28T19:04:56.913Z",
   "folders": [
     {
       "name": "App",
@@ -82,10 +82,11 @@
       "images": [
         "资源/App/来和char玩无限流副本大冒险！/IMG_7425.jpeg",
         "资源/App/来和char玩无限流副本大冒险！/IMG_7426.png",
-        "资源/App/来和char玩无限流副本大冒险！/封面.jpeg"
+        "资源/App/来和char玩无限流副本大冒险！/封面.jpeg",
+        "资源/App/来和char玩无限流副本大冒险！/封面.png"
       ],
       "description": "",
-      "updatedAt": "2026-09-28T07:41:49+08:00"
+      "updatedAt": "2026-09-29T03:03:18+08:00"
     },
     {
       "folder": "App",
