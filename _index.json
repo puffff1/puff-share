@@ -1,7 +1,7 @@
 {
   "schema": "puff_share_index",
   "schemaVersion": 1,
-  "generatedAt": "2026-09-28T09:08:45.277Z",
+  "generatedAt": "2026-09-28T10:07:47.998Z",
   "folders": [
     {
       "name": "App",
@@ -9,7 +9,7 @@
     },
     {
       "name": "世界书",
-      "count": 6
+      "count": 7
     },
     {
       "name": "其他",
@@ -129,6 +129,20 @@
       ],
       "description": "",
       "updatedAt": "2026-09-24T13:47:44+08:00"
+    },
+    {
+      "folder": "世界书",
+      "name": "gemini-3.8-flash破限奥林匹斯山上的作家传记",
+      "type": "dir",
+      "path": "资源/世界书/gemini-3.8-flash破限奥林匹斯山上的作家传记",
+      "files": [
+        "资源/世界书/gemini-3.8-flash破限奥林匹斯山上的作家传记/e_e_9_q3.8flash_42_.docx"
+      ],
+      "images": [
+        "资源/世界书/gemini-3.8-flash破限奥林匹斯山上的作家传记/b.jpg"
+      ],
+      "description": "",
+      "updatedAt": "2026-09-28T18:07:31+08:00"
     },
     {
       "folder": "世界书",
