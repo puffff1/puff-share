@@ -1,0 +1,14 @@
+{
+  "kind": "puff-chat-thread-css-preset",
+  "version": 1,
+  "name": "浅蓝透底",
+  "exportedAt": 1790757565404,
+  "presets": [
+    {
+      "id": "tcss_munut739_9u6y0",
+      "name": "浅蓝透顶",
+      "createdAt": "2026-09-30T08:39:12.933Z",
+      "css": ".chat-thread {\n  /* 字体与头像尺寸 */\n  --dress-bubble-font-size: 14px;\n  --dress-bubble-avatar-size: 32px;\n  --dress-bubble-avatar-radius: 50%;\n}\n\n.chat-msg {\n  position: relative !important;\n  margin-bottom: 10px !important;\n}\n\n/* ===== 气泡基础：细长 + 四角偏方 + 半透 ===== */\n.chat-bubble {\n  font-size: 14px !important;\n  padding: 6px 14px !important;\n  border-radius: 14px !important;   /* 整体圆角变小，四角偏方 */\n  position: relative !important;\n  line-height: 1.4 !important;\n  overflow: hidden !important;\n\n  /* 雾面核心：背景模糊 + 饱和度提升 */\n  backdrop-filter: blur(10px) saturate(170%) !important;\n  -webkit-backdrop-filter: blur(10px) saturate(170%) !important;\n\n  /* 细腻高光边，加强气泡边缘 */\n  border: 1px solid rgba(255, 255, 255, 0.65) !important;\n\n  /* 柔和投影，营造微悬浮感 */\n  box-shadow:\n    0 6px 18px -8px rgba(0, 30, 50, 0.12),\n    0 0 0 1px rgba(255, 255, 255, 0.3) inset !important;\n}\n\n/* 对方气泡：极淡浅蓝 · 50% 透明 · 左下角更方 */\n.chat-msg.is-them .chat-bubble {\n  background: rgba(210, 232, 252, 0.5) !important;\n  background-image: linear-gradient(\n    135deg,\n    rgba(255, 255, 255, 0.55) 0%,\n    rgba(200, 228, 250, 0.1) 100%\n  ) !important;\n  color: #1a2a38 !important;\n  border-radius: 14px 14px 14px 2px !important;   /* 左下角更方：2px */\n  text-shadow: 0 1px 1px rgba(255, 255, 255, 0.7) !important;\n}\n\n/* 我方气泡：极淡浅蓝 · 50% 透明 · 右下角更方 */\n.chat-msg.is-me .chat-bubble {\n  background: rgba(200, 226, 250, 0.5) !important;\n  background-image: linear-gradient(\n    135deg,\n    rgba(255, 255, 255, 0.55) 0%,\n    rgba(190, 220, 248, 0.1) 100%\n  ) !important;\n  color: #16232e !important;\n  border-radius: 14px 14px 2px 14px !important;   /* 右下角更方：2px */\n  text-shadow: 0 1px 1px rgba(255, 255, 255, 0.65) !important;\n}\n\n/* 气泡内左上角高光，增强雾面玻璃质感 */\n.chat-bubble::before {\n  content: \"\" !important;\n  position: absolute !important;\n  top: 0 !important;\n  left: 0 !important;\n  width: 65% !important;\n  height: 50% !important;\n  background: radial-gradient(\n    circle at 15% 15%,\n    rgba(255, 255, 255, 0.75) 0%,\n    rgba(255, 255, 255, 0) 70%\n  ) !important;\n  border-radius: 50% !important;\n  opacity: 0.55 !important;\n  pointer-events: none !important;\n  z-index: 0 !important;\n}\n\n/* 文字置于高光之上，保证清晰 */\n.chat-bubble > * {\n  position: relative !important;\n  z-index: 1 !important;\n}"
+    }
+  ]
+}
