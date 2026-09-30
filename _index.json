@@ -1,7 +1,7 @@
 {
   "schema": "puff_share_index",
   "schemaVersion": 1,
-  "generatedAt": "2026-09-30T08:22:14.358Z",
+  "generatedAt": "2026-09-30T10:10:25.105Z",
   "folders": [
     {
       "name": "App",
@@ -21,7 +21,7 @@
     },
     {
       "name": "美化",
-      "count": 26
+      "count": 27
     },
     {
       "name": "表情包",
@@ -584,6 +584,21 @@
       ],
       "description": "",
       "updatedAt": "2026-09-24T01:38:05+08:00"
+    },
+    {
+      "folder": "美化",
+      "name": "浅蓝透底",
+      "type": "dir",
+      "path": "资源/美化/浅蓝透底",
+      "files": [
+        "资源/美化/浅蓝透底/浅蓝透底.json"
+      ],
+      "images": [
+        "资源/美化/浅蓝透底/1000179749.jpg",
+        "资源/美化/浅蓝透底/封面.jpg"
+      ],
+      "description": "",
+      "updatedAt": "2026-09-30T18:10:09+08:00"
     },
     {
       "folder": "美化",
