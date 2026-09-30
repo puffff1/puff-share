@@ -1,7 +1,7 @@
 {
   "schema": "puff_share_index",
   "schemaVersion": 1,
-  "generatedAt": "2026-09-30T17:20:58.813Z",
+  "generatedAt": "2026-09-30T17:22:04.206Z",
   "folders": [
     {
       "name": "App",
@@ -346,9 +346,11 @@
       "files": [
         "资源/插件/对方正在输入中/puff-_c_e-.js"
       ],
-      "images": [],
+      "images": [
+        "资源/插件/对方正在输入中/b.png"
+      ],
       "description": "",
-      "updatedAt": "2026-10-01T01:20:41+08:00"
+      "updatedAt": "2026-10-01T01:21:46+08:00"
     },
     {
       "folder": "插件",
