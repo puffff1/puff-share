@@ -1,7 +1,7 @@
 {
   "schema": "puff_share_index",
   "schemaVersion": 1,
-  "generatedAt": "2026-09-30T17:18:40.179Z",
+  "generatedAt": "2026-09-30T17:20:58.813Z",
   "folders": [
     {
       "name": "App",
@@ -17,7 +17,7 @@
     },
     {
       "name": "插件",
-      "count": 5
+      "count": 6
     },
     {
       "name": "美化",
@@ -337,6 +337,18 @@
       ],
       "description": "",
       "updatedAt": "2026-09-29T09:36:04+08:00"
+    },
+    {
+      "folder": "插件",
+      "name": "对方正在输入中",
+      "type": "dir",
+      "path": "资源/插件/对方正在输入中",
+      "files": [
+        "资源/插件/对方正在输入中/puff-_c_e-.js"
+      ],
+      "images": [],
+      "description": "",
+      "updatedAt": "2026-10-01T01:20:41+08:00"
     },
     {
       "folder": "插件",
