@@ -1,7 +1,7 @@
 {
   "schema": "puff_share_index",
   "schemaVersion": 1,
-  "generatedAt": "2026-10-01T08:43:49.496Z",
+  "generatedAt": "2026-10-01T11:08:21.887Z",
   "folders": [
     {
       "name": "App",
@@ -21,7 +21,7 @@
     },
     {
       "name": "美化",
-      "count": 27
+      "count": 28
     },
     {
       "name": "表情包",
@@ -37,7 +37,7 @@
     },
     {
       "name": "预设",
-      "count": 3
+      "count": 4
     }
   ],
   "entries": [
@@ -715,6 +715,20 @@
     },
     {
       "folder": "美化",
+      "name": "淡黄色主题",
+      "type": "dir",
+      "path": "资源/美化/淡黄色主题",
+      "files": [
+        "资源/美化/淡黄色主题/r.json"
+      ],
+      "images": [
+        "资源/美化/淡黄色主题/b.jpg"
+      ],
+      "description": "",
+      "updatedAt": "2026-10-01T19:08:01+08:00"
+    },
+    {
+      "folder": "美化",
       "name": "深渊美学",
       "type": "dir",
       "path": "资源/美化/深渊美学",
@@ -1306,6 +1320,20 @@
       ],
       "description": "",
       "updatedAt": "2026-09-27T13:00:30+08:00"
+    },
+    {
+      "folder": "预设",
+      "name": "萌之泪伤",
+      "type": "dir",
+      "path": "资源/预设/萌之泪伤",
+      "files": [
+        "资源/预设/萌之泪伤/预设_萌之泪伤.json"
+      ],
+      "images": [
+        "资源/预设/萌之泪伤/封面.jpeg"
+      ],
+      "description": "",
+      "updatedAt": "2026-10-01T19:07:54+08:00"
     }
   ]
 }
