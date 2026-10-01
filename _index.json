@@ -1,7 +1,7 @@
 {
   "schema": "puff_share_index",
   "schemaVersion": 1,
-  "generatedAt": "2026-10-01T16:37:28.769Z",
+  "generatedAt": "2026-10-01T17:22:38.379Z",
   "folders": [
     {
       "name": "App",
@@ -474,7 +474,7 @@
       "type": "dir",
       "path": "资源/美化/「puff主题四色」",
       "files": [
-        "资源/美化/「puff主题四色」/puff主题四色_bug修复by猫儿甜酒.zip"
+        "资源/美化/「puff主题四色」/puff主题四色_by猫儿甜酒.zip"
       ],
       "images": [
         "资源/美化/「puff主题四色」/1000152749.jpg",
@@ -484,7 +484,7 @@
         "资源/美化/「puff主题四色」/封面.jpg"
       ],
       "description": "",
-      "updatedAt": "2026-10-02T00:36:49+08:00"
+      "updatedAt": "2026-10-02T01:22:15+08:00"
     },
     {
       "folder": "美化",
