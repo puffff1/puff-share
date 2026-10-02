@@ -1,0 +1,88 @@
+{
+  "app": "puff-xinsheng-presets",
+  "version": 1,
+  "exportedAt": 1790917591868,
+  "presets": [
+    {
+      "id": "xp_muqi2sxi_aifads",
+      "name": "淡黄色",
+      "theme": "glass",
+      "layout": "bento",
+      "customCss": "/* Puff · 淡黄可爱 · 心声面板（配套聊天主题） */\n\n.xs-panel {\n  --xs-bg: rgba(255, 249, 219, 0.18);\n  --xs-tile-bg: rgba(255, 249, 219, 0.22);\n  --xs-text: #5a4a22;\n  --xs-muted: #b8a46a;\n  --xs-accent: #e8c860;\n  --xs-border: rgba(230, 200, 110, 0.35);\n  --xs-cap: #6b5a2e;\n  --xs-action-bg: rgba(255, 243, 184, 0.45);\n  --xs-done-bg: rgba(255, 243, 184, 0.55);\n  background: rgba(255, 249, 219, 0.30);\n  backdrop-filter: blur(10px);\n  -webkit-backdrop-filter: blur(10px);\n}\n\n/* 顶栏 */\n.xs-frame {\n  width: min(380px, 100%);\n}\n.xs-cap-name {\n  font-family: var(--display);\n  font-size: 1.5rem;\n  font-weight: 400;\n  color: var(--xs-cap);\n  letter-spacing: -0.01em;\n  line-height: 1.1;\n}\n.xs-cap-time {\n  font-size: 10px;\n  color: var(--xs-muted);\n  letter-spacing: 0.04em;\n}\n.xs-cap-x {\n  border-radius: 999px;\n  background: var(--xs-action-bg);\n  border: 1px solid var(--xs-border);\n  color: var(--xs-cap);\n}\n\n/* 操作按钮 */\n.xs-actions {\n  gap: 8px;\n  margin-bottom: 12px;\n}\n.xs-action {\n  border-radius: 999px;\n  padding: 9px 12px;\n  font-size: 12px;\n  letter-spacing: 0.04em;\n  background: var(--xs-action-bg);\n  border: 1px solid var(--xs-border);\n  color: var(--xs-cap);\n}\n.xs-action.is-on {\n  background: rgba(245, 215, 110, 0.55);\n  border-color: #e8c860;\n}\n\n/* 历史列表 */\n.xs-history {\n  border-radius: 16px;\n  background: var(--xs-tile-bg);\n  border: 1px solid var(--xs-border);\n}\n.xs-history-item {\n  border-radius: 12px;\n  color: var(--xs-text);\n}\n.xs-history-item.is-current {\n  background: rgba(255, 243, 184, 0.55);\n}\n.xs-history-time {\n  font-size: 10px;\n  color: var(--xs-muted);\n}\n.xs-history-preview {\n  font-size: 12px;\n  line-height: 1.45;\n}\n\n/* 卡片拼盘 */\n.xs-bento {\n  gap: 10px;\n}\n.xs-tile {\n  padding: 13px 14px 12px;\n  border-radius: 14px;\n  background: var(--xs-tile-bg);\n  border: 1px solid var(--xs-border);\n  backdrop-filter: blur(14px);\n  -webkit-backdrop-filter: blur(14px);\n  box-shadow: 0 2px 10px rgba(214, 178, 80, 0.08);\n}\n.xs-tile-k {\n  font-size: 9px;\n  font-weight: 500;\n  color: var(--xs-muted);\n  letter-spacing: 0.12em;\n}\n.xs-tile-v,\n.xs-tile-lead {\n  font-size: 12px;\n  line-height: 1.55;\n  color: var(--xs-text);\n}\n\n/* 卡片位 */\n.xs-tile-thought {\n  grid-column: 1 / -1;\n}\n.xs-tile-thought .xs-tile-lead {\n  font-size: 13px;\n  line-height: 1.65;\n}\n.xs-tile-deep {\n  grid-column: 1 / -1;\n  opacity: 0.92;\n}\n\n/* 好感数值 */\n.xs-pulse-row {\n  gap: 6px;\n}\n.xs-pulse-k {\n  font-size: 9px;\n  color: var(--xs-muted);\n}\n.xs-pulse-v {\n  font-size: 12px;\n  font-weight: 500;\n  color: var(--xs-text);\n}\n.xs-pulse-v.is-up {\n  color: #7fb87a;\n}\n.xs-pulse-v.is-down {\n  color: #e08a7a;\n}\n.xs-pulse-v.is-flat {\n  color: var(--xs-muted);\n}\n\n/* 加载 / 空态 / 关闭 */\n.xs-loading-k {\n  font-family: var(--display);\n  font-size: 1.4rem;\n  color: var(--xs-cap);\n}\n.xs-loading-v {\n  font-size: 12px;\n  color: var(--xs-muted);\n}\n.xs-empty-cards {\n  font-size: 12px;\n  color: var(--xs-muted);\n}\n.xs-done {\n  margin-top: 18px;\n  border-radius: 999px;\n  padding: 11px;\n  background: var(--xs-done-bg);\n  font-size: 13px;\n  color: var(--xs-cap);\n}",
+      "visibleCards": [
+        "innerThought",
+        "microObservation",
+        "currentState",
+        "deepDesire",
+        "vitals",
+        "linger"
+      ],
+      "contextFields": [
+        "innerThought"
+      ],
+      "fields": [
+        {
+          "key": "innerThought",
+          "title": "未出口",
+          "hint": "不会发到聊天框里的那句",
+          "builtin": true,
+          "style": "lead",
+          "maxChars": 240
+        },
+        {
+          "key": "microObservation",
+          "title": "余光",
+          "hint": "顺手瞥见的细节",
+          "builtin": true,
+          "style": "normal",
+          "maxChars": 48
+        },
+        {
+          "key": "currentState",
+          "title": "此刻",
+          "hint": "人在哪、在干什么",
+          "builtin": true,
+          "style": "normal",
+          "maxChars": 48
+        },
+        {
+          "key": "deepDesire",
+          "title": "暗涌",
+          "hint": "更深、不想承认的那点",
+          "builtin": true,
+          "style": "muted",
+          "maxChars": 48
+        },
+        {
+          "key": "__favor__",
+          "title": "好感",
+          "hint": "好感度 · 变动",
+          "builtin": true,
+          "style": "normal",
+          "maxChars": 0
+        },
+        {
+          "key": "linger",
+          "title": "隙间",
+          "hint": "话茬之间那一下",
+          "builtin": true,
+          "style": "normal",
+          "maxChars": 48
+        }
+      ],
+      "visibleKeys": [
+        "innerThought",
+        "microObservation",
+        "currentState",
+        "deepDesire",
+        "__favor__",
+        "linger"
+      ],
+      "contextKeys": [
+        "innerThought"
+      ],
+      "deckStyle": "classic",
+      "updatedAt": 1790917564662
+    }
+  ]
+}
