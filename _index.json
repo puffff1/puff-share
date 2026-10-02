@@ -1,7 +1,7 @@
 {
   "schema": "puff_share_index",
   "schemaVersion": 1,
-  "generatedAt": "2026-10-01T17:22:38.379Z",
+  "generatedAt": "2026-10-02T04:51:55.802Z",
   "folders": [
     {
       "name": "App",
@@ -1336,7 +1336,7 @@
         "资源/预设/夜航预设引擎预设（含破甲）/b.png"
       ],
       "description": "",
-      "updatedAt": "2026-10-01T09:46:05+08:00"
+      "updatedAt": "2026-10-02T12:51:36+08:00"
     },
     {
       "folder": "预设",
