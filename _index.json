@@ -1,7 +1,7 @@
 {
   "schema": "puff_share_index",
   "schemaVersion": 1,
-  "generatedAt": "2026-10-02T05:09:13.547Z",
+  "generatedAt": "2026-10-02T05:52:38.121Z",
   "folders": [
     {
       "name": "App",
@@ -752,13 +752,13 @@
       "path": "资源/美化/淡黄色主题",
       "files": [
         "资源/美化/淡黄色主题/r.json",
-        "资源/美化/淡黄色主题/rMW_.json"
+        "资源/美化/淡黄色主题/r_o_4_F.json"
       ],
       "images": [
         "资源/美化/淡黄色主题/b.jpg"
       ],
       "description": "",
-      "updatedAt": "2026-10-02T13:08:52+08:00"
+      "updatedAt": "2026-10-02T13:52:16+08:00"
     },
     {
       "folder": "美化",
