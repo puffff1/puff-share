@@ -1,7 +1,7 @@
 {
   "schema": "puff_share_index",
   "schemaVersion": 1,
-  "generatedAt": "2026-10-02T19:08:18.726Z",
+  "generatedAt": "2026-10-02T21:15:47.921Z",
   "folders": [
     {
       "name": "App",
@@ -381,13 +381,14 @@
       "type": "dir",
       "path": "资源/插件/puff代码编辑器",
       "files": [
-        "资源/插件/puff代码编辑器/puff_h.js"
+        "资源/插件/puff代码编辑器/puff_h.js",
+        "资源/插件/puff代码编辑器/puff_n_8D.js"
       ],
       "images": [
         "资源/插件/puff代码编辑器/b.jpg"
       ],
       "description": "",
-      "updatedAt": "2026-09-24T16:01:44+08:00"
+      "updatedAt": "2026-10-03T05:15:20+08:00"
     },
     {
       "folder": "插件",
