@@ -1,7 +1,7 @@
 {
   "schema": "puff_share_index",
   "schemaVersion": 1,
-  "generatedAt": "2026-10-03T04:15:34.586Z",
+  "generatedAt": "2026-10-03T04:44:04.601Z",
   "folders": [
     {
       "name": "App",
@@ -1026,11 +1026,13 @@
       "type": "dir",
       "path": "资源/美化/香脆薄巧",
       "files": [
-        "资源/美化/香脆薄巧/puff.json"
+        "资源/美化/香脆薄巧/L_.json"
       ],
-      "images": [],
+      "images": [
+        "资源/美化/香脆薄巧/b.jpg"
+      ],
       "description": "",
-      "updatedAt": "2026-10-02T00:36:26+08:00"
+      "updatedAt": "2026-10-03T12:43:40+08:00"
     },
     {
       "folder": "表情包",
