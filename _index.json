@@ -1,11 +1,11 @@
 {
   "schema": "puff_share_index",
   "schemaVersion": 1,
-  "generatedAt": "2026-10-03T08:53:21.742Z",
+  "generatedAt": "2026-10-03T10:08:52.646Z",
   "folders": [
     {
       "name": "App",
-      "count": 8
+      "count": 9
     },
     {
       "name": "世界书",
@@ -145,6 +145,21 @@
       ],
       "description": "",
       "updatedAt": "2026-09-24T13:47:44+08:00"
+    },
+    {
+      "folder": "App",
+      "name": "记忆",
+      "type": "dir",
+      "path": "资源/App/记忆",
+      "files": [
+        "资源/App/记忆/puffmemory2.js"
+      ],
+      "images": [
+        "资源/App/记忆/1000053685.jpg",
+        "资源/App/记忆/b.jpg"
+      ],
+      "description": "",
+      "updatedAt": "2026-10-03T18:08:29+08:00"
     },
     {
       "folder": "App",
