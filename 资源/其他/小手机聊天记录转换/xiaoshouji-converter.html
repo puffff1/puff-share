@@ -1,0 +1,1621 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>小手机聊天记录转换</title>
+<style>
+:root {
+  --bg: #ECEEF6; --surface: #FFFFFF; --ink: #1C1A2C; --muted: #66647C; --line: #D6D8E6; --field: #F5F6FB;
+  --src: #6453DB; --src-soft: #E8E5FF; --src-ink: #FFFFFF;
+  --tpl: #0B8F7B; --tpl-soft: #D5F3EC; --tpl-ink: #FFFFFF;
+  --warn: #9A5505; --warn-soft: #FFEFD2; --bad: #B8324A;
+  --frame: #1C1A2C; --screen: #FBFBFE;
+  --display: "ZCOOL KuaiLe", "PingFang SC", "HarmonyOS Sans SC", "MiSans", "Microsoft YaHei", sans-serif;
+  --body: "PingFang SC", "HarmonyOS Sans SC", "MiSans", "Microsoft YaHei", "Noto Sans SC", system-ui, sans-serif;
+  --mono: ui-monospace, "SF Mono", "Cascadia Mono", Menlo, Consolas, monospace;
+  color-scheme: light;
+  box-sizing: border-box;
+  padding-top: env(safe-area-inset-top, 0px);
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #13121B; --surface: #1D1C29; --ink: #ECEAF8; --muted: #A09DB8; --line: #34324A; --field: #262437;
+    --src: #A89CFF; --src-soft: #2C2853; --src-ink: #16132E;
+    --tpl: #4AD6BC; --tpl-soft: #143A32; --tpl-ink: #06231D;
+    --warn: #F2B55A; --warn-soft: #3B2D12; --bad: #FF8DA0;
+    --frame: #3D3B57; --screen: #181724; color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #13121B; --surface: #1D1C29; --ink: #ECEAF8; --muted: #A09DB8; --line: #34324A; --field: #262437;
+  --src: #A89CFF; --src-soft: #2C2853; --src-ink: #16132E;
+  --tpl: #4AD6BC; --tpl-soft: #143A32; --tpl-ink: #06231D;
+  --warn: #F2B55A; --warn-soft: #3B2D12; --bad: #FF8DA0;
+  --frame: #3D3B57; --screen: #181724; color-scheme: dark;
+}
+*, *::before, *::after { box-sizing: inherit; }
+html { scroll-padding-top: env(safe-area-inset-top, 0px); -webkit-text-size-adjust: 100%; }
+body { margin: 0; background: var(--bg); color: var(--ink); font: 15px/1.65 var(--body); }
+.wrap { max-width: 860px; margin: 0 auto; padding: 28px 16px 64px; }
+[hidden] { display: none !important; }
+
+.top h1 { font: 400 clamp(28px, 7vw, 40px)/1.15 var(--display); margin: 0 0 10px; letter-spacing: .01em; }
+.top p { margin: 0; color: var(--muted); max-width: 34em; }
+
+/* 两台小手机 */
+.desk { display: grid; grid-template-columns: minmax(0, 1fr) clamp(26px, 7vw, 64px) minmax(0, 1fr); align-items: center; margin: 26px 0 8px; }
+@media (min-width: 620px) { .desk { grid-template-columns: minmax(0, 1fr) 112px minmax(0, 1fr); } }
+.phone { --acc: var(--src); --acc-soft: var(--src-soft); --acc-ink: var(--src-ink); --r: 14px; min-width: 0; justify-self: end; width: 100%; max-width: 290px; }
+.phone[data-side="right"] { --acc: var(--tpl); --acc-soft: var(--tpl-soft); --acc-ink: var(--tpl-ink); --r: 4px; justify-self: start; }
+.phone-cap { font-weight: 600; margin: 0 0 8px 6px; display: flex; align-items: center; gap: 7px; }
+.phone-cap::before { content: ""; width: 9px; height: 9px; border-radius: 50%; background: var(--acc); }
+.phone-shell { background: var(--frame); border-radius: 30px; padding: 7px; position: relative; }
+.phone-shell::before { content: ""; position: absolute; top: 14px; left: 50%; width: 46px; height: 7px; margin-left: -23px; border-radius: 7px; background: var(--frame); z-index: 2; }
+.phone-screen { background: var(--screen); border-radius: 24px; height: clamp(310px, 82vw, 400px); overflow: hidden; display: flex; flex-direction: column; position: relative; }
+.phone.is-over .phone-shell { outline: 3px solid var(--acc); outline-offset: 3px; }
+
+.drop { flex: 1; display: flex; flex-direction: column; justify-content: flex-end; gap: 10px; padding: 34px 12px 14px; cursor: pointer; position: relative; }
+.drop .ghost { display: flex; flex-direction: column; gap: 8px; flex: 1; justify-content: center; opacity: .75; }
+.ghost i { display: block; height: 22px; border-radius: var(--r); background: var(--acc-soft); width: 62%; }
+.ghost i:nth-child(2) { width: 48%; align-self: flex-end; background: var(--acc); opacity: .55; }
+.ghost i:nth-child(3) { width: 74%; height: 34px; }
+.ghost i:nth-child(4) { width: 36%; align-self: flex-end; background: var(--acc); opacity: .55; }
+.drop-text { font-size: 13px; line-height: 1.5; color: var(--muted); text-align: center; }
+.pick { display: block; text-align: center; background: var(--acc); color: var(--acc-ink); font-weight: 600; border-radius: 12px; padding: 9px 8px; font-size: 14px; }
+.vh { position: absolute; width: 1px; height: 1px; opacity: 0; overflow: hidden; }
+.drop:focus-within .pick, .swap:focus-within { outline: 2px solid var(--ink); outline-offset: 2px; }
+.err { background: var(--warn-soft); color: var(--warn); border-radius: 10px; padding: 8px 10px; font-size: 12.5px; line-height: 1.5; overflow-wrap: anywhere; }
+
+.chat-head { padding: 30px 12px 8px; border-bottom: 1px solid var(--line); }
+.fname { font-weight: 600; font-size: 14px; display: block; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.chat-meta { font-size: 12.5px; color: var(--muted); display: flex; justify-content: space-between; gap: 8px; align-items: baseline; }
+.swap { color: var(--acc); cursor: pointer; font-weight: 600; white-space: nowrap; position: relative; border-radius: 4px; }
+.cand { width: 100%; margin-top: 6px; font-size: 12.5px; }
+.bubbles { flex: 1; overflow-y: auto; padding: 10px 10px 14px; display: flex; flex-direction: column; gap: 7px; }
+.bub { max-width: 86%; padding: 6px 10px; border-radius: var(--r); font-size: 12.5px; line-height: 1.45; background: var(--acc-soft); align-self: flex-start; overflow-wrap: anywhere; }
+.bub.me { align-self: flex-end; background: var(--acc); color: var(--acc-ink); }
+.bub.sys { align-self: center; background: none; color: var(--muted); font-size: 11.5px; padding: 0 6px; }
+.more { font-size: 11.5px; color: var(--muted); text-align: center; }
+
+.flow { display: flex; flex-direction: column; align-items: center; gap: 4px; color: var(--muted); font-size: 12px; padding-top: 28px; }
+.flow svg { width: 100%; max-width: 44px; height: auto; display: block; color: var(--ink); }
+.flow span { display: none; white-space: nowrap; }
+@media (min-width: 620px) { .flow span { display: block; } }
+
+/* 面板 */
+.panel { background: var(--surface); border-radius: 18px; padding: 20px 18px; margin-top: 22px; }
+.panel h2 { font: 400 22px/1.2 var(--display); margin: 0 0 4px; }
+.panel h3 { font-size: 15px; margin: 22px 0 2px; }
+.sub { color: var(--muted); margin: 0 0 12px; font-size: 14px; max-width: 40em; }
+.notes { list-style: none; margin: 12px 0 0; padding: 0; display: grid; gap: 6px; }
+.notes li { background: var(--warn-soft); color: var(--warn); border-radius: 10px; padding: 8px 12px; font-size: 13.5px; }
+.actions { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; margin: 14px 0 4px; }
+button { font: inherit; cursor: pointer; border-radius: 12px; padding: 10px 16px; border: 1.5px solid var(--ink); background: none; color: var(--ink); font-weight: 600; }
+button.primary { background: var(--ink); color: var(--surface); }
+button:disabled { opacity: .5; cursor: default; }
+button:focus-visible, select:focus-visible, input:focus-visible, summary:focus-visible { outline: 2px solid var(--src); outline-offset: 2px; }
+.say { font-size: 13.5px; color: var(--muted); }
+.compare { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 12px; margin-top: 14px; }
+.compare figure { margin: 0; min-width: 0; }
+.compare figcaption { font-size: 13px; font-weight: 600; margin-bottom: 6px; display: flex; align-items: center; gap: 7px; }
+.compare figcaption::before { content: ""; width: 9px; height: 9px; border-radius: 50%; background: var(--tpl); }
+.compare figure.out figcaption::before { background: linear-gradient(90deg, var(--src) 50%, var(--tpl) 50%); }
+pre { margin: 0; background: var(--field); border-radius: 12px; padding: 12px; font: 12.5px/1.55 var(--mono); overflow-x: auto; max-height: 340px; overflow-y: auto; white-space: pre; }
+
+/* 字段对照 */
+.choice { display: grid; gap: 6px; margin: 10px 0 0; padding: 0; border: 0; min-width: 0; }
+.choice legend { font-weight: 600; padding: 0; margin-bottom: 4px; }
+.choice label { display: flex; gap: 8px; align-items: flex-start; }
+.choice input { margin-top: .4em; accent-color: var(--src); }
+.choice small { color: var(--muted); display: block; font-size: 13px; }
+.charname { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; margin-top: 10px; }
+.rows { border-top: 1px solid var(--line); margin-top: 8px; }
+.row { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: 6px 16px; padding: 12px 0; border-bottom: 1px solid var(--line); }
+@media (max-width: 600px) { .row { grid-template-columns: minmax(0, 1fr); } }
+.row-tgt { min-width: 0; }
+.key { font: 600 13.5px/1.4 var(--mono); overflow-wrap: anywhere; }
+.chip { display: inline-block; font-size: 12px; line-height: 1.5; border-radius: 6px; padding: 0 6px; margin-left: 6px; background: var(--tpl-soft); color: var(--tpl); font-weight: 600; vertical-align: 1px; }
+.eg { display: block; color: var(--muted); font-size: 12.5px; overflow-wrap: anywhere; }
+.row-src { min-width: 0; display: grid; gap: 8px; align-content: start; }
+select, input[type="text"] { font: inherit; font-size: 14px; color: var(--ink); background: var(--field); border: 1px solid var(--line); border-radius: 9px; padding: 7px 9px; max-width: 100%; min-width: 0; }
+select { width: 100%; text-overflow: ellipsis; }
+input[type="text"] { width: 100%; }
+.vm { display: grid; gap: 6px; }
+.vm-line { display: grid; grid-template-columns: minmax(0, 2fr) 16px minmax(0, 3fr); gap: 6px; align-items: center; font-size: 13.5px; }
+.vm-from { font-family: var(--mono); font-size: 12.5px; overflow-wrap: anywhere; }
+.vm-from small { color: var(--muted); font-family: var(--body); }
+.vm-line.unsure .vm-from { color: var(--warn); font-weight: 600; }
+.vm-line input { grid-column: 3; }
+.hint { font-size: 12.5px; color: var(--muted); }
+.hint.warn { color: var(--warn); }
+.def { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 6px 8px; align-items: center; font-size: 13px; }
+.def span { font-family: var(--mono); font-size: 12.5px; overflow-wrap: anywhere; }
+details { margin-top: 10px; }
+summary { cursor: pointer; color: var(--muted); font-size: 14px; border-radius: 4px; }
+.check { display: flex; gap: 8px; align-items: flex-start; margin-top: 16px; }
+.check input { margin-top: .4em; accent-color: var(--src); }
+.foot { color: var(--muted); font-size: 13px; margin-top: 22px; max-width: 40em; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="top">
+    <h1>小手机聊天记录转换</h1>
+    <p>左边放要转换的聊天记录，右边放另一台小手机导出的任意一份记录当格式示例。被转换的只有左边那份；两个文件都只在你的浏览器里处理，不会传到别处。</p>
+  </header>
+
+  <section class="desk" aria-label="上传文件">
+    <div class="phone" id="phone-left" data-side="left"></div>
+    <div class="flow" aria-hidden="true">
+      <svg viewBox="0 0 44 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12h36M29 3l10 9-10 9"/></svg>
+      <span>改成右边的格式</span>
+    </div>
+    <div class="phone" id="phone-right" data-side="right"></div>
+  </section>
+
+  <div id="work" hidden>
+    <section class="panel" id="resultPanel">
+      <h2>转换结果</h2>
+      <div id="idBox"></div>
+      <div id="resBody" aria-live="polite"></div>
+    </section>
+    <section class="panel" id="mapPanel"></section>
+    <p class="foot">一次转换一段聊天。如果文件里有好几个角色的记录，在小手机下面的下拉框里选要用的那一段。</p>
+  </div>
+</div>
+
+<script>
+const Core = (function () {
+  'use strict';
+
+  const UNSET = { toString: () => 'UNSET' };
+  const DROP = { toString: () => 'DROP' };
+  const KEEP = '@keep', DROPK = '@drop', CUSTOM = '@custom';
+  const embedded = new WeakMap(); // 由"字符串里的 JSON"展开出来的节点 -> 原始字符串（或 null）
+
+  const isObj = v => v !== null && typeof v === 'object' && !Array.isArray(v);
+  const typeOf = v => (v === null ? 'null' : Array.isArray(v) ? 'array' : typeof v);
+  const norm = s => String(s).toLowerCase().replace(/[\s_\-.]/g, '');
+  const tokens = s => String(s).replace(/([a-z0-9])([A-Z])/g, '$1 $2').replace(/([A-Z]+)([A-Z][a-z])/g, '$1 $2')
+    .toLowerCase().split(/[^a-z0-9\u4e00-\u9fa5]+/).filter(Boolean);
+  const skey = v => { const t = typeOf(v); return (t === 'object' || t === 'array') ? t + ':' + JSON.stringify(v) : t + ':' + v; };
+  const pid = p => p.join('\u0001');
+  const pathLabel = p => p.length ? p.map((s, i) => typeof s === 'number' ? '[' + s + ']' : (i ? '.' : '') + s).join('') : '（整个文件）';
+  const getPath = (root, path) => { let n = root; for (const s of path) { if (n == null) return undefined; n = n[s]; } return n; };
+  const jclone = v => (v && typeof v === 'object') ? JSON.parse(JSON.stringify(collapse(v))) : v;
+
+  /* ---------- 读文件 ---------- */
+
+  function detectIndent(text) {
+    const m = text.match(/\n([ \t]+)["{\[]/);
+    if (!m) return 0;
+    return m[1][0] === '\t' ? '\t' : Math.min(m[1].length, 8);
+  }
+
+  function parseText(text) {
+    text = String(text).replace(/^\uFEFF/, '');
+    const trimmed = text.trim();
+    if (!trimmed) throw new Error('文件是空的');
+    let root, jsonl = false;
+    try { root = JSON.parse(trimmed); }
+    catch (e) {
+      const lines = trimmed.split(/\r?\n/).filter(l => l.trim());
+      let ok = lines.length > 1;
+      if (ok) { try { root = lines.map(l => JSON.parse(l)); jsonl = true; } catch (e2) { ok = false; } }
+      if (!ok) throw new Error('这不是有效的 JSON，可能没导出完整，或者不是聊天记录文件');
+    }
+    if (root === null || typeof root !== 'object') throw new Error('文件里没有聊天记录的结构');
+    expandEmbedded(root, 0);
+    return { root, jsonl, indent: jsonl ? 0 : detectIndent(text) };
+  }
+
+  function tryEmbedded(s) {
+    if (s.length < 4) return undefined;
+    const a = s[0], b = s[s.length - 1];
+    if (!((a === '[' && b === ']') || (a === '{' && b === '}'))) return undefined;
+    let p;
+    try { p = JSON.parse(s); } catch (e) { return undefined; }
+    if ((Array.isArray(p) && p.length && isObj(p[0])) || (isObj(p) && Object.keys(p).length)) return p;
+    return undefined;
+  }
+
+  function expandEmbedded(node, depth) {
+    if (depth > 12) return;
+    const keys = Array.isArray(node) ? node.keys() : Object.keys(node);
+    for (const k of keys) {
+      const v = node[k];
+      if (typeof v === 'string') {
+        const p = tryEmbedded(v);
+        if (p !== undefined) { embedded.set(p, v); node[k] = p; expandEmbedded(p, depth + 1); }
+      } else if (v && typeof v === 'object') expandEmbedded(v, depth + 1);
+    }
+  }
+
+  // 输出前把"字符串里的 JSON"还原成字符串；不改动原对象
+  function collapse(node) {
+    if (node === null || typeof node !== 'object') return node;
+    if (embedded.has(node) && embedded.get(node) != null) return embedded.get(node);
+    let res = node, changed = false;
+    if (Array.isArray(node)) {
+      for (let i = 0; i < node.length; i++) {
+        const c = collapse(node[i]);
+        if (c !== node[i]) { if (!changed) { res = node.slice(); changed = true; } res[i] = c; }
+      }
+    } else {
+      for (const k of Object.keys(node)) {
+        const c = collapse(node[k]);
+        if (c !== node[k]) { if (!changed) { res = Object.assign({}, node); changed = true; } res[k] = c; }
+      }
+    }
+    return embedded.has(node) ? JSON.stringify(res) : res;
+  }
+
+  /* ---------- 消息拍平 ---------- */
+
+  function flattenMsg(obj) {
+    const out = [];
+    const rec = (o, path) => {
+      for (const k of Object.keys(o)) {
+        let v = o[k];
+        const p = path.concat(k);
+        if (v && typeof v === 'object' && embedded.has(v) && embedded.get(v) != null) v = embedded.get(v);
+        if (isObj(v) && p.length < 3) {
+          const n = Object.keys(v).length;
+          if (n && n <= 30) { out.push([p, {}]); rec(v, p); continue; }
+        }
+        out.push([p, v]);
+      }
+    };
+    rec(obj, []);
+    return out;
+  }
+
+  function setPathOwn(root, path, val, own) {
+    let n = root;
+    for (let i = 0; i < path.length - 1; i++) {
+      const s = path[i];
+      let c = n[s];
+      if (!isObj(c)) { c = {}; own.add(c); n[s] = c; }
+      else if (!own.has(c)) { c = Object.assign({}, c); own.add(c); n[s] = c; }
+      n = c;
+    }
+    const last = path[path.length - 1];
+    if (isObj(val) && !Object.keys(val).length && !embedded.has(val)) {
+      if (isObj(n[last]) && own.has(n[last])) return;
+      val = {}; own.add(val);
+    }
+    n[last] = val;
+  }
+
+  /* ---------- 名字表 ---------- */
+
+  const N = {
+    content: ['content', 'text', 'message', 'msg', 'mes', 'body', '内容', '消息', '文本', '正文'],
+    contentWeak: ['value', 'reply', 'words', 'say', 'raw'],
+    sender: ['role', 'sender', 'from', 'isuser', 'isme', 'ismine', 'isself', 'fromme', 'issent', 'issend', 'author', 'speaker', 'side', 'who',
+      'direction', 'isai', 'isbot', 'ischar', 'sendertype', 'sendby', 'sentby', 'isright', 'isleft', 'position', 'owner', 'fromuser', '发送者', '角色', '身份'],
+    time: ['time', 'timestamp', 'ts', 'date', 'datetime', 'createdat', 'createtime', 'sendtime', 'senddate', 'sentat', 'sendat', 'created',
+      'createdtime', 'msgtime', '时间', 'updatedat'],
+    id: ['id', 'mid', 'msgid', 'messageid', 'uuid', 'uid', 'key', 'guid'],
+    type: ['type', 'msgtype', 'messagetype', 'kind', 'contenttype', 'category', 'mtype'],
+    name: ['name', 'sendername', 'nickname', 'charname', 'displayname', 'username', 'speakername', 'authorname']
+  };
+  const IN = (list, x) => list.indexOf(x) !== -1;
+
+  const USER_W = ['user', 'me', 'self', 'human', 'right', 'send', 'sent', 'out', 'outgoing', 'mine', 'player', 'my', 'i', '我', '用户', '自己', '玩家', '我方'];
+  const CHAR_W = ['assistant', 'ai', 'bot', 'char', 'character', 'model', 'them', 'other', 'left', 'receive', 'received', 'recv', 'in', 'incoming',
+    'npc', 'gpt', 'claude', 'partner', 'friend', 'contact', 'ta', '对方', '角色', '助手', '他', '她'];
+  const SYS_W = ['system', 'sys', 'notice', 'tip', 'tips', 'narrator', 'event', '系统', '旁白'];
+
+  function polarity(name) {
+    const tk = tokens(name), n = norm(name);
+    if (tk.some(t => IN(USER_W, t)) || /user|self|mine|sent/.test(n)) return 'user';
+    if (tk.some(t => IN(CHAR_W, t)) || /bot|char|assistant|receiv/.test(n) || /ai$/.test(n)) return 'char';
+    return null;
+  }
+
+  function classifyOne(v, name) {
+    if (typeof v === 'boolean' || ((v === 0 || v === 1) && polarity(name))) {
+      const pol = polarity(name);
+      if (!pol) return null;
+      return (pol === 'user') === !!v ? 'user' : 'char';
+    }
+    if (typeof v !== 'string') return null;
+    const n = v.trim().toLowerCase();
+    if (IN(USER_W, n)) return 'user';
+    if (IN(CHAR_W, n)) return 'char';
+    if (IN(SYS_W, n)) return 'system';
+    const tk = tokens(v);
+    if (tk.some(t => IN(SYS_W, t))) return 'system';
+    if (tk.some(t => IN(USER_W, t))) return 'user';
+    if (tk.some(t => IN(CHAR_W, t))) return 'char';
+    return null;
+  }
+
+  // 返回 Map: skey(值) -> 'user' | 'char' | 'system' | null
+  function classifyValues(k) {
+    const m = new Map();
+    for (const [key, d] of k.distinct) m.set(key, classifyOne(d.value, k.name));
+    const open = [...m.entries()].filter(e => e[1] !== 'system');
+    if (open.length === 2) {
+      const [a, b] = open;
+      if (a[1] && !b[1]) m.set(b[0], a[1] === 'user' ? 'char' : 'user');
+      else if (b[1] && !a[1]) m.set(a[0], b[1] === 'user' ? 'char' : 'user');
+    }
+    return m;
+  }
+
+  const TYPE_GROUPS = [
+    ['text', 'txt', 'normal', 'plain', 'message', 'msg', 'string', 'default', 'chat', '文字', '文本'],
+    ['image', 'img', 'pic', 'picture', 'photo', '图片', '照片'],
+    ['voice', 'audio', 'sound', '语音'],
+    ['sticker', 'emoji', 'emoticon', 'meme', '表情', '表情包'],
+    ['transfer', '转账'], ['redpacket', 'hongbao', '红包'], ['location', '位置'], ['video', '视频'], ['file', '文件'],
+    ['call', '通话'], ['gift', '礼物'], ['link', '链接'], ['system', 'sys', 'notice', 'tip', '系统'], ['recall', 'revoke', '撤回']
+  ];
+  const typeGroup = v => { const n = norm(v); for (let i = 0; i < TYPE_GROUPS.length; i++) if (IN(TYPE_GROUPS[i], n)) return i; return -1; };
+
+  /* ---------- 时间格式 ---------- */
+
+  const MONTHS = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+  const ST_HUMAN = /^[A-Z][a-z]+ \d{1,2}, \d{4} \d{1,2}:\d{2}\s?(am|pm)$/i;
+
+  function detectTimeFmt(samples) {
+    const vals = samples.slice(0, 60);
+    if (!vals.length) return null;
+    const nums = vals.filter(v => typeof v === 'number' && isFinite(v));
+    if (nums.length >= vals.length * 0.8) {
+      if (nums.filter(v => v >= 1e11 && v < 1e14).length >= nums.length * 0.8) return { kind: 'ms', hasDate: true };
+      if (nums.filter(v => v >= 1e9 && v < 1e11).length >= nums.length * 0.8) return { kind: 's', hasDate: true, float: nums.some(v => v % 1 !== 0) };
+      return null;
+    }
+    const strs = vals.filter(v => typeof v === 'string');
+    if (!strs.length || strs.length < vals.length * 0.8) return null;
+    const share = re => strs.filter(x => re.test(x)).length >= strs.length * 0.8;
+    if (share(/^\d{12,14}$/)) return { kind: 'ms', str: true, hasDate: true };
+    if (share(/^\d{9,10}$/)) return { kind: 's', str: true, hasDate: true };
+    if (share(/^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}(:\d{2}(\.\d+)?)?Z$/)) return { kind: 'isoz', hasDate: true, ms: strs.some(x => /\.\d+Z$/.test(x)) };
+    if (share(ST_HUMAN)) return { kind: 'sthuman', hasDate: true, space: / (am|pm)$/i.test(strs[0]), upper: /(AM|PM)$/.test(strs[0]) };
+    return detectPattern(strs);
+  }
+
+  function detectPattern(strs) {
+    const strip = x => x.replace(/\d+/g, '').replace(/上午|下午|星期.|周.|[AaPp]\.?[Mm]\.?|[\s\-\/:.,TZ年月日号时時分秒点hms@+()]/g, '');
+    const ok = strs.filter(x => x.length <= 40 && /\d/.test(x) && strip(x) === '');
+    if (!ok.length || ok.length < strs.length * 0.8) return null;
+    const first = ok[0], seps = first.split(/\d+/), runs = first.match(/\d+/g) || [], n = runs.length;
+    if (n < 2) return null;
+    const same = ok.filter(x => (x.match(/\d+/g) || []).length === n);
+    if (same.length < ok.length * 0.8) return null;
+    const colon = /:|[时時点]|\dh/.test(first);
+    let roles;
+    if (runs[0].length === 4 && n >= 3) roles = ['Y', 'M', 'D', 'h', 'm', 's'];
+    else if (n >= 3 && runs[2].length === 4) roles = same.some(x => +x.match(/\d+/g)[0] > 12) ? ['D', 'M', 'Y', 'h', 'm', 's'] : ['M', 'D', 'Y', 'h', 'm', 's'];
+    else if (colon && !/[\-\/年月]/.test(first) && n <= 3) roles = ['h', 'm', 's'];
+    else if (colon && /[\-\/月]/.test(first) && n >= 4) roles = ['M', 'D', 'h', 'm', 's'];
+    else return null;
+    roles = roles.slice(0, n);
+    while (roles.length < n) roles.push(roles.indexOf('s') !== -1 && roles.indexOf('ms') === -1 && runs[roles.length].length === 3 ? 'ms' : 'x');
+    const pad = runs.map((r, i) => same.every(x => x.match(/\d+/g)[i].length >= 2));
+    return { kind: 'pattern', seps, runs, roles, pad, h12: /上午|下午|[AaPp]\.?[Mm]/.test(first), hasDate: roles.indexOf('M') !== -1 };
+  }
+
+  function swapAmPm(sep, pm) {
+    return sep.replace(/上午|下午/, pm ? '下午' : '上午')
+      .replace(/([AaPp])(\.?)([Mm])/, (m0, a, dot, mm) => (a === a.toUpperCase() ? (pm ? 'P' : 'A') : (pm ? 'p' : 'a')) + dot + mm);
+  }
+
+  function fmtPattern(ms, f) {
+    const d = new Date(ms);
+    let h = d.getHours();
+    const pm = h >= 12;
+    if (f.h12) h = h % 12 || 12;
+    const val = { Y: d.getFullYear(), M: d.getMonth() + 1, D: d.getDate(), h, m: d.getMinutes(), s: d.getSeconds(), ms: d.getMilliseconds() };
+    let out = '';
+    for (let i = 0; i < f.roles.length; i++) {
+      const r = f.roles[i];
+      let t = r === 'x' ? f.runs[i] : String(val[r]);
+      if (r === 'ms') t = t.padStart(3, '0'); else if (r !== 'x' && r !== 'Y' && f.pad[i]) t = t.padStart(2, '0');
+      out += (f.h12 ? swapAmPm(f.seps[i], pm) : f.seps[i]) + t;
+    }
+    const tail = f.seps[f.roles.length] || '';
+    return out + (f.h12 ? swapAmPm(tail, pm) : tail);
+  }
+
+  function parseTime(v, f) {
+    if (typeof v === 'number') return v >= 1e11 ? v : v >= 1e8 ? v * 1000 : NaN;
+    if (typeof v !== 'string') return NaN;
+    const t = v.trim();
+    if (/^\d{12,14}$/.test(t)) return +t;
+    if (/^\d{9,10}(\.\d+)?$/.test(t)) return +t * 1000;
+    if (/T.*(Z|[+\-]\d{2}:?\d{2})$/.test(t)) { const p = Date.parse(t); if (!isNaN(p)) return p; }
+    const runs = t.match(/\d+/g) || [];
+    let roles = f && f.kind === 'pattern' ? f.roles : null;
+    if (!roles && runs.length >= 3 && runs[0].length === 4) roles = ['Y', 'M', 'D', 'h', 'm', 's', 'ms'];
+    if (roles && !/^[A-Za-z]{3,}/.test(t)) {
+      const now = new Date();
+      const g = { Y: now.getFullYear(), M: now.getMonth() + 1, D: now.getDate(), h: 0, m: 0, s: 0, ms: 0 };
+      roles.forEach((r, i) => { if (r !== 'x' && runs[i] !== undefined) g[r] = +runs[i]; });
+      if (/下午|[Pp]\.?[Mm]\b/.test(t) && g.h < 12) g.h += 12;
+      if (/上午|[Aa]\.?[Mm]\b/.test(t) && g.h === 12) g.h = 0;
+      return new Date(g.Y, g.M - 1, g.D, g.h, g.m, g.s, g.ms).getTime();
+    }
+    return Date.parse(t.replace(/(\d)(am|pm)\b/i, '$1 $2'));
+  }
+
+  function fmtTime(ms, f) {
+    if (!f) return Math.round(ms);
+    switch (f.kind) {
+      case 'ms': return f.str ? String(Math.round(ms)) : Math.round(ms);
+      case 's': { const s = f.float ? ms / 1000 : Math.floor(ms / 1000); return f.str ? String(s) : s; }
+      case 'isoz': { const s = new Date(ms).toISOString(); return f.ms ? s : s.replace(/\.\d+Z$/, 'Z'); }
+      case 'sthuman': {
+        const d = new Date(ms), h = d.getHours();
+        let ap = h >= 12 ? 'pm' : 'am'; if (f.upper) ap = ap.toUpperCase();
+        return MONTHS[d.getMonth()] + ' ' + d.getDate() + ', ' + d.getFullYear() + ' ' + (h % 12 || 12) + ':' + String(d.getMinutes()).padStart(2, '0') + (f.space ? ' ' : '') + ap;
+      }
+      case 'pattern': return fmtPattern(ms, f);
+    }
+    return Math.round(ms);
+  }
+
+  /* ---------- 编号风格 ---------- */
+
+  const UUID = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
+
+  function idStyleOf(samples) {
+    const v = samples.filter(x => x !== '' && x != null && typeof x !== 'object').slice(0, 60);
+    if (!v.length) return { kind: 'seq', start: 1 };
+    const numKind = (arr, str) => {
+      const len = x => String(x).length;
+      if (arr.every(x => len(x) >= 12)) return { kind: 'ts', unit: 1, str };
+      if (arr.every(x => len(x) === 10)) return { kind: 'ts', unit: 1000, str };
+      return { kind: 'seq', start: +arr[0] === 0 ? 0 : 1, str };
+    };
+    if (v.every(x => typeof x === 'number')) return numKind(v, false);
+    const s = v.map(String);
+    if (s.every(x => /^\d+$/.test(x))) return numKind(s, true);
+    if (s.every(x => UUID.test(x))) return { kind: 'uuid', upper: s[0] !== s[0].toLowerCase() };
+    const tpl = s[0];
+    let p = 0;
+    if (s.length >= 2) { while (p < tpl.length && s.every(x => x[p] === tpl[p])) p++; while (p > 0 && /\d/.test(tpl[p - 1])) p--; }
+    else { const m = tpl.match(/^[A-Za-z]+[_\-:.#]/); p = m ? m[0].length : 0; }
+    const rest = s.map(x => x.slice(p));
+    if (p && rest.every(x => /^\d+$/.test(x))) {
+      if (rest.every(x => x.length >= 12)) return { kind: 'pseq', prefix: tpl.slice(0, p), ts: 1 };
+      if (rest.every(x => x.length === 10)) return { kind: 'pseq', prefix: tpl.slice(0, p), ts: 1000 };
+      return { kind: 'pseq', prefix: tpl.slice(0, p), start: +rest[0] === 0 ? 0 : 1 };
+    }
+    const same = s.filter(x => x.length === tpl.length);
+    let mask;
+    if (same.length >= 2 && same.length >= s.length * 0.6) mask = Array.from(tpl).map((c, i) => same.every(x => x[i] === c) && (i < p || !/[A-Za-z0-9]/.test(c)));
+    else mask = Array.from(tpl).map((c, i) => i < p || !/[A-Za-z0-9]/.test(c));
+    const hex = rest.every(x => !/[g-zG-Z]/.test(x));
+    return { kind: 'tpl', tpl, mask, hex };
+  }
+
+  function uuid() {
+    if (typeof crypto !== 'undefined' && crypto.randomUUID) return crypto.randomUUID();
+    return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, c => { const r = Math.random() * 16 | 0; return (c === 'x' ? r : (r & 3 | 8)).toString(16); });
+  }
+
+  function makeIdGen(style) {
+    const used = new Set();
+    let last = 0;
+    const rnd = n => Math.floor(Math.random() * n);
+    const ts = (tms, unit) => { let x = Math.floor((isFinite(tms) ? tms : Date.now()) / unit); if (x <= last) x = last + 1; last = x; return x; };
+    const uniq = fn => { for (let t = 0; t < 30; t++) { const x = fn(); if (!used.has(x)) { used.add(x); return x; } } const x = fn() + used.size; used.add(x); return x; };
+    const fromTpl = tms => {
+      const t = style.tpl; let out = '', i = 0;
+      while (i < t.length) {
+        if (/\d/.test(t[i]) && (i === 0 || !/\d/.test(t[i - 1]))) {
+          const m = /^\d+/.exec(t.slice(i))[0];
+          if ((m.length === 13 || m.length === 10) && m[0] === '1') { out += ts(tms, m.length === 13 ? 1 : 1000); i += m.length; continue; }
+        }
+        const c = t[i];
+        if (style.mask[i]) out += c;
+        else if (style.hex && /[0-9a-fA-F]/.test(c)) { const h = '0123456789abcdef'[rnd(16)]; out += /[A-F]/.test(c) ? h.toUpperCase() : h; }
+        else if (/\d/.test(c)) out += rnd(10);
+        else if (/[a-z]/.test(c)) out += String.fromCharCode(97 + rnd(26));
+        else if (/[A-Z]/.test(c)) out += String.fromCharCode(65 + rnd(26));
+        else out += c;
+        i++;
+      }
+      return out;
+    };
+    return (i, tms) => {
+      switch (style.kind) {
+        case 'seq': { const x = style.start + i; return style.str ? String(x) : x; }
+        case 'ts': { const x = ts(tms, style.unit); return style.str ? String(x) : x; }
+        case 'pseq': return style.prefix + (style.ts ? ts(tms, style.ts) : style.start + i);
+        case 'uuid': return uniq(() => { const u = uuid(); return style.upper ? u.toUpperCase() : u; });
+        default: return uniq(() => fromTpl(tms));
+      }
+    };
+  }
+
+  const idSig = v => {
+    if (typeof v === 'number') return String(v).length >= 12 ? 'n:ms' : String(v).length === 10 ? 'n:s' : 'n';
+    const s = String(v);
+    if (UUID.test(s)) return 'uuid';
+    const m = s.match(/^[A-Za-z]*/)[0];
+    return 's:' + m + s.slice(m.length).replace(/\d+/g, '9').replace(/[A-Za-z]+/g, 'a');
+  };
+
+  /* ---------- 分析一段消息 ---------- */
+
+  function newStat(path) {
+    return { id: pid(path), path, name: String(path[path.length - 1]), label: path.join('.'), count: 0, types: {}, strCount: 0, sumLen: 0, numCount: 0,
+      seqHits: 0, prevNum: undefined, distinct: new Map(), over: false, uniq: new Set(), dup: false, samples: [] };
+  }
+
+  function addStat(st, v) {
+    st.count++;
+    const t = typeOf(v);
+    st.types[t] = (st.types[t] || 0) + 1;
+    let k = null;
+    if (t === 'string') { st.strCount++; st.sumLen += v.length; if (v.length <= 80) k = 'string:' + v; }
+    else if (t === 'number') { if (st.prevNum !== undefined && v - st.prevNum === 1) st.seqHits++; st.prevNum = v; st.numCount++; k = 'number:' + v; }
+    else if (t === 'boolean' || t === 'null') k = t + ':' + v;
+    else if (t !== 'undefined') { const s = JSON.stringify(collapse(v)); if (s.length <= 200) k = t + ':' + s; }
+    if (k !== null) {
+      const d = st.distinct.get(k);
+      if (d) d.count++; else if (st.distinct.size < 40) st.distinct.set(k, { value: v, count: 1 }); else st.over = true;
+      if (!st.dup && st.uniq.size < 5000) { if (st.uniq.has(k)) st.dup = true; else st.uniq.add(k); }
+    } else st.over = true;
+    if (st.samples.length < 60 && v !== '' && v != null) st.samples.push(v);
+  }
+
+  function pass(arr, skip, limit) {
+    const map = new Map(), keys = [];
+    let n = 0;
+    const end = limit ? Math.min(arr.length, skip + limit) : arr.length;
+    for (let i = skip; i < end; i++) {
+      const el = arr[i];
+      if (!isObj(el)) continue;
+      n++;
+      for (const [p, v] of flattenMsg(el)) {
+        const id = pid(p);
+        let st = map.get(id);
+        if (!st) { st = newStat(p); map.set(id, st); keys.push(st); }
+        addStat(st, v);
+      }
+    }
+    for (const k of keys) {
+      let mt = 'null', mc = -1;
+      for (const t in k.types) if (t !== 'null' && k.types[t] > mc) { mc = k.types[t]; mt = t; }
+      k.mainType = mt;
+      k.fill = n ? k.count / n : 0;
+      k.nn = norm(k.name);
+      k.prim = ((k.types.string || 0) + (k.types.number || 0) + (k.types.boolean || 0)) >= k.count * 0.9;
+      k.tfmt = k.prim ? detectTimeFmt(k.samples) : null;
+      k.seq = k.numCount >= 3 && k.seqHits >= (k.numCount - 1) * 0.9 && !k.tfmt;
+      k.uniq = null;
+    }
+    return { n, keys, byId: map };
+  }
+
+  function detectRoles(A) {
+    const R = { content: null, sender: null, time: null, id: null, type: null, name: null };
+    const n = A.n || 1;
+    let best = null, bs = 0;
+    for (const k of A.keys) {
+      const nm = k.nn;
+      let s = 0;
+      if (IN(N.content, nm)) s += 10;
+      else if (IN(N.sender, nm) || IN(N.time, nm) || IN(N.id, nm) || IN(N.type, nm) || IN(N.name, nm)) continue;
+      else if (N.content.some(w => nm.indexOf(w) !== -1)) s += 5;
+      else if (IN(N.contentWeak, nm)) s += 3;
+      const strShare = (k.types.string || 0) / k.count;
+      if (strShare < 0.5) {
+        if (!(s >= 10 && ((k.types.array || 0) + (k.types.object || 0)) >= k.count * 0.5)) continue;
+        s -= 2;
+      } else {
+        const avg = k.sumLen / Math.max(1, k.strCount);
+        s += Math.min(avg, 60) / 10;
+        if (k.tfmt) s -= 6;
+        if (avg > 3000) s -= 3;
+      }
+      s *= 0.4 + 0.6 * (k.count / n);
+      s -= (k.path.length - 1) * 0.8;
+      if (s > bs) { bs = s; best = k; }
+    }
+    if (best && bs >= 2.5) R.content = best.id;
+
+    best = null; bs = 0;
+    for (const k of A.keys) {
+      if (k.id === R.content || !k.prim || k.over || k.distinct.size > 30) continue;
+      if (IN(N.id, k.nn) || IN(N.time, k.nn)) continue;
+      let s = 0;
+      if (IN(N.sender, k.nn)) s += 10; else if (IN(N.name, k.nn)) s += 4;
+      const set = new Set(classifyValues(k).values());
+      if (set.has('user') && set.has('char')) s += 9; else if (set.has('user') || set.has('char')) s += 5;
+      if (k.distinct.size < 2) s -= 3;
+      s *= 0.4 + 0.6 * (k.count / n);
+      s -= (k.path.length - 1) * 0.8;
+      if (s > bs) { bs = s; best = k; }
+    }
+    if (best && bs >= 4) R.sender = best.id;
+
+    best = null; bs = 0;
+    for (const k of A.keys) {
+      if (k.id === R.content || k.id === R.sender || !k.prim) continue;
+      let s = 0;
+      const tk = tokens(k.name);
+      if (IN(N.time, k.nn) || tk.some(t => t === 'time' || t === 'date' || t === 'timestamp')) s += 6;
+      if (k.tfmt) { s += 6; if (k.tfmt.hasDate) s += 2; }
+      if (IN(N.id, k.nn)) s -= 8;
+      s *= 0.4 + 0.6 * (k.count / n);
+      if (s > bs) { bs = s; best = k; }
+    }
+    if (best && bs >= 5.5) R.time = best.id;
+
+    best = null; bs = 0;
+    for (const k of A.keys) {
+      if (k.id === R.content || k.id === R.sender || k.id === R.time || !k.prim) continue;
+      let s = 0;
+      const tk = tokens(k.name);
+      if (IN(N.id, k.nn)) s += 6; else if (tk[tk.length - 1] === 'id') s += 3; else continue;
+      s += (!k.dup && k.count >= 2) ? 4 : (k.count < 2 ? 0 : -4);
+      s *= 0.4 + 0.6 * (k.count / n);
+      s -= (k.path.length - 1) * 0.8;
+      if (s > bs) { bs = s; best = k; }
+    }
+    if (best && bs >= 5.5) R.id = best.id;
+
+    const taken = () => Object.keys(R).map(r => R[r]).filter(Boolean);
+    for (const k of A.keys) if (!R.type && IN(N.type, k.nn) && k.prim && !k.over && k.distinct.size <= 20 && taken().indexOf(k.id) === -1) R.type = k.id;
+    for (const k of A.keys) if (!R.name && IN(N.name, k.nn) && k.mainType === 'string' && taken().indexOf(k.id) === -1) R.name = k.id;
+    return R;
+  }
+
+  function analyze(arr, limit) {
+    let A = pass(arr, 0, limit);
+    A.roles = detectRoles(A);
+    let hc = 0;
+    if (!limit && (A.roles.content || A.roles.sender)) {
+      const has = el => isObj(el) && flattenMsg(el).some(e => { const id = pid(e[0]); return id === A.roles.content || id === A.roles.sender; });
+      while (hc < Math.min(3, arr.length - 1) && !has(arr[hc])) hc++;
+      if (hc) {
+        let rest = 0, ok = 0;
+        for (let i = hc; i < Math.min(arr.length, hc + 50); i++) { rest++; if (has(arr[i])) ok++; }
+        if (ok < rest * 0.8) hc = 0;
+      }
+      if (hc) { A = pass(arr, hc); A.roles = detectRoles(A); }
+    }
+    A.headCount = hc;
+    A.roleOf = {};
+    for (const r in A.roles) if (A.roles[r]) A.roleOf[A.roles[r]] = r;
+    const sk = A.roles.sender && A.byId.get(A.roles.sender);
+    A.senderClass = sk ? classifyValues(sk) : new Map();
+    A.groups = null;
+    if (!limit && sk && !sk.over && sk.distinct.size <= 8) {
+      const groups = new Map();
+      for (let i = hc; i < arr.length; i++) {
+        const el = arr[i];
+        if (!isObj(el)) continue;
+        const flat = flattenMsg(el);
+        let g = 'undefined:';
+        for (const e of flat) if (pid(e[0]) === sk.id) { g = skey(e[1]); break; }
+        let G = groups.get(g);
+        if (!G) { G = { n: 0, keys: new Map() }; groups.set(g, G); }
+        G.n++;
+        for (const [p, v] of flat) {
+          const id = pid(p);
+          let ks = G.keys.get(id);
+          if (!ks) { ks = { count: 0, distinct: new Map() }; G.keys.set(id, ks); }
+          ks.count++;
+          const t = typeOf(v);
+          let k = null;
+          if (t === 'string') { if (v.length <= 80) k = 'string:' + v; }
+          else if (t === 'object' || t === 'array') { const s = JSON.stringify(collapse(v)); if (s.length <= 200) k = t + ':' + s; }
+          else k = t + ':' + v;
+          if (k !== null) { const d = ks.distinct.get(k); if (d) d.count++; else if (ks.distinct.size < 12) ks.distinct.set(k, { value: v, count: 1 }); }
+        }
+      }
+      A.groups = groups;
+    }
+    const ik = A.roles.id && A.byId.get(A.roles.id);
+    A.idStyle = ik ? idStyleOf(ik.samples) : null;
+    return A;
+  }
+
+  const emptyOf = t => t === 'string' ? '' : t === 'number' ? 0 : t === 'boolean' ? false : t === 'array' ? [] : t === 'object' ? {} : null;
+
+  function groupDefault(A, k, gkey) {
+    let n, cnt, dist;
+    const g = gkey !== '*' && A.groups ? A.groups.get(gkey) : null;
+    if (g) { const ks = g.keys.get(k.id); n = g.n; cnt = ks ? ks.count : 0; dist = ks ? ks.distinct : null; }
+    else { n = A.n; cnt = k.count; dist = k.distinct; }
+    if (cnt <= n * 0.5) return UNSET;
+    let best = null;
+    if (dist) for (const d of dist.values()) if (!best || d.count > best.count) best = d;
+    if (best && best.count >= cnt * 0.6) {
+      const v = best.value;
+      const heavy = (typeof v === 'string' && v.length > 40) || (v && typeof v === 'object' && (Array.isArray(v) ? v.length : Object.keys(v).length) > 0);
+      if (!heavy || best.count >= 3) return v;
+    } else if (best && (best.value === null || typeof best.value !== 'object')) {
+      // 没有明显最常见的值：像"类型"这种枚举字段，仍然取示例里出现过的值，而不是留空
+      const isType = A.roles.type === k.id;
+      if (isType) { for (const d of dist.values()) if (typeGroup(d.value) === 0) return d.value; return best.value; }
+      if (typeof best.value === 'boolean' || (!k.over && k.distinct.size <= Math.max(1, k.count * 0.5))) return best.value;
+    }
+    return emptyOf(k.mainType);
+  }
+
+  /* ---------- 找聊天记录在文件里的位置 ---------- */
+
+  const NAME_KEYS = ['name', 'title', 'nickname', 'charname', 'charactername', 'displayname', 'remark', 'remarkname'];
+
+  function findArrays(root) {
+    const found = [];
+    let budget = 80000;
+    const walkObj = (o, path, depth) => {
+      if (budget-- <= 0 || depth > 12) return;
+      for (const k of Object.keys(o)) { const v = o[k]; if (v && typeof v === 'object') walk(v, path.concat(k), depth + 1); }
+    };
+    const walk = (node, path, depth) => {
+      if (budget-- <= 0 || depth > 12) return;
+      if (Array.isArray(node)) {
+        let objs = 0;
+        for (const el of node) if (isObj(el)) objs++;
+        if (node.length && objs >= node.length * 0.6) found.push({ path, node, len: objs });
+        const lim = Math.min(node.length, 300);
+        for (let i = 0; i < lim; i++) if (isObj(node[i])) walkObj(node[i], path.concat(i), depth + 1);
+      } else if (isObj(node)) walkObj(node, path, depth);
+    };
+    walk(root, [], 0);
+    found.sort((a, b) => a.path.length - b.path.length);
+    const strong = [], out = [];
+    const isPrefix = (a, b) => a.length < b.length && a.every((s, i) => s === b[i]);
+    for (const c of found) {
+      if (strong.some(p => isPrefix(p, c.path))) continue;
+      const A = analyze(c.node, 80);
+      const ck = A.roles.content && A.byId.get(A.roles.content);
+      const strongName = ck && IN(N.content, ck.nn);
+      c.score = (ck ? (strongName ? 4 : 2) : 0) + (A.roles.sender ? 3 : 0) + (A.roles.time ? 1 : 0) + Math.min(c.len, 400) / 200;
+      c.hasContent = !!ck;
+      if (ck && A.roles.sender && strongName && c.len >= 2) strong.push(c.path);
+      const parent = getPath(root, c.path.slice(0, -1));
+      c.owner = '';
+      if (isObj(parent)) for (const k of Object.keys(parent)) if (IN(NAME_KEYS, norm(k)) && typeof parent[k] === 'string' && parent[k]) { c.owner = parent[k]; break; }
+      c.label = pathLabel(c.path);
+      out.push(c);
+    }
+    out.sort((a, b) => b.score - a.score || b.len - a.len);
+    return out.filter(c => c.hasContent).slice(0, 40);
+  }
+
+  /* ---------- 消息以外的信息（角色名、头像、id……） ---------- */
+
+  const W_GROUPS = {
+    name: ['name', 'title', 'nickname', 'charname', 'charactername', 'displayname', 'remark', 'remarkname', 'realname', 'originalname', '名字', '备注'],
+    avatar: ['avatar', 'avatarurl', 'head', 'headimg', 'icon', 'charavatar', 'aiavatar'],
+    persona: ['persona', 'prompt', 'description', 'desc', 'personality', 'systemprompt', 'charpersona', 'aipersona', 'characterprompt', 'charprompt', '人设'],
+    userpersona: ['mypersona', 'userpersona', 'userprompt', 'userdesc'],
+    username: ['username', 'mynickname', 'myname', 'usernickname'],
+    useravatar: ['myavatar', 'useravatar'],
+    id: ['id', 'uid', 'uuid', 'chatid', 'charid', 'characterid', 'contactid']
+  };
+  const W_DENY = ['version', 'ver', 'format', 'schema', 'schemaversion', 'type', 'app', 'appname', 'appversion', 'source', 'platform', 'kind'];
+  const wGroup = nn => { for (const g in W_GROUPS) if (IN(W_GROUPS[g], nn)) return g; return null; };
+
+  function flattenWrapper(root, msgPath, headCount) {
+    const out = [];
+    const eq = (a, b) => a.length === b.length && a.every((s, i) => s === b[i]);
+    const isPre = (a, b) => a.length <= b.length && a.every((s, i) => s === b[i]);
+    const leaf = (path, value) => {
+      if (out.length >= 400) return;
+      let name = '';
+      for (let i = path.length - 1; i >= 0; i--) if (typeof path[i] === 'string') { name = path[i]; break; }
+      const nn = norm(name);
+      out.push({ id: pid(path), path, label: pathLabel(path), name, nn, group: wGroup(nn), value, depth: path.length });
+    };
+    const rec = (node, path, free) => {
+      if (eq(path, msgPath)) { for (let i = 0; i < headCount; i++) if (isObj(node[i])) rec(node[i], path.concat(i), 0); return; }
+      if (Array.isArray(node)) { const idx = msgPath[path.length]; if (node[idx] !== undefined) rec(node[idx], path.concat(idx), 0); return; }
+      for (const k of Object.keys(node)) {
+        const v = node[k], cp = path.concat(k);
+        if (v && typeof v === 'object' && isPre(cp, msgPath)) rec(v, cp, 0);
+        else if (isObj(v) && free < 3 && Object.keys(v).length && Object.keys(v).length <= 60) rec(v, cp, free + 1);
+        else leaf(cp, v);
+      }
+    };
+    if (root && typeof root === 'object') rec(root, [], 0);
+    return out;
+  }
+
+  function cloneTemplate(root, msgPath) {
+    const newPath = msgPath.slice();
+    const isPre = (a, b) => a.length <= b.length && a.every((s, i) => s === b[i]);
+    const clone = (node, path) => {
+      if (node === null || typeof node !== 'object') return node;
+      let res;
+      if (path.length === msgPath.length && isPre(path, msgPath)) res = [];
+      else if (Array.isArray(node)) {
+        if (isPre(path, msgPath) && path.length < msgPath.length) {
+          const idx = msgPath[path.length], rest = msgPath.slice(path.length + 1);
+          res = [];
+          node.forEach((el, i) => {
+            if (i === idx) { newPath[path.length] = res.length; res.push(clone(el, path.concat(i))); }
+            else if (!(rest.length && Array.isArray(getPath(el, rest)))) res.push(clone(el, path.concat(i)));
+          });
+        } else res = node.map((el, i) => clone(el, path.concat(i)));
+      } else {
+        res = {};
+        for (const k of Object.keys(node)) res[k] = clone(node[k], path.concat(k));
+      }
+      if (embedded.has(node)) embedded.set(res, null);
+      return res;
+    };
+    const out = clone(root, []);
+    return { root: out, path: newPath };
+  }
+
+  const underlying = v => typeOf(v);
+  const compat = (a, b) => { const ta = underlying(a), tb = underlying(b); return ta === tb || ta === 'null' || tb === 'null'; };
+
+  /* ---------- 文本 <-> 值 ---------- */
+
+  function showLoose(v) {
+    if (v === UNSET || v === undefined) return '';
+    if (typeof v === 'string') {
+      if (v.trim() === '') return JSON.stringify(v);
+      try { JSON.parse(v); return JSON.stringify(v); } catch (e) { return v; }
+    }
+    return JSON.stringify(collapse(v));
+  }
+  function parseLoose(text) {
+    if (text == null || String(text).trim() === '') return UNSET;
+    try { return JSON.parse(text); } catch (e) { return String(text); }
+  }
+
+  /* ---------- 生成对照方案 ---------- */
+
+  function buildValueMap(S, T, sk, tk, role) {
+    if (!sk || sk.over || sk.distinct.size > 30) return null;
+    const tvals = [...tk.distinct.entries()];
+    const tcls = role === 'sender' ? classifyValues(tk) : null;
+    const scls = role === 'sender' ? classifyValues(sk) : null;
+    let top = null;
+    for (const e of tvals) if (!top || e[1].count > top[1].count) top = e;
+    const out = [];
+    for (const [key, d] of sk.distinct) {
+      const e = { key, value: d.value, count: d.count, to: KEEP, custom: '', unsure: false };
+      const same = tvals.find(t => t[0] === key) || tvals.find(t => norm(t[1].value) === norm(d.value) && typeof t[1].value === typeof d.value);
+      if (role === 'sender') {
+        const c = scls.get(key);
+        const hit = c && tvals.find(t => tcls.get(t[0]) === c);
+        if (hit) e.to = hit[0];
+        else if (c && c !== 'system' && tk.mainType === 'boolean' && tvals.length === 1 && tcls.get(tvals[0][0])) { e.to = CUSTOM; e.custom = String(!tvals[0][1].value); }
+        else if (same) e.to = same[0];
+        else if (c === 'system') { const ch = tvals.find(t => tcls.get(t[0]) === 'char'); if (tk.mainType !== 'string' && ch) e.to = ch[0]; e.unsure = tk.mainType !== 'string'; }
+        else { e.unsure = true; if (tk.mainType !== sk.mainType && top) e.to = top[0]; }
+      } else {
+        const g = typeGroup(d.value);
+        const hit = same || (g >= 0 && tvals.find(t => typeGroup(t[1].value) === g));
+        if (hit) e.to = hit[0];
+        else { const txt = tvals.find(t => typeGroup(t[1].value) === 0) || top; if (txt) e.to = txt[0]; e.unsure = true; }
+      }
+      out.push(e);
+    }
+    return out;
+  }
+
+  function genKindOf(T, tk) {
+    const role = T.roleOf[tk.id];
+    if (role === 'time' || (tk.tfmt && role !== 'id')) return 'time';
+    if (role === 'id') return 'id';
+    if (tk.seq) return 'seq';
+    if (tk.prim && !tk.dup && tk.count >= 3 && tk.mainType !== 'boolean' && role !== 'content') return 'id';
+    return null;
+  }
+
+  function makeDefaults(T, tk) {
+    const list = [];
+    const sk = T.roles.sender && T.byId.get(T.roles.sender);
+    if (T.groups && sk) for (const [g] of T.groups) {
+      const d = sk.distinct.get(g);
+      list.push({ gkey: g, label: d ? showLoose(d.value) : '（没有发送者）', cls: T.senderClass.get(g) || null, text: showLoose(groupDefault(T, tk, g)) });
+    }
+    const all = showLoose(groupDefault(T, tk, '*'));
+    const split = list.length > 1 && list.length <= 6 && list.some(x => x.text !== list[0].text);
+    return { groups: list, all, split };
+  }
+
+  function fieldSource(S, T, tk) {
+    const role = T.roleOf[tk.id];
+    if (role && S.roles[role]) return S.roles[role];
+    const ok = sk => {
+      const sr = S.roleOf[sk.id];
+      if (role === 'name' && sr === 'sender') return true;
+      return !(sr && role && sr !== role) && !(sr && !role && (sr === 'content' || sr === 'sender'));
+    };
+    let hit = S.keys.find(sk => norm(sk.label) === norm(tk.label) && ok(sk));
+    if (!hit) {
+      const c = S.keys.filter(sk => sk.nn === tk.nn && ok(sk)).sort((a, b) => a.path.length - b.path.length);
+      if (c.length) hit = c[0];
+    }
+    return hit ? hit.id : null;
+  }
+
+  function planField(S, T, tk) {
+    const role = T.roleOf[tk.id] || null;
+    const f = { id: tk.id, path: tk.path, label: tk.label, role, mode: 'omit', source: null, vm: null, genKind: genKindOf(T, tk), defaults: makeDefaults(T, tk), auto: true };
+    const src = fieldSource(S, T, tk);
+    const hasDefault = f.defaults.all !== '' || f.defaults.groups.some(g => g.text !== '');
+    if (role === 'id') {
+      const sk = src && S.byId.get(src);
+      if (sk && sk.samples.length && tk.samples.length && idSig(sk.samples[0]) === idSig(tk.samples[0])) { f.mode = 'source'; f.source = src; }
+      else f.mode = 'gen';
+    } else if (src) {
+      f.mode = 'source'; f.source = src;
+      if (tk.seq && !S.byId.get(src).seq) { f.mode = 'gen'; f.source = null; }
+    } else if (role === 'time') f.mode = tk.fill >= 0.5 ? 'gen' : 'omit';
+    else if (tk.seq) f.mode = 'gen';
+    else f.mode = hasDefault ? 'default' : 'omit';
+    if (f.mode === 'source') refreshValueMap(S, T, f);
+    return f;
+  }
+
+  function refreshValueMap(S, T, f) {
+    f.vm = null;
+    if (f.mode !== 'source' || !f.source) return;
+    if (f.role === 'sender' || f.role === 'type') f.vm = buildValueMap(S, T, S.byId.get(f.source), T.byId.get(f.id), f.role);
+  }
+
+  function planWrapper(S, T, opts) {
+    const Sw = S.wrapper, Tw = T.wrapper;
+    const parent = T.path.slice(0, -1);
+    const inChat = p => parent.every((seg, i) => p[i] === seg);
+    const out = [];
+    for (const tl of Tw) {
+      const v = tl.value;
+      const w = { id: tl.id, path: tl.path, label: tl.label, sample: v, group: tl.group, mode: 'sample', source: null, text: '', genValue: undefined, isId: false, note: '' };
+      const prim = v === null || typeof v !== 'object';
+      const near = tl.depth <= parent.length + 2 && inChat(tl.path);
+      w.isId = tl.group === 'id' && prim && v !== null && v !== '';
+      if (w.isId) {
+        const st = idStyleOf([v]);
+        if (st.kind === 'seq' || (st.kind === 'pseq' && !st.ts)) w.genValue = st.kind === 'pseq' ? st.prefix + Date.now() : (typeof v === 'number' ? Date.now() : String(Date.now()));
+        else w.genValue = makeIdGen(st)(0, Date.now());
+      }
+      if (opts.identity === 'sample') { out.push(w); continue; }
+      if (tl.group === 'name' && typeof v === 'string' && near && opts.charName) { w.mode = 'charname'; out.push(w); continue; }
+      if (!IN(W_DENY, tl.nn)) {
+        let c = Sw.filter(sl => sl.nn === tl.nn);
+        if (!c.length && tl.group) c = Sw.filter(sl => sl.group === tl.group);
+        c = c.filter(sl => compat(v, sl.value)).sort((a, b) => a.depth - b.depth);
+        if (c.length) {
+          w.mode = 'source'; w.source = c[0].id;
+          if (w.isId && idSig(c[0].value) !== idSig(v)) { w.mode = near ? 'gen' : 'sample'; w.source = null; }
+        }
+      }
+      if (w.mode === 'sample' && inChat(tl.path)) {
+        if (w.isId) { if (near) w.mode = 'gen'; }
+        else if (tl.group === 'name' && typeof v === 'string') w.mode = 'empty';
+        else if ((tl.group === 'avatar' || tl.group === 'persona') && typeof v === 'string' && v !== '') w.mode = 'empty';
+        else if (!tl.group && typeof v === 'string' && (v.length > 40 || /^data:/.test(v))) w.mode = 'empty';
+        else if (Array.isArray(v) && v.length) w.mode = 'empty';
+        if (w.mode === 'empty') w.note = '左边没有对应的内容，先清空，免得带上示例角色的资料';
+      }
+      out.push(w);
+    }
+    return out;
+  }
+
+  // 示例里"角色那一方"用到的名字（发送者本身是名字，或者每条消息带的发送者名字）
+  function sampleCharNames(T) {
+    const out = [];
+    const sk = T.roles.sender && T.byId.get(T.roles.sender);
+    if (!sk) return out;
+    const cls = classifyValues(sk), nk = T.roles.name && T.byId.get(T.roles.name);
+    for (const [key, d] of sk.distinct) {
+      if (cls.get(key) !== 'char') continue;
+      if (typeof d.value === 'string' && classifyOne(d.value, sk.name) === null && out.indexOf(d.value) === -1) out.push(d.value);
+      if (nk) { const v = groupDefault(T, nk, key); if (typeof v === 'string' && v && classifyOne(v, '') === null && out.indexOf(v) === -1) out.push(v); }
+    }
+    return out;
+  }
+
+  function buildPlan(S, T, opts) {
+    opts = Object.assign({ identity: 'new' }, opts || {});
+    const nl = S.wrapper.filter(l => l.group === 'name' && typeof l.value === 'string' && l.value).sort((a, b) => a.depth - b.depth)[0];
+    const plan = { fields: T.analysis.keys.map(tk => planField(S.analysis, T.analysis, tk)), charName: nl ? nl.value : (opts.srcName || ''), keepExtra: false };
+    return rewrap(plan, S, T, opts.identity);
+  }
+
+  // 只重排"消息以外的资料"，每条消息的对照保持不动
+  function rewrap(plan, S, T, identity) {
+    plan.identity = identity;
+    plan.wrapper = planWrapper(S, T, { identity, charName: plan.charName });
+    plan.sampleNames = identity === 'new' ? sampleCharNames(T.analysis) : [];
+    return plan;
+  }
+
+  /* ---------- 转换 ---------- */
+
+  function coerce(v, tt) {
+    const t = typeof v;
+    if (tt === 'string') return (t === 'number' || t === 'boolean') ? String(v) : v;
+    if (tt === 'number') { if (t === 'string' && v.trim() !== '' && isFinite(+v)) return +v; if (t === 'boolean') return v ? 1 : 0; return v; }
+    if (tt === 'boolean') { if (v === 'true' || v === 1) return true; if (v === 'false' || v === 0) return false; return v; }
+    return v;
+  }
+
+  function toText(v) {
+    if (typeof v === 'string') return v;
+    if (v == null) return '';
+    if (Array.isArray(v)) {
+      const parts = v.map(el => typeof el === 'string' ? el : (el && typeof (el.text || el.content) === 'string' ? (el.text || el.content) : null)).filter(x => x !== null);
+      return parts.length ? parts.join('\n') : JSON.stringify(collapse(v));
+    }
+    if (typeof v === 'object') return typeof v.text === 'string' ? v.text : typeof v.content === 'string' ? v.content : JSON.stringify(collapse(v));
+    return String(v);
+  }
+
+  function convert(S, T, plan) {
+    const sA = S.analysis, tA = T.analysis;
+    const warnings = [];
+    const tpl = cloneTemplate(T.root, T.path);
+    const remap = p => { const q = p.slice(); for (let j = 0; j < T.path.length && j < q.length; j++) { if (q[j] !== T.path[j]) break; q[j] = tpl.path[j]; } return q; };
+
+    // 消息以外的信息
+    const subst = new Map();
+    const sLeaf = new Map(S.wrapper.map(l => [l.id, l]));
+    const wrapSets = [];
+    for (const w of plan.wrapper) {
+      if (w.mode === 'sample') continue;
+      let val;
+      if (w.mode === 'source') { const sl = sLeaf.get(w.source); if (!sl) continue; val = sl.value; }
+      else if (w.mode === 'empty') val = emptyOf(typeOf(w.sample));
+      else if (w.mode === 'gen') val = w.genValue;
+      else if (w.mode === 'charname') val = plan.charName || '';
+      else if (w.mode === 'fixed') { val = parseLoose(w.text); if (val === UNSET) val = emptyOf(typeOf(w.sample)); else val = coerce(val, typeOf(w.sample)); }
+      if (val && typeof val === 'object') {
+        const tEmb = w.sample && typeof w.sample === 'object' && embedded.has(w.sample);
+        const vEmb = embedded.has(val);
+        if (tEmb && !vEmb) val = JSON.stringify(collapse(val));
+        else if (!tEmb && vEmb) val = JSON.parse(JSON.stringify(val));
+      }
+      wrapSets.push([remap(w.path), val]);
+      const sm = w.sample;
+      if ((w.group === 'name' || w.group === 'username' || w.group === 'id' || w.group === 'avatar') && ((typeof sm === 'string' && sm.length >= 2) || (typeof sm === 'number' && sm >= 1000))
+        && (typeof val === 'string' || typeof val === 'number') && (val !== '' || w.group === 'avatar') && skey(val) !== skey(sm) && !subst.has(skey(sm))) subst.set(skey(sm), val);
+    }
+    if (plan.identity === 'new' && plan.charName) for (const nm of plan.sampleNames) if (nm !== plan.charName && !subst.has(skey(nm))) subst.set(skey(nm), plan.charName);
+    const sub = v => { if (subst.size && (typeof v === 'string' || typeof v === 'number')) { const r = subst.get(skey(v)); if (r !== undefined) return r; } return v; };
+
+    // 每个字段的准备
+    const tsk = sA.roles.time ? sA.byId.get(sA.roles.time) : null;
+    const prep = plan.fields.map(f => {
+      const tk = tA.byId.get(f.id);
+      const p = { f, tk, ttype: tk.mainType, sk: f.source ? sA.byId.get(f.source) : null, vmIndex: null, defs: new Map(), defAll: UNSET, gen: null };
+      if (f.vm) {
+        p.vmIndex = new Map();
+        for (const e of f.vm) {
+          let r;
+          if (e.to === KEEP) r = KEEP; else if (e.to === DROPK) r = DROP;
+          else if (e.to === CUSTOM) { r = { v: parseLoose(e.custom), g: null }; if (r.v === UNSET) r = KEEP; else r.g = skey(r.v); }
+          else { const d = tk.distinct.get(e.to); r = d ? { v: d.value, g: e.to } : KEEP; }
+          p.vmIndex.set(e.key, r);
+        }
+      }
+      const D = f.defaults;
+      p.defAll = parseLoose(D.all);
+      for (const g of D.groups) p.defs.set(g.gkey, parseLoose(g.text));
+      if (f.mode === 'gen') {
+        if (f.genKind === 'time') p.gen = 'time';
+        else p.gen = makeIdGen(f.genKind === 'seq' ? { kind: 'seq', start: tk.samples.length && tk.samples[0] === 0 ? 0 : 1 } : (f.role === 'id' && tA.idStyle) || idStyleOf(tk.samples));
+      }
+      return p;
+    });
+    const senderPrep = prep.find(p => p.f.role === 'sender') || null;
+
+    const srcArr = getPath(S.root, S.path) || [];
+    const total = Math.max(0, srcArr.length - sA.headCount);
+    const baseTime = Date.now() - total * 60000;
+    let lastTime = NaN, tms = NaN, badTime = 0, skipped = 0, dropped = 0, idx = 0;
+
+    const defOf = (p, g) => {
+      let v = g !== null && p.defs.has(g) ? p.defs.get(g) : p.defAll;
+      if (v === UNSET) return UNSET;
+      if (v && typeof v === 'object') v = JSON.parse(JSON.stringify(v));
+      return sub(v);
+    };
+
+    // 返回 [值, 分组键]
+    const compute = (p, flat, g) => {
+      const f = p.f;
+      if (f.mode === 'omit') return UNSET;
+      if (f.mode === 'default') return defOf(p, g);
+      if (f.mode === 'gen') return p.gen === 'time' ? fmtTime(tms, p.tk.tfmt) : p.gen(idx, tms);
+      let v = flat.get(f.source);
+      if (v === undefined) return defOf(p, g);
+      if (p.vmIndex) {
+        const r = p.vmIndex.get(skey(v));
+        if (r === DROP) return DROP;
+        if (r && r !== KEEP) return sub(r.v);
+        return coerce(v, p.ttype);
+      }
+      if (f.role === 'time' || (p.tk.tfmt && p.sk && p.sk.tfmt)) {
+        if (!p.tk.tfmt) return coerce(v, p.ttype);
+        const ms = (tsk && f.source === tsk.id) ? tms : parseTime(v, p.sk && p.sk.tfmt);
+        if (!isFinite(ms)) return coerce(v, p.ttype);
+        return fmtTime(ms, p.tk.tfmt);
+      }
+      if (f.role === 'content') return p.ttype === 'string' ? toText(v) : v;
+      return coerce(v, p.ttype);
+    };
+
+    const used = new Set(plan.fields.filter(f => f.mode === 'source' && f.source).map(f => f.source));
+    const msgs = [];
+    for (let i = sA.headCount; i < srcArr.length; i++) {
+      const m = srcArr[i];
+      if (!isObj(m)) { skipped++; continue; }
+      const entries = flattenMsg(m);
+      const flat = new Map(entries.map(e => [pid(e[0]), e[1]]));
+      tms = NaN;
+      if (tsk) { tms = parseTime(flat.get(tsk.id), tsk.tfmt); if (!isFinite(tms)) badTime++; }
+      if (!isFinite(tms)) tms = isFinite(lastTime) ? lastTime + 1000 : baseTime + idx * 60000;
+      lastTime = tms;
+
+      let g = '*', senderVal;
+      if (senderPrep) {
+        const f = senderPrep.f;
+        let raw = null;
+        if (f.mode === 'source' && senderPrep.vmIndex) { const r = senderPrep.vmIndex.get(skey(flat.get(f.source))); if (r && r !== KEEP && r !== DROP) raw = r.g; }
+        senderVal = compute(senderPrep, flat, '*');
+        if (senderVal === DROP) { dropped++; continue; }
+        g = raw !== null ? raw : (senderVal === UNSET ? null : skey(senderVal));
+        if (g !== null && !(tA.groups && tA.groups.has(g))) g = null;
+      }
+      const out = {}, own = new WeakSet();
+      let drop = false;
+      for (const p of prep) {
+        const val = p === senderPrep ? senderVal : compute(p, flat, g);
+        if (val === DROP) { drop = true; break; }
+        if (val !== UNSET && val !== undefined) setPathOwn(out, p.f.path, val, own);
+      }
+      if (drop) { dropped++; continue; }
+      if (plan.keepExtra) for (const [pth, v] of entries) if (!used.has(pid(pth)) && getPath(out, pth) === undefined) setPathOwn(out, pth, v, own);
+      msgs.push(out);
+      idx++;
+    }
+
+    // 拼回示例的外壳
+    const tArr = getPath(T.root, T.path);
+    const heads = [];
+    for (let i = 0; i < tA.headCount; i++) heads.push(jclone(tArr[i]));
+    const outArr = heads.concat(msgs);
+    if (embedded.has(tArr)) embedded.set(outArr, null);
+    let root = tpl.root;
+    if (!tpl.path.length) root = outArr;
+    else { let n = root; for (let i = 0; i < tpl.path.length - 1; i++) n = n[tpl.path[i]]; n[tpl.path[tpl.path.length - 1]] = outArr; }
+    for (const [p, val] of wrapSets) {
+      let n = root, ok = true;
+      for (let i = 0; i < p.length - 1; i++) { n = n[p[i]]; if (n == null || typeof n !== 'object') { ok = false; break; } }
+      if (ok) n[p[p.length - 1]] = val;
+    }
+
+    if (skipped) warnings.push('左边有 ' + skipped + ' 条不是标准消息，已跳过。');
+    if (dropped) warnings.push('按你的设置丢掉了 ' + dropped + ' 条消息。');
+    if (badTime) warnings.push('有 ' + badTime + ' 条消息的时间没认出来，已按前后顺序补上。');
+    return { root, msgs, count: msgs.length, warnings, headCount: tA.headCount };
+  }
+
+  function serialize(res, T) {
+    const root = collapse(res.root);
+    if (T.jsonl && Array.isArray(root)) return root.map(x => JSON.stringify(x)).join('\n') + '\n';
+    return JSON.stringify(root, null, T.indent || 0);
+  }
+
+  /* ---------- 一侧文件的完整准备 ---------- */
+
+  function prepareSide(parsed, cand) {
+    const analysis = analyze(cand.node);
+    return { root: parsed.root, jsonl: parsed.jsonl, indent: parsed.indent, path: cand.path, analysis, wrapper: flattenWrapper(parsed.root, cand.path, analysis.headCount) };
+  }
+
+  return { UNSET, KEEP, DROPK, CUSTOM, parseText, findArrays, prepareSide, buildPlan, rewrap, refreshValueMap, convert, serialize, collapse, showLoose, parseLoose,
+    toText, flattenMsg, pid, skey, getPath, typeOf, isObj, pathLabel, norm };
+})();
+
+</script>
+<script>
+(function () {
+  'use strict';
+  var ROLE = { content: '正文', sender: '谁发的', time: '时间', id: '编号', type: '消息类型', name: '发送者名字' };
+  var WHO = { user: '我', char: '角色', system: '系统' };
+  var CAP = { left: '要转换的', right: '格式示例' };
+  var st = { left: null, right: null, plan: null, res: null, err: null, identity: 'new', text: null };
+  var el = function (id) { return document.getElementById(id); };
+  var esc = function (s) { return String(s).replace(/[&<>"']/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]; }); };
+  var cut = function (s, n) { s = String(s); return s.length > n ? s.slice(0, n) + '…' : s; };
+  var showVal = function (v, n) {
+    if (v === undefined) return '';
+    if (typeof v === 'string') return JSON.stringify(cut(v, n || 28));
+    return cut(JSON.stringify(Core.collapse(v)), n || 28);
+  };
+  var baseName = function (f) { return String(f || '聊天记录').replace(/\.[A-Za-z0-9]{1,6}$/, ''); };
+  var ready = function () { return st.left && st.right && !st.left.error && !st.right.error; };
+
+  /* ---------- 小手机 ---------- */
+
+  function sampleBubbles(prep, max) {
+    var A = prep.analysis, arr = Core.getPath(prep.root, prep.path), out = [];
+    for (var i = A.headCount; i < arr.length && out.length < max; i++) {
+      var m = arr[i];
+      if (!Core.isObj(m)) continue;
+      var flat = new Map(Core.flattenMsg(m).map(function (e) { return [Core.pid(e[0]), e[1]]; }));
+      var txt = A.roles.content ? Core.toText(flat.get(A.roles.content)) : '';
+      var sv = A.roles.sender ? flat.get(A.roles.sender) : undefined;
+      out.push({ txt: txt, cls: sv !== undefined ? A.senderClass.get(Core.skey(sv)) : null });
+    }
+    return out;
+  }
+
+  function renderPhone(which) {
+    var box = el('phone-' + which), s = st[which], h = '<div class="phone-cap">' + CAP[which] + '</div><div class="phone-shell"><div class="phone-screen">';
+    if (!s || s.error) {
+      h += '<label class="drop"><input class="vh" type="file" data-file="' + which + '" aria-label="选择' + CAP[which] + '文件">' +
+        (s && s.error ? '<div class="err">' + esc(s.fileName) + '：' + esc(s.error) + '</div>' : '<div class="ghost"><i></i><i></i><i></i><i></i></div>') +
+        '<div class="drop-text">' + (which === 'left' ? '这台手机导出的聊天记录' : '另一台手机导出的任意一份记录') + '</div>' +
+        '<span class="pick">选 json 文件</span></label>';
+    } else {
+      var n = s.prep.analysis.n, bs = sampleBubbles(s.prep, 6);
+      h += '<div class="chat-head"><span class="fname" title="' + esc(s.fileName) + '">' + esc(s.fileName) + '</span>' +
+        '<div class="chat-meta"><span>' + n + ' 条消息</span><label class="swap"><input class="vh" type="file" data-file="' + which + '">换一个</label></div>';
+      if (s.cands.length > 1) {
+        h += '<select class="cand" data-cand="' + which + '" aria-label="用哪一段聊天">';
+        s.cands.forEach(function (c, i) {
+          h += '<option value="' + i + '"' + (i === s.sel ? ' selected' : '') + '>' + esc((c.owner ? c.owner + '（' + c.label + '）' : c.label) + '，' + c.len + ' 条') + '</option>';
+        });
+        h += '</select>';
+      }
+      h += '</div><div class="bubbles">';
+      if (!s.prep.analysis.roles.content) h += '<div class="err">没认出哪个字段是消息正文。</div>';
+      bs.forEach(function (b) {
+        h += '<div class="bub' + (b.cls === 'user' ? ' me' : b.cls === 'system' ? ' sys' : '') + '">' + esc(cut(b.txt || '（空）', 60)) + '</div>';
+      });
+      if (n > bs.length) h += '<div class="more">还有 ' + (n - bs.length) + ' 条</div>';
+      h += '</div>';
+    }
+    box.innerHTML = h + '</div></div>';
+  }
+
+  function loadFile(which, file) {
+    var s = { fileName: file.name, error: null };
+    file.text().then(function (text) {
+      try {
+        s.parsed = Core.parseText(text);
+        s.cands = Core.findArrays(s.parsed.root);
+        if (!s.cands.length) throw new Error('没在里面找到聊天消息，确认一下这是不是聊天记录的导出文件。');
+        s.sel = 0;
+        s.prep = Core.prepareSide(s.parsed, s.cands[0]);
+      } catch (e) { s.error = e.message || String(e); }
+    }, function () { s.error = '文件读不出来。'; }).then(function () {
+      st[which] = s;
+      renderPhone(which);
+      rebuild();
+    });
+  }
+
+  ['left', 'right'].forEach(function (which) {
+    var box = el('phone-' + which);
+    box.addEventListener('change', function (e) {
+      var t = e.target;
+      if (t.dataset.file && t.files && t.files[0]) loadFile(which, t.files[0]);
+      else if (t.dataset.cand) {
+        var s = st[which];
+        s.sel = +t.value;
+        try { s.prep = Core.prepareSide(s.parsed, s.cands[s.sel]); } catch (err) { s.error = err.message; }
+        renderPhone(which);
+        rebuild();
+      }
+    });
+    box.addEventListener('dragover', function (e) { e.preventDefault(); box.classList.add('is-over'); });
+    box.addEventListener('dragleave', function () { box.classList.remove('is-over'); });
+    box.addEventListener('drop', function (e) {
+      e.preventDefault(); box.classList.remove('is-over');
+      var f = e.dataTransfer && e.dataTransfer.files && e.dataTransfer.files[0];
+      if (f) loadFile(which, f);
+    });
+    renderPhone(which);
+  });
+  window.addEventListener('dragover', function (e) { e.preventDefault(); });
+  window.addEventListener('drop', function (e) { e.preventDefault(); });
+
+  /* ---------- 对照方案 ---------- */
+
+  function rebuild() {
+    if (!ready()) { el('work').hidden = true; return; }
+    var hasChar = st.right.prep.wrapper.some(function (l) { return l.group === 'name' || l.group === 'persona' || l.group === 'avatar'; });
+    st.identity = hasChar ? 'new' : 'sample';
+    try {
+      st.plan = Core.buildPlan(st.left.prep, st.right.prep, { identity: st.identity, srcName: baseName(st.left.fileName) });
+    } catch (e) { st.plan = null; st.err = e.message || String(e); }
+    el('work').hidden = false;
+    renderIdentity();
+    renderMap();
+    run();
+  }
+
+  function modeOptions(f) {
+    var S = st.left.prep.analysis, h = '<optgroup label="取左边文件里的字段">';
+    S.keys.forEach(function (k, i) {
+      var role = S.roleOf[k.id];
+      h += '<option value="s:' + i + '"' + (f.mode === 'source' && f.source === k.id ? ' selected' : '') + '>' +
+        esc(k.label + (role ? '（' + ROLE[role] + '）' : '') + (k.samples.length ? '　例：' + showVal(k.samples[0], 18) : '')) + '</option>';
+    });
+    h += '</optgroup><optgroup label="不取左边的">';
+    h += '<option value="default"' + (f.mode === 'default' ? ' selected' : '') + '>用固定的值（默认照示例）</option>';
+    if (f.genKind) h += '<option value="gen"' + (f.mode === 'gen' ? ' selected' : '') + '>' +
+      (f.genKind === 'time' ? '按消息时间自动填' : f.genKind === 'seq' ? '自动编号 1、2、3…' : '照示例的样子自动编号') + '</option>';
+    h += '<option value="omit"' + (f.mode === 'omit' ? ' selected' : '') + '>不要这个字段</option></optgroup>';
+    return h;
+  }
+
+  function fieldRow(i) {
+    var f = st.plan.fields[i], T = st.right.prep.analysis, tk = T.byId.get(f.id);
+    var h = '<div class="row" data-kind="f" data-i="' + i + '"><div class="row-tgt"><span class="key">' + esc(f.label) + '</span>' +
+      (f.role ? '<span class="chip">' + ROLE[f.role] + '</span>' : '') +
+      (tk.samples.length ? '<span class="eg">示例里：' + esc(showVal(tk.samples[0], 34)) + '</span>' : '') + '</div><div class="row-src">' +
+      '<select data-act="mode" aria-label="' + esc(f.label) + ' 的值从哪里来">' + modeOptions(f) + '</select>';
+    if (f.mode === 'source' && f.vm) {
+      var tvals = Array.from(tk.distinct.entries()), SA = st.left.prep.analysis;
+      var tWho = function (key) { var c = f.role === 'sender' && T.senderClass.get(key); return c ? '（' + WHO[c] + '）' : ''; };
+      var sWho = function (key) { var c = f.role === 'sender' && f.source === SA.roles.sender && SA.senderClass.get(key); return c ? '（' + WHO[c] + '）' : ''; };
+      h += '<div class="vm">';
+      f.vm.forEach(function (e, j) {
+        h += '<div class="vm-line' + (e.unsure ? ' unsure' : '') + '"><span class="vm-from">' + esc(showVal(e.value, 22)) + ' <small>' + sWho(e.key) + e.count + ' 条</small></span><span aria-hidden="true">→</span>' +
+          '<select data-act="vm" data-j="' + j + '" aria-label="左边的 ' + esc(showVal(e.value, 22)) + ' 换成">';
+        tvals.forEach(function (t) { h += '<option value="' + esc(t[0]) + '"' + (e.to === t[0] ? ' selected' : '') + '>' + esc(showVal(t[1].value, 26) + tWho(t[0])) + '</option>'; });
+        h += '<option value="' + Core.KEEP + '"' + (e.to === Core.KEEP ? ' selected' : '') + '>原样照搬</option>' +
+          '<option value="' + Core.CUSTOM + '"' + (e.to === Core.CUSTOM ? ' selected' : '') + '>自己填…</option>' +
+          '<option value="' + Core.DROPK + '"' + (e.to === Core.DROPK ? ' selected' : '') + '>这类消息不转</option></select>';
+        if (e.to === Core.CUSTOM) h += '<input type="text" data-act="vmc" data-j="' + j + '" value="' + esc(e.custom) + '" placeholder="要换成的值" aria-label="自己填的值">';
+        h += '</div>';
+      });
+      if (f.vm.some(function (e) { return e.unsure; })) h += '<div class="hint warn">标出来的没认出该对应哪个，请确认一下。</div>';
+      h += '</div>';
+    } else if (f.mode === 'default') {
+      var D = f.defaults;
+      h += '<div class="def">';
+      if (D.split) D.groups.forEach(function (g, gi) {
+        var who = g.cls ? WHO[g.cls] + '发的' : cut(g.label, 16) + ' 发的';
+        h += '<span>' + esc(who) + '</span><input type="text" data-act="def" data-g="' + gi + '" value="' + esc(g.text) + '" aria-label="' + esc(who) + '消息用的值">';
+      });
+      else h += '<span>值</span><input type="text" data-act="def" data-g="-1" value="' + esc(D.groups.length && D.groups.length <= 6 ? D.groups[0].text : D.all) + '" aria-label="固定的值">';
+      var renamed = st.plan.identity === 'new' && st.plan.sampleNames.filter(function (nm) { return D.all === nm || D.groups.some(function (g) { return g.text === nm; }); });
+      h += '</div><div class="hint">' + (renamed && renamed.length ? '「' + esc(renamed.join('、')) + '」是示例角色的名字，会自动换成上面填的角色名。' : '') + '留空的话，对应的消息就不带这个字段。</div>';
+    }
+    return h + '</div></div>';
+  }
+
+  function wrapRow(i) {
+    var w = st.plan.wrapper[i], Sw = st.left.prep.wrapper;
+    var h = '<div class="row" data-kind="w" data-i="' + i + '"><div class="row-tgt"><span class="key">' + esc(w.label) + '</span>' +
+      '<span class="eg">示例里：' + esc(showVal(w.sample, 34)) + '</span></div><div class="row-src">' +
+      '<select data-act="mode" aria-label="' + esc(w.label) + ' 的值从哪里来">';
+    if (Sw.length) {
+      h += '<optgroup label="取左边文件里的">';
+      Sw.slice(0, 120).forEach(function (l, j) {
+        h += '<option value="s:' + j + '"' + (w.mode === 'source' && w.source === l.id ? ' selected' : '') + '>' + esc(l.label + '　例：' + showVal(l.value, 18)) + '</option>';
+      });
+      h += '</optgroup>';
+    }
+    h += '<optgroup label="不取左边的"><option value="sample"' + (w.mode === 'sample' ? ' selected' : '') + '>保持示例里的值</option>' +
+      '<option value="empty"' + (w.mode === 'empty' ? ' selected' : '') + '>清空</option>';
+    if (w.isId) h += '<option value="gen"' + (w.mode === 'gen' ? ' selected' : '') + '>换一个新的 id</option>';
+    if (w.group === 'name' && st.plan.identity === 'new') h += '<option value="charname"' + (w.mode === 'charname' ? ' selected' : '') + '>用上面填的角色名</option>';
+    h += '<option value="fixed"' + (w.mode === 'fixed' ? ' selected' : '') + '>自己填…</option></optgroup></select>';
+    if (w.mode === 'fixed') h += '<input type="text" data-act="wtext" value="' + esc(w.text) + '" placeholder="要填的值" aria-label="自己填的值">';
+    if (w.mode === 'empty' && w.note) h += '<div class="hint">' + esc(w.note) + '</div>';
+    if (w.isId && w.mode === 'sample' && st.plan.identity === 'new') h += '<div class="hint warn">和示例是同一个 id，导入时可能把示例那个角色盖掉。</div>';
+    return h + '</div></div>';
+  }
+
+  function renderIdentity() {
+    var p = st.plan, h = '';
+    if (p && p.wrapper.length) {
+      h += '<fieldset class="choice"><legend>导入到右边那台手机后，这段聊天算谁的</legend>' +
+        '<label><input type="radio" name="identity" value="new"' + (st.identity === 'new' ? ' checked' : '') + '><span>当成新角色<small>名字、头像、人设用左边的，id 换成新的，不会动到示例那个角色。</small></span></label>' +
+        '<label><input type="radio" name="identity" value="sample"' + (st.identity === 'sample' ? ' checked' : '') + '><span>并进示例里的那个角色<small>角色资料和 id 保持示例那份，只把聊天内容换成左边的。</small></span></label></fieldset>';
+    }
+    if (p && st.identity === 'new' && (p.sampleNames.length || p.wrapper.some(function (w) { return w.mode === 'charname'; }))) {
+      h += '<div class="charname"><label for="charName"><b>角色名</b></label><input type="text" id="charName" value="' + esc(p.charName) + '" style="width:12em">' +
+        (p.sampleNames.length ? '<span class="hint">消息里出现的示例角色名「' + esc(cut(p.sampleNames.join('、'), 24)) + '」会换成它。</span>' : '') + '</div>';
+    }
+    el('idBox').innerHTML = h;
+  }
+
+  function renderMap() {
+    var p = st.plan, box = el('mapPanel');
+    if (!p) { box.innerHTML = ''; return; }
+    var h = '<h2>字段对照</h2><p class="sub">右边格式里的每个字段，值从哪里来。上面的结果不对时，在这里改，改完结果会立刻更新。</p>';
+    h += '<h3>每条消息</h3><div class="rows" id="fieldRows">';
+    p.fields.forEach(function (f, i) { h += fieldRow(i); });
+    h += '</div>';
+    if (p.wrapper.length) {
+      var main = [], rest = [];
+      p.wrapper.forEach(function (w, i) { (w.mode !== 'sample' || (w.isId && p.identity === 'new') ? main : rest).push(i); });
+      h += '<h3>消息以外的资料</h3>';
+      if (main.length) h += '<div class="rows">' + main.map(wrapRow).join('') + '</div>';
+      if (rest.length) h += '<details' + (main.length ? '' : ' open') + '><summary>' + (main.length ? '其余 ' : '') + rest.length + ' 项保持示例里的值</summary><div class="rows">' + rest.map(wrapRow).join('') + '</div></details>';
+    }
+    h += '<label class="check"><input type="checkbox" id="keepExtra"' + (p.keepExtra ? ' checked' : '') + '><span>左边多出来、右边格式里没有的字段，也原样带上</span></label>';
+    box.innerHTML = h;
+  }
+
+  var timer = null;
+  function runSoon() { clearTimeout(timer); timer = setTimeout(run, 250); }
+
+  el('mapPanel').addEventListener('change', function (e) {
+    var t = e.target, p = st.plan;
+    if (!p) return;
+    if (t.id === 'keepExtra') { p.keepExtra = t.checked; return run(); }
+    if (t.tagName !== 'SELECT') return;
+    var row = t.closest('.row');
+    if (!row) return;
+    var i = +row.dataset.i, act = t.dataset.act, S = st.left.prep, T = st.right.prep, html;
+    if (row.dataset.kind === 'f') {
+      var f = p.fields[i];
+      if (act === 'mode') {
+        if (t.value.slice(0, 2) === 's:') { f.mode = 'source'; f.source = S.analysis.keys[+t.value.slice(2)].id; }
+        else { f.mode = t.value; f.source = null; }
+        Core.refreshValueMap(S.analysis, T.analysis, f);
+      } else if (act === 'vm') { var en = f.vm[+t.dataset.j]; en.to = t.value; en.unsure = false; }
+      html = fieldRow(i);
+    } else {
+      var w = p.wrapper[i];
+      if (t.value.slice(0, 2) === 's:') { w.mode = 'source'; w.source = S.wrapper[+t.value.slice(2)].id; }
+      else { w.mode = t.value; w.source = null; if (w.mode === 'fixed' && !w.text && (w.sample === null || typeof w.sample !== 'object')) w.text = Core.showLoose(w.sample); }
+      html = wrapRow(i);
+    }
+    var tmp = document.createElement('div');
+    tmp.innerHTML = html;
+    row.replaceWith(tmp.firstChild);
+    run();
+  });
+
+  el('mapPanel').addEventListener('input', function (e) {
+    var t = e.target, p = st.plan;
+    if (!p || t.tagName !== 'INPUT' || t.type !== 'text') return;
+    var row = t.closest('.row');
+    if (!row) return;
+    var i = +row.dataset.i, act = t.dataset.act;
+    if (act === 'vmc') p.fields[i].vm[+t.dataset.j].custom = t.value;
+    else if (act === 'def') {
+      var D = p.fields[i].defaults, g = +t.dataset.g;
+      if (g >= 0) D.groups[g].text = t.value;
+      else { D.all = t.value; D.groups.forEach(function (x) { x.text = t.value; }); }
+    } else if (act === 'wtext') p.wrapper[i].text = t.value;
+    runSoon();
+  });
+
+  el('idBox').addEventListener('change', function (e) {
+    var t = e.target, p = st.plan;
+    if (!p || t.name !== 'identity') return;
+    st.identity = t.value;
+    Core.rewrap(p, st.left.prep, st.right.prep, st.identity);
+    renderIdentity(); renderMap(); run();
+    var r = document.querySelector('input[name="identity"]:checked'); if (r) r.focus();
+  });
+  el('idBox').addEventListener('input', function (e) {
+    if (st.plan && e.target.id === 'charName') { st.plan.charName = e.target.value.trim(); runSoon(); }
+  });
+
+  /* ---------- 结果 ---------- */
+
+  function run() {
+    st.text = null; st.res = null; st.err = null;
+    if (st.plan) {
+      try { st.res = Core.convert(st.left.prep, st.right.prep, st.plan); }
+      catch (e) { st.err = e.message || String(e); }
+    }
+    renderResult();
+  }
+
+  function trimDeep(v, depth) {
+    if (typeof v === 'string') return cut(v, 90);
+    if (v === null || typeof v !== 'object') return v;
+    if (depth > 4) return Array.isArray(v) ? '[…]' : '{…}';
+    if (Array.isArray(v)) return v.slice(0, 4).map(function (x) { return trimDeep(x, depth + 1); });
+    var o = {};
+    Object.keys(v).slice(0, 40).forEach(function (k) { o[k] = trimDeep(v[k], depth + 1); });
+    return o;
+  }
+  var pretty = function (list) { return list.map(function (m) { return JSON.stringify(trimDeep(Core.collapse(m), 0), null, 2); }).join('\n\n'); };
+  var outName = function () { return baseName(st.left.fileName) + '_转换后' + (st.right.prep.jsonl ? '.txt' : '.json'); };
+
+  function renderResult() {
+    var box = el('resBody'), h = '';
+    if (!st.res) {
+      box.innerHTML = '<ul class="notes"><li>转换没成功：' + esc(st.err || '未知原因') + '。把两个文件各截几行发回对话里，可以针对它们调整。</li></ul>';
+      return;
+    }
+    var S = st.left.prep, T = st.right.prep, p = st.plan, notes = [];
+    var sf = p.fields.filter(function (f) { return f.role === 'sender'; })[0];
+    if (!S.analysis.roles.content) notes.push('左边没认出哪个字段是消息正文，请在「字段对照」里给正文那一行选对字段。');
+    if (sf && sf.mode !== 'source') notes.push('左边没认出每条消息是谁发的，现在所有消息会算成同一个人。请在「字段对照」的「谁发的」那一行选一下。');
+    var unsure = sf && sf.vm ? sf.vm.filter(function (e) { return e.unsure; }) : [];
+    if (unsure.length) notes.push('左边的发送者 ' + unsure.map(function (e) { return showVal(e.value, 16); }).join('、') + ' 没认出该对应右边的谁，请在「字段对照」的「谁发的」那一行确认。');
+    if (p.fields.some(function (f) { return f.role === 'type' && f.vm && f.vm.some(function (e) { return e.unsure; }); })) notes.push('左边有的消息类型在示例里没出现过，先按示例里的普通消息处理了。示例文件里类型越全，对得越准。');
+    if (T.jsonl) notes.push('示例是 .jsonl 文件。保存下来的是 .txt，导入前把扩展名改成 .jsonl。');
+    st.res.warnings.forEach(function (w) { notes.push(w); });
+
+    var tArr = Core.getPath(T.root, T.path), samp = [];
+    for (var i = T.analysis.headCount; i < tArr.length && samp.length < 2; i++) if (Core.isObj(tArr[i])) samp.push(tArr[i]);
+    h += '<p class="sub" style="margin-top:12px">' + st.res.count + ' 条消息已经改成 ' + esc(st.right.fileName) + ' 的格式。对比一下下面两栏的样子，没问题就保存。</p>' +
+      '<div class="actions"><button class="primary" id="saveBtn">保存 ' + esc(cut(outName(), 30)) + '</button><button id="copyBtn">复制全部内容</button><span class="say" id="say" role="status"></span></div>';
+    if (notes.length) h += '<ul class="notes">' + notes.map(function (n) { return '<li>' + esc(n) + '</li>'; }).join('') + '</ul>';
+    h += '<div class="compare"><figure><figcaption>示例里的消息</figcaption><pre>' + esc(pretty(samp)) + '</pre></figure>' +
+      '<figure class="out"><figcaption>转换后的消息</figcaption><pre>' + esc(st.res.count ? pretty(st.res.msgs.slice(0, 2)) : '（没有消息）') + '</pre></figure></div>';
+    box.innerHTML = h;
+    if (dl.state === 'none') el('saveBtn').hidden = true;
+  }
+
+  var getText = function () { if (st.text === null) st.text = Core.serialize(st.res, st.right.prep); return st.text; };
+  var say = function (t) { var s = el('say'); if (s) s.textContent = t; };
+
+  /* 保存：通过查看器提供的下载能力；没有时退回普通下载或复制 */
+  var framed = window.top !== window.self;
+  var dl = { state: 'wait', api: null };
+  var dlReady = (window.claude && typeof window.claude.use === 'function' ? window.claude.use('downloads') : Promise.resolve(null))
+    .then(function (d) { return d || null; }, function () { return null; })
+    .then(function (d) {
+      dl.api = d; dl.state = d ? 'api' : (framed ? 'none' : 'link');
+      var b = el('saveBtn'); if (b && dl.state === 'none') b.hidden = true;
+      return d;
+    });
+
+  function save() {
+    if (!st.res) return;
+    var btn = el('saveBtn'), text, name = outName();
+    try { text = getText(); } catch (e) { return say('生成文件时出错：' + e.message); }
+    btn.disabled = true; say('正在准备文件…');
+    dlReady.then(function (d) {
+      if (d) return d.save({ filename: name, data: new Blob([text]) }).then(function () { say('已保存。'); }, function (e) {
+        var c = e && e.code;
+        if (c === 'declined') say('没有保存。');
+        else if (c === 'rate_limited') say('保存窗口已经开着，或点得太快了，稍等再试。');
+        else if (c === 'too_large') say('文件太大，这里存不了。可以用「复制全部内容」。');
+        else { dl.state = 'none'; btn.hidden = true; say('这里不能直接保存文件，请用「复制全部内容」，再粘贴到一个 .json 文件里。'); }
+      });
+      if (framed) { btn.hidden = true; return say('这里不能直接保存文件，请用「复制全部内容」，再粘贴到一个 .json 文件里。'); }
+      var a = document.createElement('a'), url = URL.createObjectURL(new Blob([text], { type: 'application/json' }));
+      a.href = url; a.download = name; document.body.appendChild(a); a.click(); a.remove();
+      setTimeout(function () { URL.revokeObjectURL(url); }, 4000);
+      say('已保存。');
+    }).then(function () { btn.disabled = false; });
+  }
+
+  function copy() {
+    if (!st.res) return;
+    var text;
+    try { text = getText(); } catch (e) { return say('生成内容时出错：' + e.message); }
+    var fallback = function () {
+      var ta = document.createElement('textarea');
+      ta.value = text; ta.setAttribute('readonly', ''); ta.style.cssText = 'position:fixed;top:0;left:0;opacity:0';
+      document.body.appendChild(ta); ta.select();
+      var ok = false;
+      try { ok = document.execCommand('copy'); } catch (e) { ok = false; }
+      ta.remove();
+      say(ok ? '已复制，粘贴到一个 .json 文件里就可以导入。' : '复制没成功，浏览器不允许这里写剪贴板。');
+    };
+    if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(text).then(function () { say('已复制，粘贴到一个 .json 文件里就可以导入。'); }, fallback);
+    else fallback();
+  }
+
+  el('resultPanel').addEventListener('click', function (e) {
+    if (e.target.id === 'saveBtn') save();
+    else if (e.target.id === 'copyBtn') copy();
+  });
+
+})();
+</script>
+</body>
+</html>
