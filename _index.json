@@ -1,11 +1,11 @@
 {
   "schema": "puff_share_index",
   "schemaVersion": 1,
-  "generatedAt": "2026-10-04T10:40:48.039Z",
+  "generatedAt": "2026-10-04T13:26:44.853Z",
   "folders": [
     {
       "name": "App",
-      "count": 9
+      "count": 10
     },
     {
       "name": "世界书",
@@ -145,6 +145,26 @@
       ],
       "description": "",
       "updatedAt": "2026-09-24T13:47:44+08:00"
+    },
+    {
+      "folder": "App",
+      "name": "计划本",
+      "type": "dir",
+      "path": "资源/App/计划本",
+      "files": [
+        "资源/App/计划本/计划本.js"
+      ],
+      "images": [
+        "资源/App/计划本/Screenshot_20261004-183400.jpg",
+        "资源/App/计划本/Screenshot_20261004-183528.jpg",
+        "资源/App/计划本/Screenshot_20261004-183535.jpg",
+        "资源/App/计划本/Screenshot_20261004-183549.jpg",
+        "资源/App/计划本/Screenshot_20261004-183605.jpg",
+        "资源/App/计划本/Screenshot_20261004-183612.jpg",
+        "资源/App/计划本/封面.jpg"
+      ],
+      "description": "",
+      "updatedAt": "2026-10-04T21:26:09+08:00"
     },
     {
       "folder": "App",
