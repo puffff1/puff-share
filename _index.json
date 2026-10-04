@@ -1,7 +1,7 @@
 {
   "schema": "puff_share_index",
   "schemaVersion": 1,
-  "generatedAt": "2026-10-04T06:34:37.226Z",
+  "generatedAt": "2026-10-04T08:22:24.217Z",
   "folders": [
     {
       "name": "App",
@@ -37,7 +37,7 @@
     },
     {
       "name": "预设",
-      "count": 4
+      "count": 3
     }
   ],
   "entries": [
@@ -1810,20 +1810,6 @@
       ],
       "description": "",
       "updatedAt": "2026-10-03T10:34:24+08:00"
-    },
-    {
-      "folder": "预设",
-      "name": "萌之泪伤",
-      "type": "dir",
-      "path": "资源/预设/萌之泪伤",
-      "files": [
-        "资源/预设/萌之泪伤/预设_萌之泪伤.json"
-      ],
-      "images": [
-        "资源/预设/萌之泪伤/封面.jpeg"
-      ],
-      "description": "",
-      "updatedAt": "2026-10-01T19:07:54+08:00"
     }
   ]
 }
