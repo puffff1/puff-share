@@ -1,0 +1,14 @@
+{
+  "kind": "puff-chat-thread-css-preset",
+  "version": 1,
+  "name": "秋日午后by芒果太好吃",
+  "exportedAt": 1791103119585,
+  "presets": [
+    {
+      "id": "tcss_mutkdix8_0t9ct",
+      "name": "秋日午后",
+      "createdAt": "2026-10-04T08:33:42.668Z",
+      "css": "/* ===== 由「气泡生成器」导出 · 贴到对话主题 A 区 ===== */\n.chat-thread {\n  /* 顶栏胶囊 */\n  --dress-header-bg: rgba(255, 235, 148, 0.830);\n  --dress-header-blur: 7px;\n  --dress-header-border: rgba(0, 0, 0, 0.260);\n  --dress-header-radius: 0px;\n  --dress-header-shadow: 0 3px 9px rgba(0, 0, 0, 0.031);\n  --dress-header-title-color: #1a1a1a;\n  --dress-header-title-size: 15px;\n  --dress-header-title-weight: 500;\n  --dress-header-icon-color: #ffe587;\n\n  /* 我方气泡 */\n  --dress-bubble-me-bg: #fff3cf;\n  --dress-bubble-me-fg: #000000;\n  --dress-bubble-me-border: 1px solid #000000;\n  --dress-bubble-me-shadow: 0 2px 11px rgba(0, 0, 0, 0.075);\n  --dress-bubble-me-radius: 12px;\n\n  /* 对方气泡 */\n  --dress-bubble-them-bg: #fff1ab;\n  --dress-bubble-them-fg: #1a1a1a;\n  --dress-bubble-them-border: 0.5px solid #000000;\n  --dress-bubble-them-shadow: 0 2px 11px rgba(0, 0, 0, 0.075);\n  --dress-bubble-them-radius: 12px;\n\n  /* 输入胶囊 */\n  --dress-compose-bar-bg: rgba(255, 234, 176, 0.920);\n  --dress-compose-bar-fg: #1a1a1a;\n  --dress-compose-bar-radius: 0px;\n  --dress-compose-bar-border: 1px solid rgba(255, 255, 255, 0.350);\n  --dress-compose-bar-shadow: 0 3px 11px rgba(0, 0, 0, 0.035);\n  --dress-compose-bar-blur: blur(18px);\n\n  /* 其他 */\n  --dress-timestamp-color: #9aa2b2;\n}"
+    }
+  ]
+}
