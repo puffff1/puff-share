@@ -1,0 +1,14 @@
+{
+  "kind": "puff-chat-thread-css-preset",
+  "version": 1,
+  "name": "桃桃心事by芒果太好吃",
+  "exportedAt": 1791086896251,
+  "presets": [
+    {
+      "id": "tcss_mutavsqa_6b6ij",
+      "name": "桃桃心事",
+      "createdAt": "2026-10-04T04:07:59.026Z",
+      "css": "/* ===== 由「气泡生成器」导出 · 贴到对话主题 A 区 ===== */\n.chat-thread {\n  /* 顶栏胶囊 */\n  --dress-header-bg: rgba(255, 194, 200, 0.290);\n  --dress-header-blur: 16px;\n  --dress-header-border: rgba(0, 0, 0, 0.120);\n  --dress-header-radius: 23px;\n  --dress-header-shadow: none;\n  --dress-header-title-color: #1a1a1a;\n  --dress-header-title-size: 15px;\n  --dress-header-title-weight: 500;\n  --dress-header-icon-color: #1a1a1a;\n\n  /* 我方气泡 */\n  --dress-bubble-me-bg-gradient: linear-gradient(67deg, #ffcfe1, #ffffff);\n  --dress-bubble-me-bg: #ffcfe1;\n  --dress-bubble-me-fg: #1a1a1a;\n  --dress-bubble-me-border: none;\n  --dress-bubble-me-shadow: 0 2px 11px rgba(0, 0, 255, 0.077);\n  --dress-bubble-me-radius: 11px;\n\n  /* 对方气泡 */\n  --dress-bubble-them-bg-gradient: linear-gradient(76deg, #fff7f7, #e9d3ed);\n  --dress-bubble-them-bg: #fff7f7;\n  --dress-bubble-them-fg: #1a1a1a;\n  --dress-bubble-them-border: none;\n  --dress-bubble-them-shadow: 0 2px 7px rgba(0, 0, 0, 0.050);\n  --dress-bubble-them-radius: 6px;\n\n  /* 输入胶囊 */\n  --dress-compose-bar-bg: rgba(255, 255, 255, 0.150);\n  --dress-compose-bar-fg: #1a1a1a;\n  --dress-compose-bar-radius: 3px;\n  --dress-compose-bar-border: 1px solid rgba(0, 0, 0, 0.060);\n  --dress-compose-bar-shadow: none;\n  --dress-compose-bar-blur: blur(0px);\n\n  /* 其他 */\n  --dress-timestamp-color: #000000;\n}"
+    }
+  ]
+}
