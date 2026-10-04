@@ -1,7 +1,7 @@
 {
   "schema": "puff_share_index",
   "schemaVersion": 1,
-  "generatedAt": "2026-10-04T08:22:24.217Z",
+  "generatedAt": "2026-10-04T08:49:49.973Z",
   "folders": [
     {
       "name": "App",
@@ -21,7 +21,7 @@
     },
     {
       "name": "美化",
-      "count": 37
+      "count": 38
     },
     {
       "name": "表情包",
@@ -953,6 +953,21 @@
       ],
       "description": "",
       "updatedAt": "2026-10-02T21:06:39+08:00"
+    },
+    {
+      "folder": "美化",
+      "name": "秋日午后",
+      "type": "dir",
+      "path": "资源/美化/秋日午后",
+      "files": [
+        "资源/美化/秋日午后/H_by_.json"
+      ],
+      "images": [
+        "资源/美化/秋日午后/Screenshot_2026-10-04-16-36-00-465_os.puff.app.jpg",
+        "资源/美化/秋日午后/b.jpg"
+      ],
+      "description": "",
+      "updatedAt": "2026-10-04T16:49:14+08:00"
     },
     {
       "folder": "美化",
