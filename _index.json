@@ -1,7 +1,7 @@
 {
   "schema": "puff_share_index",
   "schemaVersion": 1,
-  "generatedAt": "2026-10-04T15:16:02.733Z",
+  "generatedAt": "2026-10-04T15:20:00.398Z",
   "folders": [
     {
       "name": "App",
@@ -21,7 +21,7 @@
     },
     {
       "name": "美化",
-      "count": 38
+      "count": 39
     },
     {
       "name": "表情包",
@@ -578,6 +578,21 @@
       ],
       "description": "",
       "updatedAt": "2026-10-03T14:25:08+08:00"
+    },
+    {
+      "folder": "美化",
+      "name": "仿iOS16版iMessage 日夜",
+      "type": "dir",
+      "path": "资源/美化/仿iOS16版iMessage 日夜",
+      "files": [
+        "资源/美化/仿iOS16版iMessage 日夜/Puff_仿iOS16版iMessage日夜by理理我.json"
+      ],
+      "images": [
+        "资源/美化/仿iOS16版iMessage 日夜/IMG_5395.png",
+        "资源/美化/仿iOS16版iMessage 日夜/封面.jpeg"
+      ],
+      "description": "",
+      "updatedAt": "2026-10-04T23:19:04+08:00"
     },
     {
       "folder": "美化",
