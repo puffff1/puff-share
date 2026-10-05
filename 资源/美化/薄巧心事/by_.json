@@ -1,0 +1,14 @@
+{
+  "kind": "puff-chat-thread-css-preset",
+  "version": 1,
+  "name": "薄巧心事by芒果太好吃",
+  "exportedAt": 1791185753720,
+  "presets": [
+    {
+      "id": "tcss_muuxqkj3_n7v4t",
+      "name": "薄巧心事",
+      "createdAt": "2026-10-05T07:35:32.464Z",
+      "css": "/* ===== 由「气泡生成器」导出 · 贴到对话主题 A 区 ===== */\n.chat-thread {\n  /* 顶栏胶囊 */\n  --dress-header-bg: rgba(227, 255, 228, 1.000);\n  --dress-header-blur: 4px;\n  --dress-header-border: rgba(255, 255, 255, 0.350);\n  --dress-header-radius: 25px;\n  --dress-header-shadow: 0 9px 27px rgba(0, 0, 0, 0.094);\n  --dress-header-title-color: #1a1a1a;\n  --dress-header-title-size: 15px;\n  --dress-header-title-weight: 500;\n  --dress-header-icon-color: #1a1a1a;\n\n  /* 我方气泡 */\n  --dress-bubble-me-bg: #deffe9;\n  --dress-bubble-me-fg: #1a1a1a;\n  --dress-bubble-me-border: 2px solid #ffffff;\n  --dress-bubble-me-shadow: 0 2px 10px rgba(0, 0, 0, 0.070);\n  --dress-bubble-me-radius: 2px;\n\n  /* 对方气泡 */\n  --dress-bubble-them-bg: #ffffff;\n  --dress-bubble-them-bg-gradient: linear-gradient(80deg, #ffffff, #d3f5ce);\n  --dress-bubble-them-fg: #1a1a1a;\n  --dress-bubble-them-border: none;\n  --dress-bubble-them-shadow: 0 2px 8px rgba(230, 230, 230, 0.060);\n  --dress-bubble-them-radius: 10px;\n\n  /* 输入胶囊 */\n  --dress-compose-bar-bg: rgba(211, 255, 199, 0.610);\n  --dress-compose-bar-fg: #1a1a1a;\n  --dress-compose-bar-radius: 25px;\n  --dress-compose-bar-border: 1px solid rgba(0, 0, 0, 0.060);\n  --dress-compose-bar-shadow: none;\n  --dress-compose-bar-blur: blur(10px);\n\n  /* 其他 */\n  --dress-timestamp-color: #9aa2b2;\n}\n\n/* ===== 气泡贴纸 · 把这段一起贴到 E 区 ===== */\n.chat-msg.is-me .chat-bubble { position: relative; }\n.chat-msg.is-me .chat-bubble::after {\n  content: '';\n  position: absolute;\n  bottom: -10px;\n  right: -10px;\n  width: 27px;\n  height: 27px;\n  background: url(\"https://file.zhuyitai.com/feedback/202610/b0617193b7c21fdfbc5f9cfc9f822f22.png\") center / contain no-repeat;\n  transform: translate(0px, -4px) rotate(7deg);\n  pointer-events: none;\n  filter: drop-shadow(0 2px 3px rgba(0, 0, 0, .15));\n}\n\n.chat-msg.is-them .chat-bubble { position: relative; }\n.chat-msg.is-them .chat-bubble::after {\n  content: '';\n  position: absolute;\n  bottom: -10px;\n  left: -10px;\n  width: 26px;\n  height: 26px;\n  background: url(\"https://oss-chat-bucket.oss-cn-beijing.aliyuncs.com/picture/console/chatres/7fd101e440d84afa8608480893e72180tEHDdnsl.png\") center / contain no-repeat;\n  transform: translate(0px, 2px) rotate(0deg);\n  pointer-events: none;\n  filter: drop-shadow(0 2px 3px rgba(0, 0, 0, .15));\n}"
+    }
+  ]
+}
