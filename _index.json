@@ -1,7 +1,7 @@
 {
   "schema": "puff_share_index",
   "schemaVersion": 1,
-  "generatedAt": "2026-10-06T03:12:49.099Z",
+  "generatedAt": "2026-10-06T04:40:41.022Z",
   "folders": [
     {
       "name": "App",
@@ -21,7 +21,7 @@
     },
     {
       "name": "美化",
-      "count": 44
+      "count": 45
     },
     {
       "name": "表情包",
@@ -632,6 +632,20 @@
       ],
       "description": "",
       "updatedAt": "2026-10-03T14:25:08+08:00"
+    },
+    {
+      "folder": "美化",
+      "name": "【线下主题】凛冬私语by诀眠",
+      "type": "dir",
+      "path": "资源/美化/【线下主题】凛冬私语by诀眠",
+      "files": [
+        "资源/美化/【线下主题】凛冬私语by诀眠/h_H_by_.css"
+      ],
+      "images": [
+        "资源/美化/【线下主题】凛冬私语by诀眠/b.jpg"
+      ],
+      "description": "",
+      "updatedAt": "2026-10-06T12:40:22+08:00"
     },
     {
       "folder": "美化",
