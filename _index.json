@@ -1,7 +1,7 @@
 {
   "schema": "puff_share_index",
   "schemaVersion": 1,
-  "generatedAt": "2026-10-07T07:02:42.121Z",
+  "generatedAt": "2026-10-07T11:07:20.014Z",
   "folders": [
     {
       "name": "App",
@@ -21,7 +21,7 @@
     },
     {
       "name": "美化",
-      "count": 46
+      "count": 47
     },
     {
       "name": "表情包",
@@ -662,6 +662,24 @@
       ],
       "description": "",
       "updatedAt": "2026-10-06T12:40:22+08:00"
+    },
+    {
+      "folder": "美化",
+      "name": "仿IG",
+      "type": "dir",
+      "path": "资源/美化/仿IG",
+      "files": [
+        "资源/美化/仿IG/仿IG夜间.json",
+        "资源/美化/仿IG/仿IG日间.json",
+        "资源/美化/仿IG/仿IG日间_2_.json"
+      ],
+      "images": [
+        "资源/美化/仿IG/IMG_8210.jpg",
+        "资源/美化/仿IG/IMG_8212.jpg",
+        "资源/美化/仿IG/封面.jpg"
+      ],
+      "description": "",
+      "updatedAt": "2026-10-07T19:06:54+08:00"
     },
     {
       "folder": "美化",
