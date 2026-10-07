@@ -1,11 +1,11 @@
 {
   "schema": "puff_share_index",
   "schemaVersion": 1,
-  "generatedAt": "2026-10-06T10:02:41.752Z",
+  "generatedAt": "2026-10-07T07:02:42.121Z",
   "folders": [
     {
       "name": "App",
-      "count": 10
+      "count": 11
     },
     {
       "name": "世界书",
@@ -180,6 +180,22 @@
       ],
       "description": "",
       "updatedAt": "2026-10-03T18:08:29+08:00"
+    },
+    {
+      "folder": "App",
+      "name": "设定小助手",
+      "type": "dir",
+      "path": "资源/App/设定小助手",
+      "files": [
+        "资源/App/设定小助手/deepseek_js_20261007_59f912.js"
+      ],
+      "images": [
+        "资源/App/设定小助手/1000042051.jpg",
+        "资源/App/设定小助手/1000042052.jpg",
+        "资源/App/设定小助手/封面.jpg"
+      ],
+      "description": "",
+      "updatedAt": "2026-10-07T15:02:18+08:00"
     },
     {
       "folder": "App",
