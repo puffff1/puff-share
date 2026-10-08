@@ -1,7 +1,7 @@
 {
   "schema": "puff_share_index",
   "schemaVersion": 1,
-  "generatedAt": "2026-10-08T03:06:32.157Z",
+  "generatedAt": "2026-10-08T07:00:35.559Z",
   "folders": [
     {
       "name": "App",
@@ -21,11 +21,11 @@
     },
     {
       "name": "美化",
-      "count": 47
+      "count": 48
     },
     {
       "name": "表情包",
-      "count": 24
+      "count": 26
     },
     {
       "name": "装扮",
@@ -1137,6 +1137,22 @@
     },
     {
       "folder": "美化",
+      "name": "简约白黑",
+      "type": "dir",
+      "path": "资源/美化/简约白黑",
+      "files": [
+        "资源/美化/简约白黑/简约白.json",
+        "资源/美化/简约白黑/简约黑.json"
+      ],
+      "images": [
+        "资源/美化/简约白黑/1000055218.jpg",
+        "资源/美化/简约白黑/封面.jpg"
+      ],
+      "description": "",
+      "updatedAt": "2026-10-08T15:00:05+08:00"
+    },
+    {
+      "folder": "美化",
       "name": "简约粉白颜文字气泡by糖",
       "type": "dir",
       "path": "资源/美化/简约粉白颜文字气泡by糖",
@@ -1378,6 +1394,20 @@
     },
     {
       "folder": "表情包",
+      "name": "sovkyaki",
+      "type": "dir",
+      "path": "资源/表情包/sovkyaki",
+      "files": [
+        "资源/表情包/sovkyaki/sickyaki表情包-24张-有预览.docx"
+      ],
+      "images": [
+        "资源/表情包/sovkyaki/Image_1791432250630_71.jpg"
+      ],
+      "description": "",
+      "updatedAt": "2026-10-08T15:00:13+08:00"
+    },
+    {
+      "folder": "表情包",
       "name": "一些萌萌表情包",
       "type": "dir",
       "path": "资源/表情包/一些萌萌表情包",
@@ -1479,6 +1509,20 @@
       ],
       "description": "",
       "updatedAt": "2026-10-03T01:56:07+08:00"
+    },
+    {
+      "folder": "表情包",
+      "name": "小猫狗喏喏",
+      "type": "dir",
+      "path": "资源/表情包/小猫狗喏喏",
+      "files": [
+        "资源/表情包/小猫狗喏喏/小猫狗喏喏表情包合集-72张-有预览.docx"
+      ],
+      "images": [
+        "资源/表情包/小猫狗喏喏/Image_1791432385098_551.jpg"
+      ],
+      "description": "",
+      "updatedAt": "2026-10-08T14:59:53+08:00"
     },
     {
       "folder": "表情包",
