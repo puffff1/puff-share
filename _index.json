@@ -1,7 +1,7 @@
 {
   "schema": "puff_share_index",
   "schemaVersion": 1,
-  "generatedAt": "2026-10-08T01:10:03.060Z",
+  "generatedAt": "2026-10-08T03:06:32.157Z",
   "folders": [
     {
       "name": "App",
@@ -33,7 +33,7 @@
     },
     {
       "name": "角色卡",
-      "count": 19
+      "count": 20
     },
     {
       "name": "预设",
@@ -1898,6 +1898,18 @@
       ],
       "description": "",
       "updatedAt": "2026-09-23T19:10:22+08:00"
+    },
+    {
+      "folder": "角色卡",
+      "name": "欺负一个山里来下来的年轻老东西？！",
+      "type": "dir",
+      "path": "资源/角色卡/欺负一个山里来下来的年轻老东西？！",
+      "files": [
+        "资源/角色卡/欺负一个山里来下来的年轻老东西？！/人设_沈予清_我从山中来_奶茶任我买.docx"
+      ],
+      "images": [],
+      "description": "",
+      "updatedAt": "2026-10-08T11:06:09+08:00"
     },
     {
       "folder": "角色卡",
