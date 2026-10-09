@@ -1,7 +1,7 @@
 {
   "schema": "puff_share_index",
   "schemaVersion": 1,
-  "generatedAt": "2026-10-08T13:48:06.295Z",
+  "generatedAt": "2026-10-09T10:58:27.857Z",
   "folders": [
     {
       "name": "App",
@@ -9,7 +9,7 @@
     },
     {
       "name": "世界书",
-      "count": 10
+      "count": 11
     },
     {
       "name": "其他",
@@ -258,6 +258,26 @@
       ],
       "description": "",
       "updatedAt": "2026-10-06T09:33:51+08:00"
+    },
+    {
+      "folder": "世界书",
+      "name": "【千语花】深度deeptalk+小作文",
+      "type": "dir",
+      "path": "资源/世界书/【千语花】深度deeptalk+小作文",
+      "files": [
+        "资源/世界书/【千语花】深度deeptalk+小作文/千语花_深度deeptalk_小作文_by点星.docx"
+      ],
+      "images": [
+        "资源/世界书/【千语花】深度deeptalk+小作文/1000057043.jpg",
+        "资源/世界书/【千语花】深度deeptalk+小作文/1000057053.jpg",
+        "资源/世界书/【千语花】深度deeptalk+小作文/1000057054.jpg",
+        "资源/世界书/【千语花】深度deeptalk+小作文/1000057109.jpg",
+        "资源/世界书/【千语花】深度deeptalk+小作文/1000057110.jpg",
+        "资源/世界书/【千语花】深度deeptalk+小作文/1000057111.jpg",
+        "资源/世界书/【千语花】深度deeptalk+小作文/封面.jpg"
+      ],
+      "description": "",
+      "updatedAt": "2026-10-09T18:58:05+08:00"
     },
     {
       "folder": "世界书",
