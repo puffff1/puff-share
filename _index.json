@@ -1,7 +1,7 @@
 {
   "schema": "puff_share_index",
   "schemaVersion": 1,
-  "generatedAt": "2026-10-09T23:43:41.055Z",
+  "generatedAt": "2026-10-10T02:14:30.289Z",
   "folders": [
     {
       "name": "App",
@@ -21,7 +21,7 @@
     },
     {
       "name": "美化",
-      "count": 49
+      "count": 50
     },
     {
       "name": "表情包",
@@ -985,6 +985,24 @@
       ],
       "description": "",
       "updatedAt": "2026-10-02T15:11:17+08:00"
+    },
+    {
+      "folder": "美化",
+      "name": "棕白黑",
+      "type": "dir",
+      "path": "资源/美化/棕白黑",
+      "files": [
+        "资源/美化/棕白黑/棕.json",
+        "资源/美化/棕白黑/白.json",
+        "资源/美化/棕白黑/黑.json"
+      ],
+      "images": [
+        "资源/美化/棕白黑/1000055446.jpg",
+        "资源/美化/棕白黑/1000055450.jpg",
+        "资源/美化/棕白黑/封面.jpg"
+      ],
+      "description": "",
+      "updatedAt": "2026-10-10T10:14:09+08:00"
     },
     {
       "folder": "美化",
