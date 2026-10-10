@@ -1,7 +1,7 @@
 {
   "schema": "puff_share_index",
   "schemaVersion": 1,
-  "generatedAt": "2026-10-10T13:50:05.197Z",
+  "generatedAt": "2026-10-10T16:06:19.526Z",
   "folders": [
     {
       "name": "App",
@@ -33,7 +33,7 @@
     },
     {
       "name": "角色卡",
-      "count": 21
+      "count": 22
     },
     {
       "name": "预设",
@@ -1997,6 +1997,18 @@
       "images": [],
       "description": "Puff 资源集市测试资源。在 App 里点「一键应用」或浏览同目录下的文件即可。",
       "updatedAt": "2026-09-21T16:16:10+08:00"
+    },
+    {
+      "folder": "角色卡",
+      "name": "“家姐，你太美好喇…”岑谚",
+      "type": "dir",
+      "path": "资源/角色卡/“家姐，你太美好喇…”岑谚",
+      "files": [
+        "资源/角色卡/“家姐，你太美好喇…”岑谚/人设_BG岑谚_家姐_你太美好喇_by阿渺.docx"
+      ],
+      "images": [],
+      "description": "",
+      "updatedAt": "2026-10-11T00:05:54+08:00"
     },
     {
       "folder": "角色卡",
