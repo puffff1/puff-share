@@ -1,7 +1,7 @@
 {
   "schema": "puff_share_index",
   "schemaVersion": 1,
-  "generatedAt": "2026-10-10T09:18:58.727Z",
+  "generatedAt": "2026-10-10T09:19:32.568Z",
   "folders": [
     {
       "name": "App",
@@ -691,9 +691,11 @@
       "files": [
         "资源/美化/一个简单的仿微博by真水/仿微博by真水.json"
       ],
-      "images": [],
+      "images": [
+        "资源/美化/一个简单的仿微博by真水/封面.jpg"
+      ],
       "description": "",
-      "updatedAt": "2026-10-10T17:18:38+08:00"
+      "updatedAt": "2026-10-10T17:19:08+08:00"
     },
     {
       "folder": "美化",
