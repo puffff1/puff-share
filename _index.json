@@ -1,7 +1,7 @@
 {
   "schema": "puff_share_index",
   "schemaVersion": 1,
-  "generatedAt": "2026-10-11T06:13:57.605Z",
+  "generatedAt": "2026-10-11T12:45:31.098Z",
   "folders": [
     {
       "name": "App",
@@ -25,7 +25,7 @@
     },
     {
       "name": "美化",
-      "count": 52
+      "count": 53
     },
     {
       "name": "表情包",
@@ -860,6 +860,23 @@
       "tags": [
         "列表"
       ]
+    },
+    {
+      "folder": "美化",
+      "name": "仿纸飞机",
+      "type": "dir",
+      "path": "资源/美化/仿纸飞机",
+      "files": [
+        "资源/美化/仿纸飞机/仿纸飞机puff.js",
+        "资源/美化/仿纸飞机/仿纸飞机puff.txt",
+        "资源/美化/仿纸飞机/仿纸飞机puff纯css.txt"
+      ],
+      "images": [
+        "资源/美化/仿纸飞机/1000116368.jpg",
+        "资源/美化/仿纸飞机/封面.jpg"
+      ],
+      "description": "",
+      "updatedAt": "2026-10-11T20:45:08+08:00"
     },
     {
       "folder": "美化",
