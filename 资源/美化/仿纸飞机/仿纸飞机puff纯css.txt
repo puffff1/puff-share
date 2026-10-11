@@ -1,0 +1,300 @@
+/* 仿纸飞机by哦，禁二传可二改 */
+/* 仅保留顶栏、底栏和普通消息气泡；其余消息结构与功能使用 Puff 原版。 */
+
+/* A. 纸飞机白、浅绿、蓝色。重要变量防止宿主深色模式把文字改成白色。 */
+.chat-thread {
+  --dress-header-bg: transparent !important;
+  --dress-header-blur: 0px !important;
+  --dress-header-border: transparent !important;
+  --dress-header-radius: 0px !important;
+  --dress-header-shadow: none !important;
+  --dress-header-title-color: #182533 !important;
+  --dress-header-title-size: 16px !important;
+  --dress-header-title-weight: 600 !important;
+  --dress-header-icon-color: #182533 !important;
+  --dress-compose-bar-bg: #fff !important;
+  --dress-compose-bar-fg: #182533 !important;
+  --dress-compose-bar-radius: 27px !important;
+  --dress-compose-bar-border: 1px solid rgba(113,128,143,.14) !important;
+  --dress-compose-bar-shadow: 0 2px 8px rgba(23,43,58,.14) !important;
+  --dress-compose-bar-blur: none !important;
+  --dress-scroll-pad-x: 14px;
+  --pp-blue: #246fa5;
+  --pp-blue-soft: #eaf4fd;
+  --pp-green: #24784b;
+  --pp-green-soft: #eaf6ef;
+  --pp-line: #dbe8ef;
+  --pp-ink: #182533;
+}
+
+/* B. 顶栏：两侧等宽留位，名称与原生心声按钮共用居中的胶囊。
+   actions 仅取消布局盒，按钮仍留在原生 DOM 中，点击事件保持原样。 */
+.chat-thread .chat-thread-pill:not(.chat-thread-pill-detail) {
+  position: relative !important;
+  isolation: isolate !important;
+  background: transparent !important;
+  border-color: transparent !important;
+  box-shadow: none !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+  grid-template-columns: minmax(52px, 1fr) minmax(0, max-content) minmax(52px, 1fr) !important;
+  gap: 0 !important;
+}
+.chat-thread .chat-thread-pill:not(.chat-thread-pill-detail):has(.chat-thread-head-xinsheng) {
+  grid-template-columns: minmax(52px, 1fr) minmax(0, max-content) 32px minmax(52px, 1fr) !important;
+}
+.chat-thread .chat-thread-pill:not(.chat-thread-pill-detail)::before {
+  content: "" !important;
+  grid-area: 1 / 2 / 2 / 3 !important;
+  align-self: stretch !important;
+  z-index: 0 !important;
+  box-sizing: border-box !important;
+  border: 1px solid rgba(113,128,143,.12) !important;
+  border-radius: 999px !important;
+  background: #fff !important;
+  box-shadow: 0 2px 8px rgba(23,43,58,.14) !important;
+  pointer-events: none !important;
+}
+.chat-thread .chat-thread-pill:not(.chat-thread-pill-detail):has(.chat-thread-head-xinsheng)::before {
+  grid-column-end: 4 !important;
+}
+.chat-thread .chat-thread-pill:not(.chat-thread-pill-detail) :is(.chat-back, .chat-thread-head-more) {
+  position: relative !important;
+  z-index: 1 !important;
+  box-sizing: border-box !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  width: 44px !important;
+  height: 44px !important;
+  min-width: 44px !important;
+  flex-shrink: 0 !important;
+  padding: 10px !important;
+  border: 1px solid rgba(113,128,143,.12) !important;
+  border-radius: 50% !important;
+  background: #fff !important;
+  color: #182533 !important;
+  box-shadow: 0 2px 8px rgba(23,43,58,.14) !important;
+}
+.chat-thread .chat-thread-pill:not(.chat-thread-pill-detail) .chat-back {
+  grid-area: 1 / 1 !important;
+  justify-self: start !important;
+}
+.chat-thread .chat-thread-pill:not(.chat-thread-pill-detail) .chat-thread-head-actions {
+  display: contents !important;
+}
+.chat-thread .chat-thread-pill:not(.chat-thread-pill-detail) .chat-thread-head-more {
+  grid-area: 1 / -2 / 2 / -1 !important;
+  justify-self: end !important;
+}
+.chat-thread .chat-thread-pill:not(.chat-thread-pill-detail) .chat-thread-head-xinsheng {
+  grid-area: 1 / 3 / 2 / 4 !important;
+  position: relative !important;
+  z-index: 1 !important;
+  align-self: center !important;
+  justify-self: center !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  box-sizing: border-box !important;
+  width: 32px !important;
+  height: 44px !important;
+  min-width: 32px !important;
+  padding: 0 8px 0 0 !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  background: transparent !important;
+  box-shadow: none !important;
+}
+.chat-thread .chat-thread-pill:not(.chat-thread-pill-detail) .chat-thread-center {
+  grid-area: 1 / 2 / 2 / 3 !important;
+  position: relative !important;
+  z-index: 1 !important;
+  justify-self: stretch !important;
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  justify-content: center !important;
+  min-width: 0 !important;
+  box-sizing: border-box !important;
+  min-height: 44px !important;
+  padding: 7px 12px !important;
+  border: 0 !important;
+  background: transparent !important;
+  box-shadow: none !important;
+  color: #182533 !important;
+  text-align: center !important;
+}
+.chat-thread .chat-thread-pill:not(.chat-thread-pill-detail):has(.chat-thread-head-xinsheng) .chat-thread-center {
+  padding-right: 0 !important;
+}
+.chat-thread .chat-thread-pill:not(.chat-thread-pill-detail) .chat-thread-center h2 {
+  max-width: 100% !important;
+  min-width: 0 !important;
+  color: #182533 !important;
+  font-size: 16px !important;
+  font-weight: 600 !important;
+  line-height: 1.3 !important;
+  margin: 0 !important;
+  overflow: hidden !important;
+  white-space: nowrap !important;
+  text-overflow: ellipsis !important;
+}
+
+/* C. Puff 原生功能：笑脸=加号；回形针=回复/发送/停止；右侧蓝色麦克风=语音。
+   空输入显示原生回复键；原生发送键 ready 时在同一位置显示发送键并隐藏闲置回复键。
+   回形针仅是按钮外观，各自原生点击事件保留。转圈/停止时显示原生图形。 */
+.chat-thread .chat-compose-bar {
+  min-height: 54px !important;
+  box-sizing: border-box !important;
+  gap: 4px !important;
+  padding: 5px 5px 5px 7px !important;
+  border: var(--dress-compose-bar-border) !important;
+  border-radius: 28px !important;
+  background: #fff !important;
+  color: #182533 !important;
+  box-shadow: var(--dress-compose-bar-shadow) !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+}
+.chat-thread .chat-compose-plus-wrap { order: 1 !important; }
+.chat-thread .chat-compose-input {
+  order: 2 !important;
+  flex: 1 1 0% !important;
+  min-width: 0 !important;
+  color: #182533 !important;
+  caret-color: #3390ec !important;
+  background: transparent !important;
+  font-size: 16px !important;
+  line-height: 1.5 !important;
+}
+.chat-thread .chat-compose-input::placeholder { color: #8b949e !important; }
+.chat-thread .chat-compose-bar :is(.chat-compose-plus,.chat-compose-icon) {
+  position: relative !important;
+  flex-shrink: 0 !important;
+  width: 40px !important;
+  height: 40px !important;
+  min-width: 40px !important;
+  padding: 0 !important;
+  margin-bottom: 0 !important;
+  border-radius: 50% !important;
+}
+.chat-thread .chat-compose-plus { color: #7b8388 !important; }
+.chat-thread .chat-compose-bar > .chat-compose-icon:not(.is-voice) {
+  order: 3 !important;
+  background: transparent !important;
+  color: #7b8388 !important;
+}
+/* Puff 输入文字后会同时挂载回复键和发送键；同一位置只显示当前可用操作。 */
+.chat-thread .chat-compose-bar:has(> .chat-compose-icon.is-send.ready:not([hidden])) > .chat-compose-icon.is-reply:has(> svg > path[d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"]):not([aria-busy="true"]):not([aria-label*="停止"]):not([aria-label*="stop" i]):not(:is(.is-stop,.is-loading,.is-busy)):not(:has([style*="animation"],animate,animateTransform)) {
+  display: none !important;
+}
+.chat-thread .chat-compose-bar:has(> .chat-compose-icon.is-reply:is([aria-busy="true"],[aria-label*="停止"],[aria-label*="stop" i],.is-stop,.is-loading,.is-busy,:has([style*="chat-reply-spin"],svg circle,animateTransform))) > .chat-compose-icon.is-send {
+  display: none !important;
+}
+.chat-thread .chat-compose-bar > .chat-compose-icon.is-voice {
+  order: 4 !important;
+  width: 44px !important;
+  height: 44px !important;
+  min-width: 44px !important;
+  background: #229ed9 !important;
+  color: #fff !important;
+}
+.chat-thread .chat-compose-bar > .chat-compose-icon.is-voice[aria-pressed="true"] {
+  background: #157fb5 !important;
+  box-shadow: inset 0 0 0 2px rgba(255,255,255,.65) !important;
+}
+.chat-thread .chat-compose-plus > svg,
+.chat-thread .chat-compose-icon.is-voice > svg,
+.chat-thread .chat-compose-bar > .chat-compose-icon:is(.is-reply:has(> svg > path[d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"]),.is-send.ready:not(:has(svg circle))):not([aria-busy="true"]):not([aria-label*="停止"]):not([aria-label*="stop" i]):not(:is(.is-stop,.is-loading,.is-busy)):not(:has([style*="animation"],animate,animateTransform)) > svg { visibility: hidden !important; }
+.chat-thread .chat-compose-plus::before,
+.chat-thread .chat-compose-icon.is-voice::before,
+.chat-thread .chat-compose-bar > .chat-compose-icon:is(.is-reply:has(> svg > path[d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"]),.is-send.ready:not(:has(svg circle))):not([aria-busy="true"]):not([aria-label*="停止"]):not([aria-label*="stop" i]):not(:is(.is-stop,.is-loading,.is-busy)):not(:has([style*="animation"],animate,animateTransform))::before {
+  content: "" !important;
+  position: absolute !important;
+  inset: 7px !important;
+  background: currentColor !important;
+  -webkit-mask: var(--pp-compose-icon) center / contain no-repeat !important;
+  mask: var(--pp-compose-icon) center / contain no-repeat !important;
+  pointer-events: none !important;
+}
+.chat-thread .chat-compose-plus { --pp-compose-icon: url("data:image/svg+xml,%3Csvg%20width%3D%2215%22%20height%3D%2215%22%20viewBox%3D%220%200%2015%2015%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Cpath%20d%3D%22M14.5%207.5C14.5%2011.366%2011.366%2014.5%207.5%2014.5C3.63401%2014.5%200.5%2011.366%200.5%207.5C0.5%203.63401%203.63401%200.5%207.5%200.5C11.366%200.5%2014.5%203.63401%2014.5%207.5Z%22%20stroke-linejoin%3D%22round%22%20stroke%3D%22black%22%2F%3E%0A%3Ccircle%20cx%3D%225%22%20cy%3D%225%22%20r%3D%221%22%20fill%3D%22%23010101%22%2F%3E%0A%3Ccircle%20cx%3D%2210%22%20cy%3D%225%22%20r%3D%221%22%20fill%3D%22black%22%2F%3E%0A%3Cpath%20d%3D%22M4%209C5.70081%2011.4297%209.29919%2011.4297%2011%209%22%20stroke-linecap%3D%22round%22%20stroke%3D%22black%22%2F%3E%0A%3C%2Fsvg%3E%0A"); }
+
+/* D. 普通气泡。只改颜色、圆角、内边距和尾巴，不修改消息宽度与排版结构。 */
+.chat-thread .chat-msg {
+  --pp-bubble-fill: #fff;
+  --pp-bubble-radius: 18px 18px 18px 0;
+  --pp-tail-left: -7px;
+  --pp-tail-right: auto;
+  --pp-tail-flip: none;
+}
+.chat-thread .chat-msg.is-me {
+  --pp-bubble-fill: #eeffdf;
+  --pp-bubble-radius: 18px 18px 0 18px;
+  --pp-tail-left: auto;
+  --pp-tail-right: -7px;
+  --pp-tail-flip: scaleX(-1);
+}
+/* 语音、图片、贴纸、红包及其他卡片沿用 Puff 原版。 */
+.chat-thread .chat-msg:not(:is(.has-voice,.has-sticker,.has-image,.has-transfer,.has-red-envelope,.has-gift,.has-diary-share,.has-forum-share,.has-listen-together,.has-location,.has-takeout,.has-shop-order,.has-offline-invite)):not(:has(.chat-recall-wrap,.puff-call-end-msg,.puff-call-end-card,.chat-offline-ticket)) {
+  align-items: flex-end !important;
+}
+.chat-thread .chat-msg:not(:is(.has-voice,.has-sticker,.has-image,.has-transfer,.has-red-envelope,.has-gift,.has-diary-share,.has-forum-share,.has-listen-together,.has-location,.has-takeout,.has-shop-order,.has-offline-invite)):not(:has(.chat-recall-wrap,.puff-call-end-msg,.puff-call-end-card,.chat-offline-ticket)) > :is(.chat-ava,.chat-avatar-mention-host) {
+  align-self: flex-end !important;
+  margin-top: 0 !important;
+  margin-bottom: 15px !important;
+}
+.chat-thread .chat-msg:not(:is(.has-voice,.has-sticker,.has-image,.has-transfer,.has-red-envelope,.has-gift,.has-diary-share,.has-forum-share,.has-listen-together,.has-location,.has-takeout,.has-shop-order,.has-offline-invite)):not(:has(.chat-recall-wrap,.puff-call-end-msg,.puff-call-end-card,.chat-offline-ticket)) .chat-msg-body {
+  overflow: visible !important;
+}
+.chat-thread .chat-msg:not(:is(.has-voice,.has-sticker,.has-image,.has-transfer,.has-red-envelope,.has-gift,.has-diary-share,.has-forum-share,.has-listen-together,.has-location,.has-takeout,.has-shop-order,.has-offline-invite)):not(:has(.chat-recall-wrap,.puff-call-end-msg,.puff-call-end-card,.chat-offline-ticket)) .chat-bubble:not(.chat-bubble-sticker):not(.chat-bubble-trans-chip) {
+  position: relative !important;
+  box-sizing: border-box !important;
+  min-height: 36px !important;
+  padding: 6px 12px !important;
+  overflow: visible !important;
+  border: 0 !important;
+  border-radius: var(--pp-bubble-radius) !important;
+  background: var(--pp-bubble-fill) !important;
+  box-shadow: none !important;
+  color: #182533 !important;
+}
+/* 字体视觉重心略偏上；仅校正纯正文，不改变气泡盒模型。 */
+.chat-thread .chat-msg:not(:is(.has-voice,.has-sticker,.has-image,.has-transfer,.has-red-envelope,.has-gift,.has-diary-share,.has-forum-share,.has-listen-together,.has-location,.has-takeout,.has-shop-order,.has-offline-invite)):not(:has(.chat-recall-wrap,.puff-call-end-msg,.puff-call-end-card,.chat-offline-ticket)) .chat-bubble > .chat-bubble-primary:only-child {
+  margin: 0 !important;
+  transform: translateY(1px) !important;
+}
+.chat-thread .chat-msg:not(:is(.has-voice,.has-sticker,.has-image,.has-transfer,.has-red-envelope,.has-gift,.has-diary-share,.has-forum-share,.has-listen-together,.has-location,.has-takeout,.has-shop-order,.has-offline-invite)):not(:has(.chat-recall-wrap,.puff-call-end-msg,.puff-call-end-card,.chat-offline-ticket)) .chat-bubble:not(.chat-bubble-sticker):not(.chat-bubble-trans-chip)::after {
+  content: "" !important;
+  position: absolute !important;
+  z-index: 0 !important;
+  left: var(--pp-tail-left) !important;
+  right: var(--pp-tail-right) !important;
+  bottom: 0 !important;
+  top: auto !important;
+  width: 8px !important;
+  height: 11px !important;
+  border: 0 !important;
+  background: var(--pp-bubble-fill) !important;
+  transform: var(--pp-tail-flip) !important;
+  -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 8 11'%3E%3Crect x='7' width='1' height='11'/%3E%3Cpath d='M0 11H7V0.5L6 4.5L5.73502 5.09619C4.62512 7.59348 2.55883 9.54044 0 10.5V11Z'/%3E%3C/svg%3E") center/contain no-repeat !important;
+  mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 8 11'%3E%3Crect x='7' width='1' height='11'/%3E%3Cpath d='M0 11H7V0.5L6 4.5L5.73502 5.09619C4.62512 7.59348 2.55883 9.54044 0 10.5V11Z'/%3E%3C/svg%3E") center/contain no-repeat !important;
+  pointer-events: none !important;
+}
+
+/* 我方语音及展开后的转写使用与我方文字气泡一致的浅绿色。 */
+.chat-thread .chat-msg.is-me.has-voice :is(.puff-voice-pill,.puff-voice-note) {
+  background: #eeffdf !important;
+  border-color: #d5e9dc !important;
+}
+
+/* 不接管弹层 display、键盘定位、安全区、壁纸，也不隐藏任何功能入口。 */
+
+.chat-thread .chat-compose-bar > .chat-compose-icon:is(.is-reply:has(> svg > path[d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"]),.is-send.ready:not(:has(svg circle))):not([aria-busy="true"]):not([aria-label*="停止"]):not([aria-label*="stop" i]):not(:is(.is-stop,.is-loading,.is-busy)):not(:has([style*="animation"],animate,animateTransform)) {
+  --pp-compose-icon: url("data:image/svg+xml,%3Csvg%20width%3D%2213%22%20height%3D%2214%22%20viewBox%3D%220%200%2013%2014%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Cpath%20d%3D%22M4.64354%209.78936L8.38856%206.49286C8.99857%205.9559%209.0578%205.0261%208.52084%204.41609C7.98389%203.80608%207.05409%203.74685%206.44408%204.28381L1.37369%208.74695C0.306169%209.68662%200.202526%2011.3138%201.1422%2012.3813C2.08187%2013.4488%203.70902%2013.5525%204.77654%2012.6128L11.2211%206.94004C12.7461%205.59765%2012.8942%203.27315%2011.5518%201.74812C10.2094%200.223094%207.88492%200.0750355%206.35989%201.41742L1.24069%205.92353%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%20stroke%3D%22black%22%2F%3E%0A%3C%2Fsvg%3E%0A");
+}
+
+.chat-thread .chat-compose-icon.is-voice {
+  --pp-compose-icon: url("data:image/svg+xml,%3Csvg%20width%3D%229%22%20height%3D%2213%22%20viewBox%3D%220%200%209%2013%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Cpath%20d%3D%22M4.5%202.5V6.5%22%20stroke-width%3D%225%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%20stroke%3D%22black%22%2F%3E%0A%3Cpath%20d%3D%22M0.5%205.5V6C0.5%208.20914%202.29086%2010%204.5%2010C6.70914%2010%208.5%208.20914%208.5%206V5.5%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%20stroke%3D%22black%22%2F%3E%0A%3Cpath%20d%3D%22M4.5%2010.5V12.5%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%20stroke%3D%22black%22%2F%3E%0A%3C%2Fsvg%3E%0A");
+}
+
