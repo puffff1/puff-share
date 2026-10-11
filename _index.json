@@ -1,11 +1,15 @@
 {
   "schema": "puff_share_index",
   "schemaVersion": 1,
-  "generatedAt": "2026-10-11T05:08:55.867Z",
+  "generatedAt": "2026-10-11T06:13:57.605Z",
   "folders": [
     {
       "name": "App",
       "count": 11
+    },
+    {
+      "name": "repo",
+      "count": 1
     },
     {
       "name": "世界书",
@@ -211,6 +215,18 @@
       ],
       "description": "",
       "updatedAt": "2026-09-28T23:49:38+08:00"
+    },
+    {
+      "folder": "repo",
+      "name": "棕白黑",
+      "type": "dir",
+      "path": "资源/repo/棕白黑",
+      "files": [],
+      "images": [
+        "资源/repo/棕白黑/1000048249.jpg"
+      ],
+      "description": "",
+      "updatedAt": "2026-10-11T14:13:35+08:00"
     },
     {
       "folder": "世界书",
