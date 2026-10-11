@@ -1,7 +1,7 @@
 {
   "schema": "puff_share_index",
   "schemaVersion": 1,
-  "generatedAt": "2026-10-10T22:51:07.059Z",
+  "generatedAt": "2026-10-11T04:01:51.254Z",
   "folders": [
     {
       "name": "App",
@@ -25,7 +25,7 @@
     },
     {
       "name": "表情包",
-      "count": 38
+      "count": 43
     },
     {
       "name": "装扮",
@@ -1474,6 +1474,34 @@
     },
     {
       "folder": "表情包",
+      "name": "BGBB砰砰兔2",
+      "type": "dir",
+      "path": "资源/表情包/BGBB砰砰兔2",
+      "files": [
+        "资源/表情包/BGBB砰砰兔2/BGBB砰砰兔表情包2-gif-有预览.docx"
+      ],
+      "images": [
+        "资源/表情包/BGBB砰砰兔2/1000024166.png"
+      ],
+      "description": "",
+      "updatedAt": "2026-10-11T12:01:04+08:00"
+    },
+    {
+      "folder": "表情包",
+      "name": "Bgbb砰砰兔1",
+      "type": "dir",
+      "path": "资源/表情包/Bgbb砰砰兔1",
+      "files": [
+        "资源/表情包/Bgbb砰砰兔1/BGBB砰砰兔表情包1-gif-有预览.docx"
+      ],
+      "images": [
+        "资源/表情包/Bgbb砰砰兔1/1000024167.png"
+      ],
+      "description": "",
+      "updatedAt": "2026-10-11T12:01:19+08:00"
+    },
+    {
+      "folder": "表情包",
       "name": "Pata",
       "type": "dir",
       "path": "资源/表情包/Pata",
@@ -1690,6 +1718,20 @@
     },
     {
       "folder": "表情包",
+      "name": "季屿川-表情包",
+      "type": "dir",
+      "path": "资源/表情包/季屿川-表情包",
+      "files": [
+        "资源/表情包/季屿川-表情包/c_h_.docx",
+        "资源/表情包/季屿川-表情包/h_-40_.zip",
+        "资源/表情包/季屿川-表情包/png"
+      ],
+      "images": [],
+      "description": "",
+      "updatedAt": "2026-10-11T12:00:54+08:00"
+    },
+    {
+      "folder": "表情包",
       "name": "小熊小兔",
       "type": "dir",
       "path": "资源/表情包/小熊小兔",
@@ -1889,6 +1931,34 @@
       ],
       "description": "",
       "updatedAt": "2026-09-23T23:48:15+08:00"
+    },
+    {
+      "folder": "表情包",
+      "name": "萨卡斑鱼1静",
+      "type": "dir",
+      "path": "资源/表情包/萨卡斑鱼1静",
+      "files": [
+        "资源/表情包/萨卡斑鱼1静/萨卡斑鱼表情包1-有预览.docx"
+      ],
+      "images": [
+        "资源/表情包/萨卡斑鱼1静/1000024165.png"
+      ],
+      "description": "",
+      "updatedAt": "2026-10-11T12:00:31+08:00"
+    },
+    {
+      "folder": "表情包",
+      "name": "萨卡斑鱼2动",
+      "type": "dir",
+      "path": "资源/表情包/萨卡斑鱼2动",
+      "files": [
+        "资源/表情包/萨卡斑鱼2动/萨卡斑鱼表情包2gif-有预览.docx"
+      ],
+      "images": [
+        "资源/表情包/萨卡斑鱼2动/1000024168.png"
+      ],
+      "description": "",
+      "updatedAt": "2026-10-11T12:01:27+08:00"
     },
     {
       "folder": "表情包",
