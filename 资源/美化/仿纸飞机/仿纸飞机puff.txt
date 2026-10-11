@@ -1,0 +1,786 @@
+/* 仿纸飞机by哦，禁二传可二改 */
+/* 仅作用于即时聊天 .chat-thread；保留宿主壁纸、安全区、键盘及按钮状态。
+   时间和勾号按 Telegram 风格的末行留位规则排版，并保留 Puff 原生插槽和消息节点。
+*/
+
+/* A. 纸飞机白、浅绿、蓝色。重要变量防止宿主深色模式把文字改成白色。 */
+.chat-thread {
+  --dress-header-bg: transparent !important;
+  --dress-header-blur: 0px !important;
+  --dress-header-border: transparent !important;
+  --dress-header-radius: 0px !important;
+  --dress-header-shadow: none !important;
+  --dress-header-title-color: #182533 !important;
+  --dress-header-title-size: 16px !important;
+  --dress-header-title-weight: 600 !important;
+  --dress-header-icon-color: #182533 !important;
+  --dress-bubble-me-bg: #eeffdf !important;
+  --dress-bubble-me-bg-gradient: none !important;
+  --dress-bubble-me-fg: #182533 !important;
+  --dress-bubble-me-border: none !important;
+  --dress-bubble-me-shadow: none !important;
+  --dress-bubble-me-radius: 18px !important;
+  --dress-bubble-them-bg: #fff !important;
+  --dress-bubble-them-fg: #182533 !important;
+  --dress-bubble-them-border: none !important;
+  --dress-bubble-them-shadow: none !important;
+  --dress-bubble-them-radius: 18px !important;
+  --dress-compose-bar-bg: #fff !important;
+  --dress-compose-bar-fg: #182533 !important;
+  --dress-compose-bar-radius: 27px !important;
+  --dress-compose-bar-border: 1px solid rgba(113,128,143,.14) !important;
+  --dress-compose-bar-shadow: 0 2px 8px rgba(23,43,58,.14) !important;
+  --dress-compose-bar-blur: none !important;
+  --dress-timestamp-color: #718a9c !important;
+  --dress-scroll-pad-x: 14px;
+  --pp-blue: #246fa5;
+  --pp-blue-soft: #eaf4fd;
+  --pp-green: #24784b;
+  --pp-green-soft: #eaf6ef;
+  --pp-line: #dbe8ef;
+  --pp-ink: #182533;
+}
+
+/* B. 顶栏：两侧等宽留位，名称与原生心声按钮共用居中的胶囊。
+   actions 仅取消布局盒，按钮仍留在原生 DOM 中，点击事件保持原样。 */
+.chat-thread .chat-thread-pill:not(.chat-thread-pill-detail) {
+  position: relative !important;
+  isolation: isolate !important;
+  background: transparent !important;
+  border-color: transparent !important;
+  box-shadow: none !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+  grid-template-columns: minmax(52px, 1fr) minmax(0, max-content) minmax(52px, 1fr) !important;
+  gap: 0 !important;
+}
+.chat-thread .chat-thread-pill:not(.chat-thread-pill-detail):has(.chat-thread-head-xinsheng) {
+  grid-template-columns: minmax(52px, 1fr) minmax(0, max-content) 32px minmax(52px, 1fr) !important;
+}
+.chat-thread .chat-thread-pill:not(.chat-thread-pill-detail)::before {
+  content: "" !important;
+  grid-area: 1 / 2 / 2 / 3 !important;
+  align-self: stretch !important;
+  z-index: 0 !important;
+  box-sizing: border-box !important;
+  border: 1px solid rgba(113,128,143,.12) !important;
+  border-radius: 999px !important;
+  background: #fff !important;
+  box-shadow: 0 2px 8px rgba(23,43,58,.14) !important;
+  pointer-events: none !important;
+}
+.chat-thread .chat-thread-pill:not(.chat-thread-pill-detail):has(.chat-thread-head-xinsheng)::before {
+  grid-column-end: 4 !important;
+}
+.chat-thread .chat-thread-pill:not(.chat-thread-pill-detail) :is(.chat-back, .chat-thread-head-more) {
+  position: relative !important;
+  z-index: 1 !important;
+  box-sizing: border-box !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  width: 44px !important;
+  height: 44px !important;
+  min-width: 44px !important;
+  flex-shrink: 0 !important;
+  padding: 10px !important;
+  border: 1px solid rgba(113,128,143,.12) !important;
+  border-radius: 50% !important;
+  background: #fff !important;
+  color: #182533 !important;
+  box-shadow: 0 2px 8px rgba(23,43,58,.14) !important;
+}
+.chat-thread .chat-thread-pill:not(.chat-thread-pill-detail) .chat-back {
+  grid-area: 1 / 1 !important;
+  justify-self: start !important;
+}
+.chat-thread .chat-thread-pill:not(.chat-thread-pill-detail) .chat-thread-head-actions {
+  display: contents !important;
+}
+.chat-thread .chat-thread-pill:not(.chat-thread-pill-detail) .chat-thread-head-more {
+  grid-area: 1 / -2 / 2 / -1 !important;
+  justify-self: end !important;
+}
+.chat-thread .chat-thread-pill:not(.chat-thread-pill-detail) .chat-thread-head-xinsheng {
+  grid-area: 1 / 3 / 2 / 4 !important;
+  position: relative !important;
+  z-index: 1 !important;
+  align-self: center !important;
+  justify-self: center !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  box-sizing: border-box !important;
+  width: 32px !important;
+  height: 44px !important;
+  min-width: 32px !important;
+  padding: 0 8px 0 0 !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  background: transparent !important;
+  box-shadow: none !important;
+}
+.chat-thread .chat-thread-pill:not(.chat-thread-pill-detail) .chat-thread-center {
+  grid-area: 1 / 2 / 2 / 3 !important;
+  position: relative !important;
+  z-index: 1 !important;
+  justify-self: stretch !important;
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  justify-content: center !important;
+  min-width: 0 !important;
+  box-sizing: border-box !important;
+  min-height: 44px !important;
+  padding: 7px 12px !important;
+  border: 0 !important;
+  background: transparent !important;
+  box-shadow: none !important;
+  color: #182533 !important;
+  text-align: center !important;
+}
+.chat-thread .chat-thread-pill:not(.chat-thread-pill-detail):has(.chat-thread-head-xinsheng) .chat-thread-center {
+  padding-right: 0 !important;
+}
+.chat-thread .chat-thread-pill:not(.chat-thread-pill-detail) .chat-thread-center h2 {
+  max-width: 100% !important;
+  min-width: 0 !important;
+  color: #182533 !important;
+  font-size: 16px !important;
+  font-weight: 600 !important;
+  line-height: 1.3 !important;
+  margin: 0 !important;
+  overflow: hidden !important;
+  white-space: nowrap !important;
+  text-overflow: ellipsis !important;
+}
+
+/* C. Puff 原生功能：笑脸=加号；回形针=回复/发送/停止；右侧蓝色麦克风=语音。
+   空输入显示原生回复键；原生发送键 ready 时在同一位置显示发送键并隐藏闲置回复键。
+   回形针仅是按钮外观，各自原生点击事件保留。转圈/停止时显示原生图形。 */
+.chat-thread .chat-compose-bar {
+  min-height: 54px !important;
+  box-sizing: border-box !important;
+  gap: 4px !important;
+  padding: 5px 5px 5px 7px !important;
+  border: var(--dress-compose-bar-border) !important;
+  border-radius: 28px !important;
+  background: #fff !important;
+  color: #182533 !important;
+  box-shadow: var(--dress-compose-bar-shadow) !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+}
+.chat-thread .chat-compose-plus-wrap { order: 1 !important; }
+.chat-thread .chat-compose-input {
+  order: 2 !important;
+  flex: 1 1 0% !important;
+  min-width: 0 !important;
+  color: #182533 !important;
+  caret-color: #3390ec !important;
+  background: transparent !important;
+  font-size: 16px !important;
+  line-height: 1.5 !important;
+}
+.chat-thread .chat-compose-input::placeholder { color: #8b949e !important; }
+.chat-thread .chat-compose-bar :is(.chat-compose-plus,.chat-compose-icon) {
+  position: relative !important;
+  flex-shrink: 0 !important;
+  width: 40px !important;
+  height: 40px !important;
+  min-width: 40px !important;
+  padding: 0 !important;
+  margin-bottom: 0 !important;
+  border-radius: 50% !important;
+}
+.chat-thread .chat-compose-plus { color: #7b8388 !important; }
+.chat-thread .chat-compose-bar > .chat-compose-icon:not(.is-voice) {
+  order: 3 !important;
+  background: transparent !important;
+  color: #7b8388 !important;
+}
+/* Puff 输入文字后会同时挂载回复键和发送键；同一位置只显示当前可用操作。 */
+.chat-thread .chat-compose-bar:has(> .chat-compose-icon.is-send.ready:not([hidden])) > .chat-compose-icon.is-reply:has(> svg > path[d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"]):not([aria-busy="true"]):not([aria-label*="停止"]):not([aria-label*="stop" i]):not(:is(.is-stop,.is-loading,.is-busy)):not(:has([style*="animation"],animate,animateTransform)) {
+  display: none !important;
+}
+.chat-thread .chat-compose-bar:has(> .chat-compose-icon.is-reply:is([aria-busy="true"],[aria-label*="停止"],[aria-label*="stop" i],.is-stop,.is-loading,.is-busy,:has([style*="chat-reply-spin"],svg circle,animateTransform))) > .chat-compose-icon.is-send {
+  display: none !important;
+}
+.chat-thread .chat-compose-bar > .chat-compose-icon.is-voice {
+  order: 4 !important;
+  width: 44px !important;
+  height: 44px !important;
+  min-width: 44px !important;
+  background: #229ed9 !important;
+  color: #fff !important;
+}
+.chat-thread .chat-compose-bar > .chat-compose-icon.is-voice[aria-pressed="true"] {
+  background: #157fb5 !important;
+  box-shadow: inset 0 0 0 2px rgba(255,255,255,.65) !important;
+}
+.chat-thread .chat-compose-plus > svg,
+.chat-thread .chat-compose-icon.is-voice > svg,
+.chat-thread .chat-compose-bar > .chat-compose-icon:is(.is-reply:has(> svg > path[d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"]),.is-send.ready:not(:has(svg circle))):not([aria-busy="true"]):not([aria-label*="停止"]):not([aria-label*="stop" i]):not(:is(.is-stop,.is-loading,.is-busy)):not(:has([style*="animation"],animate,animateTransform)) > svg { visibility: hidden !important; }
+.chat-thread .chat-compose-plus::before,
+.chat-thread .chat-compose-icon.is-voice::before,
+.chat-thread .chat-compose-bar > .chat-compose-icon:is(.is-reply:has(> svg > path[d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"]),.is-send.ready:not(:has(svg circle))):not([aria-busy="true"]):not([aria-label*="停止"]):not([aria-label*="stop" i]):not(:is(.is-stop,.is-loading,.is-busy)):not(:has([style*="animation"],animate,animateTransform))::before {
+  content: "" !important;
+  position: absolute !important;
+  inset: 7px !important;
+  background: currentColor !important;
+  -webkit-mask: var(--pp-compose-icon) center / contain no-repeat !important;
+  mask: var(--pp-compose-icon) center / contain no-repeat !important;
+  pointer-events: none !important;
+}
+.chat-thread .chat-compose-plus { --pp-compose-icon: url("data:image/svg+xml,%3Csvg%20width%3D%2215%22%20height%3D%2215%22%20viewBox%3D%220%200%2015%2015%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Cpath%20d%3D%22M14.5%207.5C14.5%2011.366%2011.366%2014.5%207.5%2014.5C3.63401%2014.5%200.5%2011.366%200.5%207.5C0.5%203.63401%203.63401%200.5%207.5%200.5C11.366%200.5%2014.5%203.63401%2014.5%207.5Z%22%20stroke-linejoin%3D%22round%22%20stroke%3D%22black%22%2F%3E%0A%3Ccircle%20cx%3D%225%22%20cy%3D%225%22%20r%3D%221%22%20fill%3D%22%23010101%22%2F%3E%0A%3Ccircle%20cx%3D%2210%22%20cy%3D%225%22%20r%3D%221%22%20fill%3D%22black%22%2F%3E%0A%3Cpath%20d%3D%22M4%209C5.70081%2011.4297%209.29919%2011.4297%2011%209%22%20stroke-linecap%3D%22round%22%20stroke%3D%22black%22%2F%3E%0A%3C%2Fsvg%3E%0A"); }
+.chat-thread .chat-compose-icon.is-voice { --pp-compose-icon: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20stroke%3D%22black%22%20stroke-width%3D%221.7%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Crect%20x%3D%228%22%20y%3D%222.5%22%20width%3D%228%22%20height%3D%2213%22%20rx%3D%224%22%2F%3E%3Cpath%20d%3D%22M5%2011a7%207%200%200%200%2014%200M12%2018v3.5M9%2021.5h6%22%2F%3E%3C%2Fsvg%3E"); }
+.chat-thread .chat-compose-bar > .chat-compose-icon:is(.is-reply:has(> svg > path[d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"]),.is-send.ready:not(:has(svg circle))):not([aria-busy="true"]):not([aria-label*="停止"]):not([aria-label*="stop" i]):not(:is(.is-stop,.is-loading,.is-busy)):not(:has([style*="animation"],animate,animateTransform)) { --pp-compose-icon: url("data:image/svg+xml,%3Csvg%20width%3D%229%22%20height%3D%2210%22%20viewBox%3D%220%200%209%2010%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Cpath%20d%3D%22M3.11892%206.39358L5.3708%204.41139C5.78536%204.04648%205.8256%203.4146%205.46069%203.00004C5.09578%202.58548%204.4639%202.54523%204.04934%202.91014L1.09375%205.51176C0.368276%206.15035%200.297841%207.25615%200.936434%207.98163C1.57503%208.70711%202.68082%208.77754%203.4063%208.13895L7.11251%204.8766C8.14891%203.96433%208.24953%202.38461%207.33726%201.34822C6.42498%200.31182%204.84527%200.211199%203.80887%201.12347L0.806372%203.76639%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%20stroke%3D%22black%22%2F%3E%0A%3C%2Fsvg%3E%0A"); }
+.chat-thread .puff-paperplane-offline {
+  border: 1px solid var(--pp-line) !important;
+  background: #fff !important;
+  color: var(--pp-blue) !important;
+}
+
+/* D. 消息。已知媒体类和脚本识别的非文本均不套普通气泡。 */
+.chat-thread .chat-msg-body { min-width: 0; }
+.chat-thread .chat-swipe-content { position: relative !important; }
+.chat-thread .chat-msg-name { color: #2f8fca !important; font-size: 12px !important; opacity: 1 !important; }
+.chat-thread :is(.chat-ava, .chat-ava-sm) { border-radius: 50% !important; }
+.chat-thread .chat-msg {
+  --pp-fill: #fff;
+  --pp-radius: 18px 18px 18px 0;
+  --pp-tail-left: -7px;
+  --pp-tail-right: auto;
+  --pp-tail-flip: none;
+  --pp-body-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='104' height='36' viewBox='0 0 104 36'%3E%3Cpath d='M86 0H18C8.05888 0 0 8.05888 0 18V36H86C95.9411 36 104 27.9411 104 18C104 8.05888 95.9411 0 86 0Z' fill='%23FFFFFF'/%3E%3C/svg%3E");
+}
+.chat-thread .chat-msg.is-me {
+  --pp-fill: #eeffdf;
+  --pp-radius: 18px 18px 0 18px;
+  --pp-tail-left: auto;
+  --pp-tail-right: -7px;
+  --pp-tail-flip: scaleX(-1);
+  --pp-body-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='104' height='36' viewBox='0 0 104 36'%3E%3Cpath d='M18 0H86C95.9411 0 104 8.05888 104 18V36H18C8.05888 36 0 27.9411 0 18C0 8.05888 8.05888 0 18 0Z' fill='%23EEFFDF'/%3E%3C/svg%3E");
+}
+/* 此排除列表匹配媒体类别；脚本也会标记未知 mediaType。 */
+.chat-thread .chat-msg:not(:is(.has-voice,.has-sticker,.has-image,.has-transfer,.has-red-envelope,.has-gift,.has-diary-share,.has-forum-share,.has-listen-together,.has-location,.has-takeout,.has-shop-order,.has-offline-invite)):not(:has(.puff-paperplane-anchor[data-pp-kind="special"],.chat-recall-wrap,.puff-call-end-msg,.puff-call-end-card,.chat-offline-ticket)) {
+  --pp-ordinary: 1;
+  align-items: flex-end !important;
+}
+/* 群聊也固定以气泡底边为基准；名字只是气泡内部的首行，不参与头像的垂直错位。 */
+.chat-thread .chat-msg:has(.puff-paperplane-anchor[data-pp-chat="group"]):has(.puff-paperplane-anchor[data-pp-kind="text"]) {
+  align-items: flex-end !important;
+}
+.chat-thread .chat-msg:has(.puff-paperplane-anchor[data-pp-chat="group"]):has(.puff-paperplane-anchor[data-pp-kind="text"]) > .chat-msg-body {
+  align-self: flex-end !important;
+  margin-bottom: 0 !important;
+}
+/* Puff 默认给对方头像加 16px 顶部偏移；群聊普通消息必须覆盖它，
+   让头像最低点与气泡底边落在同一水平线上。 */
+.chat-thread .chat-msg:has(.puff-paperplane-anchor[data-pp-chat="group"]):has(.puff-paperplane-anchor[data-pp-kind="text"]) > :is(.chat-ava, .chat-avatar-mention-host) {
+  align-self: flex-end !important;
+  margin-top: 0 !important;
+  margin-bottom: 0 !important;
+}
+/* 头像随普通气泡底部对齐；清除 Puff 对双方头像的 2px / 16px 顶部偏移。 */
+.chat-thread .chat-msg:not(:is(.has-voice,.has-sticker,.has-image,.has-transfer,.has-red-envelope,.has-gift,.has-diary-share,.has-forum-share,.has-listen-together,.has-location,.has-takeout,.has-shop-order,.has-offline-invite)):not(:has(.puff-paperplane-anchor[data-pp-kind="special"],.chat-recall-wrap,.puff-call-end-msg,.puff-call-end-card,.chat-offline-ticket)) > .chat-ava {
+  align-self: flex-end !important;
+  margin-top: 0 !important;
+  margin-bottom: 0 !important;
+}
+/* 以下只匹配普通文本。素材层独立于文字盒模型。 */
+.chat-thread .chat-msg:not(:is(.has-voice,.has-sticker,.has-image,.has-transfer,.has-red-envelope,.has-gift,.has-diary-share,.has-forum-share,.has-listen-together,.has-location,.has-takeout,.has-shop-order,.has-offline-invite)):not(:has(.puff-paperplane-anchor[data-pp-kind="special"],.chat-recall-wrap,.puff-call-end-msg,.puff-call-end-card,.chat-offline-ticket)) .chat-msg-body {
+   /* Puff 的 chat-swipe-host 原生 overflow-x:hidden 会截断气泡尖角。 */
+  overflow: visible !important;
+   /* Telegram Web 官方：非手机端为 85%；手机端在下方媒体查询中扣除 89px。 */
+   max-width: min(85%, 440px) !important;
+  width: fit-content !important;
+}
+/* Telegram Web 官方手机端规则（max-width: 600px）：
+   --message-handhelds-margin: 5.5625rem = 89px。
+   Puff 的 chat-msg-body 对应官方 bubble 的可用消息轨道。 */
+@media only screen and (max-width: 600px) {
+  .chat-thread .chat-msg:not(:is(.has-voice,.has-sticker,.has-image,.has-transfer,.has-red-envelope,.has-gift,.has-diary-share,.has-forum-share,.has-listen-together,.has-location,.has-takeout,.has-shop-order,.has-offline-invite)):not(:has(.puff-paperplane-anchor[data-pp-kind="special"],.chat-recall-wrap,.puff-call-end-msg,.puff-call-end-card,.chat-offline-ticket)) .chat-msg-body {
+    max-width: calc(100% - 89px) !important;
+  }
+}
+.chat-thread .chat-msg:not(:is(.has-voice,.has-sticker,.has-image,.has-transfer,.has-red-envelope,.has-gift,.has-diary-share,.has-forum-share,.has-listen-together,.has-location,.has-takeout,.has-shop-order,.has-offline-invite)):not(:has(.puff-paperplane-anchor[data-pp-kind="special"],.chat-recall-wrap,.puff-call-end-msg,.puff-call-end-card,.chat-offline-ticket)) .chat-bubble:not(.chat-bubble-sticker):not(.chat-bubble-trans-chip) {
+  position: relative !important;
+  isolation: isolate !important;
+  box-sizing: border-box !important;
+  min-height: 36px !important;
+  min-width: 36px !important;
+  max-width: 100% !important;
+  padding: 6px 12px !important;
+  border: 0 !important;
+  border-image: none !important;
+  border-radius: var(--pp-radius) !important;
+  background: transparent !important;
+  box-shadow: none !important;
+  color: #182533 !important;
+  font-size: 16px !important;
+  line-height: 1.45 !important;
+  white-space: pre-wrap !important;
+   /* Telegram Web 官方正文规则：正常文字按词/字符断行，只有超长连续串才强制断开。 */
+   overflow-wrap: break-word !important;
+   word-break: break-word !important;
+  overflow: visible !important;
+}
+.chat-thread .chat-msg:not(:is(.has-voice,.has-sticker,.has-image,.has-transfer,.has-red-envelope,.has-gift,.has-diary-share,.has-forum-share,.has-listen-together,.has-location,.has-takeout,.has-shop-order,.has-offline-invite)):not(:has(.puff-paperplane-anchor[data-pp-kind="special"],.chat-recall-wrap,.puff-call-end-msg,.puff-call-end-card,.chat-offline-ticket)) .chat-bubble:not(.chat-bubble-sticker):not(.chat-bubble-trans-chip)::before {
+  content: "" !important;
+  position: absolute !important;
+  inset: 0 !important;
+  z-index: 0 !important;
+  box-sizing: border-box !important;
+  border: solid transparent !important;
+  border-width: 16px 18px 17px !important;
+  border-image-source: var(--pp-body-image) !important;
+  border-image-slice: 16 18 17 18 fill !important;
+  border-image-width: 16px 18px 17px 18px !important;
+  border-image-repeat: stretch !important;
+  pointer-events: none !important;
+}
+.chat-thread .chat-msg:not(:is(.has-voice,.has-sticker,.has-image,.has-transfer,.has-red-envelope,.has-gift,.has-diary-share,.has-forum-share,.has-listen-together,.has-location,.has-takeout,.has-shop-order,.has-offline-invite)):not(:has(.puff-paperplane-anchor[data-pp-kind="special"],.chat-recall-wrap,.puff-call-end-msg,.puff-call-end-card,.chat-offline-ticket)) .chat-bubble:not(.chat-bubble-sticker):not(.chat-bubble-trans-chip)::after {
+  content: "" !important;
+  position: absolute !important;
+  z-index: 0 !important;
+  left: var(--pp-tail-left) !important;
+  right: var(--pp-tail-right) !important;
+  /* 与单聊相同：尾巴贴合气泡底部，不按群聊另设偏移。 */
+  bottom: 0 !important;
+  top: auto !important;
+  width: 8px !important;
+  height: 11px !important;
+  border: 0 !important;
+  background: var(--pp-fill) !important;
+  transform: var(--pp-tail-flip) !important;
+  -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 8 11'%3E%3Crect x='7' width='1' height='11'/%3E%3Cpath d='M0 11H7V0.5L6 4.5L5.73502 5.09619C4.62512 7.59348 2.55883 9.54044 0 10.5V11Z'/%3E%3C/svg%3E") center/contain no-repeat !important;
+  mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 8 11'%3E%3Crect x='7' width='1' height='11'/%3E%3Cpath d='M0 11H7V0.5L6 4.5L5.73502 5.09619C4.62512 7.59348 2.55883 9.54044 0 10.5V11Z'/%3E%3C/svg%3E") center/contain no-repeat !important;
+  pointer-events: none !important;
+}
+.chat-thread .chat-msg:not(:is(.has-voice,.has-sticker,.has-image,.has-transfer,.has-red-envelope,.has-gift,.has-diary-share,.has-forum-share,.has-listen-together,.has-location,.has-takeout,.has-shop-order,.has-offline-invite)):not(:has(.puff-paperplane-anchor[data-pp-kind="special"],.chat-recall-wrap,.puff-call-end-msg,.puff-call-end-card,.chat-offline-ticket)) .chat-bubble > * {
+  position: relative !important;
+  z-index: 1 !important;
+}
+
+/* E. 分组只读取插槽内自有标记。未知成员/时间保持 single。 */
+.chat-thread .chat-msg.is-them:has(.puff-paperplane-anchor[data-pp-group="first"]) {
+  --pp-body-image: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22104%22%20height%3D%2236%22%20viewBox%3D%220%200%20104%2036%22%3E%3Cpath%20d%3D%22M86%200H18C8.05888%200%200%208.05888%200%2018V30C0%2033.3137%202.6863%2036%206%2036H86C95.9411%2036%20104%2027.9411%20104%2018C104%208.05888%2095.9411%200%2086%200Z%22%20fill%3D%22%23FFFFFF%22%2F%3E%3C%2Fsvg%3E");
+}
+.chat-thread .chat-msg.is-them:has(.puff-paperplane-anchor[data-pp-group="middle"]) {
+  --pp-body-image: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22104%22%20height%3D%2236%22%20viewBox%3D%220%200%20104%2036%22%3E%3Cpath%20d%3D%22M86%200H6C2.6863%200%200%202.6863%200%206V30C0%2033.3137%202.6863%2036%206%2036H86C95.9411%2036%20104%2027.9411%20104%2018C104%208.05888%2095.9411%200%2086%200Z%22%20fill%3D%22%23FFFFFF%22%2F%3E%3C%2Fsvg%3E");
+}
+.chat-thread .chat-msg.is-them:has(.puff-paperplane-anchor[data-pp-group="last"]) {
+  --pp-body-image: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22104%22%20height%3D%2236%22%20viewBox%3D%220%200%20104%2036%22%3E%3Cpath%20d%3D%22M86%200H6C2.6863%200%200%202.6863%200%206V36H86C95.9411%2036%20104%2027.9411%20104%2018C104%208.05888%2095.9411%200%2086%200Z%22%20fill%3D%22%23FFFFFF%22%2F%3E%3C%2Fsvg%3E");
+}
+.chat-thread .chat-msg.is-me:has(.puff-paperplane-anchor[data-pp-group="first"]) {
+  --pp-body-image: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22104%22%20height%3D%2236%22%20viewBox%3D%220%200%20104%2036%22%3E%3Cpath%20d%3D%22M18%200H86C95.9411%200%20104%208.05888%20104%2018V30C104%2033.3137%20101.3137%2036%2098%2036H18C8.05888%2036%200%2027.9411%200%2018C0%208.05888%208.05888%200%2018%200Z%22%20fill%3D%22%23EEFFDF%22%2F%3E%3C%2Fsvg%3E");
+}
+.chat-thread .chat-msg.is-me:has(.puff-paperplane-anchor[data-pp-group="middle"]) {
+  --pp-body-image: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22104%22%20height%3D%2236%22%20viewBox%3D%220%200%20104%2036%22%3E%3Cpath%20d%3D%22M18%200H98C101.3137%200%20104%202.6863%20104%206V30C104%2033.3137%20101.3137%2036%2098%2036H18C8.05888%2036%200%2027.9411%200%2018C0%208.05888%208.05888%200%2018%200Z%22%20fill%3D%22%23EEFFDF%22%2F%3E%3C%2Fsvg%3E");
+}
+.chat-thread .chat-msg.is-me:has(.puff-paperplane-anchor[data-pp-group="last"]) {
+  --pp-body-image: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22104%22%20height%3D%2236%22%20viewBox%3D%220%200%20104%2036%22%3E%3Cpath%20d%3D%22M18%200H98C101.3137%200%20104%202.6863%20104%206V36H18C8.05888%2036%200%2027.9411%200%2018C0%208.05888%208.05888%200%2018%200Z%22%20fill%3D%22%23EEFFDF%22%2F%3E%3C%2Fsvg%3E");
+}
+.chat-thread .chat-msg:not(:is(.has-voice,.has-sticker,.has-image,.has-transfer,.has-red-envelope,.has-gift,.has-diary-share,.has-forum-share,.has-listen-together,.has-location,.has-takeout,.has-shop-order,.has-offline-invite)):not(:has(.puff-paperplane-anchor[data-pp-kind="special"],.chat-recall-wrap,.puff-call-end-msg,.puff-call-end-card,.chat-offline-ticket)):has(.puff-paperplane-anchor:is([data-pp-group="first"],[data-pp-group="middle"])) .chat-bubble:not(.chat-bubble-sticker):not(.chat-bubble-trans-chip)::after {
+  content: none !important;
+}
+.chat-thread .chat-msg:has(.puff-paperplane-anchor[data-pp-kind="text"]) {
+  margin-top: 0 !important;
+  margin-bottom: 6px !important;
+}
+.chat-thread .chat-msg:has(.puff-paperplane-anchor:is([data-pp-group="first"],[data-pp-group="middle"])) {
+  margin-bottom: 3px !important;
+}
+/* 私聊不显示发言名，群聊继续使用原生姓名和连续消息去重规则。 */
+.chat-thread .chat-msg:has(.puff-paperplane-anchor[data-pp-chat="direct"]) .chat-msg-name {
+  display: none !important;
+}
+/* Puff 每一行都保留头像母位；连续消息只隐藏首段与中段的重复头像。 */
+.chat-thread .chat-msg:has(.puff-paperplane-anchor[data-pp-group]) > :is(.chat-ava, .chat-avatar-mention-host) {
+  position: relative !important;
+  z-index: 4 !important;
+  flex-shrink: 0 !important;
+}
+.chat-thread .chat-msg:has(.puff-paperplane-anchor:is([data-pp-group="first"],[data-pp-group="middle"])) > :is(.chat-ava, .chat-avatar-mention-host) {
+  visibility: hidden !important;
+  height: 0 !important;
+  min-height: 0 !important;
+  max-height: 0 !important;
+  margin-top: 0 !important;
+  margin-bottom: 0 !important;
+}
+.chat-thread .chat-msg:has(.puff-paperplane-anchor[data-pp-group="middle"]) .chat-msg-name-row,
+.chat-thread .chat-msg:has(.puff-paperplane-anchor[data-pp-group="last"]) .chat-msg-name-row {
+  display: none !important;
+}
+/* 群聊首条/单条名字放入气泡内部；双方都保留，连续消息只隐藏重复名字。 */
+.chat-thread .chat-msg:has(.puff-paperplane-anchor[data-pp-name="1"]) > .chat-msg-body .chat-swipe-content > :is(.chat-msg-name, .chat-msg-name-row) {
+  position: absolute !important;
+  top: 6px !important;
+  left: 12px !important;
+  grid-area: 2 / 1 !important;
+  align-self: start !important;
+  justify-self: start !important;
+  z-index: 3 !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  pointer-events: none !important;
+}
+.chat-thread .chat-msg:has(.puff-paperplane-anchor[data-pp-name="1"]) > .chat-msg-body .chat-swipe-content > .chat-bubble {
+  grid-area: 2 / 1 / 3 / 2 !important;
+  padding: 27px 12px 6px !important;
+}
+.chat-thread .chat-msg:has(.puff-paperplane-anchor[data-pp-name="1"]) .chat-msg-name {
+  display: block !important;
+}
+.chat-thread .chat-msg:has(.puff-paperplane-anchor[data-pp-name="1"]) .chat-msg-name-row {
+  display: flex !important;
+}
+.chat-thread .chat-msg.is-me:has(.puff-paperplane-anchor[data-pp-name="1"]) :is(.chat-msg-name, .chat-msg-name-row) {
+  color: #24784b !important;
+}
+/* 真实群聊 DOM 的兜底：名字行由群聊分组直接决定，不依赖 data-pp-name 的刷新时机。 */
+.chat-thread .chat-msg:has(.puff-paperplane-anchor[data-pp-chat="group"]):has(.puff-paperplane-anchor[data-pp-kind="text"]):has(.puff-paperplane-anchor:is([data-pp-group="single"],[data-pp-group="first"])) > .chat-msg-body .chat-swipe-content > .chat-msg-name-row {
+  display: flex !important;
+  position: absolute !important;
+  top: 6px !important;
+  left: 12px !important;
+  z-index: 3 !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  pointer-events: none !important;
+}
+.chat-thread .chat-msg:has(.puff-paperplane-anchor[data-pp-chat="group"]):has(.puff-paperplane-anchor[data-pp-kind="text"]):has(.puff-paperplane-anchor:is([data-pp-group="single"],[data-pp-group="first"])) > .chat-msg-body .chat-swipe-content > .chat-msg-name-row .chat-msg-name {
+  display: block !important;
+}
+.chat-thread .chat-msg:has(.puff-paperplane-anchor[data-pp-chat="group"]):has(.puff-paperplane-anchor[data-pp-kind="text"]):has(.puff-paperplane-anchor:is([data-pp-group="single"],[data-pp-group="first"])) > .chat-msg-body .chat-swipe-content > .chat-bubble {
+  padding: 27px 12px 6px !important;
+}
+/* Telegram 官方映射：正文气泡使用 fit-content；时间/勾号占用末行留位。
+   放不下时正文先换行，元数据跟随最后一行，不单独制造底部时间行。 */
+.chat-thread .chat-swipe-content:has(.puff-paperplane-anchor[data-pp-kind="text"]):has(> .chat-bubble > .chat-bubble-primary) {
+  display: grid !important;
+  grid-template-columns: minmax(0, max-content) !important;
+  gap: 0 !important;
+  align-items: start !important;
+  width: fit-content !important;
+  max-width: 100% !important;
+}
+.chat-thread .chat-swipe-content:has(.puff-paperplane-anchor[data-pp-kind="text"]):has(> .chat-bubble > .chat-bubble-primary) > .chat-msg-name {
+  grid-area: 1 / 1 !important;
+  margin-bottom: 4px !important;
+}
+.chat-thread .chat-swipe-content:has(.puff-paperplane-anchor[data-pp-kind="text"]):has(> .chat-bubble > .chat-bubble-primary) > .chat-bubble {
+  grid-area: 2 / 1 / 3 / 2 !important;
+  width: fit-content !important;
+  min-width: 0 !important;
+  max-width: 100% !important;
+}
+.chat-thread .chat-swipe-content:has(.puff-paperplane-anchor[data-pp-kind="text"]):has(> .chat-bubble > .chat-bubble-primary) > .chat-msg-time {
+  grid-area: 3 / 1 !important;
+  margin-top: 4px !important;
+}
+.chat-thread .chat-swipe-content:has(.puff-paperplane-anchor[data-pp-kind="text"]):has(> .chat-bubble > .chat-bubble-primary) > :has(.puff-paperplane-anchor) {
+  display: contents !important;
+}
+.chat-thread .chat-swipe-content:has(.puff-paperplane-anchor[data-pp-kind="text"]):has(> .chat-bubble > .chat-bubble-primary) .puff-paperplane-anchor {
+  position: absolute !important;
+  grid-area: 2 / 1 / 3 / 2 !important;
+  right: 12px !important;
+  bottom: 6px !important;
+  z-index: 5 !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  height: 11px !important;
+  width: max-content !important;
+  pointer-events: none !important;
+}
+.chat-thread .chat-swipe-content:has(.puff-paperplane-anchor[data-pp-kind="text"]):has(> .chat-bubble > .chat-bubble-primary) {
+  --pp-meta-width: 0px;
+}
+.chat-thread .chat-swipe-content:has(.puff-paperplane-anchor[data-pp-kind="text"]):has(> .chat-bubble > .chat-bubble-primary):has(.puff-paperplane-anchor[data-pp-time="1"]) {
+  --pp-meta-width: 28px;
+}
+.chat-thread .chat-swipe-content:has(.puff-paperplane-anchor[data-pp-kind="text"]):has(> .chat-bubble > .chat-bubble-primary):has(.puff-paperplane-anchor:is([data-pp-status="single"],[data-pp-status="double"])) {
+  --pp-meta-width: 19px;
+}
+.chat-thread .chat-swipe-content:has(.puff-paperplane-anchor[data-pp-kind="text"]):has(> .chat-bubble > .chat-bubble-primary):has(.puff-paperplane-anchor[data-pp-time="1"]:is([data-pp-status="single"],[data-pp-status="double"])) {
+  --pp-meta-width: 52px;
+}
+.chat-thread .chat-swipe-content:has(.puff-paperplane-anchor[data-pp-kind="text"]):has(> .chat-bubble > .chat-bubble-primary) .chat-bubble-primary,
+.chat-thread .chat-swipe-content:has(.puff-paperplane-anchor[data-pp-kind="text"]):has(> .chat-bubble > .chat-bubble-primary) .chat-bubble-trans-inline {
+  margin: 0 !important;
+  white-space: pre-wrap !important;
+}
+.chat-thread .chat-swipe-content:has(.puff-paperplane-anchor[data-pp-kind="text"]):has(> .chat-bubble > .chat-bubble-primary):has(.puff-paperplane-anchor:is([data-pp-time="1"],[data-pp-status="single"],[data-pp-status="double"])) .chat-bubble-primary:not(:has(~ .chat-bubble-trans-inline))::after,
+.chat-thread .chat-swipe-content:has(.puff-paperplane-anchor[data-pp-kind="text"]):has(> .chat-bubble > .chat-bubble-primary):has(.puff-paperplane-anchor:is([data-pp-time="1"],[data-pp-status="single"],[data-pp-status="double"])) .chat-bubble-trans-inline::after {
+  /* 留位允许自行换行；绝不绑定最后一个字，也不为了时间改正文换行。 */
+  content: "" !important;
+  display: inline-block !important;
+  width: var(--pp-meta-width) !important;
+  height: 11px !important;
+  margin: 0 0 0 6px !important;
+  padding: 0 !important;
+  vertical-align: baseline !important;
+  pointer-events: none !important;
+}
+/* 元数据放不进正文末行时：正文作为第一行，气泡按正文宽度收缩，
+   时间/勾号固定到右下角，不再把气泡撑到消息区最大宽度。 */
+.chat-thread .chat-swipe-content:has(.puff-paperplane-anchor[data-pp-meta-mode="block"]):has(> .chat-bubble > .chat-bubble-primary) .chat-bubble-primary:not(:has(~ .chat-bubble-trans-inline))::after,
+.chat-thread .chat-swipe-content:has(.puff-paperplane-anchor[data-pp-meta-mode="block"]):has(> .chat-bubble > .chat-bubble-primary) .chat-bubble-trans-inline::after {
+  display: block !important;
+  width: 0 !important;
+  height: 11px !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+.chat-thread .chat-swipe-content:has(.puff-paperplane-anchor[data-pp-meta-mode="block"]):has(> .chat-bubble > .chat-bubble-primary) > .chat-bubble {
+  width: var(--pp-block-width, max-content) !important;
+  max-width: 100% !important;
+}
+.chat-thread .chat-swipe-content:has(.puff-paperplane-anchor[data-pp-meta-mode="block"]):has(> .chat-bubble > .chat-bubble-primary) > .chat-bubble .chat-bubble-primary {
+  width: max-content !important;
+  max-width: 100% !important;
+}
+.chat-thread .puff-paperplane-meta {
+  display: flex !important;
+  align-items: flex-end !important;
+  justify-content: flex-end !important;
+  gap: 3px !important;
+  width: max-content !important;
+  height: 11px !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  color: #8b98a5 !important;
+  font-size: 11px !important;
+  line-height: 1 !important;
+  font-variant-numeric: tabular-nums !important;
+  white-space: nowrap !important;
+}
+.chat-thread .puff-paperplane-time {
+  display: inline-block !important;
+  width: auto !important;
+  height: auto !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  color: #8b98a5 !important;
+  font-size: 11px !important;
+  font-weight: 400 !important;
+  letter-spacing: 0 !important;
+  line-height: 1 !important;
+}
+.chat-thread .chat-msg.is-me .puff-paperplane-time { color: #70ad5d !important; }
+.chat-thread .puff-paperplane-checks {
+  display: inline-flex !important;
+  width: 19px !important;
+  height: 14px !important;
+  color: #2fa102 !important;
+  line-height: 1 !important;
+  transform: translateY(1px) !important;
+}
+.chat-thread .puff-paperplane-checks svg { width: 19px !important; height: 14px !important; }
+.chat-thread .puff-paperplane-anchor[data-pp-status="single"] .puff-paperplane-checks,
+.chat-thread .puff-paperplane-anchor[data-pp-status="single"] .puff-paperplane-checks svg {
+  width: 13px !important;
+  height: 11px !important;
+}
+.chat-thread .puff-paperplane-anchor[data-pp-status="double"] .puff-paperplane-checks,
+.chat-thread .puff-paperplane-anchor[data-pp-status="double"] .puff-paperplane-checks svg {
+  height: 11px !important;
+}
+.chat-thread .puff-paperplane-anchor [hidden] { display: none !important; }
+.chat-thread .chat-msg:has(.puff-paperplane-anchor[data-pp-time="1"]) .chat-msg-time {
+  display: none !important;
+}
+
+/* F. 引用、双语、撤回、推演、通知。保留原生点击与内容。 */
+.chat-thread .chat-qq-quote {
+  box-sizing: border-box !important;
+  max-width: 100% !important;
+  padding: 6px 10px !important;
+  border: 0 !important;
+  border-left: 3px solid #3b94d1 !important;
+  border-radius: 4px !important;
+  background: #e7f3fc !important;
+  color: #182533 !important;
+  font-size: 14px !important;
+  line-height: 1.35 !important;
+}
+.chat-thread .chat-qq-quote-name { color: #246fa5 !important; font-weight: 600 !important; }
+.chat-thread .chat-qq-quote-text { color: #426278 !important; overflow-wrap: anywhere !important; }
+.chat-thread .chat-bubble-trans-inline { color: #426278 !important; line-height: 1.5 !important; }
+.chat-thread .chat-bubble-trans-chip {
+  background: #eaf4fd !important; color: #246fa5 !important;
+  border: 1px solid #dbe8ef !important; border-radius: 8px !important;
+}
+.chat-thread :is(.chat-bubble-trans-chip-label,.chat-recall-view) { color: #246fa5 !important; }
+.chat-thread :is(.chat-thread-notice,.chat-recall-row,.chat-thinking-chip) {
+  background: rgba(239,247,251,.92) !important;
+  color: #607888 !important;
+  border-radius: 12px !important;
+}
+.chat-thread :is(.chat-thread-notice-hint,.chat-recall-text) { color: #607888 !important; }
+
+/* G. 语音及其文字。按钮、波形动画及媒体比例由 Puff 管理。 */
+.chat-thread .puff-voice-pill {
+  box-sizing: border-box !important;
+  max-width: 100% !important;
+  min-height: 44px !important;
+  border: 1px solid #dbe8ef !important;
+  border-radius: 12px !important;
+  background: #eaf4fd !important;
+  color: #246fa5 !important;
+  box-shadow: 0 2px 6px rgba(30,72,98,.07) !important;
+}
+.chat-thread .chat-msg.is-me .puff-voice-pill { background: #eaf6ef !important; border-color: #d5e9dc !important; }
+.chat-thread .puff-voice-glyph { color: #2176b5 !important; }
+.chat-thread .puff-voice-wave { background-color: #246fa5 !important; }
+.chat-thread .puff-voice-dur { color: #182f40 !important; }
+.chat-thread .puff-voice-note {
+  padding: 10px 12px !important;
+  border: 1px solid #dbe8ef !important;
+  border-radius: 12px !important;
+  background: #f3f9fd !important;
+  color: #182f40 !important;
+  font-size: 14px !important;
+  line-height: 1.5 !important;
+  text-align: left !important;
+  overflow-wrap: anywhere !important;
+}
+.chat-thread .chat-msg.is-me .puff-voice-note { background: #f2faf5 !important; border-color: #d5e9dc !important; }
+.chat-thread .puff-voice-note-body {
+  width: 100% !important;
+  color: inherit !important;
+  text-align: left !important;
+}
+.chat-thread .puff-voice-note-tr {
+  color: #426278 !important;
+  border-color: #dbe8ef !important;
+  text-align: left !important;
+}
+.chat-thread .puff-photo { max-width: 100% !important; border-radius: 12px !important; }
+.chat-thread .chat-bubble-sticker { background: transparent !important; border: 0 !important; box-shadow: none !important; }
+
+/* H. 已公布的卡片外观。没有状态字段定义，不伪造“已收款”等状态。 */
+.chat-thread :is(.puff-transfer,.puff-gift,.puff-diary-share,.puff-forum-share,.puff-call-end-card,.chat-offline-ticket) {
+  box-sizing: border-box !important;
+  max-width: 100% !important;
+  border: 1px solid #dbe8ef !important;
+  border-radius: 12px !important;
+  background: #fff !important;
+  color: #182f40 !important;
+  box-shadow: 0 2px 6px rgba(30,72,98,.07) !important;
+}
+.chat-thread .puff-transfer { background: #eaf4fd !important; color: #246fa5 !important; }
+.chat-thread .chat-msg.has-transfer .chat-msg-body { width: 208px !important; max-width: 208px !important; }
+.chat-thread .chat-msg.has-location .chat-msg-body,
+.chat-thread .chat-msg.has-takeout .chat-msg-body { width: 220px !important; max-width: 220px !important; }
+.chat-thread .chat-msg.has-offline-invite .chat-msg-body { width: 216px !important; max-width: 216px !important; }
+.chat-thread .chat-msg.has-voice .chat-msg-body { max-width: min(280px, 82vw) !important; }
+.chat-thread .chat-msg.is-me .puff-transfer,
+.chat-thread .chat-msg.is-me .puff-oi-invite { background: rgba(255,255,255,.96) !important; }
+.chat-thread .puff-transfer {
+  width: 208px !important;
+  height: 108px !important;
+  flex-shrink: 0 !important;
+  padding: 12px 14px !important;
+  border-radius: 16px !important;
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: space-between !important;
+  text-align: left !important;
+}
+.chat-thread .puff-transfer-top { display: flex !important; align-items: center !important; justify-content: space-between !important; gap: 8px !important; }
+.chat-thread .puff-transfer-k { color: #607888 !important; font-size: 11px !important; font-weight: 600 !important; letter-spacing: .04em !important; }
+.chat-thread .puff-transfer-badge { font-size: 9px !important; line-height: 1 !important; padding: 3px 7px !important; border-radius: 999px !important; }
+.chat-thread .puff-transfer-badge.is-done { background: rgba(45,106,74,.12) !important; color: #2d6a4a !important; }
+.chat-thread .puff-transfer-amt { display: flex !important; align-items: baseline !important; gap: 2px !important; padding: 2px 0 !important; }
+.chat-thread .puff-transfer-currency { color: #718a9c !important; font-size: 13px !important; }
+.chat-thread .puff-transfer-val { color: #182533 !important; font-size: 24px !important; font-weight: 700 !important; line-height: 1 !important; }
+.chat-thread .puff-transfer-memo { margin: 0 !important; padding-top: 8px !important; border-top: 1px solid rgba(113,128,143,.14) !important; color: #718a9c !important; font-size: 11px !important; line-height: 1.35 !important; }
+.chat-thread .puff-place-card {
+  width: 220px !important;
+  flex-shrink: 0 !important;
+  overflow: hidden !important;
+  border-radius: 14px !important;
+  border: 1px solid #dbe8ef !important;
+  background: #fff !important;
+  color: #182533 !important;
+  box-shadow: 0 2px 12px rgba(30,72,98,.08) !important;
+  text-align: left !important;
+}
+.chat-thread .puff-location-card { --map-base: #c8e8d6; --map-wash: 45,150,100; --map-pin: #187a48; }
+.chat-thread .puff-location-card.is-tone-sand { --map-base: #f0dcc0; --map-wash: 190,135,55; --map-pin: #9a6420; }
+.chat-thread .puff-place-map { height: 84px !important; position: relative !important; overflow: hidden !important; background: radial-gradient(circle at 32% 40%,rgba(var(--map-wash),.42),transparent 48%),radial-gradient(circle at 74% 62%,rgba(var(--map-wash),.26),transparent 52%),linear-gradient(160deg,#fff,var(--map-base)) !important; }
+.chat-thread .puff-place-map-grid,.chat-thread .puff-place-map-roads { position: absolute !important; inset: 0 !important; pointer-events: none !important; }
+.chat-thread .puff-place-map-grid { opacity: .35 !important; background-image: linear-gradient(rgba(255,255,255,.35) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.35) 1px,transparent 1px) !important; background-size: 18px 18px !important; }
+.chat-thread .puff-place-map-roads { opacity: .45 !important; background: linear-gradient(105deg,transparent 42%,rgba(255,255,255,.55) 42.5%,rgba(255,255,255,.55) 44%,transparent 44.5%),linear-gradient(18deg,transparent 58%,rgba(255,255,255,.4) 58.5%,rgba(255,255,255,.4) 60%,transparent 60.5%) !important; }
+.chat-thread .puff-place-pin-glow { position: absolute !important; left: 50% !important; top: 46% !important; width: 28px !important; height: 28px !important; margin: -14px 0 0 -14px !important; border-radius: 50% !important; background: rgba(var(--map-wash),.4) !important; }
+.chat-thread .puff-place-pin { position: absolute !important; left: 50% !important; top: 46% !important; width: 15px !important; height: 15px !important; margin: -20px 0 0 -7.5px !important; border-radius: 50% 50% 50% 0 !important; transform: rotate(-45deg) !important; background: var(--map-pin) !important; z-index: 1 !important; }
+.chat-thread .puff-place-pin:after { content: "" !important; position: absolute !important; inset: 4px !important; border-radius: 50% !important; background: #fff !important; }
+.chat-thread .puff-place-dist-badge { position: absolute !important; right: 8px !important; top: 8px !important; padding: 3px 7px !important; border-radius: 999px !important; color: #fff !important; background: rgba(0,0,0,.42) !important; font-size: 10px !important; }
+.chat-thread .puff-place-body { display: flex !important; flex-direction: column !important; gap: 2px !important; padding: 10px 12px 12px !important; }
+.chat-thread .puff-place-k { color: var(--map-pin) !important; font-size: 10px !important; font-weight: 600 !important; letter-spacing: .08em !important; }
+.chat-thread .puff-place-title { color: #182533 !important; font-size: 14px !important; line-height: 1.35 !important; }
+.chat-thread .puff-place-sub { margin: 0 !important; color: #607888 !important; font-size: 12px !important; line-height: 1.4 !important; white-space: pre-wrap !important; }
+.chat-thread .puff-place-map-open { display: block !important; width: 100% !important; padding: 9px 12px !important; border: 0 !important; border-top: 1px solid #dbe8ef !important; background: transparent !important; color: #607888 !important; font-size: 12px !important; text-align: center !important; }
+.chat-thread .puff-takeout-receipt { width: 220px !important; flex-shrink: 0 !important; position: relative !important; filter: drop-shadow(0 2px 10px rgba(0,0,0,.08)) !important; --receipt-paper:#f6f6f6; --receipt-ink:#182533; --receipt-mute:#718a9c; --receipt-rule:rgba(0,0,0,.14); }
+.chat-thread .puff-takeout-receipt:before,.chat-thread .puff-takeout-receipt:after { content: "" !important; display: block !important; height: 9px !important; background: radial-gradient(circle at 4.5px 0,transparent 4.2px,var(--receipt-paper) 4.4px) 0 0/9px 9px repeat-x !important; }
+.chat-thread .puff-takeout-receipt:after { background-position: 0 100% !important; }
+.chat-thread .puff-takeout-receipt-inner { position: relative !important; padding: 12px 14px 10px !important; background: var(--receipt-paper) !important; color: var(--receipt-ink) !important; text-align: left !important; }
+.chat-thread .puff-takeout-receipt-head { display: flex !important; flex-direction: column !important; align-items: center !important; gap: 4px !important; text-align: center !important; }
+.chat-thread .puff-takeout-receipt-shop { color: var(--receipt-ink) !important; font-size: 15px !important; }
+.chat-thread .puff-takeout-receipt-k { color: var(--receipt-mute) !important; font-size: 10px !important; letter-spacing: .16em !important; }
+.chat-thread .puff-takeout-receipt-rule { margin: 11px 0 10px !important; border-top: 1px dashed var(--receipt-rule) !important; }
+.chat-thread .puff-takeout-receipt-items { display: flex !important; flex-direction: column !important; gap: 7px !important; margin: 0 !important; padding: 0 !important; list-style: none !important; }
+.chat-thread .puff-takeout-receipt-items li { display: flex !important; align-items: flex-start !important; gap: 7px !important; color: var(--receipt-ink) !important; font-size: 12px !important; line-height: 1.4 !important; }
+.chat-thread .puff-takeout-receipt-dot { width: 4px !important; height: 4px !important; margin-top: 6px !important; flex-shrink: 0 !important; border-radius: 50% !important; background: var(--receipt-mute) !important; }
+.chat-thread .puff-takeout-receipt-note { margin: 9px 0 0 !important; color: var(--receipt-mute) !important; font-size: 11px !important; line-height: 1.4 !important; }
+.chat-thread .puff-takeout-receipt-total { display: flex !important; align-items: baseline !important; justify-content: space-between !important; margin: 0 !important; color: var(--receipt-mute) !important; font-size: 12px !important; }
+.chat-thread .puff-takeout-receipt-total strong { color: var(--receipt-ink) !important; font-size: 17px !important; }
+.chat-thread .puff-takeout-receipt-foot { margin: 10px 0 0 !important; color: var(--receipt-mute) !important; font-size: 10px !important; text-align: center !important; letter-spacing: .18em !important; }
+.chat-thread .puff-oi-invite { width: 216px !important; flex-shrink: 0 !important; box-sizing: border-box !important; position: relative !important; padding: 14px 14px 12px !important; overflow: hidden !important; border-radius: 16px !important; border: 1px solid rgba(0,0,0,.07) !important; background: #fff !important; color: #182533 !important; box-shadow: 0 4px 18px rgba(0,0,0,.06) !important; text-align: center !important; }
+.chat-thread .puff-oi-invite-frame { position: absolute !important; inset: 7px !important; border: 1px solid #dbe8ef !important; border-radius: 12px !important; pointer-events: none !important; }
+.chat-thread .puff-oi-invite-head { position: relative !important; z-index: 1 !important; margin: 2px 0 0 !important; color: #182533 !important; font-size: 18px !important; line-height: 1.2 !important; }
+.chat-thread .puff-oi-invite-rule { position: relative !important; z-index: 1 !important; width: 56% !important; height: 1px !important; margin: 10px auto 12px !important; background: #dbe8ef !important; }
+.chat-thread .puff-oi-invite-scene { position: relative !important; z-index: 1 !important; width: 100% !important; margin: 0 0 6px !important; color: #182533 !important; font-size: 17px !important; line-height: 1.35 !important; }
+.chat-thread .puff-oi-invite-opening { position: relative !important; z-index: 1 !important; margin: 0 0 8px !important; color: #607888 !important; font-size: 12px !important; line-height: 1.45 !important; }
+.chat-thread .puff-oi-invite-status { position: relative !important; z-index: 1 !important; padding: 3px 8px !important; border-radius: 999px !important; background: rgba(0,0,0,.05) !important; color: #718a9c !important; font-size: 9px !important; }
+.chat-thread .puff-oi-invite-actions { position: relative !important; z-index: 1 !important; display: flex !important; width: 100% !important; gap: 8px !important; margin-top: 10px !important; padding-top: 10px !important; border-top: 1px solid #dbe8ef !important; }
+.chat-thread .puff-oi-invite-btn { flex: 1 !important; height: 30px !important; border-radius: 10px !important; border: 1px solid #dbe8ef !important; font-size: 12px !important; }
+.chat-thread .puff-oi-invite-btn.is-primary { border-color: transparent !important; background: #246fa5 !important; color: #fff !important; }
+.chat-thread .puff-gift { border-color: #cde7d8 !important; }
+.chat-thread :is(.chat-offline-ticket-k,.chat-offline-ticket-link) { color: #246fa5 !important; }
+.chat-thread .chat-offline-ticket-text { color: #182f40 !important; }
+.chat-thread .chat-reaction-chip {
+  background: #eaf4fd !important;
+  border: 1px solid #dbe8ef !important;
+  border-radius: 999px !important;
+  color: #246fa5 !important;
+}
+.chat-thread .chat-reaction-chip-meta { color: #607888 !important; }
+.chat-thread .chat-bubble-actions-card {
+  background: #fff !important;
+  color: #182533 !important;
+  border: 1px solid #dbe8ef !important;
+  border-radius: 14px !important;
+  box-shadow: 0 5px 18px rgba(23,43,58,.14) !important;
+}
+/* 不接管弹层 display、键盘定位、安全区、壁纸，也不隐藏任何功能入口。 */
+
+.chat-thread .chat-compose-bar > .chat-compose-icon:is(.is-reply:has(> svg > path[d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"]),.is-send.ready:not(:has(svg circle))):not([aria-busy="true"]):not([aria-label*="停止"]):not([aria-label*="stop" i]):not(:is(.is-stop,.is-loading,.is-busy)):not(:has([style*="animation"],animate,animateTransform)) {
+  --pp-compose-icon: url("data:image/svg+xml,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Cpath%20d%3D%22M5.3185%2011.1479L10.4739%206.60992C10.9817%206.16293%2011.031%205.38891%2010.584%204.8811C10.137%204.37329%209.36302%204.32399%208.85521%204.77098L1.22731%2011.4853C0.338644%2012.2676%200.252367%2013.6221%201.0346%2014.5108C1.81684%2015.3994%203.17138%2015.4857%204.06004%2014.7035L14.1055%205.86107C15.3751%204.74359%2015.4983%202.80854%2014.3808%201.53901C13.2633%200.269489%2011.3283%200.146235%2010.0588%201.26372L2.48577%207.92976%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%20stroke%3D%22black%22%2F%3E%0A%3C%2Fsvg%3E%0A");
+}
+
+.chat-thread .chat-compose-bar > .chat-compose-icon:is(.is-reply:has(> svg > path[d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"]),.is-send.ready:not(:has(svg circle))):not([aria-busy="true"]):not([aria-label*="停止"]):not([aria-label*="stop" i]):not(:is(.is-stop,.is-loading,.is-busy)):not(:has([style*="animation"],animate,animateTransform)) {
+  --pp-compose-icon: url("data:image/svg+xml,%3Csvg%20width%3D%2213%22%20height%3D%2214%22%20viewBox%3D%220%200%2013%2014%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Cpath%20d%3D%22M4.64354%209.78936L8.38856%206.49286C8.99857%205.9559%209.0578%205.0261%208.52084%204.41609C7.98389%203.80608%207.05409%203.74685%206.44408%204.28381L1.37369%208.74695C0.306169%209.68662%200.202526%2011.3138%201.1422%2012.3813C2.08187%2013.4488%203.70902%2013.5525%204.77654%2012.6128L11.2211%206.94004C12.7461%205.59765%2012.8942%203.27315%2011.5518%201.74812C10.2094%200.223094%207.88492%200.0750355%206.35989%201.41742L1.24069%205.92353%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%20stroke%3D%22black%22%2F%3E%0A%3C%2Fsvg%3E%0A");
+}
+
+.chat-thread .chat-compose-icon.is-voice {
+  --pp-compose-icon: url("data:image/svg+xml,%3Csvg%20width%3D%229%22%20height%3D%2214%22%20viewBox%3D%220%200%209%2014%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Cpath%20d%3D%22M4.5%202.5V7.5%22%20stroke-width%3D%225%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%20stroke%3D%22black%22%2F%3E%0A%3Cpath%20d%3D%22M0.5%206.5V7C0.5%209.20914%202.29086%2011%204.5%2011C6.70914%2011%208.5%209.20914%208.5%207V6.5%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%20stroke%3D%22black%22%2F%3E%0A%3Cpath%20d%3D%22M4.5%2011.5V13.5%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%20stroke%3D%22black%22%2F%3E%0A%3C%2Fsvg%3E%0A");
+}
+
+.chat-thread .chat-compose-icon.is-voice {
+  --pp-compose-icon: url("data:image/svg+xml,%3Csvg%20width%3D%229%22%20height%3D%2213%22%20viewBox%3D%220%200%209%2013%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Cpath%20d%3D%22M4.5%202.5V6.5%22%20stroke-width%3D%225%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%20stroke%3D%22black%22%2F%3E%0A%3Cpath%20d%3D%22M0.5%205.5V6C0.5%208.20914%202.29086%2010%204.5%2010C6.70914%2010%208.5%208.20914%208.5%206V5.5%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%20stroke%3D%22black%22%2F%3E%0A%3Cpath%20d%3D%22M4.5%2010.5V12.5%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%20stroke%3D%22black%22%2F%3E%0A%3C%2Fsvg%3E%0A");
+}
