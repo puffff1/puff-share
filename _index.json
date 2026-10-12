@@ -1,7 +1,7 @@
 {
   "schema": "puff_share_index",
   "schemaVersion": 1,
-  "generatedAt": "2026-10-12T07:33:19.035Z",
+  "generatedAt": "2026-10-12T11:53:00.944Z",
   "folders": [
     {
       "name": "App",
@@ -29,7 +29,7 @@
     },
     {
       "name": "表情包",
-      "count": 46
+      "count": 47
     },
     {
       "name": "装扮",
@@ -1799,6 +1799,20 @@
       "images": [],
       "description": "",
       "updatedAt": "2026-10-12T15:32:51+08:00"
+    },
+    {
+      "folder": "表情包",
+      "name": "审美吉蛙2",
+      "type": "dir",
+      "path": "资源/表情包/审美吉蛙2",
+      "files": [
+        "资源/表情包/审美吉蛙2/审美吉蛙表情包2-有预览.docx"
+      ],
+      "images": [
+        "资源/表情包/审美吉蛙2/1000024382.png"
+      ],
+      "description": "",
+      "updatedAt": "2026-10-12T19:52:36+08:00"
     },
     {
       "folder": "表情包",
