@@ -1,7 +1,7 @@
 {
   "schema": "puff_share_index",
   "schemaVersion": 1,
-  "generatedAt": "2026-10-12T03:12:51.308Z",
+  "generatedAt": "2026-10-12T07:33:19.035Z",
   "folders": [
     {
       "name": "App",
@@ -1798,7 +1798,7 @@
       ],
       "images": [],
       "description": "",
-      "updatedAt": "2026-10-11T12:00:54+08:00"
+      "updatedAt": "2026-10-12T15:32:51+08:00"
     },
     {
       "folder": "表情包",
