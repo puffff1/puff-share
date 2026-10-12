@@ -1,7 +1,7 @@
 {
   "schema": "puff_share_index",
   "schemaVersion": 1,
-  "generatedAt": "2026-10-12T11:53:00.944Z",
+  "generatedAt": "2026-10-12T12:57:51.705Z",
   "folders": [
     {
       "name": "App",
@@ -1793,12 +1793,13 @@
       "path": "资源/表情包/季屿川-表情包",
       "files": [
         "资源/表情包/季屿川-表情包/c_h_.docx",
-        "资源/表情包/季屿川-表情包/h_-40_.zip",
-        "资源/表情包/季屿川-表情包/png"
+        "资源/表情包/季屿川-表情包/h_-40_.zip"
       ],
-      "images": [],
+      "images": [
+        "资源/表情包/季屿川-表情包/1000014725.jpg"
+      ],
       "description": "",
-      "updatedAt": "2026-10-12T15:32:51+08:00"
+      "updatedAt": "2026-10-12T20:57:27+08:00"
     },
     {
       "folder": "表情包",
