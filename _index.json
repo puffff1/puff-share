@@ -1,7 +1,7 @@
 {
   "schema": "puff_share_index",
   "schemaVersion": 1,
-  "generatedAt": "2026-10-13T03:04:48.748Z",
+  "generatedAt": "2026-10-13T03:22:14.607Z",
   "folders": [
     {
       "name": "App",
@@ -29,7 +29,7 @@
     },
     {
       "name": "表情包",
-      "count": 48
+      "count": 49
     },
     {
       "name": "装扮",
@@ -1583,6 +1583,20 @@
       ],
       "description": "",
       "updatedAt": "2026-09-24T18:46:49+08:00"
+    },
+    {
+      "folder": "表情包",
+      "name": "baby bunnies",
+      "type": "dir",
+      "path": "资源/表情包/baby bunnies",
+      "files": [
+        "资源/表情包/baby bunnies/BabyBunnies表情包-有预览.docx"
+      ],
+      "images": [
+        "资源/表情包/baby bunnies/1000024413.png"
+      ],
+      "description": "",
+      "updatedAt": "2026-10-13T11:21:53+08:00"
     },
     {
       "folder": "表情包",
