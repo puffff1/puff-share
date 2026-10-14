@@ -1,7 +1,7 @@
 {
   "schema": "puff_share_index",
   "schemaVersion": 1,
-  "generatedAt": "2026-10-14T07:36:30.615Z",
+  "generatedAt": "2026-10-14T07:37:15.141Z",
   "folders": [
     {
       "name": "App",
@@ -29,7 +29,7 @@
     },
     {
       "name": "表情包",
-      "count": 55
+      "count": 56
     },
     {
       "name": "装扮",
@@ -2087,6 +2087,20 @@
       ],
       "description": "",
       "updatedAt": "2026-10-12T11:06:45+08:00"
+    },
+    {
+      "folder": "表情包",
+      "name": "月薪猫幼年版",
+      "type": "dir",
+      "path": "资源/表情包/月薪猫幼年版",
+      "files": [
+        "资源/表情包/月薪猫幼年版/月薪猫幼年GIF-有预览.docx"
+      ],
+      "images": [
+        "资源/表情包/月薪猫幼年版/1000025096.jpg"
+      ],
+      "description": "",
+      "updatedAt": "2026-10-14T15:36:52+08:00"
     },
     {
       "folder": "表情包",
