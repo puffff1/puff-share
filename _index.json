@@ -1,7 +1,7 @@
 {
   "schema": "puff_share_index",
   "schemaVersion": 1,
-  "generatedAt": "2026-10-14T07:37:15.141Z",
+  "generatedAt": "2026-10-14T07:49:35.211Z",
   "folders": [
     {
       "name": "App",
@@ -13,7 +13,7 @@
     },
     {
       "name": "世界书",
-      "count": 11
+      "count": 12
     },
     {
       "name": "其他",
@@ -308,6 +308,20 @@
       ],
       "description": "",
       "updatedAt": "2026-10-06T09:33:34+08:00"
+    },
+    {
+      "folder": "世界书",
+      "name": "奥林匹斯众神的传记作家会议gemini-4-argon 破甲",
+      "type": "dir",
+      "path": "资源/世界书/奥林匹斯众神的传记作家会议gemini-4-argon 破甲",
+      "files": [
+        "资源/世界书/奥林匹斯众神的传记作家会议gemini-4-argon 破甲/奥林匹斯众神的传记作家会议_4argon_适用.docx"
+      ],
+      "images": [
+        "资源/世界书/奥林匹斯众神的传记作家会议gemini-4-argon 破甲/封面.jpg"
+      ],
+      "description": "",
+      "updatedAt": "2026-10-14T15:49:11+08:00"
     },
     {
       "folder": "世界书",
