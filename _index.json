@@ -1,7 +1,7 @@
 {
   "schema": "puff_share_index",
   "schemaVersion": 1,
-  "generatedAt": "2026-10-13T03:38:36.773Z",
+  "generatedAt": "2026-10-14T05:07:12.589Z",
   "folders": [
     {
       "name": "App",
@@ -29,7 +29,7 @@
     },
     {
       "name": "表情包",
-      "count": 51
+      "count": 52
     },
     {
       "name": "装扮",
@@ -1701,6 +1701,21 @@
       ],
       "description": "",
       "updatedAt": "2026-10-02T21:06:49+08:00"
+    },
+    {
+      "folder": "表情包",
+      "name": "傻孩子表情包",
+      "type": "dir",
+      "path": "资源/表情包/傻孩子表情包",
+      "files": [
+        "资源/表情包/傻孩子表情包/傻孩子表情包-kik.docx"
+      ],
+      "images": [
+        "资源/表情包/傻孩子表情包/Screenshot_20261013_191600_com.microsoft.emmx_edit_1399656961035906.jpg",
+        "资源/表情包/傻孩子表情包/Screenshot_20261013_191607_com.microsoft.emmx_edit_1399661305607260.jpg"
+      ],
+      "description": "",
+      "updatedAt": "2026-10-14T13:06:48+08:00"
     },
     {
       "folder": "表情包",
