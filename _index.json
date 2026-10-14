@@ -1,7 +1,7 @@
 {
   "schema": "puff_share_index",
   "schemaVersion": 1,
-  "generatedAt": "2026-10-14T06:21:15.668Z",
+  "generatedAt": "2026-10-14T06:22:06.782Z",
   "folders": [
     {
       "name": "App",
@@ -29,7 +29,7 @@
     },
     {
       "name": "表情包",
-      "count": 53
+      "count": 54
     },
     {
       "name": "装扮",
@@ -1625,6 +1625,20 @@
       ],
       "description": "",
       "updatedAt": "2026-09-24T15:01:04+08:00"
+    },
+    {
+      "folder": "表情包",
+      "name": "gray lamb",
+      "type": "dir",
+      "path": "资源/表情包/gray lamb",
+      "files": [
+        "资源/表情包/gray lamb/Gray_Lamb小灰小白羊表情包-有预览.docx"
+      ],
+      "images": [
+        "资源/表情包/gray lamb/1000025091.png"
+      ],
+      "description": "",
+      "updatedAt": "2026-10-14T14:21:44+08:00"
     },
     {
       "folder": "表情包",
