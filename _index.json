@@ -1,7 +1,7 @@
 {
   "schema": "puff_share_index",
   "schemaVersion": 1,
-  "generatedAt": "2026-10-14T07:05:42.928Z",
+  "generatedAt": "2026-10-14T07:36:30.615Z",
   "folders": [
     {
       "name": "App",
@@ -29,7 +29,7 @@
     },
     {
       "name": "表情包",
-      "count": 54
+      "count": 55
     },
     {
       "name": "装扮",
@@ -1983,6 +1983,20 @@
       ],
       "description": "",
       "updatedAt": "2026-10-08T21:47:35+08:00"
+    },
+    {
+      "folder": "表情包",
+      "name": "小黄脸",
+      "type": "dir",
+      "path": "资源/表情包/小黄脸",
+      "files": [
+        "资源/表情包/小黄脸/小黄脸表情包-有预览.docx"
+      ],
+      "images": [
+        "资源/表情包/小黄脸/1000025098.jpg"
+      ],
+      "description": "",
+      "updatedAt": "2026-10-14T15:36:06+08:00"
     },
     {
       "folder": "表情包",
