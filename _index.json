@@ -1,11 +1,11 @@
 {
   "schema": "puff_share_index",
   "schemaVersion": 1,
-  "generatedAt": "2026-10-15T15:26:43.538Z",
+  "generatedAt": "2026-10-15T15:29:27.647Z",
   "folders": [
     {
       "name": "App",
-      "count": 12
+      "count": 11
     },
     {
       "name": "repo",
@@ -60,24 +60,6 @@
       ],
       "description": "",
       "updatedAt": "2026-09-24T17:35:56+08:00"
-    },
-    {
-      "folder": "App",
-      "name": "剁手审批局",
-      "type": "dir",
-      "path": "资源/App/剁手审批局",
-      "files": [
-        "资源/App/剁手审批局/剁手审批局.html"
-      ],
-      "images": [
-        "资源/App/剁手审批局/19524.jpg",
-        "资源/App/剁手审批局/19527.jpg",
-        "资源/App/剁手审批局/19531.jpg",
-        "资源/App/剁手审批局/19534.jpg",
-        "资源/App/剁手审批局/封面.jpg"
-      ],
-      "description": "",
-      "updatedAt": "2026-10-15T23:26:18+08:00"
     },
     {
       "folder": "App",
