@@ -1,0 +1,2238 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,viewport-fit=cover" />
+<title>购买审批</title>
+<style>
+  :root {
+    --accent: #3b6ef6;
+    --accent-2: #5b5cf6;
+    --accent-rgb: 59, 110, 246;
+    --bg-dim: 0.72;
+    --bg-image: none;
+  }
+  * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+  html, body { margin: 0; width: 100%; min-height: 100%; }
+  body {
+    font: 15px/1.55 -apple-system, BlinkMacSystemFont, "PingFang SC", "Helvetica Neue", "Microsoft YaHei", sans-serif;
+    color: #1a1f2b;
+    background:
+      radial-gradient(1200px 600px at 10% -10%, #e8eeff 0%, transparent 60%),
+      radial-gradient(900px 500px at 100% 0%, #f3e9ff 0%, transparent 55%),
+      linear-gradient(180deg, #f4f6fb 0%, #eef1f8 100%);
+    background-attachment: fixed;
+    -webkit-font-smoothing: antialiased;
+  }
+  /* 自定义背景主题 */
+  body.theme-custom {
+    background-image:
+      linear-gradient(rgba(255,255,255,var(--bg-dim)), rgba(255,255,255,var(--bg-dim))),
+      var(--bg-image);
+    background-size: cover, cover;
+    background-position: center center, center center;
+    background-attachment: fixed, fixed;
+    background-repeat: no-repeat, no-repeat;
+  }
+  .app {
+    min-height: 100dvh;
+    max-width: 560px;
+    margin: 0 auto;
+    padding: var(--ai-phone-app-safe-top, 84px) 16px calc(100px + var(--ai-phone-app-safe-bottom, 12px));
+  }
+  .page-head {
+    display: flex; align-items: center; justify-content: space-between;
+    gap: 10px; margin-bottom: 14px;
+  }
+  .page-title { font-size: 22px; font-weight: 800; letter-spacing: .3px; }
+  .page-title small { display:block; font-size:12px; font-weight:500; color:#8b93a6; letter-spacing:0; margin-top:2px;}
+
+  .card {
+    background: rgba(255,255,255,.80);
+    -webkit-backdrop-filter: blur(18px) saturate(170%);
+    backdrop-filter: blur(18px) saturate(170%);
+    border: 1px solid rgba(255,255,255,.95);
+    border-radius: 18px;
+    box-shadow: 0 8px 24px rgba(28,42,72,.07);
+    padding: 16px;
+    margin-bottom: 12px;
+  }
+  .card-title { font-size: 15px; font-weight: 700; margin-bottom: 8px; display:flex; align-items:center; gap:6px;}
+  .muted { color: #8b93a6; font-size: 13px; }
+  .tiny { font-size: 12px; color:#9aa3b2; }
+  .divider { height:1px; background: rgba(20,30,50,.07); margin: 12px 0; }
+
+  /* hero */
+  .hero { background: linear-gradient(135deg, var(--accent), var(--accent-2)); color:#fff; border:none; box-shadow: 0 12px 28px rgba(var(--accent-rgb),.28); }
+  .hero-grid { display:grid; grid-template-columns: repeat(3,1fr); gap:8px; text-align:center; }
+  .hero-label { font-size: 11px; opacity:.78; margin-bottom: 4px; letter-spacing:.4px;}
+  .hero-val { font-size: 20px; font-weight: 800; letter-spacing:-.3px; }
+  .hero-val .unit { font-size:12px; font-weight:600; margin-left:2px; opacity:.85;}
+  .hero-foot { margin-top:12px; padding-top:10px; border-top:1px solid rgba(255,255,255,.22); font-size:12px; opacity:.9; display:flex; justify-content:space-between; gap:8px;}
+
+  .warn-card { border-color: rgba(230,162,60,.5); background: rgba(255,248,235,.92); }
+
+  /* buttons */
+  .btn {
+    min-height: 44px; padding: 0 16px; border-radius: 13px; border: none;
+    background: linear-gradient(135deg, var(--accent), var(--accent-2)); color:#fff;
+    font-weight: 700; font-size: 15px; font-family: inherit;
+    display: inline-flex; align-items: center; justify-content: center; gap: 6px;
+    cursor: pointer; transition: transform .12s ease, opacity .12s;
+  }
+  .btn:active { transform: scale(.975); }
+  .btn:disabled { opacity: .45; }
+  .btn.block { width: 100%; }
+  .btn.ghost { background: rgba(var(--accent-rgb),.11); color: var(--accent); }
+  .btn.ghost2 { background: rgba(20,30,50,.07); color: #4a5265; }
+  .btn.danger { background: rgba(227,93,93,.13); color: #d64545; }
+  .btn.green { background: linear-gradient(135deg,#2fa66a,#37b97a); }
+  .btn.sm { min-height: 34px; font-size: 13px; padding: 0 12px; border-radius: 10px; }
+  .btn-row { display:flex; gap:8px; }
+  .btn-row .btn { flex:1; }
+
+  /* list items */
+  .item {
+    display: flex; align-items: center; gap: 12px;
+    padding: 12px 14px; border-radius: 14px;
+    background: rgba(255,255,255,.72);
+    border: 1px solid rgba(20,30,50,.05);
+    margin-bottom: 8px;
+    cursor: pointer;
+    transition: background .15s;
+  }
+  .item:active { background: rgba(var(--accent-rgb),.07); }
+  .item-ico {
+    width: 40px; height: 40px; border-radius: 12px; flex: none;
+    display:flex; align-items:center; justify-content:center;
+    font-size: 19px;
+    background: linear-gradient(135deg, rgba(var(--accent-rgb),.13), rgba(122,92,246,.13));
+  }
+  .item-main { flex: 1; min-width: 0; }
+  .item-name { font-weight: 650; font-size: 14.5px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .item-sub { font-size: 12px; color: #8b93a6; margin-top: 2px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;}
+  .item-right { text-align: right; flex: none; }
+  .item-amt { font-weight: 750; font-size: 14.5px; }
+
+  .pill {
+    display:inline-flex; align-items:center; gap:4px;
+    padding: 2px 9px; border-radius: 999px;
+    font-size: 11px; font-weight: 700; letter-spacing:.2px;
+  }
+
+  .sec-title { font-size: 13px; font-weight: 700; color:#5c6579; margin: 18px 4px 8px; letter-spacing:.3px;}
+
+  /* form */
+  label.fld { display:block; margin-bottom: 12px; }
+  .fld-label { font-size: 12.5px; font-weight: 650; color:#5c6579; margin-bottom: 6px; display:flex; justify-content:space-between; align-items:center;}
+  input[type="text"], input[type="number"], input[type="date"], select, textarea {
+    width: 100%; min-height: 44px; padding: 10px 12px;
+    border-radius: 12px; border: 1px solid rgba(20,30,50,.10);
+    background: rgba(255,255,255,.9);
+    font: inherit; color: inherit; outline: none;
+    transition: border-color .15s, box-shadow .15s;
+  }
+  textarea { min-height: 78px; resize: vertical; line-height: 1.5; }
+  input:focus, select:focus, textarea:focus {
+    border-color: var(--accent); box-shadow: 0 0 0 3px rgba(var(--accent-rgb),.13);
+  }
+  select { appearance: none; -webkit-appearance: none;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%238b93a6' stroke-width='3'><polyline points='6 9 12 15 18 9'/></svg>");
+    background-repeat: no-repeat; background-position: right 12px center; padding-right: 34px;
+  }
+  input[type="range"] { width:100%; -webkit-appearance:none; height: 26px; background:transparent; }
+  input[type="range"]::-webkit-slider-runnable-track { height:6px; border-radius:3px; background: linear-gradient(90deg,var(--accent) var(--p,50%), rgba(20,30,50,.10) var(--p,50%)); }
+  input[type="range"]::-webkit-slider-thumb { -webkit-appearance:none; width:22px;height:22px;border-radius:50%;background:#fff;border:2px solid var(--accent); margin-top:-8px; box-shadow:0 2px 6px rgba(var(--accent-rgb),.35); }
+
+  .check-row { display:flex; flex-wrap:wrap; gap:8px; }
+  .chip {
+    display:inline-flex; align-items:center; gap:6px;
+    padding: 8px 13px; border-radius: 11px; min-height: 40px;
+    background: rgba(20,30,50,.05); font-size: 13px; font-weight: 600; color:#5c6579;
+    cursor:pointer; user-select:none;
+  }
+  .chip input { display:none; }
+  .chip.on { background: rgba(var(--accent-rgb),.14); color: var(--accent); }
+
+  .row-item { display:flex; gap:8px; align-items:center; margin-bottom:8px; }
+  .row-item input { flex:1; min-width:0; }
+  .row-item .del {
+    flex:none; width:38px; height:38px; border-radius:11px; border:none;
+    background: rgba(227,93,93,.12); color:#d64545; font-size:18px; line-height:1;
+    cursor:pointer;
+  }
+
+  /* detail */
+  .decision-hero { text-align:center; padding: 22px 16px; border-radius: 18px; color:#fff; margin-bottom: 12px; }
+  .decision-hero .dh-label { font-size: 13px; opacity: .88; letter-spacing: 2px; }
+  .decision-hero .dh-val { font-size: 30px; font-weight: 850; letter-spacing: 1px; margin-top: 4px; }
+  .kvs { display:flex; flex-direction:column; gap:0; }
+  .kv { display:flex; justify-content:space-between; gap:12px; padding: 8px 0; border-bottom:1px solid rgba(20,30,50,.06); font-size:13.5px; }
+  .kv:last-child { border-bottom:none; }
+  .kv .k { color:#8b93a6; flex:none; }
+  .kv .v { text-align:right; font-weight:600; word-break: break-word; }
+
+  ul.list-plain { margin:0; padding-left: 18px; }
+  ul.list-plain li { margin-bottom: 6px; font-size: 13.5px; line-height: 1.55; }
+
+  .tag { display:inline-block; padding:3px 10px; border-radius: 8px; font-size:12px; font-weight:650; margin: 0 6px 6px 0; }
+  .tag.red { background: rgba(227,93,93,.12); color:#d64545; }
+  .tag.amber { background: rgba(230,162,60,.15); color:#b97b12; }
+  .tag.blue { background: rgba(var(--accent-rgb),.12); color: var(--accent); }
+  .tag.green { background: rgba(47,166,106,.13); color:#2fa66a; }
+  .tag.gray { background: rgba(20,30,50,.06); color:#68718a; }
+
+  /* 聊天气泡 / 追问 */
+  .thread { display: flex; flex-direction: column; gap: 9px; }
+  .bubble {
+    max-width: 88%; padding: 10px 13px; border-radius: 16px;
+    font-size: 14px; line-height: 1.55; word-break: break-word; white-space: pre-wrap;
+  }
+  .bubble.ai {
+    background: rgba(var(--accent-rgb), .10);
+    border: 1px solid rgba(var(--accent-rgb), .16);
+    border-top-left-radius: 5px; align-self: flex-start; color: #1a1f2b;
+  }
+  .bubble.me {
+    background: linear-gradient(135deg, var(--accent), var(--accent-2));
+    color: #fff; border-top-right-radius: 5px; align-self: flex-end;
+  }
+  .bubble-name { font-size: 11px; font-weight: 700; color: var(--accent); margin-bottom: 3px; }
+  .qa-input { display: flex; gap: 8px; align-items: flex-end; }
+  .qa-input textarea { flex: 1; min-height: 46px; }
+
+  /* 主题自定义 */
+  .theme-preview {
+    height: 96px; border-radius: 14px; border: 1px solid rgba(20,30,50,.08);
+    background: linear-gradient(135deg, #e8eeff, #f3e9ff);
+    background-size: cover; background-position: center; background-repeat: no-repeat;
+    display: flex; align-items: flex-end; justify-content: center;
+    padding-bottom: 9px; overflow: hidden;
+  }
+  .theme-preview span {
+    background: rgba(255,255,255,.88); color: #5c6579;
+    padding: 3px 11px; border-radius: 999px; font-size: 12px; font-weight: 650;
+  }
+  .swatch {
+    width: 40px; height: 40px; border-radius: 13px; cursor: pointer;
+    border: 2px solid transparent; transition: transform .12s;
+  }
+  .swatch:active { transform: scale(.94); }
+  .swatch.on { border-color: #fff; box-shadow: 0 0 0 2px rgba(20,30,50,.35); }
+
+  /* loading */
+  .loading-wrap { display:flex; flex-direction:column; align-items:center; justify-content:center; padding: 40px 0; gap: 14px; }
+  .spinner {
+    width: 42px; height: 42px; border-radius: 50%;
+    border: 3px solid rgba(var(--accent-rgb),.18);
+    border-top-color: var(--accent);
+    animation: spin 0.85s linear infinite;
+  }
+  @keyframes spin { to { transform: rotate(360deg); } }
+  .dots::after { content:''; animation: dots 1.4s steps(4,end) infinite; }
+  @keyframes dots { 0%{content:''} 25%{content:'.'} 50%{content:'..'} 75%{content:'...'} }
+
+  /* tabbar */
+  .tabbar {
+    position: fixed; left: 0; right: 0; bottom: 0; z-index: 20;
+    display: flex; justify-content: space-around; align-items: stretch;
+    padding: 6px 10px calc(6px + var(--ai-phone-app-safe-bottom, 12px));
+    background: rgba(255,255,255,.86);
+    -webkit-backdrop-filter: blur(22px) saturate(180%);
+    backdrop-filter: blur(22px) saturate(180%);
+    border-top: 1px solid rgba(20,30,50,.06);
+  }
+  .tabbar button {
+    flex:1; border:none; background:transparent; font: inherit;
+    display:flex; flex-direction:column; align-items:center; gap:3px;
+    padding: 7px 0; border-radius: 12px; color:#98a0b3; font-size: 11px; font-weight:650;
+    cursor:pointer; min-height: 48px;
+  }
+  .tabbar button .ti { font-size: 19px; line-height: 1; }
+  .tabbar button.active { color: var(--accent); background: rgba(var(--accent-rgb),.08); }
+
+  .empty { text-align:center; padding: 36px 12px; color:#9aa3b2; font-size: 13.5px; }
+  .empty .big { font-size: 34px; margin-bottom: 10px; opacity:.6;}
+  .toastbar { position:fixed; left:50%; bottom: 108px; transform: translateX(-50%); z-index: 50;
+    background: rgba(26,31,43,.9); color:#fff; padding: 9px 16px; border-radius: 12px; font-size: 13px;
+    opacity:0; pointer-events:none; transition: opacity .2s; max-width: 80vw; text-align:center;}
+  .toastbar.on { opacity: 1; }
+</style>
+</head>
+<body>
+
+<div class="app" id="app">
+  <div id="screen"></div>
+</div>
+<nav class="tabbar" id="tabbar"></nav>
+<div class="toastbar" id="toastbar"></div>
+
+<script>
+(function () {
+  'use strict';
+
+  const api = window.AiPhone;
+  const screenEl = document.getElementById('screen');
+  const tabEl = document.getElementById('tabbar');
+  const toastEl = document.getElementById('toastbar');
+
+  /* ============================ 常量 ============================ */
+  const STATUS_LABEL = {
+    pending: '待审批', reviewing: '审批中', decided: '已出结果',
+    cooling: '冷静中', purchasable: '可购买', purchased: '已购买',
+    reviewed: '已复盘', abandoned: '已放弃'
+  };
+  const STATUS_COLOR = {
+    pending: '#e6a23c', reviewing: '#3b6ef6', decided: '#7c8598',
+    cooling: '#8b5cf6', purchasable: '#2fa66a', purchased: '#2fa66a',
+    reviewed: '#7c8598', abandoned: '#9aa3b2'
+  };
+  const DECISION_LABEL = {
+    pass: '通过', conditional: '有条件通过', suspend: '暂缓',
+    reject: '驳回', need_info: '要求补充'
+  };
+  const DECISION_MAP = {
+    '通过': 'pass', '有条件通过': 'conditional', '暂缓': 'suspend',
+    '驳回': 'reject', '要求补充': 'need_info'
+  };
+  const DECISION_COLOR = {
+    pass: 'linear-gradient(135deg,#2fa66a,#42c184)',
+    conditional: 'linear-gradient(135deg,#e6a23c,#f0b95a)',
+    suspend: 'linear-gradient(135deg,#8b5cf6,#a67bf8)',
+    reject: 'linear-gradient(135deg,#e35d5d,#f07878)',
+    need_info: 'linear-gradient(135deg,#5c7fa8,#7d9cc0)'
+  };
+  const TYPE_ICON = {
+    '电子产品': '📱', '服饰': '👕', '家居': '🛋️', '娱乐': '🎮',
+    '课程': '📚', '餐饮': '🍜', '美妆': '💄', '其他': '📦'
+  };
+  const ACTIVE_STATUS = ['pending', 'reviewing', 'decided', 'cooling', 'purchasable'];
+
+  const ACCENT_PRESETS = [
+    { a: '#3b6ef6', b: '#5b5cf6' },
+    { a: '#2fa66a', b: '#37b97a' },
+    { a: '#0f9b8e', b: '#1cb9a6' },
+    { a: '#e35d5d', b: '#f07878' },
+    { a: '#e6a23c', b: '#f0b95a' },
+    { a: '#8b5cf6', b: '#a67bf8' },
+    { a: '#d94f8a', b: '#f072a8' },
+    { a: '#5c7fa8', b: '#7d9cc0' }
+  ];
+
+  /* ============================ 状态 ============================ */
+  const S = {
+    view: 'home',
+    booted: false,
+    busy: false,
+    snapshot: null,
+    applications: [],
+    memories: [],
+    characters: [],
+    characterId: null,
+    sessionId: null,
+    detailId: null,
+    approvalStage: '',
+    presetFilter: 'all',
+    stats: null,
+    theme: null,
+    qaPending: null,
+    _chatRange: 30,
+    _lastView: null,
+    _lastDetailId: null
+  };
+
+  /* ============================ 工具 ============================ */
+  const esc = (s) => String(s == null ? '' : s).replace(/[&<>"']/g, c => (
+    { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]
+  ));
+  const money = (n) => {
+    const v = Number(n) || 0;
+    const sign = v < 0 ? '-' : '';
+    return sign + '¥' + Math.abs(v).toLocaleString('zh-CN', { maximumFractionDigits: 2 });
+  };
+  const todayStr = () => {
+    const d = new Date();
+    return d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0') + '-' + String(d.getDate()).padStart(2, '0');
+  };
+  const dateStr = (iso) => {
+    if (!iso) return '—';
+    const d = new Date(iso);
+    if (isNaN(d)) return '—';
+    return (d.getMonth() + 1) + '月' + d.getDate() + '日';
+  };
+  const daysLeft = (iso) => {
+    if (!iso) return null;
+    const t = new Date(iso + 'T23:59:59').getTime();
+    if (isNaN(t)) return null;
+    return Math.ceil((t - Date.now()) / 86400000);
+  };
+  function toast(msg) {
+    toastEl.textContent = msg;
+    toastEl.classList.add('on');
+    clearTimeout(toast._t);
+    toast._t = setTimeout(() => toastEl.classList.remove('on'), 1900);
+  }
+  function safeToast(msg) { try { api.ui.toast(msg); } catch (e) {} toast(msg); }
+  function charName() {
+    const c = (S.characters || []).find(x => x.id === S.characterId);
+    return (c && (c.name || c.nickname)) || 'AI 好友';
+  }
+  function debounce(fn, ms) {
+    let t = null;
+    return function () { clearTimeout(t); t = setTimeout(fn, ms || 400); };
+  }
+
+  /* ============================ DB 封装 ============================ */
+  async function dbList(col, limit) {
+    try { const r = await api.db.list(col, { limit: limit || 200 }); return r || []; }
+    catch (e) { return []; }
+  }
+  async function dbCreate(col, data) { return api.db.create(col, data); }
+  async function dbUpdate(col, id, data) { return api.db.update(col, id, data); }
+  async function dbDelete(col, id) { try { await api.db.delete(col, id); } catch (e) {} }
+
+  async function getSetting(key, def) {
+    const list = await dbList('settings', 60);
+    const f = list.find(x => x.key === key);
+    return f && f.value !== undefined ? f.value : (def === undefined ? null : def);
+  }
+  async function setSetting(key, value) {
+    const list = await dbList('settings', 60);
+    const f = list.find(x => x.key === key);
+    if (f) await dbUpdate('settings', f.id, { key, value });
+    else await dbCreate('settings', { key, value });
+  }
+
+  /* ============================ 主题 ============================ */
+  function defaultTheme() {
+    return { accent: '#3b6ef6', accent2: '#5b5cf6', dim: 0.72, bgImage: null };
+  }
+  function hexToRgbStr(hex) {
+    const h = String(hex || '').replace('#', '');
+    if (h.length !== 6) return '59, 110, 246';
+    const n = parseInt(h, 16);
+    if (isNaN(n)) return '59, 110, 246';
+    return [(n >> 16) & 255, (n >> 8) & 255, n & 255].join(', ');
+  }
+  function applyTheme() {
+    const t = S.theme || defaultTheme();
+    const r = document.documentElement.style;
+    r.setProperty('--accent', t.accent || '#3b6ef6');
+    r.setProperty('--accent-2', t.accent2 || '#5b5cf6');
+    r.setProperty('--accent-rgb', hexToRgbStr(t.accent || '#3b6ef6'));
+    r.setProperty('--bg-dim', String(typeof t.dim === 'number' ? t.dim : 0.72));
+    if (t.bgImage) {
+      r.setProperty('--bg-image', 'url("' + t.bgImage + '")');
+      document.body.classList.add('theme-custom');
+    } else {
+      r.setProperty('--bg-image', 'none');
+      document.body.classList.remove('theme-custom');
+    }
+  }
+  async function saveTheme() {
+    try { await setSetting('theme', S.theme); } catch (e) {}
+  }
+  const saveThemeDebounced = debounce(() => { saveTheme(); }, 500);
+
+  /** 读取图片文件并压缩为 dataURL（避免存储爆炸） */
+  function compressImage(file, maxW, quality) {
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.onerror = () => reject(new Error('读取失败'));
+      reader.onload = () => {
+        const img = new Image();
+        img.onerror = () => reject(new Error('图片解析失败'));
+        img.onload = () => {
+          try {
+            const scale = Math.min(1, (maxW || 1400) / (img.width || 1));
+            const w = Math.max(1, Math.round(img.width * scale));
+            const h = Math.max(1, Math.round(img.height * scale));
+            const canvas = document.createElement('canvas');
+            canvas.width = w; canvas.height = h;
+            const ctx = canvas.getContext('2d');
+            ctx.drawImage(img, 0, 0, w, h);
+            resolve(canvas.toDataURL('image/jpeg', quality || 0.78));
+          } catch (e) { reject(e); }
+        };
+        img.src = reader.result;
+      };
+      reader.readAsDataURL(file);
+    });
+  }
+
+  /* ============================ 财务计算 ============================ */
+  function emptySnapshot() {
+    return {
+      disposable_cash: 0,
+      next_income_date: '',
+      next_income_amount: 0,
+      fixed_expenses: [],
+      debts: [],
+      emergency_reserve: 0,
+      min_daily_life: 0,
+      updatedAt: null
+    };
+  }
+  async function loadSnapshot() {
+    const list = await dbList('snapshot', 5);
+    if (list && list[0]) return Object.assign(emptySnapshot(), list[0]);
+    return emptySnapshot();
+  }
+  async function saveSnapshot() {
+    const list = await dbList('snapshot', 5);
+    S.snapshot.updatedAt = new Date().toISOString();
+    const payload = JSON.parse(JSON.stringify(S.snapshot));
+    delete payload.id;
+    if (list && list[0]) {
+      await dbUpdate('snapshot', list[0].id, payload);
+    } else {
+      const created = await dbCreate('snapshot', payload);
+      S.snapshot.id = created.id;
+    }
+  }
+  function hasSnapshot() {
+    const s = S.snapshot || {};
+    return !!(s.next_income_date || (+s.disposable_cash > 0));
+  }
+
+  function finCalc(snap, budget) {
+    const s = snap || {};
+    const b = +budget || 0;
+    const fixed = (s.fixed_expenses || []).reduce((a, x) => a + (+x.amount || 0), 0);
+    const debtDue = (s.debts || []).reduce((a, x) => a + (+x.minPayment || 0), 0);
+    const cash = +s.disposable_cash || 0;
+    const reserve = +s.emergency_reserve || 0;
+    const minDaily = +s.min_daily_life || 0;
+
+    const safe = cash - debtDue - fixed - reserve;
+    const days = daysLeft(s.next_income_date);
+    const daysN = days === null || days < 0 ? 0 : days;
+    const after = safe - b;
+    const dailyAfter = daysN > 0 ? after / daysN : null;
+
+    const reds = [];
+    if (dailyAfter !== null && minDaily > 0 && dailyAfter < minDaily) reds.push('买后日均低于最低生活线');
+    if (after < 0) reds.push('会动用应急预留或必还欠款');
+    if (safe <= 0) reds.push('当前安全可花已为负');
+
+    return {
+      fixed, debtDue, cash, reserve, minDaily,
+      safe, days: daysN, after, dailyAfter, reds
+    };
+  }
+
+  /* ============================ 视图渲染 ============================ */
+  function render() {
+    if (!S.booted) return;
+    const sameView = S._lastView === S.view && S._lastDetailId === S.detailId;
+    const sy = window.scrollY;
+
+    switch (S.view) {
+      case 'home': screenEl.innerHTML = viewHome(); break;
+      case 'pending': screenEl.innerHTML = viewPending(); break;
+      case 'create': screenEl.innerHTML = viewCreate(); break;
+      case 'detail': screenEl.innerHTML = viewDetail(); break;
+      case 'stats': screenEl.innerHTML = viewStats(); break;
+      case 'settings': screenEl.innerHTML = viewSettings(); break;
+      case 'finance': screenEl.innerHTML = viewFinance(); break;
+      default: screenEl.innerHTML = viewHome();
+    }
+    renderTab();
+    if (sameView) window.scrollTo(0, sy);
+    else window.scrollTo(0, 0);
+    S._lastView = S.view;
+    S._lastDetailId = S.detailId;
+  }
+
+  function renderTab() {
+    const tabs = [
+      { v: 'home', i: '🏠', t: '首页' },
+      { v: 'pending', i: '📋', t: '待审批' },
+      { v: 'stats', i: '📊', t: '复盘' },
+      { v: 'settings', i: '⚙️', t: '设置' }
+    ];
+    const cur = ['home', 'finance'].includes(S.view) ? 'home'
+      : ['pending', 'detail', 'create'].includes(S.view) ? 'pending'
+      : S.view;
+    tabEl.innerHTML = tabs.map(x => `
+      <button data-action="nav" data-view="${x.v}" class="${cur === x.v ? 'active' : ''}">
+        <span class="ti">${x.i}</span><span>${x.t}</span>
+      </button>`).join('');
+  }
+
+  function statusPill(st) {
+    const c = STATUS_COLOR[st] || '#8b93a6';
+    return `<span class="pill" style="background:${c}1f;color:${c}">${esc(STATUS_LABEL[st] || st)}</span>`;
+  }
+
+  function appItem(a) {
+    const icon = TYPE_ICON[a.item_type] || '📦';
+    const subParts = [];
+    if (a.decision && DECISION_LABEL[a.decision]) subParts.push(DECISION_LABEL[a.decision]);
+    if (a.status === 'cooling' && a.review_date) {
+      const d = daysLeft(a.review_date);
+      subParts.push(d !== null && d > 0 ? `冷静期还剩 ${d} 天` : '冷静期已结束');
+    }
+    if (a.status === 'purchased' && a.license) subParts.push('待复盘');
+    if (!subParts.length) subParts.push(dateStr(a.createdAt));
+
+    return `
+      <div class="item" data-action="open-detail" data-id="${esc(a.id)}">
+        <div class="item-ico">${icon}</div>
+        <div class="item-main">
+          <div class="item-name">${esc(a.item_name || '未命名申请')}</div>
+          <div class="item-sub">${esc(subParts.join(' · '))}</div>
+        </div>
+        <div class="item-right">
+          <div class="item-amt">${money(a.budget)}</div>
+          <div style="margin-top:4px">${statusPill(a.status)}</div>
+        </div>
+      </div>`;
+  }
+
+  /* ---------------- 首页 ---------------- */
+  function viewHome() {
+    const fin = finCalc(S.snapshot, 0);
+    const active = S.applications
+      .filter(a => ACTIVE_STATUS.includes(a.status))
+      .sort((a, b) => (b.createdAt || '').localeCompare(a.createdAt || ''));
+    const recentDone = S.applications
+      .filter(a => ['purchased', 'reviewed', 'abandoned'].includes(a.status))
+      .sort((a, b) => (b.createdAt || '').localeCompare(a.createdAt || ''))
+      .slice(0, 3);
+
+    const overdue = S.snapshot.updatedAt
+      ? Math.floor((Date.now() - new Date(S.snapshot.updatedAt).getTime()) / 86400000)
+      : null;
+
+    let html = `
+      <div class="page-head">
+        <div class="page-title">购买审批<small>想买之前，先问问 TA</small></div>
+        <button class="btn ghost2 sm" data-action="nav" data-view="finance">财务快照</button>
+      </div>`;
+
+    if (!hasSnapshot()) {
+      html += `
+        <div class="card warn-card">
+          <div class="card-title">⚠️ 先完善财务快照</div>
+          <div class="muted">审批需要你的可支配资金、下次到账日与固定支出，否则 AI 无法判断红线。</div>
+          <button class="btn block" style="margin-top:12px" data-action="nav" data-view="finance">去填写</button>
+        </div>`;
+    } else {
+      html += `
+        <div class="card hero">
+          <div class="hero-grid">
+            <div><div class="hero-label">距下次到账</div><div class="hero-val">${fin.days}<span class="unit">天</span></div></div>
+            <div><div class="hero-label">安全可花</div><div class="hero-val">${money(fin.safe)}</div></div>
+            <div><div class="hero-label">日均可用</div><div class="hero-val">${fin.days > 0 ? money(fin.safe / fin.days) : '—'}</div></div>
+          </div>
+          <div class="hero-foot">
+            <span>必还 ${money(fin.debtDue)} · 固定 ${money(fin.fixed)}</span>
+            <span>${S.snapshot.next_income_date ? '到账 ' + esc(S.snapshot.next_income_date) : '未设到账日'}</span>
+          </div>
+        </div>`;
+
+      if (overdue !== null && overdue >= 7) {
+        html += `<div class="card warn-card" style="padding:12px 14px">
+          <div class="muted">📅 财务快照已 ${overdue} 天未更新，建议重新核对后再提交申请。</div>
+        </div>`;
+      }
+    }
+
+    html += `<button class="btn block" data-action="go-create" style="margin-bottom:16px">＋ 新建购买申请</button>`;
+
+    if (active.length) {
+      html += `<div class="sec-title">进行中（${active.length}）</div>`;
+      html += active.map(appItem).join('');
+    } else {
+      html += `<div class="card empty"><div class="big">🧾</div>还没有进行中的申请<br><span class="tiny">点击上方按钮，把想买的东西交给 TA 审批</span></div>`;
+    }
+
+    if (recentDone.length) {
+      html += `<div class="sec-title">最近结束</div>`;
+      html += recentDone.map(appItem).join('');
+    }
+
+    return html;
+  }
+
+  /* ---------------- 待审批 ---------------- */
+  function viewPending() {
+    const filters = [
+      { k: 'all', t: '全部' },
+      { k: 'pending', t: '待审批' },
+      { k: 'cooling', t: '冷静中' },
+      { k: 'purchasable', t: '可购买' },
+      { k: 'decided', t: '已出结果' }
+    ];
+    const list = S.applications
+      .filter(a => ACTIVE_STATUS.includes(a.status))
+      .filter(a => S.presetFilter === 'all' ? true : a.status === S.presetFilter)
+      .sort((a, b) => (b.createdAt || '').localeCompare(a.createdAt || ''));
+
+    let html = `<div class="page-head"><div class="page-title">待审批</div>
+      <button class="btn ghost2 sm" data-action="go-create">＋ 新建</button></div>`;
+
+    html += `<div class="check-row" style="margin-bottom:14px">` + filters.map(f => `
+      <span class="chip ${S.presetFilter === f.k ? 'on' : ''}" data-action="filter" data-k="${f.k}">${f.t}</span>
+    `).join('') + `</div>`;
+
+    if (!list.length) {
+      html += `<div class="card empty"><div class="big">📭</div>这里空空如也</div>`;
+    } else {
+      html += list.map(appItem).join('');
+    }
+    return html;
+  }
+
+  /* ---------------- 新建申请 ---------------- */
+  function viewCreate() {
+    const fin = finCalc(S.snapshot, 0);
+    const types = Object.keys(TYPE_ICON);
+    return `
+      <div class="page-head">
+        <div class="page-title">新建申请</div>
+        <button class="btn ghost2 sm" data-action="nav" data-view="home">取消</button>
+      </div>
+
+      <div class="card" style="padding:12px 14px">
+        <div class="muted">当前安全可花 <b style="color:#1a1f2b">${money(fin.safe)}</b>　·　距到账 ${fin.days} 天</div>
+      </div>
+
+      <div class="card">
+        <label class="fld">
+          <div class="fld-label">物品类型</div>
+          <select id="f-type">${types.map(t => `<option>${t}</option>`).join('')}</select>
+        </label>
+        <label class="fld">
+          <div class="fld-label">具体物品 <span class="tiny">必填</span></div>
+          <input type="text" id="f-name" placeholder="例如：机械键盘 87 键" />
+        </label>
+        <label class="fld">
+          <div class="fld-label">预算（元） <span class="tiny">必填</span></div>
+          <input type="number" id="f-budget" inputmode="decimal" placeholder="0" />
+        </label>
+        <label class="fld">
+          <div class="fld-label">购买理由 <span class="tiny">必填</span></div>
+          <textarea id="f-reason" placeholder="为什么想买？它解决什么问题？"></textarea>
+        </label>
+        <label class="fld">
+          <div class="fld-label">紧急程度 <span class="tiny" id="urg-val">5 / 10</span></div>
+          <input type="range" id="f-urgency" min="1" max="10" step="1" value="5" />
+        </label>
+        <label class="fld">
+          <div class="fld-label">没有它会怎样</div>
+          <textarea id="f-without" placeholder="如果不买，你的生活会受什么影响？"></textarea>
+        </label>
+        <label class="fld">
+          <div class="fld-label">现有替代品</div>
+          <input type="text" id="f-alt" placeholder="有没有能凑合用的东西？" />
+        </label>
+        <label class="fld">
+          <div class="fld-label">预计使用频率</div>
+          <select id="f-freq">
+            <option>每天</option><option>每周几次</option><option>每月几次</option><option>很少</option>
+          </select>
+        </label>
+        <label class="fld">
+          <div class="fld-label">提交时情绪</div>
+          <select id="f-emotion">
+            <option>平静</option><option>冲动</option><option>焦虑</option><option>犒赏自己</option><option>无聊</option><option>被种草</option>
+          </select>
+        </label>
+
+        <div class="fld-label" style="margin-bottom:8px">可以接受的替代方案</div>
+        <div class="check-row" style="margin-bottom:14px">
+          <label class="chip" id="c-used"><input type="checkbox" id="f-used" />接受二手</label>
+          <label class="chip" id="c-sub"><input type="checkbox" id="f-sub" />接受平替</label>
+          <label class="chip" id="c-delay"><input type="checkbox" id="f-delay" />接受延迟</label>
+          <label class="chip" id="c-promo"><input type="checkbox" id="f-promo" />受促销影响</label>
+        </div>
+
+        <button class="btn block" data-action="submit-app" ${S.busy ? 'disabled' : ''}>
+          ${S.busy ? '提交中…' : '提交审批'}
+        </button>
+      </div>
+    `;
+  }
+
+  /* ---------------- 审批详情 ---------------- */
+  function viewDetail() {
+    const a = S.applications.find(x => x.id === S.detailId);
+    if (!a) return `<div class="card empty"><div class="big">🤷</div>找不到这条申请</div>`;
+
+    if (a.status === 'reviewing') {
+      return `
+        <div class="page-head"><div class="page-title">审批中</div></div>
+        <div class="card">
+          <div class="loading-wrap">
+            <div class="spinner"></div>
+            <div style="font-weight:700">审批中<span class="dots"></span></div>
+            <div class="muted" style="text-align:center">正在读取你的财务快照、近期聊天与购买记忆</div>
+          </div>
+        </div>
+        <div class="card">
+          <div class="kv"><span class="k">物品</span><span class="v">${esc(a.item_name)}</span></div>
+          <div class="kv"><span class="k">预算</span><span class="v">${money(a.budget)}</span></div>
+        </div>`;
+    }
+
+    let html = `
+      <div class="page-head">
+        <div class="page-title">审批详情</div>
+        <button class="btn ghost2 sm" data-action="nav" data-view="pending">返回</button>
+      </div>`;
+
+    /* 决策头 */
+    if (a.decision) {
+      const bg = DECISION_COLOR[a.decision] || 'linear-gradient(135deg,#5c7fa8,#7d9cc0)';
+      html += `<div class="decision-hero" style="background:${bg}">
+        <div class="dh-label">审批结果</div>
+        <div class="dh-val">${esc(DECISION_LABEL[a.decision] || a.decision_raw || '')}</div>
+        <div class="tiny" style="color:rgba(255,255,255,.85);margin-top:6px">${esc(dateStr(a.decidedAt))}</div>
+      </div>`;
+    } else {
+      html += `<div class="card"><div class="card-title">${esc(a.item_name)}</div>
+        <div class="muted">尚未审批</div></div>`;
+    }
+
+    /* 申请摘要 */
+    html += `<div class="card">
+      <div class="card-title">📄 申请内容</div>
+      <div class="kv"><span class="k">物品类型</span><span class="v">${esc(a.item_type || '—')}</span></div>
+      <div class="kv"><span class="k">具体物品</span><span class="v">${esc(a.item_name)}</span></div>
+      <div class="kv"><span class="k">预算</span><span class="v">${money(a.budget)}</span></div>
+      <div class="kv"><span class="k">紧急程度</span><span class="v">${a.urgency} / 10</span></div>
+      <div class="kv"><span class="k">使用频率</span><span class="v">${esc(a.use_frequency || '—')}</span></div>
+      <div class="kv"><span class="k">提交情绪</span><span class="v">${esc(a.emotion || '—')}</span></div>
+      <div class="kv"><span class="k">替代品</span><span class="v">${esc(a.alternatives || '无')}</span></div>
+      <div class="divider"></div>
+      <div class="tiny" style="margin-bottom:4px">购买理由</div>
+      <div style="font-size:13.5px">${esc(a.reason || '—')}</div>
+      ${a.without_it ? `<div class="tiny" style="margin:10px 0 4px">没有它会怎样</div><div style="font-size:13.5px">${esc(a.without_it)}</div>` : ''}
+      <div class="divider"></div>
+      <div class="tiny">提交时间：${esc(new Date(a.createdAt).toLocaleString('zh-CN'))}</div>
+    </div>`;
+
+    /* 财务快照快照 */
+    if (a.finance_snapshot) {
+      const f = a.finance_snapshot;
+      html += `<div class="card">
+        <div class="card-title">💰 审批时财务快照</div>
+        <div class="kv"><span class="k">安全可花</span><span class="v">${money(f.safe)}</span></div>
+        <div class="kv"><span class="k">买后余额</span><span class="v" style="color:${f.after < 0 ? '#d64545' : '#2fa66a'}">${money(f.after)}</span></div>
+        <div class="kv"><span class="k">买后日均</span><span class="v" style="color:${f.dailyAfter !== null && f.dailyAfter < f.minDaily ? '#d64545' : '#2fa66a'}">${f.dailyAfter === null ? '—' : money(f.dailyAfter)}</span></div>
+        <div class="kv"><span class="k">最低生活线</span><span class="v">${money(f.minDaily)}</span></div>
+        ${f.reds && f.reds.length ? `<div style="margin-top:10px">${f.reds.map(r => `<span class="tag red">${esc(r)}</span>`).join('')}</div>` : `<div style="margin-top:10px"><span class="tag green">未触发财务红线</span></div>`}
+      </div>`;
+    }
+
+    /* 审批理由 */
+    if (a.decision) {
+      html += `<div class="card">
+        <div class="card-title">🧠 审批理由</div>`;
+      if (a.reasons && a.reasons.length) {
+        html += `<ul class="list-plain">${a.reasons.map(r => `<li>${esc(r)}</li>`).join('')}</ul>`;
+      } else {
+        html += `<div class="muted">—</div>`;
+      }
+      if (a.conditions && a.conditions.length) {
+        html += `<div class="divider"></div><div class="card-title" style="font-size:13.5px">📌 附加条件</div>
+          <div>${a.conditions.map(c => `<span class="tag amber">${esc(c)}</span>`).join('')}</div>`;
+      }
+      if (a.cited_memories && a.cited_memories.length) {
+        html += `<div class="divider"></div><div class="card-title" style="font-size:13.5px">💬 引用到的记忆 / 聊天</div>
+          <ul class="list-plain">${a.cited_memories.map(c => `<li>${esc(c)}</li>`).join('')}</ul>`;
+      }
+      if (a.risk_flags && a.risk_flags.length) {
+        html += `<div class="divider"></div><div class="card-title" style="font-size:13.5px">🚩 风险标签</div>
+          <div>${a.risk_flags.map(c => `<span class="tag red">${esc(c)}</span>`).join('')}</div>`;
+      }
+      if (a.follow_up && a.follow_up.length) {
+        html += `<div class="divider"></div><div class="card-title" style="font-size:13.5px">❓ TA 想问你</div>
+          <ul class="list-plain">${a.follow_up.map(c => `<li>${esc(c)}</li>`).join('')}</ul>`;
+      }
+      html += `</div>`;
+    }
+
+    /* ====== 新增：TA 的留言 + 追问 ====== */
+    if (a.decision) {
+      const nm = charName();
+      const msg = a.ai_message || (a.reasons && a.reasons[0]) || '（TA 这次没有说话）';
+      html += `<div class="card">
+        <div class="card-title">💬 ${esc(nm)} 的留言</div>
+        <div class="thread">
+          <div class="bubble ai">
+            <div class="bubble-name">${esc(nm)}</div>${esc(msg)}
+          </div>
+        </div>
+        <div class="btn-row" style="margin-top:12px">
+          <button class="btn ghost sm" data-action="forward-decision" data-id="${esc(a.id)}">📤 转发到聊天</button>
+          <button class="btn sm" data-action="focus-qa" data-id="${esc(a.id)}">🗣️ 质问 / 追问</button>
+        </div>
+      </div>`;
+
+      const thread = a.qa_thread || [];
+      html += `<div class="card" id="qa-card">
+        <div class="card-title">🗣️ 追问记录${thread.length ? `（${thread.length}）` : ''}</div>
+        ${thread.length ? `<div class="thread">
+          ${thread.map(t => t.role === 'user'
+            ? `<div class="bubble me">${esc(t.text)}</div>`
+            : `<div class="bubble ai"><div class="bubble-name">${esc(nm)}</div>${esc(t.text)}</div>`
+          ).join('')}
+          ${S.qaPending === a.id ? `<div class="bubble ai"><span class="dots">正在输入</span></div>` : ''}
+        </div><div class="divider"></div>` : `<div class="muted" style="margin-bottom:10px">不满意这个结论？直接问 TA 为什么。</div>`}
+        <div class="qa-input">
+          <textarea id="qa-text" rows="2" placeholder="例如：你为什么不让我买？"></textarea>
+          <button class="btn sm" data-action="send-qa" data-id="${esc(a.id)}" ${S.qaPending === a.id ? 'disabled' : ''}>发送</button>
+        </div>
+        <div class="check-row" style="margin-top:8px">
+          <span class="chip" data-action="qa-quick" data-id="${esc(a.id)}" data-t="你为什么不让我买？给我个说法。">你为什么不让我买？</span>
+          <span class="chip" data-action="qa-quick" data-id="${esc(a.id)}" data-t="我真的很想要这个，再考虑一下行吗？">我真的很想要</span>
+          <span class="chip" data-action="qa-quick" data-id="${esc(a.id)}" data-t="那我换个便宜点的版本可以吗？">换个便宜的</span>
+        </div>
+        ${thread.length ? `<button class="btn block ghost2 sm" style="margin-top:10px" data-action="forward-thread" data-id="${esc(a.id)}">📤 把这段对话转发到聊天</button>` : ''}
+      </div>`;
+    }
+
+    /* 购买许可证 */
+    if (a.license) {
+      html += `<div class="card" style="border-color:rgba(47,166,106,.35);background:rgba(242,255,249,.9)">
+        <div class="card-title">🎫 购买许可证</div>
+        <div class="kv"><span class="k">批准预算</span><span class="v">${money(a.license.budget)}</span></div>
+        <div class="kv"><span class="k">资金来源</span><span class="v">${esc(a.license.fund_source || '可支配资金')}</span></div>
+        <div class="kv"><span class="k">买后日均</span><span class="v">${a.license.daily_after === null ? '—' : money(a.license.daily_after)}</span></div>
+        <div class="kv"><span class="k">复盘日期</span><span class="v">${esc(a.license.review_date || '—')}</span></div>
+      </div>`;
+    }
+
+    /* 操作区 */
+    html += renderDetailActions(a);
+
+    /* 复盘记录 */
+    if (a.review) {
+      const r = a.review;
+      html += `<div class="card">
+        <div class="card-title">📝 复盘记录</div>
+        <div class="kv"><span class="k">实际价格</span><span class="v">${money(r.actual_price)}</span></div>
+        <div class="kv"><span class="k">购买渠道</span><span class="v">${esc(r.channel || '—')}</span></div>
+        <div class="kv"><span class="k">满意度</span><span class="v">${'★'.repeat(r.satisfaction || 0)}${'☆'.repeat(5 - (r.satisfaction || 0))}</span></div>
+        <div class="kv"><span class="k">使用次数</span><span class="v">${esc(r.usage_count || '—')}</span></div>
+        <div class="kv"><span class="k">是否后悔</span><span class="v" style="color:${r.regret ? '#d64545' : '#2fa66a'}">${r.regret ? '后悔' : '不后悔'}</span></div>
+        ${r.saved ? `<div class="kv"><span class="k">省下金额</span><span class="v">${money(r.saved)}</span></div>` : ''}
+      </div>`;
+    }
+
+    return html;
+  }
+
+  function renderDetailActions(a) {
+    const rows = [];
+    if (a.status === 'pending') {
+      rows.push(`<button class="btn block" data-action="run-approval" data-id="${esc(a.id)}">开始审批</button>`);
+    }
+    if (a.status === 'decided' && a.decision === 'reject' && !a.appealed) {
+      rows.push(`<button class="btn block ghost" data-action="appeal" data-id="${esc(a.id)}">提交申诉（仅一次）</button>`);
+    }
+    if (a.status === 'decided' && a.decision === 'need_info') {
+      rows.push(`<button class="btn block" data-action="resubmit" data-id="${esc(a.id)}">补充信息后重新审批</button>`);
+    }
+    if (a.status === 'cooling') {
+      const d = daysLeft(a.review_date);
+      const over = d === null || d <= 0;
+      rows.push(`<div class="card" style="text-align:center;padding:14px;background:rgba(139,92,246,.08);border-color:rgba(139,92,246,.25)">
+        <div style="font-weight:700;color:#7c4ddb">🧊 冷静期${over ? '已结束' : '中'}</div>
+        <div class="muted" style="margin-top:4px">${over ? '现在可以再确认一次，你还想买吗？' : `建议冷静到 ${esc(a.review_date)}（还剩 ${d} 天）`}</div>
+      </div>`);
+      if (over) {
+        rows.push(`<div class="btn-row">
+          <button class="btn green" data-action="cool-buy" data-id="${esc(a.id)}">还是想买</button>
+          <button class="btn ghost2" data-action="cool-drop" data-id="${esc(a.id)}">放弃了</button>
+        </div>`);
+      } else {
+        rows.push(`<div class="btn-row">
+          <button class="btn ghost2" data-action="cool-drop" data-id="${esc(a.id)}">现在就放弃</button>
+        </div>`);
+      }
+    }
+    if (a.status === 'purchasable') {
+      rows.push(`<button class="btn block green" data-action="mark-purchased" data-id="${esc(a.id)}">我已购买</button>`);
+      rows.push(`<button class="btn block ghost2" data-action="cool-drop" data-id="${esc(a.id)}">算了，不买了</button>`);
+    }
+    if (a.status === 'purchased') {
+      rows.push(`<button class="btn block" data-action="open-review" data-id="${esc(a.id)}">去复盘</button>`);
+    }
+    if (a.status === 'reviewed' || a.status === 'abandoned') {
+      rows.push(`<button class="btn block ghost2" data-action="delete-app" data-id="${esc(a.id)}">删除这条记录</button>`);
+    }
+    if (a.force_buy) {
+      rows.push(`<div class="tiny" style="text-align:center;color:#d64545">已标记为「强制购买」，并写入一条 AI 记忆</div>`);
+    }
+    if (!rows.length) return '';
+    return `<div style="margin-bottom:12px">${rows.join('')}</div>`;
+  }
+
+  /* ---------------- 复盘 ---------------- */
+  function viewStats() {
+    const all = S.applications;
+    const reviewed = all.filter(a => a.status === 'reviewed' && a.review);
+    const abandoned = all.filter(a => a.status === 'abandoned');
+    const purchased = all.filter(a => ['purchased', 'reviewed'].includes(a.status));
+    const savedTotal = abandoned.reduce((s, a) => s + (+a.budget || 0), 0);
+    const forceCount = all.filter(a => a.force_buy).length;
+
+    const emo = {};
+    all.forEach(a => { if (a.emotion) emo[a.emotion] = (emo[a.emotion] || 0) + 1; });
+    const emoMax = Math.max(1, ...Object.values(emo));
+
+    const diffs = reviewed
+      .map(a => Math.abs((+a.review.actual_price || 0) - (+a.budget || 0)))
+      .filter(x => !isNaN(x));
+    const avgDiff = diffs.length ? diffs.reduce((x, y) => x + y, 0) / diffs.length : null;
+
+    const sat = reviewed.map(a => +a.review.satisfaction || 0).filter(x => x > 0);
+    const avgSat = sat.length ? sat.reduce((x, y) => x + y, 0) / sat.length : null;
+    const regretRate = reviewed.length ? reviewed.filter(a => a.review.regret).length / reviewed.length : null;
+
+    let html = `<div class="page-head"><div class="page-title">复盘与统计</div></div>`;
+
+    html += `<div class="card hero" style="background:linear-gradient(135deg,#2fa66a,#3fbf86)">
+      <div class="hero-grid">
+        <div><div class="hero-label">放弃省下</div><div class="hero-val">${money(savedTotal)}</div></div>
+        <div><div class="hero-label">已购买</div><div class="hero-val">${purchased.length}<span class="unit">件</span></div></div>
+        <div><div class="hero-label">越权次数</div><div class="hero-val">${forceCount}<span class="unit">次</span></div></div>
+      </div>
+    </div>`;
+
+    const toReview = all.filter(a => a.status === 'purchased');
+    if (toReview.length) {
+      html += `<div class="sec-title">待复盘（${toReview.length}）</div>`;
+      html += toReview.map(a => `
+        <div class="item" data-action="open-detail" data-id="${esc(a.id)}">
+          <div class="item-ico">📝</div>
+          <div class="item-main">
+            <div class="item-name">${esc(a.item_name)}</div>
+            <div class="item-sub">买到手了，来记录一下真实感受</div>
+          </div>
+          <div class="item-right"><div class="item-amt">${money(a.budget)}</div></div>
+        </div>`).join('');
+    }
+
+    html += `<div class="card">
+      <div class="card-title">🧭 冲动类型分布</div>`;
+    const emoKeys = Object.keys(emo);
+    if (!emoKeys.length) {
+      html += `<div class="muted">还没有数据</div>`;
+    } else {
+      html += emoKeys.sort((a, b) => emo[b] - emo[a]).map(k => `
+        <div style="margin-bottom:10px">
+          <div style="display:flex;justify-content:space-between;font-size:13px;margin-bottom:4px">
+            <span>${esc(k)}</span><span class="muted">${emo[k]}</span>
+          </div>
+          <div style="height:8px;border-radius:4px;background:rgba(20,30,50,.07);overflow:hidden">
+            <div style="height:100%;width:${(emo[k] / emoMax * 100).toFixed(1)}%;border-radius:4px;background:linear-gradient(90deg,var(--accent),var(--accent-2))"></div>
+          </div>
+        </div>`).join('');
+    }
+    html += `</div>`;
+
+    html += `<div class="card">
+      <div class="card-title">📈 关键指标</div>
+      <div class="kv"><span class="k">预算准确度</span><span class="v">${avgDiff === null ? '—' : '平均偏差 ' + money(avgDiff)}</span></div>
+      <div class="kv"><span class="k">平均满意度</span><span class="v">${avgSat === null ? '—' : avgSat.toFixed(1) + ' / 5'}</span></div>
+      <div class="kv"><span class="k">后悔率</span><span class="v" style="color:${regretRate !== null && regretRate > 0.3 ? '#d64545' : '#2fa66a'}">${regretRate === null ? '—' : Math.round(regretRate * 100) + '%'}</span></div>
+      <div class="kv"><span class="k">累计提交</span><span class="v">${all.length} 次</span></div>
+      <div class="kv"><span class="k">放弃购买</span><span class="v">${abandoned.length} 次</span></div>
+      <div class="kv"><span class="k">已复盘</span><span class="v">${reviewed.length} 次</span></div>
+    </div>`;
+
+    const mems = S.memories.slice().sort((a, b) => (b.createdAt || '').localeCompare(a.createdAt || '')).slice(0, 8);
+    html += `<div class="card">
+      <div class="card-title">🧠 AI 好友记忆</div>`;
+    if (!mems.length) {
+      html += `<div class="muted">暂无记忆。审批产生越权、后悔等结果后会自动写入。</div>`;
+    } else {
+      html += mems.map(m => `
+        <div style="padding:9px 0;border-bottom:1px solid rgba(20,30,50,.06)">
+          <div style="display:flex;gap:8px;align-items:center;margin-bottom:3px">
+            <span class="tag ${
+              m.type === '越权购买' ? 'red' :
+              m.type === '后悔' ? 'amber' :
+              m.type === '满意购买' ? 'green' : 'blue'
+            }">${esc(m.type)}</span>
+            <span class="tiny">${esc(dateStr(m.createdAt))}</span>
+          </div>
+          <div style="font-size:13.5px">${esc(m.summary)}</div>
+        </div>`).join('');
+    }
+    html += `</div>`;
+
+    return html;
+  }
+
+  /* ---------------- 设置 ---------------- */
+  function viewSettings() {
+    const chars = S.characters || [];
+    let html = `<div class="page-head"><div class="page-title">设置</div></div>`;
+
+    html += `<div class="card">
+      <div class="card-title">🧑‍⚖️ 审批人</div>
+      <div class="muted" style="margin-bottom:10px">选择一位 AI 好友作为审批人，TA 会读取自己的记忆与聊天语境来审核你。</div>
+      ${chars.length ? `
+        <select id="s-char" data-role="char-select">
+          ${chars.map(c => `<option value="${esc(c.id)}" ${c.id === S.characterId ? 'selected' : ''}>${esc(c.name || '未命名角色')}</option>`).join('')}
+        </select>` : `<div class="muted">还没有角色，请先在小手机里创建一位角色。</div>`}
+    </div>`;
+
+    html += themeCard();
+
+    html += `<div class="card">
+      <div class="card-title">💰 财务快照</div>
+      <div class="kv"><span class="k">可支配资金</span><span class="v">${money(S.snapshot.disposable_cash)}</span></div>
+      <div class="kv"><span class="k">下次到账</span><span class="v">${esc(S.snapshot.next_income_date || '未设置')}</span></div>
+      <div class="kv"><span class="k">最低日均生活线</span><span class="v">${money(S.snapshot.min_daily_life)}</span></div>
+      <div class="kv"><span class="k">固定支出</span><span class="v">${(S.snapshot.fixed_expenses || []).length} 项</span></div>
+      <div class="kv"><span class="k">欠款</span><span class="v">${(S.snapshot.debts || []).length} 项</span></div>
+      <button class="btn block ghost" style="margin-top:12px" data-action="nav" data-view="finance">编辑财务快照</button>
+    </div>`;
+
+    const range = S._chatRange || 30;
+    html += `<div class="card">
+      <div class="card-title">🔍 审批检索范围</div>
+      <label class="fld" style="margin-bottom:0">
+        <div class="fld-label">聊天记录回溯天数 <span class="tiny" id="range-val">${range} 天</span></div>
+        <input type="range" id="s-range" min="7" max="90" step="1" value="${range}" />
+      </label>
+      <div class="tiny" style="margin-top:6px">审批时只把命中的片段摘要交给 AI，不传全文。</div>
+    </div>`;
+
+    html += `<div class="card">
+      <div class="card-title">🗂️ 数据</div>
+      <button class="btn block ghost" data-action="export-json">导出全部数据（JSON）</button>
+      <button class="btn block danger" style="margin-top:10px" data-action="clear-all">一键清空全部数据</button>
+      <div class="tiny" style="margin-top:10px;line-height:1.6">
+        全部数据保存在本机 APP 私有空间，不会上传。卸载 APP 时选择删除数据即可彻底清除。
+      </div>
+    </div>`;
+
+    html += `<div class="card">
+      <div class="card-title">ℹ️ 关于</div>
+      <div class="muted" style="line-height:1.7">
+        <b>购买审批</b> v1.1.0<br>
+        想买之前，先把它交给 AI 好友审批一次。<br>
+        没有免审额度，所有申请都必须审批。
+      </div>
+    </div>`;
+
+    return html;
+  }
+
+  function themeCard() {
+    const t = S.theme || defaultTheme();
+    const dim = typeof t.dim === 'number' ? t.dim : 0.72;
+    const previewStyle = t.bgImage
+      ? `background-image:linear-gradient(rgba(255,255,255,${dim}),rgba(255,255,255,${dim})),url('${t.bgImage}')`
+      : '';
+    return `
+      <div class="card">
+        <div class="card-title">🎨 主题外观</div>
+        <div class="theme-preview" style="${previewStyle}">
+          <span>${t.bgImage ? '自定义背景已启用' : '默认背景'}</span>
+        </div>
+        <input type="file" id="theme-file" accept="image/*" style="display:none" />
+        <div class="btn-row" style="margin-top:10px">
+          <button class="btn ghost sm" data-action="pick-bg">🖼 上传背景图</button>
+          ${t.bgImage ? `<button class="btn ghost2 sm" data-action="clear-bg">移除背景</button>` : ''}
+        </div>
+        <label class="fld" style="margin-top:14px">
+          <div class="fld-label">背景遮罩强度 <span class="tiny" id="dim-val">${Math.round(dim * 100)}%</span></div>
+          <input type="range" id="theme-dim" min="0" max="95" step="1" value="${Math.round(dim * 100)}"
+                 style="--p:${(Math.round(dim * 100) / 95 * 100).toFixed(1)}%" />
+        </label>
+        <div class="fld-label" style="margin-bottom:8px">主题色</div>
+        <div class="check-row" style="margin-bottom:4px">
+          ${ACCENT_PRESETS.map(p => `
+            <span class="swatch ${(t.accent === p.a) ? 'on' : ''}"
+                  data-action="set-accent" data-a="${p.a}" data-b="${p.b}"
+                  style="background:linear-gradient(135deg,${p.a},${p.b})"></span>`).join('')}
+        </div>
+        <button class="btn block ghost2 sm" style="margin-top:14px" data-action="reset-theme">恢复默认外观</button>
+        <div class="tiny" style="margin-top:8px;line-height:1.6">背景图会压缩后保存在本机，不会上传。</div>
+      </div>`;
+  }
+
+  /* ---------------- 财务快照编辑 ---------------- */
+  function viewFinance() {
+    const s = S.snapshot;
+    const fin = finCalc(s, 0);
+    const fx = s.fixed_expenses || [];
+    const db = s.debts || [];
+
+    return `
+      <div class="page-head">
+        <div class="page-title">财务快照</div>
+        <button class="btn ghost2 sm" data-action="nav" data-view="home">返回</button>
+      </div>
+
+      <div class="card" style="padding:12px 14px">
+        <div class="muted">安全可花 = 可支配资金 − 必还欠款 − 固定支出 − 应急预留</div>
+        <div style="font-size:20px;font-weight:800;margin-top:6px;color:${fin.safe < 0 ? '#d64545' : '#2fa66a'}">${money(fin.safe)}</div>
+      </div>
+
+      <div class="card">
+        <div class="card-title">基础</div>
+        <label class="fld">
+          <div class="fld-label">当前可支配资金（元）</div>
+          <input type="number" id="s-cash" inputmode="decimal" value="${s.disposable_cash || 0}" />
+        </label>
+        <label class="fld">
+          <div class="fld-label">下次到账日期</div>
+          <input type="date" id="s-income-date" value="${esc(s.next_income_date || '')}" />
+        </label>
+        <label class="fld">
+          <div class="fld-label">下次到账金额（元）</div>
+          <input type="number" id="s-income-amt" inputmode="decimal" value="${s.next_income_amount || 0}" />
+        </label>
+        <label class="fld">
+          <div class="fld-label">应急预留（元）</div>
+          <input type="number" id="s-reserve" inputmode="decimal" value="${s.emergency_reserve || 0}" />
+        </label>
+        <label class="fld" style="margin-bottom:0">
+          <div class="fld-label">最低日均生活线（元/天）</div>
+          <input type="number" id="s-mindaily" inputmode="decimal" value="${s.min_daily_life || 0}" />
+        </label>
+      </div>
+
+      <div class="card">
+        <div class="card-title">固定支出</div>
+        <div id="fx-rows">
+          ${fx.map((x, i) => `
+            <div class="row-item">
+              <input type="text" data-fx="fixed" data-idx="${i}" data-field="name" value="${esc(x.name || '')}" placeholder="名称，如 房租" />
+              <input type="number" inputmode="decimal" data-fx="fixed" data-idx="${i}" data-field="amount" value="${x.amount || 0}" placeholder="金额" style="max-width:110px" />
+              <button class="del" data-action="del-row" data-kind="fixed" data-idx="${i}">×</button>
+            </div>`).join('')}
+        </div>
+        <button class="btn block ghost sm" data-action="add-row" data-kind="fixed" style="margin-top:6px">＋ 添加固定支出</button>
+      </div>
+
+      <div class="card">
+        <div class="card-title">欠款</div>
+        <div id="debt-rows">
+          ${db.map((x, i) => `
+            <div class="row-item">
+              <input type="text" data-fx="debt" data-idx="${i}" data-field="name" value="${esc(x.name || '')}" placeholder="名称，如 信用卡" />
+              <input type="number" inputmode="decimal" data-fx="debt" data-idx="${i}" data-field="amount" value="${x.amount || 0}" placeholder="欠款" style="max-width:96px" />
+              <input type="number" inputmode="decimal" data-fx="debt" data-idx="${i}" data-field="minPayment" value="${x.minPayment || 0}" placeholder="最低还款" style="max-width:96px" />
+              <button class="del" data-action="del-row" data-kind="debt" data-idx="${i}">×</button>
+            </div>`).join('')}
+        </div>
+        <button class="btn block ghost sm" data-action="add-row" data-kind="debt" style="margin-top:6px">＋ 添加欠款</button>
+      </div>
+
+      <button class="btn block" data-action="save-finance">保存财务快照</button>
+    `;
+  }
+
+  /* ============================ 事件 ============================ */
+  document.addEventListener('click', async (e) => {
+    const chip = e.target.closest('.chip input') ? e.target.closest('.chip') : null;
+    if (chip) {
+      setTimeout(() => chip.classList.toggle('on', chip.querySelector('input').checked), 0);
+      return;
+    }
+    const el = e.target.closest('[data-action]');
+    if (!el) return;
+    const act = el.dataset.action;
+    try { await handleAction(act, el.dataset, el); }
+    catch (err) { console.error(err); safeToast('出错了：' + (err && err.message ? err.message : '未知错误')); }
+  });
+
+  document.addEventListener('input', (e) => {
+    const t = e.target;
+    if (t.id === 'f-urgency') {
+      const el = document.getElementById('urg-val');
+      if (el) el.textContent = t.value + ' / 10';
+      t.style.setProperty('--p', ((t.value - 1) / 9 * 100) + '%');
+    }
+    if (t.id === 's-range') {
+      const el = document.getElementById('range-val');
+      if (el) el.textContent = t.value + ' 天';
+      S._chatRange = +t.value;
+      setSetting('chatRange', +t.value);
+      t.style.setProperty('--p', ((t.value - 7) / 83 * 100) + '%');
+    }
+    if (t.id === 'theme-dim') {
+      const el = document.getElementById('dim-val');
+      if (el) el.textContent = t.value + '%';
+      if (!S.theme) S.theme = defaultTheme();
+      S.theme.dim = (+t.value) / 100;
+      applyTheme();
+      saveThemeDebounced();
+      t.style.setProperty('--p', ((+t.value) / 95 * 100) + '%');
+    }
+    if (t.dataset && t.dataset.fx) {
+      const kind = t.dataset.fx === 'fixed' ? 'fixed_expenses' : 'debts';
+      const idx = +t.dataset.idx;
+      const field = t.dataset.field;
+      if (S.snapshot[kind] && S.snapshot[kind][idx]) {
+        S.snapshot[kind][idx][field] = field === 'name' ? t.value : (parseFloat(t.value) || 0);
+      }
+    }
+  });
+
+  document.addEventListener('change', async (e) => {
+    const t = e.target;
+    if (t.dataset && t.dataset.role === 'char-select') {
+      S.characterId = t.value;
+      setSetting('characterId', t.value);
+      safeToast('审批人已切换');
+    }
+    if (t.id === 'theme-file') {
+      const f = t.files && t.files[0];
+      t.value = '';
+      if (!f) return;
+      safeToast('正在处理图片…');
+      try {
+        const data = await compressImage(f, 1400, 0.78);
+        if (!S.theme) S.theme = defaultTheme();
+        S.theme.bgImage = data;
+        applyTheme();
+        await saveTheme();
+        render();
+        safeToast('背景已更新');
+      } catch (err) {
+        safeToast('图片处理失败，换一张试试');
+      }
+    }
+  });
+
+  async function handleAction(act, ds, el) {
+    switch (act) {
+      case 'nav':
+        S.view = ds.view;
+        render();
+        break;
+
+      case 'filter':
+        S.presetFilter = ds.k;
+        render();
+        break;
+
+      case 'go-create':
+        if (!S.characterId || !S.characters.length) {
+          safeToast('请先在设置里选择一位审批人角色');
+          S.view = 'settings';
+          render();
+          return;
+        }
+        S.view = 'create';
+        render();
+        break;
+
+      case 'open-detail':
+        S.detailId = ds.id;
+        S.view = 'detail';
+        render();
+        break;
+
+      case 'submit-app':
+        await submitApplication();
+        break;
+
+      case 'run-approval':
+        await runApproval(ds.id);
+        break;
+
+      case 'appeal':
+        await appeal(ds.id);
+        break;
+
+      case 'resubmit':
+        await runApproval(ds.id);
+        break;
+
+      case 'cool-buy':
+        await coolBuy(ds.id);
+        break;
+
+      case 'cool-drop':
+        await coolDrop(ds.id);
+        break;
+
+      case 'mark-purchased':
+        await markPurchased(ds.id);
+        break;
+
+      case 'open-review':
+        await openReviewDialog(ds.id);
+        break;
+
+      /* ====== 新增：转发 / 质问 / 主题 ====== */
+      case 'forward-decision':
+        await forwardDecision(ds.id);
+        break;
+
+      case 'forward-thread':
+        await forwardThread(ds.id);
+        break;
+
+      case 'send-qa': {
+        const v = (document.getElementById('qa-text') || {}).value || '';
+        if (!v.trim()) { safeToast('先说点什么吧'); return; }
+        await sendQA(ds.id, v.trim());
+        break;
+      }
+
+      case 'qa-quick':
+        await sendQA(ds.id, ds.t || '');
+        break;
+
+      case 'focus-qa': {
+        const card = document.getElementById('qa-card');
+        if (card) card.scrollIntoView({ block: 'center', behavior: 'smooth' });
+        const ta = document.getElementById('qa-text');
+        if (ta) setTimeout(() => { try { ta.focus(); } catch (e) {} }, 300);
+        break;
+      }
+
+      case 'pick-bg': {
+        const f = document.getElementById('theme-file');
+        if (f) f.click();
+        break;
+      }
+
+      case 'clear-bg':
+        if (!S.theme) S.theme = defaultTheme();
+        S.theme.bgImage = null;
+        applyTheme();
+        await saveTheme();
+        render();
+        safeToast('已移除背景图');
+        break;
+
+      case 'set-accent':
+        if (!S.theme) S.theme = defaultTheme();
+        S.theme.accent = ds.a;
+        S.theme.accent2 = ds.b;
+        applyTheme();
+        await saveTheme();
+        render();
+        break;
+
+      case 'reset-theme':
+        S.theme = defaultTheme();
+        applyTheme();
+        await saveTheme();
+        render();
+        safeToast('已恢复默认外观');
+        break;
+
+      case 'delete-app':
+        if (await confirmDialog('删除这条记录？', '删除后不可恢复。')) {
+          await dbDelete('applications', ds.id);
+          S.applications = S.applications.filter(a => a.id !== ds.id);
+          S.view = 'pending';
+          render();
+          safeToast('已删除');
+        }
+        break;
+
+      case 'add-row': {
+        const kind = ds.kind === 'fixed' ? 'fixed_expenses' : 'debts';
+        if (!S.snapshot[kind]) S.snapshot[kind] = [];
+        S.snapshot[kind].push(kind === 'fixed_expenses'
+          ? { name: '', amount: 0 }
+          : { name: '', amount: 0, minPayment: 0, dueDate: '', highInterest: false });
+        render();
+        break;
+      }
+
+      case 'del-row': {
+        const kind = ds.kind === 'fixed' ? 'fixed_expenses' : 'debts';
+        S.snapshot[kind].splice(+ds.idx, 1);
+        render();
+        break;
+      }
+
+      case 'save-finance':
+        await saveFinanceFromForm();
+        break;
+
+      case 'export-json':
+        await exportJSON();
+        break;
+
+      case 'clear-all':
+        await clearAll();
+        break;
+
+      default:
+        break;
+    }
+  }
+
+  /* ============================ 业务逻辑 ============================ */
+
+  async function submitApplication() {
+    const get = (id) => (document.getElementById(id) || {}).value || '';
+    const chk = (id) => !!(document.getElementById(id) || {}).checked;
+
+    const name = get('f-name').trim();
+    const budget = parseFloat(get('f-budget')) || 0;
+    if (!name) { safeToast('请填写具体物品'); return; }
+    if (budget <= 0) { safeToast('请填写预算'); return; }
+    const reason = get('f-reason').trim();
+    if (!reason) { safeToast('请填写购买理由'); return; }
+
+    const fin = finCalc(S.snapshot, budget);
+
+    const payload = {
+      item_type: get('f-type'),
+      item_name: name,
+      budget: budget,
+      reason: reason,
+      urgency: parseInt(get('f-urgency')) || 5,
+      without_it: get('f-without').trim(),
+      alternatives: get('f-alt').trim(),
+      use_frequency: get('f-freq'),
+      promoaffected: chk('f-promo'),
+      emotion: get('f-emotion'),
+      accept_used: chk('f-used'),
+      accept_substitute: chk('f-sub'),
+      accept_delay: chk('f-delay'),
+      status: 'pending',
+      decision: null,
+      ai_message: '',
+      conditions: [],
+      reasons: [],
+      cited_memories: [],
+      risk_flags: [],
+      follow_up: [],
+      qa_thread: [],
+      review_date: null,
+      appeal_count: 0,
+      force_buy: false,
+      characterId: S.characterId,
+      finance_snapshot: {
+        safe: fin.safe,
+        after: fin.after,
+        dailyAfter: fin.dailyAfter,
+        minDaily: fin.minDaily,
+        days: fin.days,
+        reds: fin.reds
+      },
+      createdAt: new Date().toISOString()
+    };
+
+    const created = await dbCreate('applications', payload);
+    payload.id = created.id;
+    S.applications.unshift(payload);
+
+    S.detailId = created.id;
+    S.view = 'detail';
+    render();
+
+    await runApproval(created.id);
+  }
+
+  /**
+   * 收集审批上下文：财务快照 + 聊天片段 + AI 记忆
+   */
+  async function gatherContext(a) {
+    const keywords = [
+      a.item_name, a.item_type, '省钱', '还钱', '还款', '后悔', '预算',
+      '超支', '月光', '攒钱', String(Math.round(a.budget))
+    ].filter(Boolean);
+
+    const rangeDays = S._chatRange || 30;
+    const cutoff = Date.now() - rangeDays * 86400000;
+    const snippets = [];
+
+    /* 1. 聊天记录检索 */
+    try {
+      if (S.sessionId) {
+        const hist = await api.chat.readHistory({ sessionId: S.sessionId, limit: 150 });
+        const msgs = Array.isArray(hist) ? hist : (hist && (hist.messages || hist.items) || []);
+        for (const m of msgs) {
+          const txt = m && (m.content || m.text) || '';
+          if (!txt) continue;
+          const ts = m.createdAt ? new Date(m.createdAt).getTime() : 0;
+          if (ts && ts < cutoff) continue;
+          if (keywords.some(k => txt.includes(k))) {
+            snippets.push('- ' + txt.replace(/\s+/g, ' ').slice(0, 70));
+          }
+          if (snippets.length >= 12) break;
+        }
+      }
+    } catch (e) { /* 无会话权限时静默降级 */ }
+
+    /* 2. 降级：短期记忆事件流 */
+    if (!snippets.length && S.characterId) {
+      try {
+        const st = await api.memory.readShortTerm({ characterId: S.characterId, limit: 60 });
+        const arr = Array.isArray(st) ? st : (st && (st.events || st.items || st.memories) || []);
+        for (const m of arr) {
+          const txt = (m && (m.summary || m.content || m.text)) || '';
+          if (!txt) continue;
+          if (keywords.some(k => txt.includes(k))) {
+            snippets.push('- ' + txt.replace(/\s+/g, ' ').slice(0, 70));
+          }
+          if (snippets.length >= 10) break;
+        }
+      } catch (e) {}
+    }
+
+    /* 3. AI 好友记忆 */
+    const relevantTypes = ['越权购买', '后悔', '放弃购买', '满意购买', '条件未达成'];
+    const mems = S.memories
+      .filter(m => relevantTypes.includes(m.type))
+      .sort((x, y) => (y.createdAt || '').localeCompare(x.createdAt || ''))
+      .slice(0, 10)
+      .map(m => `- [${m.type}] ${m.summary}`);
+
+    return {
+      chat: snippets.join('\n'),
+      memories: mems.join('\n')
+    };
+  }
+
+  function buildPrompt(a, fin, ctx) {
+    const s = S.snapshot;
+    const YN = (v) => v ? '是' : '否';
+    return [
+      '你是一位替用户把关冲动消费的 AI 好友。请审核以下购买申请，严格按下面的 JSON 结构输出，不要输出任何额外文字，不要使用 Markdown 代码块。',
+      '',
+      '输出格式：',
+      '{',
+      '  "decision": "通过 | 有条件通过 | 暂缓 | 驳回 | 要求补充",',
+      '  "message": "给用户的一段口语化留言（1-3 句），直接对 TA 说话，说明你为什么同意或不同意，可以带一点情绪和个性",',
+      '  "reasons": ["审批理由，每条一句话"],',
+      '  "conditions": ["附加条件，没有则空数组"],',
+      '  "cited_memories": ["引用的聊天/记忆片段，没有则空数组"],',
+      '  "risk_flags": ["风险标签，没有则空数组"],',
+      '  "follow_up": ["你想追问用户的问题，没有则空数组"],',
+      '  "review_date": "YYYY-MM-DD，仅暂缓或有条件通过时给出"',
+      '}',
+      '',
+      '【购买申请】',
+      '物品类型：' + a.item_type,
+      '具体物品：' + a.item_name,
+      '预算：' + a.budget + ' 元',
+      '购买理由：' + a.reason,
+      '紧急程度：' + a.urgency + ' / 10',
+      '没有它会怎样：' + (a.without_it || '未填写'),
+      '现有替代品：' + (a.alternatives || '无'),
+      '预计使用频率：' + a.use_frequency,
+      '是否受促销影响：' + YN(a.promoaffected),
+      '提交时情绪：' + a.emotion,
+      '接受二手：' + YN(a.accept_used) + '｜接受平替：' + YN(a.accept_substitute) + '｜接受延迟：' + YN(a.accept_delay),
+      '',
+      '【财务快照】',
+      '可支配资金：' + fin.cash + ' 元',
+      '距下次到账：' + fin.days + ' 天（' + (s.next_income_date || '未设置') + '，金额 ' + (s.next_income_amount || 0) + ' 元）',
+      '固定支出合计：' + fin.fixed + ' 元',
+      '必还欠款最低还款合计：' + fin.debtDue + ' 元',
+      '应急预留：' + fin.reserve + ' 元',
+      '最低日均生活线：' + fin.minDaily + ' 元/天',
+      '→ 安全可花：' + fin.safe + ' 元',
+      '→ 买后余额：' + fin.after + ' 元',
+      '→ 买后日均：' + (fin.dailyAfter === null ? '未知' : fin.dailyAfter.toFixed(1)) + ' 元/天',
+      '→ 已触发红灯：' + (fin.reds.length ? fin.reds.join('、') : '无'),
+      '',
+      '【近期相关聊天片段（近 ' + (S._chatRange || 30) + ' 天，已做关键词命中筛选）】',
+      ctx.chat || '（无可用片段）',
+      '',
+      '【与该用户的过往购买记忆】',
+      ctx.memories || '（无）',
+      '',
+      '今天是 ' + todayStr() + '。请给出你的审批结论。'
+    ].join('\n');
+  }
+
+  function extractJSON(text) {
+    if (!text) return null;
+    let t = String(text).trim();
+    const fence = t.match(/```(?:json)?\s*([\s\S]*?)```/i);
+    if (fence) t = fence[1].trim();
+    const s = t.indexOf('{');
+    const e = t.lastIndexOf('}');
+    if (s === -1 || e === -1 || e < s) return null;
+    try { return JSON.parse(t.slice(s, e + 1)); }
+    catch (err) {
+      try { return JSON.parse(t.slice(s, e + 1).replace(/,\s*([}\]])/g, '$1')); }
+      catch (err2) { return null; }
+    }
+  }
+
+  async function runApproval(appId) {
+    const a = S.applications.find(x => x.id === appId);
+    if (!a) return;
+    if (!S.characterId) { safeToast('请先设置审批人角色'); return; }
+
+    /* 置为审批中 */
+    a.status = 'reviewing';
+    S.detailId = appId;
+    if (S.view !== 'detail') S.view = 'detail';
+    render();
+    await dbUpdate('applications', appId, { status: 'reviewing' });
+
+    try {
+      const fin = finCalc(S.snapshot, a.budget);
+      const ctx = await gatherContext(a);
+      const prompt = buildPrompt(a, fin, ctx);
+
+      const result = await api.ai.generate({
+        characterId: S.characterId,
+        appTags: ['purchase', 'approve'],
+        instruction: prompt
+      });
+
+      const parsed = extractJSON(result && result.text);
+
+      if (!parsed || !parsed.decision) {
+        a.status = 'decided';
+        a.decision = 'need_info';
+        a.decision_raw = '解析失败';
+        a.ai_message = '';
+        a.reasons = ['审批结果解析失败，请重试或补充信息后重新提交。'];
+        a.conditions = []; a.cited_memories = []; a.risk_flags = []; a.follow_up = [];
+        a.qa_thread = [];
+        a.decidedAt = new Date().toISOString();
+        await dbUpdate('applications', appId, {
+          status: a.status, decision: a.decision, decision_raw: a.decision_raw,
+          ai_message: a.ai_message, qa_thread: a.qa_thread,
+          reasons: a.reasons, conditions: a.conditions, cited_memories: a.cited_memories,
+          risk_flags: a.risk_flags, follow_up: a.follow_up, decidedAt: a.decidedAt
+        });
+        render();
+        safeToast('审批结果解析失败，请重试');
+        return;
+      }
+
+      const key = DECISION_MAP[parsed.decision] || 'need_info';
+      let nextStatus = 'decided';
+      if (key === 'pass') nextStatus = 'purchasable';
+      else if (key === 'conditional' || key === 'suspend') nextStatus = 'cooling';
+
+      const reviewDate = parsed.review_date || defaultReviewDate(key);
+
+      const license = (key === 'pass' || key === 'conditional') ? {
+        budget: a.budget,
+        fund_source: fin.safe >= a.budget ? '可支配资金' : '需动用预留（已提示）',
+        daily_after: fin.dailyAfter,
+        review_date: reviewDate
+      } : null;
+
+      Object.assign(a, {
+        status: nextStatus,
+        decision: key,
+        decision_raw: parsed.decision,
+        ai_message: typeof parsed.message === 'string' ? parsed.message.trim() : '',
+        conditions: Array.isArray(parsed.conditions) ? parsed.conditions : [],
+        reasons: Array.isArray(parsed.reasons) ? parsed.reasons : [],
+        cited_memories: Array.isArray(parsed.cited_memories) ? parsed.cited_memories : [],
+        risk_flags: Array.isArray(parsed.risk_flags) ? parsed.risk_flags : [],
+        follow_up: Array.isArray(parsed.follow_up) ? parsed.follow_up : [],
+        qa_thread: [],
+        review_date: reviewDate,
+        license: license,
+        decidedAt: new Date().toISOString()
+      });
+
+      await dbUpdate('applications', appId, {
+        status: a.status, decision: a.decision, decision_raw: a.decision_raw,
+        ai_message: a.ai_message, qa_thread: a.qa_thread,
+        conditions: a.conditions, reasons: a.reasons, cited_memories: a.cited_memories,
+        risk_flags: a.risk_flags, follow_up: a.follow_up, review_date: a.review_date,
+        license: a.license, decidedAt: a.decidedAt
+      });
+
+      /* 通知 */
+      await notifyDecision(a);
+
+      /* 冷静期定时任务 */
+      if (nextStatus === 'cooling' && reviewDate) {
+        scheduleCoolingTask(a, reviewDate).catch(() => {});
+      }
+
+      render();
+      safeToast('审批完成：' + (DECISION_LABEL[key] || key));
+
+    } catch (err) {
+      a.status = 'decided';
+      a.decision = 'need_info';
+      a.decision_raw = '调用失败';
+      a.ai_message = '';
+      a.reasons = ['审批调用失败：' + (err && err.message ? err.message : '未知错误')];
+      a.decidedAt = new Date().toISOString();
+      await dbUpdate('applications', appId, {
+        status: a.status, decision: a.decision, decision_raw: a.decision_raw,
+        ai_message: a.ai_message, reasons: a.reasons, decidedAt: a.decidedAt
+      });
+      render();
+      safeToast('审批调用失败，请稍后重试');
+    }
+  }
+
+  function defaultReviewDate(key) {
+    const d = new Date();
+    if (key === 'suspend') d.setDate(d.getDate() + 7);
+    else d.setDate(d.getDate() + 3);
+    return d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0') + '-' + String(d.getDate()).padStart(2, '0');
+  }
+
+  async function notifyDecision(a) {
+    const label = DECISION_LABEL[a.decision] || '已出结果';
+    try {
+      await api.notifications.create({
+        title: '购买审批 · ' + a.item_name,
+        body: '审批结果：' + label + (a.ai_message ? '｜' + a.ai_message : (a.reasons && a.reasons[0] ? '｜' + a.reasons[0] : '')),
+        badgeDelta: 1,
+        data: { applicationId: a.id }
+      });
+    } catch (e) {}
+  }
+
+  async function scheduleCoolingTask(a, reviewDate) {
+    try {
+      const d = daysLeft(reviewDate);
+      const delayMs = Math.max(60000, (d === null ? 3 : d) * 86400000);
+      await api.tasks.schedule({
+        id: 'cooling_' + a.id,
+        delayMs: delayMs,
+        actions: [
+          {
+            type: 'notification',
+            title: '冷静期结束',
+            body: '「' + a.item_name + '」的冷静期结束了，还想要吗？',
+            badgeDelta: 1,
+            data: { applicationId: a.id }
+          }
+        ]
+      });
+    } catch (e) {}
+  }
+
+  /* ============================ 质问 / 追问 ============================ */
+
+  function buildQAPrompt(a) {
+    const nm = charName();
+    const fin = a.finance_snapshot || {};
+    const L = [];
+    L.push('你现在扮演用户的 AI 好友「' + nm + '」。你刚刚对 TA 的购买申请给出了审批结论，现在 TA 来追问 / 质问你。');
+    L.push('请用你自己的口吻、以第一人称直接回应，2-4 句话，口语化、有个性。可以坚持原则，也可以酌情让步，但不要机械重复之前的理由。');
+    L.push('只输出你要说的话本身：不要 JSON，不要 Markdown，不要旁白，不要加引号。');
+    L.push('');
+    L.push('【申请】' + a.item_name + '（' + (a.item_type || '') + '），预算 ' + a.budget + ' 元');
+    L.push('【购买理由】' + (a.reason || '—'));
+    L.push('【你的审批结论】' + (DECISION_LABEL[a.decision] || '未定'));
+    if (a.ai_message) L.push('【你当时的留言】' + a.ai_message);
+    if (a.reasons && a.reasons.length) L.push('【你的理由】' + a.reasons.join('；'));
+    if (a.conditions && a.conditions.length) L.push('【附加条件】' + a.conditions.join('；'));
+    if (a.risk_flags && a.risk_flags.length) L.push('【风险标签】' + a.risk_flags.join('；'));
+    if (fin.safe !== undefined) {
+      L.push('【财务状况】安全可花 ' + fin.safe + ' 元，买后余额 ' + fin.after + ' 元，买后日均 ' +
+        (fin.dailyAfter === null ? '未知' : Math.round(fin.dailyAfter)) + ' 元/天，最低生活线 ' + fin.minDaily + ' 元/天');
+    }
+    L.push('');
+    L.push('【对话记录】');
+    (a.qa_thread || []).forEach(t => L.push((t.role === 'user' ? '用户：' : '你：') + t.text));
+    L.push('');
+    L.push('今天是 ' + todayStr() + '。请回应。');
+    return L.join('\n');
+  }
+
+  async function sendQA(appId, text) {
+    const a = S.applications.find(x => x.id === appId);
+    if (!a || !text) return;
+    if (!S.characterId) { safeToast('请先设置审批人角色'); return; }
+
+    if (!a.qa_thread) a.qa_thread = [];
+    a.qa_thread.push({ role: 'user', text: text, at: new Date().toISOString() });
+    S.qaPending = appId;
+    render();
+    try { await dbUpdate('applications', appId, { qa_thread: a.qa_thread }); } catch (e) {}
+
+    let reply = '';
+    try {
+      const res = await api.ai.generate({
+        characterId: S.characterId,
+        appTags: ['purchase', 'approve', 'qa'],
+        instruction: buildQAPrompt(a)
+      });
+      reply = (res && res.text ? String(res.text) : '').trim();
+    } catch (e) {
+      reply = '（TA 现在没有回应，稍后再试试）';
+    }
+    if (!reply) reply = '（TA 沉默了一下，没有回答）';
+    reply = reply.replace(/^```[\s\S]*?```$/g, (m) => m.replace(/```/g, '')).trim();
+    reply = reply.replace(/^["“]|["”]$/g, '').trim();
+
+    a.qa_thread.push({ role: 'ai', text: reply, at: new Date().toISOString() });
+    S.qaPending = null;
+    try { await dbUpdate('applications', appId, { qa_thread: a.qa_thread }); } catch (e) {}
+    render();
+
+    const ta = document.getElementById('qa-text');
+    if (ta) { try { ta.scrollIntoView({ block: 'center', behavior: 'smooth' }); } catch (e) {} }
+  }
+
+  /* ============================ 转发到聊天 ============================ */
+
+  /**
+   * 尝试把一段文本发送到聊天。
+   * 宿主 API 名称不确定，这里做多路尝试；全部失败则退回复制到剪贴板。
+   */
+  async function sendToChat(text) {
+    const targets = [];
+    const push = (obj, name) => {
+      if (obj && typeof obj[name] === 'function') targets.push(obj[name].bind(obj));
+    };
+    if (api) {
+      push(api.chat, 'sendMessage');
+      push(api.chat, 'send');
+      push(api.chat, 'appendMessage');
+      push(api.chat, 'pushMessage');
+      push(api.chat, 'writeMessage');
+      push(api.message, 'send');
+      push(api.messages, 'send');
+    }
+
+    const payload = {
+      sessionId: S.sessionId,
+      characterId: S.characterId,
+      role: 'user',
+      type: 'text',
+      content: text,
+      text: text
+    };
+
+    for (const fn of targets) {
+      try {
+        await fn(payload);
+        return { ok: true };
+      } catch (e) { /* 换下一个 */ }
+    }
+
+    try {
+      await navigator.clipboard.writeText(text);
+      return { ok: false, fallback: 'copied' };
+    } catch (e) {
+      return { ok: false, fallback: 'failed' };
+    }
+  }
+
+  function handleSendResult(r) {
+    if (r.ok) safeToast('已转发到聊天');
+    else if (r.fallback === 'copied') safeToast('已复制到剪贴板，去聊天里粘贴吧');
+    else safeToast('转发失败，请手动复制');
+  }
+
+  function buildDecisionText(a) {
+    const nm = charName();
+    const L = [];
+    L.push('【购买审批结果】');
+    L.push('物品：' + a.item_name + '（预算 ' + money(a.budget) + '）');
+    L.push('结论：' + (DECISION_LABEL[a.decision] || '—'));
+    if (a.ai_message) L.push(nm + '：' + a.ai_message);
+    if (a.reasons && a.reasons.length) L.push('理由：' + a.reasons.map(r => '\n· ' + r).join(''));
+    if (a.conditions && a.conditions.length) L.push('附加条件：' + a.conditions.map(c => '\n· ' + c).join(''));
+    return L.join('\n');
+  }
+
+  async function forwardDecision(appId) {
+    const a = S.applications.find(x => x.id === appId);
+    if (!a) return;
+    const r = await sendToChat(buildDecisionText(a));
+    handleSendResult(r);
+  }
+
+  async function forwardThread(appId) {
+    const a = S.applications.find(x => x.id === appId);
+    if (!a || !a.qa_thread || !a.qa_thread.length) { safeToast('还没有追问记录'); return; }
+    const nm = charName();
+    const L = [];
+    L.push('【购买审批 · 追问记录】');
+    L.push('物品：' + a.item_name + '（' + money(a.budget) + '）· 结论：' + (DECISION_LABEL[a.decision] || '—'));
+    L.push('————');
+    a.qa_thread.forEach(t => {
+      L.push((t.role === 'user' ? '我：' : nm + '：') + t.text);
+    });
+    const r = await sendToChat(L.join('\n'));
+    handleSendResult(r);
+  }
+
+  async function appeal(appId) {
+    const a = S.applications.find(x => x.id === appId);
+    if (!a) return;
+    if (a.appealed) { safeToast('每条申请只能申诉一次'); return; }
+    if (!(await confirmDialog('提交申诉？', '你可以补充说明一次，TA 会重新审批。'))) return;
+
+    a.appealed = true;
+    a.status = 'pending';
+    a.decision = null;
+    await dbUpdate('applications', appId, { appealed: true, status: 'pending', decision: null });
+    render();
+    await runApproval(appId);
+  }
+
+  async function coolBuy(appId) {
+    const a = S.applications.find(x => x.id === appId);
+    if (!a) return;
+    const fin = finCalc(S.snapshot, a.budget);
+    a.status = 'purchasable';
+    a.license = a.license || {
+      budget: a.budget,
+      fund_source: fin.safe >= a.budget ? '可支配资金' : '需动用预留（已提示）',
+      daily_after: fin.dailyAfter,
+      review_date: a.review_date
+    };
+    await dbUpdate('applications', appId, { status: 'purchasable', license: a.license });
+    render();
+    safeToast('已确认，记得买完回来复盘');
+  }
+
+  async function coolDrop(appId) {
+    const a = S.applications.find(x => x.id === appId);
+    if (!a) return;
+    if (!(await confirmDialog('放弃这次购买？', '会记录一条「放弃购买」记忆，并计入省下金额。'))) return;
+
+    a.status = 'abandoned';
+    a.abandonedAt = new Date().toISOString();
+    await dbUpdate('applications', appId, { status: 'abandoned', abandonedAt: a.abandonedAt });
+
+    await writeMemory('放弃购买', a, '用户放弃了购买「' + a.item_name + '」，省下 ' + a.budget + ' 元。');
+
+    render();
+    safeToast('已放弃，省下 ' + money(a.budget));
+  }
+
+  async function markPurchased(appId) {
+    const a = S.applications.find(x => x.id === appId);
+    if (!a) return;
+    a.status = 'purchased';
+    a.purchasedAt = new Date().toISOString();
+    if (!a.license) {
+      const fin = finCalc(S.snapshot, a.budget);
+      a.license = { budget: a.budget, fund_source: '可支配资金', daily_after: fin.dailyAfter, review_date: a.review_date };
+    }
+    await dbUpdate('applications', appId, { status: 'purchased', purchasedAt: a.purchasedAt, license: a.license });
+
+    try {
+      await api.tasks.schedule({
+        id: 'review_' + a.id,
+        delayMs: 14 * 86400000,
+        actions: [{
+          type: 'notification',
+          title: '该复盘了',
+          body: '「' + a.item_name + '」买回来两周了，用着怎么样？',
+          badgeDelta: 1,
+          data: { applicationId: a.id }
+        }]
+      });
+    } catch (e) {}
+
+    render();
+    safeToast('已记录，别忘了两周后回来复盘');
+  }
+
+  /* --------- 复盘表单（用连续 confirm 简化实现） --------- */
+  async function openReviewDialog(appId) {
+    const a = S.applications.find(x => x.id === appId);
+    if (!a) return;
+
+    const actual = prompt('实际花了多少钱？（元）', String(a.budget || ''));
+    if (actual === null) return;
+    const channel = prompt('在哪个渠道买的？', '') || '';
+    const satStr = prompt('满意度 1-5 分', '4');
+    if (satStr === null) return;
+    const satisfaction = Math.max(1, Math.min(5, parseInt(satStr) || 4));
+    const usage = prompt('买回来用了多少次 / 频率？', '') || '';
+    const regretStr = prompt('后悔吗？输入 1 = 后悔，0 = 不后悔', '0');
+    const regret = String(regretStr).trim() === '1';
+
+    const review = {
+      actual_price: parseFloat(actual) || 0,
+      channel: channel,
+      satisfaction: satisfaction,
+      usage_count: usage,
+      regret: regret,
+      saved: 0,
+      reviewedAt: new Date().toISOString()
+    };
+
+    a.review = review;
+    a.status = 'reviewed';
+    await dbUpdate('applications', appId, { review: review, status: 'reviewed' });
+
+    if (regret) {
+      await writeMemory('后悔', a, '用户买了「' + a.item_name + '」（' + review.actual_price + ' 元）后表示后悔。');
+    } else {
+      await writeMemory('满意购买', a, '用户买了「' + a.item_name + '」（' + review.actual_price + ' 元），满意度 ' + satisfaction + '/5，不后悔。');
+    }
+
+    if (a.conditions && a.conditions.length && review.actual_price > a.budget) {
+      await writeMemory('条件未达成', a, '「' + a.item_name + '」审批附加条件未达成：实际花费 ' + review.actual_price + ' 元，超出批准预算 ' + a.budget + ' 元。');
+    }
+
+    render();
+    safeToast('复盘已保存');
+  }
+
+  async function writeMemory(type, a, summary) {
+    const mem = {
+      type: type,
+      application_id: a.id,
+      item_name: a.item_name,
+      summary: summary,
+      createdAt: new Date().toISOString()
+    };
+    try {
+      const created = await dbCreate('ai_memory', mem);
+      mem.id = created.id;
+      S.memories.push(mem);
+    } catch (e) { return; }
+
+    if (type === '越权购买' || type === '后悔') {
+      try {
+        await api.memory.add({
+          characterId: S.characterId,
+          type: 'long_term',
+          content: summary,
+          importance: type === '越权购买' ? 0.75 : 0.6,
+          reason: '购买审批 APP 记录'
+        });
+      } catch (e) {}
+    }
+  }
+
+  /* --------- 强制购买 --------- */
+  async function forceBuy(appId) {
+    const a = S.applications.find(x => x.id === appId);
+    if (!a) return;
+    a.force_buy = true;
+    a.status = 'purchased';
+    a.purchasedAt = new Date().toISOString();
+    await dbUpdate('applications', appId, { force_buy: true, status: 'purchased', purchasedAt: a.purchasedAt });
+    await writeMemory('越权购买', a, '用户在被驳回后强制购买了「' + a.item_name + '」（' + a.budget + ' 元）。');
+    render();
+    safeToast('已标记为强制购买，并写入一条记忆');
+  }
+
+  /* --------- 财务快照保存 --------- */
+  async function saveFinanceFromForm() {
+    const get = (id) => (document.getElementById(id) || {}).value || '';
+    const num = (id) => parseFloat(get(id)) || 0;
+
+    S.snapshot.disposable_cash = num('s-cash');
+    S.snapshot.next_income_date = get('s-income-date');
+    S.snapshot.next_income_amount = num('s-income-amt');
+    S.snapshot.emergency_reserve = num('s-reserve');
+    S.snapshot.min_daily_life = num('s-mindaily');
+
+    await saveSnapshot();
+    safeToast('财务快照已保存');
+    S.view = 'home';
+    render();
+  }
+
+  /* --------- 导出 / 清空 --------- */
+  async function exportJSON() {
+    const data = {
+      exportedAt: new Date().toISOString(),
+      snapshot: S.snapshot,
+      applications: S.applications,
+      memories: S.memories,
+      theme: S.theme,
+      settings: await dbList('settings', 60)
+    };
+    const text = JSON.stringify(data, null, 2);
+    try {
+      await navigator.clipboard.writeText(text);
+      safeToast('已复制到剪贴板（' + text.length + ' 字符）');
+    } catch (e) {
+      prompt('复制以下 JSON：', text.slice(0, 2000));
+    }
+  }
+
+  async function clearAll() {
+    if (!(await confirmDialog('清空全部数据？', '财务快照、所有申请、AI 记忆都会被删除，且不可恢复。'))) return;
+    for (const a of S.applications) { try { await dbDelete('applications', a.id); } catch (e) {} }
+    for (const m of S.memories) { try { await dbDelete('ai_memory', m.id); } catch (e) {} }
+    const snaps = await dbList('snapshot', 5);
+    for (const s of snaps) { try { await dbDelete('snapshot', s.id); } catch (e) {} }
+
+    S.applications = [];
+    S.memories = [];
+    S.snapshot = emptySnapshot();
+    S.view = 'home';
+    render();
+    safeToast('已清空全部数据');
+  }
+
+  async function confirmDialog(title, message) {
+    try {
+      const r = await api.ui.confirm({ title: title, message: message });
+      return !!r;
+    } catch (e) {
+      return window.confirm(title + '\n' + message);
+    }
+  }
+
+  /* ============================ 启动 ============================ */
+  async function boot() {
+    if (!api) {
+      screenEl.innerHTML = '<div class="card">请在「小手机」宿主中打开本应用。</div>';
+      return;
+    }
+
+    let launch = null;
+    try { launch = await api.app.getLaunchContext(); } catch (e) {}
+    S.sessionId = (launch && launch.sessionId) || null;
+
+    try { S.characters = (await api.characters.list()) || []; }
+    catch (e) { S.characters = []; }
+
+    const savedChar = await getSetting('characterId');
+    S.characterId = (launch && launch.characterId) || savedChar || (S.characters[0] && S.characters[0].id) || null;
+    if (S.characterId && S.characterId !== savedChar) {
+      try { await setSetting('characterId', S.characterId); } catch (e) {}
+    }
+
+    const savedRange = await getSetting('chatRange');
+    S._chatRange = savedRange || 30;
+
+    /* 主题 */
+    const savedTheme = await getSetting('theme', null);
+    S.theme = Object.assign(defaultTheme(), savedTheme || {});
+    applyTheme();
+
+    S.snapshot = await loadSnapshot();
+    S.applications = (await dbList('applications')).sort((a, b) => (b.createdAt || '').localeCompare(a.createdAt || ''));
+    S.memories = await dbList('ai_memory');
+
+    if (launch && launch.data && launch.data.applicationId) {
+      const found = S.applications.find(x => x.id === launch.data.applicationId);
+      if (found) { S.detailId = found.id; S.view = 'detail'; }
+    }
+
+    S.booted = true;
+    render();
+
+    if (hasSnapshot() && S.snapshot.updatedAt) {
+      const days = Math.floor((Date.now() - new Date(S.snapshot.updatedAt).getTime()) / 86400000);
+      if (days >= 7) {
+        setTimeout(() => safeToast('财务快照已 ' + days + ' 天未更新'), 1200);
+      }
+    }
+  }
+
+  /* 暴露强制购买入口（在详情页驳回时可用） */
+  window.__forceBuy = forceBuy;
+
+  boot();
+})();
+</script>
+</body>
+</html>
