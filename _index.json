@@ -1,7 +1,7 @@
 {
   "schema": "puff_share_index",
   "schemaVersion": 1,
-  "generatedAt": "2026-10-16T02:35:35.348Z",
+  "generatedAt": "2026-10-16T09:32:35.615Z",
   "folders": [
     {
       "name": "App",
@@ -25,7 +25,7 @@
     },
     {
       "name": "美化",
-      "count": 53
+      "count": 54
     },
     {
       "name": "表情包",
@@ -891,6 +891,21 @@
       ],
       "description": "",
       "updatedAt": "2026-10-11T20:45:08+08:00"
+    },
+    {
+      "folder": "美化",
+      "name": "低饱和桌面美化",
+      "type": "dir",
+      "path": "资源/美化/低饱和桌面美化",
+      "files": [
+        "资源/美化/低饱和桌面美化/低饱和我们喜欢你.json"
+      ],
+      "images": [
+        "资源/美化/低饱和桌面美化/IMG_7228.jpg",
+        "资源/美化/低饱和桌面美化/封面.jpg"
+      ],
+      "description": "",
+      "updatedAt": "2026-10-16T17:32:12+08:00"
     },
     {
       "folder": "美化",
