@@ -1,7 +1,7 @@
 {
   "schema": "puff_share_index",
   "schemaVersion": 1,
-  "generatedAt": "2026-10-16T17:52:48.705Z",
+  "generatedAt": "2026-10-16T17:54:53.926Z",
   "folders": [
     {
       "name": "App",
@@ -29,7 +29,7 @@
     },
     {
       "name": "表情包",
-      "count": 60
+      "count": 61
     },
     {
       "name": "装扮",
@@ -2026,6 +2026,20 @@
       ],
       "description": "",
       "updatedAt": "2026-10-08T21:47:35+08:00"
+    },
+    {
+      "folder": "表情包",
+      "name": "小鸡仔咕咕",
+      "type": "dir",
+      "path": "资源/表情包/小鸡仔咕咕",
+      "files": [
+        "资源/表情包/小鸡仔咕咕/小鸡仔咕咕-有预览.docx"
+      ],
+      "images": [
+        "资源/表情包/小鸡仔咕咕/1000025529.png"
+      ],
+      "description": "",
+      "updatedAt": "2026-10-17T01:53:43+08:00"
     },
     {
       "folder": "表情包",
