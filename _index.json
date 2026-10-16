@@ -1,7 +1,7 @@
 {
   "schema": "puff_share_index",
   "schemaVersion": 1,
-  "generatedAt": "2026-10-16T11:53:51.523Z",
+  "generatedAt": "2026-10-16T17:51:28.410Z",
   "folders": [
     {
       "name": "App",
@@ -29,7 +29,7 @@
     },
     {
       "name": "表情包",
-      "count": 57
+      "count": 58
     },
     {
       "name": "装扮",
@@ -1885,6 +1885,20 @@
       ],
       "description": "",
       "updatedAt": "2026-10-08T21:47:02+08:00"
+    },
+    {
+      "folder": "表情包",
+      "name": "奶蛙神态",
+      "type": "dir",
+      "path": "资源/表情包/奶蛙神态",
+      "files": [
+        "资源/表情包/奶蛙神态/奶龙的九种变换形态表情包-有预览_你爱了吗模式.docx"
+      ],
+      "images": [
+        "资源/表情包/奶蛙神态/1000025531.png"
+      ],
+      "description": "",
+      "updatedAt": "2026-10-17T01:51:04+08:00"
     },
     {
       "folder": "表情包",
