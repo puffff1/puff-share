@@ -1,7 +1,7 @@
 {
   "schema": "puff_share_index",
   "schemaVersion": 1,
-  "generatedAt": "2026-10-17T15:56:56.058Z",
+  "generatedAt": "2026-10-17T15:58:33.302Z",
   "folders": [
     {
       "name": "App",
@@ -414,13 +414,13 @@
       "type": "dir",
       "path": "资源/其他/GPT生图提示词",
       "files": [
-        "资源/其他/GPT生图提示词/人设资料.json"
+        "资源/其他/GPT生图提示词/GPT生图提示词by淮枝.docx"
       ],
       "images": [
         "资源/其他/GPT生图提示词/封面.jpg"
       ],
       "description": "",
-      "updatedAt": "2026-10-17T23:56:31+08:00"
+      "updatedAt": "2026-10-17T23:58:10+08:00"
     },
     {
       "folder": "其他",
