@@ -1,7 +1,7 @@
 {
   "schema": "puff_share_index",
   "schemaVersion": 1,
-  "generatedAt": "2026-10-16T17:54:53.926Z",
+  "generatedAt": "2026-10-17T08:20:40.515Z",
   "folders": [
     {
       "name": "App",
@@ -25,7 +25,7 @@
     },
     {
       "name": "美化",
-      "count": 54
+      "count": 55
     },
     {
       "name": "表情包",
@@ -937,6 +937,21 @@
       ],
       "description": "",
       "updatedAt": "2026-09-27T21:49:57+08:00"
+    },
+    {
+      "folder": "美化",
+      "name": "古早qq奶油气泡",
+      "type": "dir",
+      "path": "资源/美化/古早qq奶油气泡",
+      "files": [
+        "资源/美化/古早qq奶油气泡/古早qq奶油气泡.json"
+      ],
+      "images": [
+        "资源/美化/古早qq奶油气泡/102.jpeg",
+        "资源/美化/古早qq奶油气泡/封面.jpg"
+      ],
+      "description": "",
+      "updatedAt": "2026-10-17T16:20:01+08:00"
     },
     {
       "folder": "美化",
