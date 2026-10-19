@@ -1,7 +1,7 @@
 {
   "schema": "puff_share_index",
   "schemaVersion": 1,
-  "generatedAt": "2026-10-19T02:22:52.495Z",
+  "generatedAt": "2026-10-19T03:08:43.258Z",
   "folders": [
     {
       "name": "App",
@@ -587,13 +587,13 @@
       "type": "dir",
       "path": "资源/插件/世界书工坊 v0.9.2 ♡",
       "files": [
-        "资源/插件/世界书工坊 v0.9.2 ♡/puff-_Lf_J.js"
+        "资源/插件/世界书工坊 v0.9.2 ♡/puff-世界书工坊.es"
       ],
       "images": [
         "资源/插件/世界书工坊 v0.9.2 ♡/b.png"
       ],
       "description": "",
-      "updatedAt": "2026-10-10T21:00:11+08:00"
+      "updatedAt": "2026-10-19T11:08:18+08:00"
     },
     {
       "folder": "插件",
