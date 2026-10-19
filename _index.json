@@ -1,7 +1,7 @@
 {
   "schema": "puff_share_index",
   "schemaVersion": 1,
-  "generatedAt": "2026-10-18T15:34:16.682Z",
+  "generatedAt": "2026-10-19T02:22:52.495Z",
   "folders": [
     {
       "name": "App",
@@ -1493,13 +1493,13 @@
       "type": "dir",
       "path": "资源/美化/角色语调总控 v1.6.3 𓏢",
       "files": [
-        "资源/美化/角色语调总控 v1.6.3 𓏢/puff-_r_42_.js"
+        "资源/美化/角色语调总控 v1.6.3 𓏢/puff-语调角色总控.es"
       ],
       "images": [
         "资源/美化/角色语调总控 v1.6.3 𓏢/b.png"
       ],
       "description": "",
-      "updatedAt": "2026-10-12T08:12:05+08:00"
+      "updatedAt": "2026-10-19T10:22:30+08:00"
     },
     {
       "folder": "美化",
