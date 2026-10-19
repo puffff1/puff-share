@@ -1,7 +1,7 @@
 {
   "schema": "puff_share_index",
   "schemaVersion": 1,
-  "generatedAt": "2026-10-19T16:20:06.666Z",
+  "generatedAt": "2026-10-19T16:20:57.562Z",
   "folders": [
     {
       "name": "App",
@@ -703,13 +703,13 @@
       "type": "dir",
       "path": "资源/插件/群聊身份管家 v1.1.2 ♥",
       "files": [
-        "资源/插件/群聊身份管家 v1.1.2 ♥/puff-_J_.js"
+        "资源/插件/群聊身份管家 v1.1.2 ♥/puff-群聊身份管家.es"
       ],
       "images": [
         "资源/插件/群聊身份管家 v1.1.2 ♥/b.png"
       ],
       "description": "",
-      "updatedAt": "2026-10-10T21:00:00+08:00"
+      "updatedAt": "2026-10-20T00:20:31+08:00"
     },
     {
       "folder": "插件",
