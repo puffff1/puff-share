@@ -1,7 +1,7 @@
 {
   "schema": "puff_share_index",
   "schemaVersion": 1,
-  "generatedAt": "2026-10-19T16:20:57.562Z",
+  "generatedAt": "2026-10-19T16:21:46.605Z",
   "folders": [
     {
       "name": "App",
@@ -689,13 +689,13 @@
       "type": "dir",
       "path": "资源/插件/群聊角色工坊 v1.2.1 ✎",
       "files": [
-        "资源/插件/群聊角色工坊 v1.2.1 ✎/puff-_J_r_J.js"
+        "资源/插件/群聊角色工坊 v1.2.1 ✎/puff-角色工坊.es"
       ],
       "images": [
         "资源/插件/群聊角色工坊 v1.2.1 ✎/b.png"
       ],
       "description": "",
-      "updatedAt": "2026-10-10T20:59:49+08:00"
+      "updatedAt": "2026-10-20T00:21:14+08:00"
     },
     {
       "folder": "插件",
