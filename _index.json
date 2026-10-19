@@ -1,7 +1,7 @@
 {
   "schema": "puff_share_index",
   "schemaVersion": 1,
-  "generatedAt": "2026-10-19T03:08:43.258Z",
+  "generatedAt": "2026-10-19T06:32:10.090Z",
   "folders": [
     {
       "name": "App",
@@ -25,7 +25,7 @@
     },
     {
       "name": "美化",
-      "count": 55
+      "count": 56
     },
     {
       "name": "表情包",
@@ -1401,6 +1401,27 @@
       ],
       "description": "",
       "updatedAt": "2026-10-06T11:12:29+08:00"
+    },
+    {
+      "folder": "美化",
+      "name": "简讯by淮枝",
+      "type": "dir",
+      "path": "资源/美化/简讯by淮枝",
+      "files": [
+        "资源/美化/简讯by淮枝/简讯日夜间by淮枝.json",
+        "资源/美化/简讯by淮枝/简讯水蓝.json",
+        "资源/美化/简讯by淮枝/简讯灰粉.json",
+        "资源/美化/简讯by淮枝/简讯薄巧.json"
+      ],
+      "images": [
+        "资源/美化/简讯by淮枝/1000138191.jpg",
+        "资源/美化/简讯by淮枝/1000138192.jpg",
+        "资源/美化/简讯by淮枝/1000138193.jpg",
+        "资源/美化/简讯by淮枝/1000138194.jpg",
+        "资源/美化/简讯by淮枝/封面.jpg"
+      ],
+      "description": "",
+      "updatedAt": "2026-10-19T14:31:45+08:00"
     },
     {
       "folder": "美化",
