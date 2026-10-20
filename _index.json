@@ -1,7 +1,7 @@
 {
   "schema": "puff_share_index",
   "schemaVersion": 1,
-  "generatedAt": "2026-10-20T16:04:11.082Z",
+  "generatedAt": "2026-10-20T17:39:14.417Z",
   "folders": [
     {
       "name": "App",
@@ -25,11 +25,11 @@
     },
     {
       "name": "美化",
-      "count": 56
+      "count": 57
     },
     {
       "name": "表情包",
-      "count": 65
+      "count": 66
     },
     {
       "name": "装扮",
@@ -1356,6 +1356,20 @@
     },
     {
       "folder": "美化",
+      "name": "玻璃",
+      "type": "dir",
+      "path": "资源/美化/玻璃",
+      "files": [
+        "资源/美化/玻璃/玻璃.json"
+      ],
+      "images": [
+        "资源/美化/玻璃/封面.jpg"
+      ],
+      "description": "",
+      "updatedAt": "2026-10-21T01:29:07+08:00"
+    },
+    {
+      "folder": "美化",
       "name": "秋日午后",
       "type": "dir",
       "path": "资源/美化/秋日午后",
@@ -1820,6 +1834,20 @@
       ],
       "description": "",
       "updatedAt": "2026-10-03T03:06:37+08:00"
+    },
+    {
+      "folder": "表情包",
+      "name": "不知道是什么的小熊",
+      "type": "dir",
+      "path": "资源/表情包/不知道是什么的小熊",
+      "files": [
+        "资源/表情包/不知道是什么的小熊/豆豆眼_表情包导出.txt"
+      ],
+      "images": [
+        "资源/表情包/不知道是什么的小熊/459876.jpg"
+      ],
+      "description": "",
+      "updatedAt": "2026-10-21T01:30:43+08:00"
     },
     {
       "folder": "表情包",
