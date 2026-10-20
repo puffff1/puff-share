@@ -1,7 +1,7 @@
 {
   "schema": "puff_share_index",
   "schemaVersion": 1,
-  "generatedAt": "2026-10-19T16:21:46.605Z",
+  "generatedAt": "2026-10-20T00:00:19.380Z",
   "folders": [
     {
       "name": "App",
@@ -29,7 +29,7 @@
     },
     {
       "name": "表情包",
-      "count": 63
+      "count": 64
     },
     {
       "name": "装扮",
@@ -1646,6 +1646,20 @@
       ],
       "description": "",
       "updatedAt": "2026-10-11T12:01:19+08:00"
+    },
+    {
+      "folder": "表情包",
+      "name": "Gomtturi熊突突",
+      "type": "dir",
+      "path": "资源/表情包/Gomtturi熊突突",
+      "files": [
+        "资源/表情包/Gomtturi熊突突/Gomtturi_熊突突_表情包-有预览.docx"
+      ],
+      "images": [
+        "资源/表情包/Gomtturi熊突突/1000026241.png"
+      ],
+      "description": "",
+      "updatedAt": "2026-10-20T07:59:58+08:00"
     },
     {
       "folder": "表情包",
