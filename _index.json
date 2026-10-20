@@ -1,7 +1,7 @@
 {
   "schema": "puff_share_index",
   "schemaVersion": 1,
-  "generatedAt": "2026-10-20T15:59:18.918Z",
+  "generatedAt": "2026-10-20T16:01:37.767Z",
   "folders": [
     {
       "name": "App",
@@ -2548,9 +2548,11 @@
       "files": [
         "资源/角色卡/“家姐，你太美好喇…”岑谚/人设_BG岑谚_家姐_你太美好喇_by阿渺.docx"
       ],
-      "images": [],
+      "images": [
+        "资源/角色卡/“家姐，你太美好喇…”岑谚/封面.jpg"
+      ],
       "description": "",
-      "updatedAt": "2026-10-20T23:58:55+08:00"
+      "updatedAt": "2026-10-21T00:01:04+08:00"
     },
     {
       "folder": "角色卡",
