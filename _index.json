@@ -1,7 +1,7 @@
 {
   "schema": "puff_share_index",
   "schemaVersion": 1,
-  "generatedAt": "2026-10-22T02:47:01.888Z",
+  "generatedAt": "2026-10-22T15:39:19.963Z",
   "folders": [
     {
       "name": "App",
@@ -29,7 +29,7 @@
     },
     {
       "name": "表情包",
-      "count": 67
+      "count": 68
     },
     {
       "name": "装扮",
@@ -2537,6 +2537,20 @@
       ],
       "description": "",
       "updatedAt": "2026-09-23T18:13:20+08:00"
+    },
+    {
+      "folder": "表情包",
+      "name": "蝴蝶结仓鼠",
+      "type": "dir",
+      "path": "资源/表情包/蝴蝶结仓鼠",
+      "files": [
+        "资源/表情包/蝴蝶结仓鼠/粉色蝴蝶仓鼠表情包BabyChorong-有预览.docx"
+      ],
+      "images": [
+        "资源/表情包/蝴蝶结仓鼠/1000027162.jpg"
+      ],
+      "description": "",
+      "updatedAt": "2026-10-22T23:38:54+08:00"
     },
     {
       "folder": "表情包",
