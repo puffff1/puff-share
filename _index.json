@@ -1,7 +1,7 @@
 {
   "schema": "puff_share_index",
   "schemaVersion": 1,
-  "generatedAt": "2026-10-21T10:05:27.579Z",
+  "generatedAt": "2026-10-22T02:47:01.888Z",
   "folders": [
     {
       "name": "App",
@@ -25,7 +25,7 @@
     },
     {
       "name": "美化",
-      "count": 59
+      "count": 60
     },
     {
       "name": "表情包",
@@ -1428,6 +1428,24 @@
       ],
       "description": "",
       "updatedAt": "2026-10-04T16:49:14+08:00"
+    },
+    {
+      "folder": "美化",
+      "name": "简约水色",
+      "type": "dir",
+      "path": "资源/美化/简约水色",
+      "files": [
+        "资源/美化/简约水色/对话水色.docx",
+        "资源/美化/简约水色/消息列表水色.docx",
+        "资源/美化/简约水色/线下水色.docx"
+      ],
+      "images": [
+        "资源/美化/简约水色/1000071521.jpg",
+        "资源/美化/简约水色/1000071522.jpg",
+        "资源/美化/简约水色/封面.jpg"
+      ],
+      "description": "",
+      "updatedAt": "2026-10-22T10:46:16+08:00"
     },
     {
       "folder": "美化",
