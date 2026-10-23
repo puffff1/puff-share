@@ -1,7 +1,7 @@
 {
   "schema": "puff_share_index",
   "schemaVersion": 1,
-  "generatedAt": "2026-10-23T13:54:33.268Z",
+  "generatedAt": "2026-10-23T13:56:31.226Z",
   "folders": [
     {
       "name": "App",
@@ -13,7 +13,7 @@
     },
     {
       "name": "世界书",
-      "count": 14
+      "count": 12
     },
     {
       "name": "其他",
@@ -293,20 +293,6 @@
     },
     {
       "folder": "世界书",
-      "name": "gemini-3.8-flash破限奥林匹斯山上的作家传记",
-      "type": "dir",
-      "path": "资源/世界书/gemini-3.8-flash破限奥林匹斯山上的作家传记",
-      "files": [
-        "资源/世界书/gemini-3.8-flash破限奥林匹斯山上的作家传记/e_e_9_q3.8flash_42_.docx"
-      ],
-      "images": [
-        "资源/世界书/gemini-3.8-flash破限奥林匹斯山上的作家传记/b.jpg"
-      ],
-      "description": "",
-      "updatedAt": "2026-09-28T18:07:31+08:00"
-    },
-    {
-      "folder": "世界书",
       "name": "gl叙事与行为规范1.0",
       "type": "dir",
       "path": "资源/世界书/gl叙事与行为规范1.0",
@@ -384,20 +370,6 @@
       ],
       "description": "",
       "updatedAt": "2026-10-06T09:33:34+08:00"
-    },
-    {
-      "folder": "世界书",
-      "name": "奥林匹斯众神的传记作家会议gemini-4-argon 破甲",
-      "type": "dir",
-      "path": "资源/世界书/奥林匹斯众神的传记作家会议gemini-4-argon 破甲",
-      "files": [
-        "资源/世界书/奥林匹斯众神的传记作家会议gemini-4-argon 破甲/奥林匹斯众神的传记作家会议_4argon_适用.docx"
-      ],
-      "images": [
-        "资源/世界书/奥林匹斯众神的传记作家会议gemini-4-argon 破甲/封面.jpg"
-      ],
-      "description": "",
-      "updatedAt": "2026-10-14T15:49:11+08:00"
     },
     {
       "folder": "世界书",
