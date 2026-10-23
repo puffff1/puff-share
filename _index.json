@@ -1,7 +1,7 @@
 {
   "schema": "puff_share_index",
   "schemaVersion": 1,
-  "generatedAt": "2026-10-22T18:39:38.023Z",
+  "generatedAt": "2026-10-23T00:24:19.818Z",
   "folders": [
     {
       "name": "App",
@@ -9,7 +9,7 @@
     },
     {
       "name": "repo",
-      "count": 3
+      "count": 4
     },
     {
       "name": "世界书",
@@ -239,6 +239,19 @@
       ],
       "description": "",
       "updatedAt": "2026-10-18T23:33:53+08:00"
+    },
+    {
+      "folder": "repo",
+      "name": "简约粉白颜文字气泡by糖",
+      "type": "dir",
+      "path": "资源/repo/简约粉白颜文字气泡by糖",
+      "files": [],
+      "images": [
+        "资源/repo/简约粉白颜文字气泡by糖/1000027189.jpg",
+        "资源/repo/简约粉白颜文字气泡by糖/1000027190.jpg"
+      ],
+      "description": "",
+      "updatedAt": "2026-10-23T08:23:58+08:00"
     },
     {
       "folder": "repo",
