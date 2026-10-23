@@ -1,7 +1,7 @@
 {
   "schema": "puff_share_index",
   "schemaVersion": 1,
-  "generatedAt": "2026-10-23T13:51:51.265Z",
+  "generatedAt": "2026-10-23T13:54:33.268Z",
   "folders": [
     {
       "name": "App",
@@ -9,7 +9,7 @@
     },
     {
       "name": "repo",
-      "count": 4
+      "count": 5
     },
     {
       "name": "世界书",
@@ -215,6 +215,18 @@
       ],
       "description": "",
       "updatedAt": "2026-09-28T23:49:38+08:00"
+    },
+    {
+      "folder": "repo",
+      "name": "仿微信(日间+夜间)",
+      "type": "dir",
+      "path": "资源/repo/仿微信(日间+夜间)",
+      "files": [
+        "资源/repo/仿微信(日间+夜间)/正文.txt"
+      ],
+      "images": [],
+      "description": "",
+      "updatedAt": "2026-10-23T21:54:09+08:00"
     },
     {
       "folder": "repo",
