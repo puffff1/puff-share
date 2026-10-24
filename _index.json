@@ -1,7 +1,7 @@
 {
   "schema": "puff_share_index",
   "schemaVersion": 1,
-  "generatedAt": "2026-10-23T14:18:37.212Z",
+  "generatedAt": "2026-10-24T02:18:26.210Z",
   "folders": [
     {
       "name": "App",
@@ -9,7 +9,7 @@
     },
     {
       "name": "repo",
-      "count": 5
+      "count": 4
     },
     {
       "name": "世界书",
@@ -264,18 +264,6 @@
       ],
       "description": "",
       "updatedAt": "2026-10-23T08:23:58+08:00"
-    },
-    {
-      "folder": "repo",
-      "name": "简讯by淮枝",
-      "type": "dir",
-      "path": "资源/repo/简讯by淮枝",
-      "files": [
-        "资源/repo/简讯by淮枝/正文.txt"
-      ],
-      "images": [],
-      "description": "",
-      "updatedAt": "2026-10-23T02:39:06+08:00"
     },
     {
       "folder": "世界书",
