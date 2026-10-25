@@ -1,7 +1,7 @@
 {
   "schema": "puff_share_index",
   "schemaVersion": 1,
-  "generatedAt": "2026-10-25T03:56:20.375Z",
+  "generatedAt": "2026-10-25T04:39:00.362Z",
   "folders": [
     {
       "name": "App",
@@ -37,7 +37,7 @@
     },
     {
       "name": "角色卡",
-      "count": 27
+      "count": 28
     },
     {
       "name": "预设",
@@ -3042,6 +3042,25 @@
       ],
       "description": "",
       "updatedAt": "2026-10-08T15:51:16+08:00"
+    },
+    {
+      "folder": "角色卡",
+      "name": "江澈",
+      "type": "dir",
+      "path": "资源/角色卡/江澈",
+      "files": [
+        "资源/角色卡/江澈/世界书_江澈世界书.docx",
+        "资源/角色卡/江澈/人设_江澈_NPC_.docx",
+        "资源/角色卡/江澈/人设_男高为我心动人设卡.docx",
+        "资源/角色卡/江澈/人设资料.json"
+      ],
+      "images": [
+        "资源/角色卡/江澈/3167.jpg",
+        "资源/角色卡/江澈/3169.jpg",
+        "资源/角色卡/江澈/封面.jpg"
+      ],
+      "description": "",
+      "updatedAt": "2026-10-25T12:38:35+08:00"
     },
     {
       "folder": "角色卡",
