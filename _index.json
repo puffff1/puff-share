@@ -1,7 +1,7 @@
 {
   "schema": "puff_share_index",
   "schemaVersion": 1,
-  "generatedAt": "2026-10-31T15:18:13.752Z",
+  "generatedAt": "2026-11-02T11:41:56.459Z",
   "folders": [
     {
       "name": "App",
@@ -25,7 +25,7 @@
     },
     {
       "name": "美化",
-      "count": 60
+      "count": 61
     },
     {
       "name": "表情包",
@@ -816,6 +816,22 @@
       ],
       "description": "",
       "updatedAt": "2026-10-05T23:48:37+08:00"
+    },
+    {
+      "folder": "美化",
+      "name": "qq简约版日夜间",
+      "type": "dir",
+      "path": "资源/美化/qq简约版日夜间",
+      "files": [
+        "资源/美化/qq简约版日夜间/qq简约版夜间.json",
+        "资源/美化/qq简约版日夜间/qq简约版白间.json"
+      ],
+      "images": [
+        "资源/美化/qq简约版日夜间/1000058242.jpg",
+        "资源/美化/qq简约版日夜间/封面.jpg"
+      ],
+      "description": "",
+      "updatedAt": "2026-11-02T19:41:21+08:00"
     },
     {
       "folder": "美化",
