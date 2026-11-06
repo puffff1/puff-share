@@ -1,7 +1,7 @@
 {
   "schema": "puff_share_index",
   "schemaVersion": 1,
-  "generatedAt": "2026-11-04T11:29:07.036Z",
+  "generatedAt": "2026-11-06T08:17:08.205Z",
   "folders": [
     {
       "name": "App",
@@ -9,7 +9,7 @@
     },
     {
       "name": "repo",
-      "count": 8
+      "count": 9
     },
     {
       "name": "世界书",
@@ -213,6 +213,18 @@
       ],
       "description": "",
       "updatedAt": "2026-09-28T23:49:38+08:00"
+    },
+    {
+      "folder": "repo",
+      "name": "【千语花】深度deeptalk+小作文",
+      "type": "dir",
+      "path": "资源/repo/【千语花】深度deeptalk+小作文",
+      "files": [
+        "资源/repo/【千语花】深度deeptalk+小作文/正文.txt"
+      ],
+      "images": [],
+      "description": "",
+      "updatedAt": "2026-11-06T16:16:37+08:00"
     },
     {
       "folder": "repo",
