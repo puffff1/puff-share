@@ -1,7 +1,7 @@
 {
   "schema": "puff_share_index",
   "schemaVersion": 1,
-  "generatedAt": "2026-11-07T02:15:12.646Z",
+  "generatedAt": "2026-11-07T10:21:49.355Z",
   "folders": [
     {
       "name": "App",
@@ -1810,14 +1810,14 @@
       "type": "dir",
       "path": "资源/美化/黑白漫画风主题",
       "files": [
-        "资源/美化/黑白漫画风主题/json"
+        "资源/美化/黑白漫画风主题/H_.json"
       ],
       "images": [
-        "资源/美化/黑白漫画风主题/1000014435.jpg",
-        "资源/美化/黑白漫画风主题/b.jpg"
+        "资源/美化/黑白漫画风主题/b.jpg",
+        "资源/美化/黑白漫画风主题/j3q607.webp"
       ],
       "description": "",
-      "updatedAt": "2026-10-05T00:14:00+08:00"
+      "updatedAt": "2026-11-07T18:21:28+08:00"
     },
     {
       "folder": "表情包",
