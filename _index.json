@@ -1,7 +1,7 @@
 {
   "schema": "puff_share_index",
   "schemaVersion": 1,
-  "generatedAt": "2026-11-07T10:55:20.467Z",
+  "generatedAt": "2026-11-07T13:57:42.508Z",
   "folders": [
     {
       "name": "App",
@@ -25,7 +25,7 @@
     },
     {
       "name": "美化",
-      "count": 63
+      "count": 64
     },
     {
       "name": "表情包",
@@ -1664,6 +1664,18 @@
       ],
       "description": "",
       "updatedAt": "2026-10-19T14:31:45+08:00"
+    },
+    {
+      "folder": "美化",
+      "name": "线下简约美化",
+      "type": "dir",
+      "path": "资源/美化/线下简约美化",
+      "files": [
+        "资源/美化/线下简约美化/Puff毛玻璃线下美化.docx"
+      ],
+      "images": [],
+      "description": "",
+      "updatedAt": "2026-11-07T21:57:16+08:00"
     },
     {
       "folder": "美化",
