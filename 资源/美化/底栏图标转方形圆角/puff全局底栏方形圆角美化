@@ -1,0 +1,80 @@
+/* ==========『作者：长夜何其多』使用方法：点击puff小手机的装扮功能，在桌面页底部导航选择图标将这串代码复制在桌面ccs里，此代码随意使用========== */
+/* ========== 1. 全局变量：圆角方形 + 去模糊 ========== */
+:root {
+  --ico-r: 14px;
+  --dress-wg-radius: var(--ico-r) !important;
+  --dress-app-ico-radius: var(--ico-r) !important;
+  /* 壁纸遮罩相关的模糊全部归零 */
+  --desk-blur: 0px !important;
+  --desk-mask: 0 !important;
+  --wallpaper-blur: 0px !important;
+  --desk-wallpaper-blur: 0px !important;
+  --desk-glass-blur: 0px !important;
+}
+
+/* ========== 2. 桌面壁纸：夜间高清、0模糊、去遮罩 ========== */
+.desk {
+  background-size: cover !important;
+  background-position: center !important;
+  filter: none !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+  opacity: 1 !important;
+}
+
+/* ========== 3. 桌面 App 图标：圆角方形 ========== */
+.desk[data-p] .app-box .ico,
+.tile.app .ico {
+  border-radius: var(--ico-r) !important;
+  overflow: hidden !important;
+  -webkit-mask-image: -webkit-radial-gradient(white, black); /* 防子元素溢出露角 */
+  mask-image: radial-gradient(white, black);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, .55) !important;
+}
+
+/* ========== 4. 底部导航栏图标：圆角方形 ========== */
+.dock-app-ico,
+.dock-app-empty {
+  border-radius: var(--ico-r) !important;
+  overflow: hidden !important;
+  object-fit: cover !important;
+  width: 44px !important;
+  height: 44px !important;
+}
+
+/* ========== 5. 面板 / 导航栏 / 顶栏：深色 + 无模糊 ========== */
+.dock,
+.dock-bar,
+.dock-wrap,
+.status-bar,
+.top-bar,
+.header,
+.nav-bar,
+.title-bar {
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+}
+.panel,
+.popup,
+.sidebar,
+.settings-panel,
+.msg-panel,
+.card-panel,
+.drawer,
+.dialog,
+.dropdown,
+.menu {
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+  border: 1px solid #22232a !important;
+  border-radius: var(--ico-r) !important;   /* 面板也统一圆角方形 */
+  box-shadow: none !important;
+}
+
+/* ========== 6. 兜底：禁用一切毛玻璃模糊 ========== */
+* {
+  -webkit-backdrop-filter: none !important;
+  backdrop-filter: none !important;
+}
