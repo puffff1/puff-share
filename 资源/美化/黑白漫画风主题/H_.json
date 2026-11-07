@@ -1,0 +1,14 @@
+{
+  "kind": "puff-desktop-css-preset",
+  "version": 1,
+  "name": "长夜&漫画风（日间版）",
+  "exportedAt": 1794046450157,
+  "presets": [
+    {
+      "id": "dcss_mumx9prz_4n14b",
+      "name": "玻璃",
+      "createdAt": "2026-09-29T17:00:16.703Z",
+      "css": ".device {\n  --glass: rgba(255,255,255,.62);\n  --glass-strong: rgba(255,255,255,.9);\n  --glass-border: rgba(0,0,0,.05);\n}\nhtml[data-theme=\"dark\"] .device {\n  --glass: rgba(28,28,32,.68);\n  --glass-strong: rgba(40,40,46,.9);\n  --glass-border: rgba(255,255,255,.08);\n}\n.wg-profile,.wg-hero,.wg-note,.wg-quote {\n  background: rgba(255,255,255,.92);\n  border: 1px solid rgba(0,0,0,.05);\n  box-shadow: 0 0 0 0.5px rgba(255,255,255,.9);\n  backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px);\n  border-radius: 18px;\n}\nhtml[data-theme=\"dark\"] .wg-profile,\nhtml[data-theme=\"dark\"] .wg-hero,\nhtml[data-theme=\"dark\"] .wg-note,\nhtml[data-theme=\"dark\"] .wg-quote {\n  background: rgba(36,36,36,.92);\n  border-color: rgba(255,255,255,.08);\n  box-shadow: 0 0 0 0.5px rgba(36,36,36,.9);\n}"
+    }
+  ]
+}
