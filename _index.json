@@ -1,7 +1,7 @@
 {
   "schema": "puff_share_index",
   "schemaVersion": 1,
-  "generatedAt": "2026-11-07T13:57:42.508Z",
+  "generatedAt": "2026-11-07T13:59:32.221Z",
   "folders": [
     {
       "name": "App",
@@ -1673,9 +1673,11 @@
       "files": [
         "资源/美化/线下简约美化/Puff毛玻璃线下美化.docx"
       ],
-      "images": [],
+      "images": [
+        "资源/美化/线下简约美化/封面.jpg"
+      ],
       "description": "",
-      "updatedAt": "2026-11-07T21:57:16+08:00"
+      "updatedAt": "2026-11-07T21:59:04+08:00"
     },
     {
       "folder": "美化",
