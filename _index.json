@@ -1,7 +1,7 @@
 {
   "schema": "puff_share_index",
   "schemaVersion": 1,
-  "generatedAt": "2026-11-08T04:29:59.537Z",
+  "generatedAt": "2026-11-09T06:34:50.674Z",
   "folders": [
     {
       "name": "App",
@@ -9,7 +9,7 @@
     },
     {
       "name": "repo",
-      "count": 9
+      "count": 10
     },
     {
       "name": "世界书",
@@ -249,6 +249,18 @@
       "images": [],
       "description": "",
       "updatedAt": "2026-11-04T02:34:24+08:00"
+    },
+    {
+      "folder": "repo",
+      "name": "低饱和桌面美化 · 0ec167",
+      "type": "dir",
+      "path": "资源/repo/低饱和桌面美化 · 0ec167",
+      "files": [
+        "资源/repo/低饱和桌面美化 · 0ec167/正文.txt"
+      ],
+      "images": [],
+      "description": "",
+      "updatedAt": "2026-11-09T14:34:20+08:00"
     },
     {
       "folder": "repo",
