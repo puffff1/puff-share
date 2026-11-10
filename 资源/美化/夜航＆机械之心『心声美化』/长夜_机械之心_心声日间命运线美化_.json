@@ -1,0 +1,89 @@
+{
+  "app": "puff-xinsheng-presets",
+  "version": 1,
+  "exportedAt": 1794306441852,
+  "presets": [
+    {
+      "id": "xp_mwacdxsq_3x382i",
+      "name": "长夜＆机械之心『心声日间命运线美化』",
+      "theme": "dusk",
+      "layout": "focus",
+      "customCss": "/* 长夜＆机械之心➠线上心声美化，建议修改key 给版式取值＜40 使用更佳*/\n.xs-voice-wrap {\n  background: linear-gradient(180deg, rgba(255,248,252,.75) 0%, rgba(255,224,236,.75) 100%);\n  backdrop-filter: blur(28px);\n  -webkit-backdrop-filter: blur(28px);\n  border-radius: 24px;\n  padding: 24px 16px 32px;\n  position: relative;\n  overflow: hidden;\n  font-family: system-ui, sans-serif;\n}\n.xs-title {\n  font-family:\"Cinzel\",serif;\n  font-style:italic;\n  font-size:22px;\n  color:#d65a8c;\n  margin:0 0 8px;\n  position:relative; z-index:2;\n}\n.xs-ecg-top, .xs-ecg-bottom {\n  position:absolute; left:0; right:0; height:18px; opacity:.8; pointer-events:none;\n}\n.xs-ecg-top { top:60px; }\n.xs-ecg-bottom { bottom:0; }\n.xs-ecg-top svg, .xs-ecg-bottom svg { width:100%; height:100%; }\n.xs-center-line {\n  position:absolute; left:50%; top:88px; bottom:36px;\n  width:2px; transform:translateX(-50%);\n  background:#ffb2d1; z-index:1;\n}\n.xs-list {\n  position:relative; z-index:2;\n  display:flex; flex-direction:column; gap:4px;\n  margin-top:24px;\n}\n.xs-row {\n  display:flex; align-items:center; position:relative;\n}\n.xs-bubble {\n  width:46%; padding:9px 14px;\n  background: rgba(255,255,255,.65);\n  backdrop-filter: blur(20px);\n  -webkit-backdrop-filter: blur(20px);\n  border-radius:20px;\n  border:1px solid rgba(255,185,214,.4);\n  box-shadow: 0 2px 12px rgba(236,124,160,.1);\n  font-size:11.5px; line-height:1.6; color:#333;\n  position:relative;\n  white-space:normal; word-break:break-word;\n}\n.xs-bubble .content:empty::after {\n  content:\"机械之心\";\n  font-style:italic;\n  color:#d65a8c;\n  opacity:.5;\n}\n.xs-bubble.left { margin-right:auto; }\n.xs-bubble.right { margin-left:auto; }\n.xs-bubble .tag {\n  display:block; font-size:10px; letter-spacing:1px;\n  color:#d65a8c; opacity:.8; margin-bottom:2px;\n}\n/* 好感栏心电图+心 */\n.xs-bubble .xs-favor-ecg {\n  display:flex; align-items:center; gap:6px; margin-top:6px;\n}\n.xs-bubble .xs-favor-ecg svg.line { flex:1; height:14px; }\n.xs-bubble .xs-favor-ecg svg.heart { width:12px; height:12px; flex-shrink:0; }\n/* 藏掉系统原生丑进度条 */\n.xs-bubble [class*=\"bar\"] { display:none !important; }\n.xs-node {\n  position:absolute; left:50%; top:50%;\n  transform:translate(-50%,-50%);\n  width:16px; height:16px; border-radius:50%;\n  background:#fff; border:3px solid #ec7ca0;\n  box-shadow:0 0 0 4px rgba(236,124,160,.15);\n  z-index:3;\n}",
+      "visibleCards": [
+        "innerThought",
+        "microObservation",
+        "currentState",
+        "deepDesire",
+        "vitals",
+        "linger"
+      ],
+      "contextFields": [
+        "innerThought"
+      ],
+      "fields": [
+        {
+          "key": "innerThought",
+          "title": "未出口",
+          "hint": "不会发到聊天框里的那句",
+          "builtin": true,
+          "style": "lead",
+          "maxChars": 40
+        },
+        {
+          "key": "microObservation",
+          "title": "余光",
+          "hint": "顺手瞥见的细节",
+          "builtin": true,
+          "style": "normal",
+          "maxChars": 40
+        },
+        {
+          "key": "currentState",
+          "title": "此刻",
+          "hint": "人在哪、在干什么",
+          "builtin": true,
+          "style": "normal",
+          "maxChars": 40
+        },
+        {
+          "key": "deepDesire",
+          "title": "暗涌",
+          "hint": "更深、不想承认的那点",
+          "builtin": true,
+          "style": "muted",
+          "maxChars": 40
+        },
+        {
+          "key": "__favor__",
+          "title": "好感",
+          "hint": "好感度 · 变动",
+          "builtin": true,
+          "style": "normal",
+          "maxChars": 40
+        },
+        {
+          "key": "linger",
+          "title": "隙间",
+          "hint": "话茬之间那一下",
+          "builtin": true,
+          "style": "normal",
+          "maxChars": 40
+        }
+      ],
+      "visibleKeys": [
+        "innerThought",
+        "microObservation",
+        "currentState",
+        "deepDesire",
+        "__favor__",
+        "linger"
+      ],
+      "contextKeys": [
+        "innerThought"
+      ],
+      "deckStyle": "html",
+      "htmlTemplate": "<div class=\"xs-voice-wrap\">\n  <div class=\"xs-title\">Voice Preference</div>\n  <div class=\"xs-ecg-top\">\n    <svg viewBox=\"0 0 300 20\" preserveAspectRatio=\"none\">\n      <path d=\"M0 10 L30 10 L35 3 L40 17 L45 10 L75 10 L80 5 L85 15 L90 10 L120 10 L125 2 L130 18 L135 10 L165 10 L170 7 L175 13 L180 10 L210 10 L215 4 L220 16 L225 10 L255 10 L260 8 L265 12 L270 10 L300 10\" stroke=\"#ff94be\" stroke-width=\"1.5\" fill=\"none\"/>\n    </svg>\n  </div>\n  <div class=\"xs-center-line\"></div>\n  <div class=\"xs-ecg-bottom\">\n    <svg viewBox=\"0 0 300 20\" preserveAspectRatio=\"none\">\n      <path d=\"M0 10 L30 10 L35 17 L40 3 L45 10 L75 10 L80 15 L85 5 L90 10 L120 10 L125 18 L130 2 L135 10 L165 10 L170 13 L175 7 L180 10 L210 10 L215 16 L220 4 L225 10 L255 10 L260 12 L265 8 L270 10 L300 10\" stroke=\"#ff94be\" stroke-width=\"1.5\" fill=\"none\"/>\n    </svg>\n  </div>\n\n  <div class=\"xs-list\">\n    <div class=\"xs-row\">\n      <div class=\"xs-bubble left\"><span class=\"tag\">未出口</span><span class=\"content\">{{innerThought}}</span></div>\n      <div class=\"xs-node\"></div>\n    </div>\n    <div class=\"xs-row\">\n      <div class=\"xs-bubble right\"><span class=\"tag\">余光</span><span class=\"content\">{{microObservation}}</span></div>\n      <div class=\"xs-node\"></div>\n    </div>\n    <div class=\"xs-row\">\n      <div class=\"xs-bubble left\"><span class=\"tag\">此刻</span><span class=\"content\">{{currentState}}</span></div>\n      <div class=\"xs-node\"></div>\n    </div>\n    <div class=\"xs-row\">\n      <div class=\"xs-bubble right\"><span class=\"tag\">暗涌</span><span class=\"content\">{{deepDesire}}</span></div>\n      <div class=\"xs-node\"></div>\n    </div>\n    <!-- 好感栏：AI给的数值 + 静态心电图+小粉心 -->\n    <div class=\"xs-row\">\n      <div class=\"xs-bubble left\">\n        <span class=\"tag\">好感</span><span class=\"content\">{{favor}}</span>\n        <div class=\"xs-favor-ecg\">\n          <svg class=\"line\" viewBox=\"0 0 100 14\" preserveAspectRatio=\"none\">\n            <path d=\"M0 7 L15 7 L18 2 L21 12 L24 7 L40 7 L43 3 L46 11 L49 7 L65 7 L68 1 L71 13 L74 7 L100 7\" stroke=\"#ff94be\" stroke-width=\"1.5\" fill=\"none\"/>\n          </svg>\n          <svg class=\"heart\" viewBox=\"0 0 24 24\">\n            <path d=\"M12 21 C4 15 1 10 3 5 C5 1 10 1 12 4 C14 1 19 1 21 5 C23 10 20 15 12 21 Z\" fill=\"#ec7ca0\"/>\n          </svg>\n        </div>\n      </div>\n      <div class=\"xs-node\"></div>\n    </div>\n    <div class=\"xs-row\">\n      <div class=\"xs-bubble right\"><span class=\"tag\">隙间</span><span class=\"content\">{{linger}}</span></div>\n      <div class=\"xs-node\"></div>\n    </div>\n  </div>\n</div>",
+      "updatedAt": 1794294722135
+    }
+  ]
+}
