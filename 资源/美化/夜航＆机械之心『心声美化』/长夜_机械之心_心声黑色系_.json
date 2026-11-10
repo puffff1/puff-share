@@ -1,0 +1,88 @@
+{
+  "app": "puff-xinsheng-presets",
+  "version": 1,
+  "exportedAt": 1794306439326,
+  "presets": [
+    {
+      "id": "xp_mwajfac1_2a1vf3",
+      "name": "长夜＆机械之心『心声黑色系』",
+      "theme": "glass",
+      "layout": "bento",
+      "customCss": "body::before {\n  content: \"\";\n  position: fixed;\n  top: 0; left: 0; right: 0; bottom: 0;\n  background: url('https://picui.ogmua.cn/s1/2026/11/08/6aefd141288ba.webp') no-repeat center center / cover !important;\n  z-index: -999 !important;\n  pointer-events: none;\n}\n\n.xs-panel {\n  --xs-bg: transparent; \n  --xs-tile-bg: #000000; \n  --xs-text: #FFFFFF; \n  --xs-muted: #BBBBBB; \n  --xs-accent: #FFFFFF;\n  --xs-border: #FFFFFF; \n  --xs-cap: #FFFFFF;\n  --xs-action-bg: #000000;\n  --xs-done-bg: #000000;\n  \n  background: transparent !important;\n  backdrop-filter: none !important;\n  -webkit-backdrop-filter: none !important;\n  \n  width: 100% !important;\n  max-width: 100% !important;\n  margin: 0 auto !important; \n  padding: 20px 16px !important; \n  border-radius: 0px !important;\n}\n\n.xs-frame {\n  width: 100% !important;\n  max-width: 100% !important;\n}\n\n/* 锁定所有卡片为纯黑背景 */\n.xs-tile {\n  background: #000000 !important;\n  border: 1px solid #FFFFFF !important;\n  backdrop-filter: none !important;\n  -webkit-backdrop-filter: none !important;\n}\n\n/* 重点针对暗涌：去掉半透明，强制纯白字 */\n.xs-tile-deep {\n  opacity: 1 !important;\n  background: #000000 !important;\n}\n\n.xs-tile-deep .xs-tile-v,\n.xs-tile-deep .xs-tile-k,\n.xs-tile .xs-tile-v,\n.xs-tile .xs-tile-k {\n  color: #FFFFFF !important;\n}\n\n/* 顶部三个按钮锁定纯黑 */\n.xs-action {\n  background: #000000 !important;\n  border: 1px solid #FFFFFF !important;\n  color: #FFFFFF !important;\n}\n\n.xs-history {\n  background: #000000 !important;\n  border: 1px solid #FFFFFF !important;\n}\n\n.xs-history-item {\n  background: transparent !important;\n  border-bottom: 1px solid rgba(255, 255, 255, 0.2) !important;\n}",
+      "visibleCards": [
+        "innerThought",
+        "microObservation",
+        "currentState",
+        "deepDesire",
+        "vitals",
+        "linger"
+      ],
+      "contextFields": [
+        "innerThought"
+      ],
+      "fields": [
+        {
+          "key": "innerThought",
+          "title": "未出口",
+          "hint": "不会发到聊天框里的那句",
+          "builtin": true,
+          "style": "lead",
+          "maxChars": 240
+        },
+        {
+          "key": "microObservation",
+          "title": "余光",
+          "hint": "顺手瞥见的细节",
+          "builtin": true,
+          "style": "normal",
+          "maxChars": 48
+        },
+        {
+          "key": "currentState",
+          "title": "此刻",
+          "hint": "人在哪、在干什么",
+          "builtin": true,
+          "style": "normal",
+          "maxChars": 48
+        },
+        {
+          "key": "deepDesire",
+          "title": "暗涌",
+          "hint": "更深、不想承认的那点",
+          "builtin": true,
+          "style": "muted",
+          "maxChars": 48
+        },
+        {
+          "key": "__favor__",
+          "title": "好感",
+          "hint": "好感度 · 变动",
+          "builtin": true,
+          "style": "normal",
+          "maxChars": 0
+        },
+        {
+          "key": "linger",
+          "title": "隙间",
+          "hint": "话茬之间那一下",
+          "builtin": true,
+          "style": "normal",
+          "maxChars": 48
+        }
+      ],
+      "visibleKeys": [
+        "innerThought",
+        "microObservation",
+        "currentState",
+        "deepDesire",
+        "__favor__",
+        "linger"
+      ],
+      "contextKeys": [
+        "innerThought"
+      ],
+      "deckStyle": "classic",
+      "updatedAt": 1794305935389
+    }
+  ]
+}
