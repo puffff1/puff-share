@@ -1,0 +1,264 @@
+{
+  "app": "puff-xinsheng-presets",
+  "version": 1,
+  "exportedAt": 1794549976664,
+  "presets": [
+    {
+      "id": "xp_mwekojrc_61b8qh",
+      "name": "长夜＆黑白漫画风➠夜航引擎『日间』",
+      "theme": "ink",
+      "layout": "stack",
+      "customCss": "/* ==================================================\n   BLACK EDITORIAL · ARCHIVE SYSTEM\n   黑白档案馆 · HTML 配套 CSS\n================================================== */\n\n/* 01. 全局基础 */\n.file-wrap,\n.file-wrap * {\n  box-sizing: border-box;\n}\n\n.file-wrap {\n  width: 100%;\n  max-width: 100%;\n  overflow: hidden;\n  color: #171717;\n  background: #fff;\n  border: 1px solid #171717;\n  border-radius: 0 !important;\n  font-family: \"Noto Serif SC\", \"Songti SC\", serif;\n}\n\n/* 02. 顶部档案 */\n.file-top {\n  padding: 22px 19px 20px;\n  background: #fff;\n  border-bottom: 1px solid #171717;\n}\n\n.file-top::before {\n  content: \"ARCHIVE / PRIVATE RECORD\";\n  display: block;\n  margin-bottom: 18px;\n  color: #aaa;\n  font-family: Arial, sans-serif;\n  font-size: 9px;\n  letter-spacing: 2.5px;\n}\n\n.file-tag {\n  display: inline-flex;\n  align-items: center;\n  gap: 9px;\n  max-width: 100%;\n  padding: 6px 9px;\n  margin: 0 0 12px;\n  color: #171717;\n  background: #fff;\n  border: 1px solid #222;\n  border-radius: 0 !important;\n  font-family: Arial, \"Noto Serif SC\", serif;\n  font-size: 11px;\n  font-weight: 600;\n  line-height: 1.5;\n}\n\n.file-tag span {\n  padding-left: 8px;\n  border-left: 1px solid #bbb;\n  font-family: \"Noto Serif SC\", serif;\n  font-weight: 400;\n}\n\n.file-time {\n  padding: 8px 0 14px;\n  margin-bottom: 16px;\n  color: #777;\n  border-bottom: 1px dashed #ccc;\n  font-family: Arial, sans-serif;\n  font-size: 12px;\n  line-height: 1.8;\n  text-align: center;\n}\n\n.file-story,\n.file-text {\n  color: #3b3b3b;\n  font-size: 13px;\n  line-height: 1.95;\n  overflow-wrap: anywhere;\n  white-space: pre-wrap;\n}\n\n/* 03. 横向分页 */\n.file-slider-box {\n  display: block;\n  width: 100%;\n  height: 520px;\n  max-height: 68vh;\n  min-height: 320px;\n  overflow-x: auto;\n  overflow-y: hidden;\n  white-space: nowrap;\n  font-size: 0;\n  background: #fff;\n  border-bottom: 1px solid #222;\n  -webkit-overflow-scrolling: touch;\n  scroll-snap-type: x mandatory;\n  scrollbar-width: none;\n}\n\n.file-slider-box::-webkit-scrollbar {\n  display: none;\n}\n\n/* 04. 单页 */\n.file-page {\n  display: inline-block;\n  width: 100%;\n  height: 100%;\n  padding: 19px;\n  overflow-x: hidden;\n  overflow-y: auto;\n  vertical-align: top;\n  white-space: normal;\n  font-size: 13px;\n  background: #fff;\n  scroll-snap-align: start;\n  scrollbar-width: none;\n  -webkit-overflow-scrolling: touch;\n}\n\n.file-page::-webkit-scrollbar {\n  display: none;\n}\n\n/* 05. 普通内容 */\n.file-text {\n  margin-bottom: 17px;\n}\n\n.block-box {\n  padding: 14px;\n  margin-bottom: 15px;\n  color: #333;\n  background: #fafafa;\n  border: 1px solid #dedede;\n  border-radius: 0 !important;\n}\n\n.mind-box {\n  padding: 16px 10px;\n  margin: 8px 0 19px;\n  color: #777;\n  background: #fafafa;\n  border-top: 1px solid #ddd;\n  border-bottom: 1px solid #ddd;\n  font-size: 12px;\n  line-height: 1.9;\n  text-align: center;\n  overflow-wrap: anywhere;\n}\n\n/* 06. 私聊 / 群聊：保留圆角 */\n.chat-flow {\n  display: flex;\n  flex-direction: column;\n  gap: 18px;\n  padding: 10px 0;\n}\n\n.chat-row {\n  display: flex;\n  flex-direction: column;\n  gap: 6px;\n  max-width: 100%;\n}\n\n.chat-name {\n  color: #999;\n  font-family: Arial, sans-serif;\n  font-size: 10px;\n}\n\n.chat-bubble {\n  max-width: 85%;\n  padding: 10px 14px;\n  color: #333;\n  background: #fff;\n  border: 1px solid #222;\n  font-size: 13px;\n  line-height: 1.8;\n  overflow-wrap: anywhere;\n  white-space: pre-wrap;\n}\n\n.chat-row.left {\n  align-items: flex-start;\n}\n\n.chat-row.left .chat-name {\n  margin-left: 4px;\n}\n\n.chat-row.left .chat-bubble {\n  border-radius: 0 12px 12px 12px;\n}\n\n.chat-row.right {\n  align-items: flex-end;\n}\n\n.chat-row.right .chat-name {\n  margin-right: 4px;\n}\n\n.chat-row.right .chat-bubble {\n  border-radius: 12px 0 12px 12px;\n}\n\n/* 07. 论坛 */\n#forum-box {\n  width: 100%;\n}\n\n.forum-item {\n  margin-bottom: 12px;\n  overflow: hidden;\n  background: #fff;\n  border: 1px solid #ddd;\n  border-radius: 0 !important;\n}\n\n.forum-item summary {\n  display: flex;\n  align-items: center;\n  gap: 10px;\n  padding: 13px 12px;\n  background: #fafafa;\n  cursor: pointer;\n  list-style: none;\n}\n\n.forum-item summary::-webkit-details-marker {\n  display: none;\n}\n\n.forum-title {\n  flex: 1;\n  min-width: 0;\n  color: #222;\n  font-size: 13px;\n  font-weight: bold;\n  line-height: 1.6;\n  overflow-wrap: anywhere;\n}\n\n.forum-meta {\n  flex-shrink: 0;\n  color: #999;\n  font-size: 10px;\n}\n\n.forum-content {\n  padding: 14px;\n  color: #444;\n  border-top: 1px dashed #ddd;\n  font-size: 12px;\n  line-height: 1.8;\n  overflow-wrap: anywhere;\n}\n\n.forum-lz {\n  margin-bottom: 12px;\n  font-weight: bold;\n}\n\n.forum-reply {\n  padding: 10px 12px;\n  margin-top: 8px;\n  background: #fafafa;\n  border-left: 2px solid #bbb;\n  font-size: 12px;\n  line-height: 1.7;\n  overflow-wrap: anywhere;\n}\n\n/* 08. 热搜 */\n#trending-box {\n  padding: 0 5px;\n}\n\n.hot-item {\n  background: #fff;\n  border-bottom: 1px dashed #ddd;\n}\n\n.hot-item:last-child {\n  border-bottom: none;\n}\n\n.hot-item summary {\n  display: flex;\n  align-items: flex-start;\n  gap: 8px;\n  padding: 14px 4px;\n  cursor: pointer;\n  list-style: none;\n}\n\n.hot-item summary::-webkit-details-marker {\n  display: none;\n}\n\n.hot-rank {\n  flex: 0 0 23px;\n  color: #999;\n  font-family: Arial, sans-serif;\n  font-size: 15px;\n  font-weight: bold;\n  line-height: 1.5;\n  text-align: center;\n}\n\n.hot-rank.top1 {\n  color: #c63c3c;\n}\n\n.hot-rank.top2 {\n  color: #a66a32;\n}\n\n.hot-rank.top3 {\n  color: #a38c38;\n}\n\n.hot-title {\n  flex: 1;\n  min-width: 0;\n  color: #222;\n  font-size: 13px;\n  font-weight: bold;\n  line-height: 1.6;\n  overflow-wrap: anywhere;\n}\n\n.hot-stats {\n  display: flex;\n  flex-shrink: 0;\n  flex-direction: column;\n  align-items: flex-end;\n  margin-left: 4px;\n  color: #999;\n  font-size: 10px;\n  line-height: 1.6;\n}\n\n.hot-detail {\n  padding: 12px 12px 12px 30px;\n  color: #555;\n  background: #fafafa;\n  border-top: 1px dashed #ddd;\n  font-size: 12px;\n  line-height: 1.7;\n  overflow-wrap: anywhere;\n}\n\n.hot-detail b {\n  color: #222;\n}\n\n/* 09. 底部 */\n.file-bottom {\n  padding: 19px;\n  color: #222;\n  background: #fff;\n  border-top: 1px solid #171717;\n}\n\n.file-end-title,\n.file-memory-title {\n  color: #222;\n  font-size: 12px;\n  font-weight: bold;\n}\n\n.file-end-text {\n  padding: 8px 0 14px;\n  color: #444;\n  font-size: 13px;\n  line-height: 1.9;\n  text-align: right;\n  overflow-wrap: anywhere;\n}\n\n.file-memory {\n  padding: 13px;\n  background: #fff;\n  border: 1px solid #222;\n  border-radius: 0 !important;\n}\n\n.file-memory-text {\n  margin-top: 7px;\n  color: #666;\n  font-size: 12px;\n  line-height: 1.9;\n  overflow-wrap: anywhere;\n}\n\n/* 10. 系统提示 */\n.sys-alert {\n  padding: 13px;\n  margin-top: 18px;\n  color: #eee;\n  background: #111;\n  border: 1px solid #9e3434;\n  border-left: 3px solid #9e3434;\n  border-radius: 0 !important;\n  box-shadow: 0 0 5px rgba(158,52,52,.12);\n}\n\n.sys-alert .file-tag {\n  padding: 4px 7px;\n  margin-bottom: 9px;\n  color: #eee;\n  background: #222;\n  border-color: #9e3434;\n  font-size: 9px;\n  line-height: 1.4;\n}\n\n.sys-alert .file-tag span {\n  border-color: #777;\n  font-size: 10px;\n}\n\n.sys-alert-text {\n  color: #ddd;\n  font-size: 11px;\n  line-height: 1.75;\n  overflow-wrap: anywhere;\n  white-space: pre-wrap;\n}\n\n/* 11. 好感度 */\n.favor-bar-bg {\n  height: 7px;\n  margin-top: 9px;\n  overflow: hidden;\n  background: #eee;\n  border: 1px solid #ccc;\n  border-radius: 0 !important;\n}\n\n.favor-bar-fill {\n  width: {{favor}}%;\n  height: 100%;\n  background: #171717;\n}\n\n/* 12. 移动端 */\n@media (max-width: 480px) {\n  .file-top {\n    padding: 19px 16px;\n  }\n\n  .file-page {\n    padding: 16px;\n  }\n\n  .file-slider-box {\n    height: 500px;\n    max-height: 65vh;\n  }\n\n  .chat-bubble {\n    max-width: 90%;\n  }\n\n  .file-bottom {\n    padding: 16px;\n  }\n}\n\n/* ==================================================\n   SYSTEM PANEL · 操作按钮\n   不改档案馆 HTML 的视觉\n================================================== */\n\n/* 面板变量 */\n.xs-panel {\n  --xs-bg: #fff;\n  --xs-tile-bg: #fff;\n  --xs-text: #171717;\n  --xs-muted: #888;\n  --xs-accent: #171717;\n  --xs-border: #222;\n  --xs-cap: #171717;\n  --xs-action-bg: #fff;\n  --xs-done-bg: #fff;\n}\n\n/* 历史 / 偏好 / 重ROLL */\n.xs-panel .xs-action {\n  color: #171717 !important;\n  background: #fff !important;\n  border: 1px solid #222 !important;\n  border-radius: 0 !important;\n  box-shadow: none !important;\n  backdrop-filter: none !important;\n  -webkit-backdrop-filter: none !important;\n}\n\n/* 删除 */\n.xs-panel .xs-delete,\n.xs-panel .xs-remove,\n.xs-panel button[class*=\"delete\"],\n.xs-panel button[class*=\"remove\"] {\n  color: #171717 !important;\n  background: #fff !important;\n  border: 1px solid #222 !important;\n  border-radius: 0 !important;\n  box-shadow: none !important;\n}\n\n/* 右上角关闭 */\n.xs-panel .xs-cap-x {\n  display: flex !important;\n  width: 36px !important;\n  height: 36px !important;\n  align-items: center !important;\n  justify-content: center !important;\n  color: #171717 !important;\n  background: #fff !important;\n  border: 1px solid #222 !important;\n  border-radius: 0 !important;\n  box-shadow: none !important;\n}\n\n/* 底部关闭 */\n.xs-panel .xs-done {\n  padding: 12px 18px !important;\n  color: #171717 !important;\n  background: #fff !important;\n  border: 1px solid #222 !important;\n  border-radius: 0 !important;\n  box-shadow: none !important;\n}\n\n/* 悬停 */\n.xs-panel .xs-action:hover,\n.xs-panel .xs-done:hover,\n.xs-panel .xs-delete:hover,\n.xs-panel .xs-remove:hover {\n  color: #fff !important;\n  background: #171717 !important;\n  border-color: #171717 !important;\n}\n\n/* 按钮内部 */\n.xs-panel .xs-action *,\n.xs-panel .xs-done *,\n.xs-panel .xs-cap-x *,\n.xs-panel .xs-delete *,\n.xs-panel .xs-remove * {\n  border-radius: 0 !important;\n  box-shadow: none !important;\n}\n/* 强制一句话居中，消除代码缩进带来的空格偏移 */\n.file-page .file-text[style*=\"text-align:center\"],\n.file-page .file-text[style*=\"text-align: center\"] {\n  text-align: center !important;\n  white-space: normal !important; /* 核心：忽略代码里的回车和空格 */\n  text-indent: 0 !important;\n  padding: 0 !important;\n}",
+      "visibleCards": [
+        "currentState"
+      ],
+      "contextFields": [
+        "innerThought"
+      ],
+      "fields": [
+        {
+          "key": "time_loc",
+          "title": "时间推演",
+          "hint": "格式：时间 / 地点 / 在场人物。要求必须极简，只写当前环境状态和大概可能发生的事，不要废话。",
+          "builtin": false,
+          "style": "normal",
+          "maxChars": 80
+        },
+        {
+          "key": "story",
+          "title": "故事",
+          "hint": "衍生小剧场：不要直接总结正文，而是根据当前玩家和AI的聊天话题，编造并讲述一个与之相呼应的“小故事/寓言”。内容要隐喻或贴合当前情境。",
+          "builtin": false,
+          "style": "normal",
+          "maxChars": 180
+        },
+        {
+          "key": "content",
+          "title": "此刻相遇",
+          "hint": "核心正文：包含详细的对话、动作、神态、环境描写。强制要求：必须频繁换行分段！ 不要挤成一坨，确保手机阅读体验。",
+          "builtin": false,
+          "style": "normal",
+          "maxChars": 400
+        },
+        {
+          "key": "mind_voice",
+          "title": "内心戏",
+          "hint": "角色的内心真实独白。不需要动作描写，不需要环境描写，只需用第一人称写下他此刻心里的真实OS（潜台词）。如果表面装作高冷，内心可能在想别的。必须分段。",
+          "builtin": false,
+          "style": "normal",
+          "maxChars": 200
+        },
+        {
+          "key": "private_chat",
+          "title": "私聊",
+          "hint": "角色和其他人（第三人）私下聊关于玩家的事情。格式必须严格为每句话换行，且以“说话人名字：内容”开头。绝对不要写任何动作、环境等旁白描写。",
+          "builtin": false,
+          "style": "normal",
+          "maxChars": 360
+        },
+        {
+          "key": "group_chat",
+          "title": "群聊",
+          "hint": "多个角色在群里讨论玩家或当前事件，要体现人多口杂的氛围。格式必须严格为每句话换行，且以“说话人名字：内容”开头。绝对不要写任何旁白描写。",
+          "builtin": false,
+          "style": "normal",
+          "maxChars": 400
+        },
+        {
+          "key": "forum",
+          "title": "论坛",
+          "hint": "生成10个帖子；每帖依次逐行写：标题【】、发帖人(赞:xxx)、楼主：xxx、网友A回复楼主：xxx、网友B：xxx、网友C：xxx；网友D：xxx。帖间空行。",
+          "builtin": false,
+          "style": "normal",
+          "maxChars": 800
+        },
+        {
+          "key": "trending",
+          "title": "热搜",
+          "hint": "生成10条不同热搜，每条单独一行：1.标题（热度:xxx 点赞数：xxx）热评：xxx；编号连续，内容各异，不得合并或遗漏。",
+          "builtin": false,
+          "style": "normal",
+          "maxChars": 300
+        },
+        {
+          "key": "inner_choice",
+          "title": "内心选择",
+          "hint": "角色内心的多方案推演。格式： 方案A：xxx (顾虑) 方案B：xxx (顾虑) 最终打算采取：xxx",
+          "builtin": false,
+          "style": "normal",
+          "maxChars": 200
+        },
+        {
+          "key": "deep_choice",
+          "title": "深处选择",
+          "hint": "角色内心最深处、最真实的阴暗或深情想法。注意：这只是他脑子里想的，不一定会去做。",
+          "builtin": false,
+          "style": "normal",
+          "maxChars": 120
+        },
+        {
+          "key": "relationship",
+          "title": "关系",
+          "hint": "结合当前关系（如：主仆、恋人、仇敌）和好感度（0-100的数值），写一段具体的状态描述和态度变化。",
+          "builtin": false,
+          "style": "normal",
+          "maxChars": 150
+        },
+        {
+          "key": "favor",
+          "title": "好感度",
+          "hint": "纯数字：仅输出 0-100 的阿拉伯数字，不要带“%”或文字。",
+          "builtin": false,
+          "style": "normal",
+          "maxChars": 0
+        },
+        {
+          "key": "current_state",
+          "title": "此刻",
+          "hint": "简要写角色的状态，心里感受，心理碎碎念。",
+          "builtin": false,
+          "style": "normal",
+          "maxChars": 120
+        },
+        {
+          "key": "quest",
+          "title": "任务",
+          "hint": "要求：当前的目标、进度，用极其干练的词语说自己要完成的事。",
+          "builtin": false,
+          "style": "normal",
+          "maxChars": 120
+        },
+        {
+          "key": "schedule",
+          "title": "行程",
+          "hint": "说明玩家/角色一天的行程安排及接下来打算做什么。",
+          "builtin": false,
+          "style": "normal",
+          "maxChars": 120
+        },
+        {
+          "key": "inventory",
+          "title": "随身携带",
+          "hint": "角色当前身上的穿着（衣物、配饰），以及随身携带的特定物品。",
+          "builtin": false,
+          "style": "normal",
+          "maxChars": 120
+        },
+        {
+          "key": "good_choice",
+          "title": "好的故事",
+          "hint": "如果玩家顺从、做对选择或触发正向剧情，角色/故事会走向何种发展。语气需要甜蜜、救赎或温馨，写一个故事。",
+          "builtin": false,
+          "style": "normal",
+          "maxChars": 150
+        },
+        {
+          "key": "bad_choice",
+          "title": "坏的故事",
+          "hint": "如果玩家激怒角色、做错选择或触发黑化剧情，角色会走向何种极端。语气可以病娇、虐心或充满毁灭感，写一个故事。",
+          "builtin": false,
+          "style": "normal",
+          "maxChars": 120
+        },
+        {
+          "key": "world_status",
+          "title": "世界动态",
+          "hint": "要求：休息或时间推进时，其他人（比如配角或npc）正在干什么，如果知道了玩家的事会怎么想怎么做。",
+          "builtin": false,
+          "style": "normal",
+          "maxChars": 120
+        },
+        {
+          "key": "parallel",
+          "title": "平行时空",
+          "hint": "假如当前的事情没有发生，或者走向了另一个极端，在另一条时间线上的剧情走向，写一个故事。",
+          "builtin": false,
+          "style": "normal",
+          "maxChars": 120
+        },
+        {
+          "key": "deceive",
+          "title": "假如欺骗",
+          "hint": "假如角色对玩家撒了谎，他表面上会怎么演，内心里真正在算计什么，写一个故事。",
+          "builtin": false,
+          "style": "normal",
+          "maxChars": 120
+        },
+        {
+          "key": "one_word",
+          "title": "一句话",
+          "hint": "极度简短，一句直戳心窝子的话，不能超过30个字。",
+          "builtin": false,
+          "style": "normal",
+          "maxChars": 30
+        },
+        {
+          "key": "system_tip",
+          "title": "系统提示",
+          "hint": "危险版警告：使用带有机械感、游戏系统的冰冷口吻。必须以 [WARNING] 或 【系统提示】 开头，给出一句关于当前局势、角色危险阈值或环境异动的冷酷播报。",
+          "builtin": false,
+          "style": "normal",
+          "maxChars": 150
+        },
+        {
+          "key": "bottom_card",
+          "title": "结语",
+          "hint": "像电影片尾的定格画面，一句总结性的环境描写或陈述。",
+          "builtin": false,
+          "style": "normal",
+          "maxChars": 120
+        },
+        {
+          "key": "memory",
+          "title": "记忆",
+          "hint": "要求：以第三人称总结这段对话核心，防止下轮失忆（如：他拿走了手机）。",
+          "builtin": false,
+          "style": "normal",
+          "maxChars": 120
+        },
+        {
+          "key": "currentState",
+          "title": "此刻",
+          "hint": "简要写角色的状态，心里感受，心理碎碎念。",
+          "builtin": true,
+          "style": "normal",
+          "maxChars": 48
+        }
+      ],
+      "visibleKeys": [
+        "time_loc",
+        "story",
+        "content",
+        "mind_voice",
+        "private_chat",
+        "group_chat",
+        "forum",
+        "trending",
+        "inner_choice",
+        "deep_choice",
+        "relationship",
+        "favor",
+        "current_state",
+        "quest",
+        "schedule",
+        "inventory",
+        "good_choice",
+        "bad_choice",
+        "world_status",
+        "parallel",
+        "deceive",
+        "one_word",
+        "system_tip",
+        "bottom_card",
+        "memory",
+        "currentState"
+      ],
+      "contextKeys": [
+        "memory"
+      ],
+      "deckStyle": "html",
+      "htmlTemplate": "<div class=\"file-wrap\">\n\n  <div class=\"file-top\">\n    <div class=\"file-tag\">TIME <span>时间推演</span></div>\n    <div class=\"file-time\">{{time_loc}}</div>\n    <div class=\"file-tag\">STORY <span>故事</span></div>\n    <div class=\"file-story\">{{story}}</div>\n  </div>\n\n  <div class=\"file-slider-box\">\n\n    <div class=\"file-page\">\n      <div class=\"file-tag\">CONTENT <span>此刻相遇</span></div>\n      <div class=\"file-text\">{{content}}</div>\n      <div class=\"file-tag\">MIND <span>内心戏</span></div>\n      <div class=\"mind-box\">『{{mind_voice}}』</div>\n    </div>\n\n    <div class=\"file-page\">\n      <div class=\"file-tag\">PRIVATE <span>私聊</span></div>\n      <div class=\"chat-flow\" id=\"private-box\"></div>\n    </div>\n\n    <div class=\"file-page\">\n      <div class=\"file-tag\">GROUP <span>群聊</span></div>\n      <div class=\"chat-flow\" id=\"group-box\"></div>\n    </div>\n\n    <div class=\"file-page\">\n      <div class=\"file-tag\">FORUM <span>论坛</span></div>\n      <div id=\"forum-box\"></div>\n    </div>\n\n    <div class=\"file-page\">\n      <div class=\"file-tag\">TRENDING <span>热搜</span></div>\n      <div id=\"trending-box\"></div>\n    </div>\n\n    <div class=\"file-page\">\n      <div class=\"file-tag\">INNER <span>内心选择</span></div>\n      <div class=\"block-box\"><div class=\"file-text\">{{inner_choice}}</div></div>\n      <div class=\"file-tag\">DEEP <span>深处选择</span></div>\n      <div class=\"block-box\"><div class=\"file-text\">{{deep_choice}}</div></div>\n    </div>\n\n    <div class=\"file-page\">\n      <div class=\"file-tag\">MISSION <span>任务与状态</span></div>\n      <div class=\"block-box\">\n        <div class=\"file-tag\">QUEST <span>任务</span></div>\n        <div class=\"file-text\">{{quest}}</div>\n      </div>\n      <div class=\"block-box\">\n        <div class=\"file-tag\">SCHEDULE <span>行程</span></div>\n        <div class=\"file-text\">{{schedule}}</div>\n      </div>\n      <div class=\"block-box\">\n        <div class=\"file-tag\">INVENTORY <span>随身携带</span></div>\n        <div class=\"file-text\">{{inventory}}</div>\n      </div>\n    </div>\n\n    <div class=\"file-page\">\n      <div class=\"file-tag\">RELATIONSHIP <span>关系</span></div>\n      <div class=\"block-box\"><div class=\"file-text\">{{relationship}}</div></div>\n      <div class=\"file-tag\">CURRENT <span>此刻</span></div>\n      <div class=\"block-box\"><div class=\"file-text\">{{current_state}}</div></div>\n      <div class=\"file-tag\">FAVOR <span>好感度</span></div>\n      <div class=\"block-box\">\n        <div style=\"font-size:26px;font-weight:bold;text-align:right;\">{{favor}}%</div>\n        <div class=\"favor-bar-bg\">\n          <div class=\"favor-bar-fill\"></div>\n        </div>\n      </div>\n    </div>\n\n    <div class=\"file-page\">\n      <div class=\"file-tag\">SIMULATION <span>推演与假设</span></div>\n      <div class=\"block-box\">\n        <div class=\"file-tag\">GOOD STORY <span>好的故事</span></div>\n        <div class=\"file-text\">{{good_choice}}</div>\n      </div>\n      <div class=\"block-box\">\n        <div class=\"file-tag\">BAD STORY <span>坏的故事</span></div>\n        <div class=\"file-text\">{{bad_choice}}</div>\n      </div>\n    </div>\n\n    <div class=\"file-page\">\n      <div class=\"file-tag\">WORLD <span>世界动态</span></div>\n      <div class=\"block-box\"><div class=\"file-text\">{{world_status}}</div></div>\n      <div class=\"file-tag\">PARALLEL <span>平行时空</span></div>\n      <div class=\"block-box\"><div class=\"file-text\">{{parallel}}</div></div>\n    </div>\n\n    <div class=\"file-page\">\n      <div class=\"file-tag\">ONE WORD <span>一句话</span></div>\n      <div class=\"file-text\" style=\"font-size:20px;font-weight:bold;text-align:center;\">\n        “{{one_word}}”\n      </div>\n\n      <div class=\"file-tag\">DECEIVE <span>假如欺骗</span></div>\n      <div class=\"file-text\">{{deceive}}</div>\n\n      <div class=\"sys-alert\">\n        <div class=\"file-tag\">WARNING <span>系统提示</span></div>\n        <div class=\"sys-alert-text\">{{system_tip}}</div>\n      </div>\n    </div>\n\n  </div>\n\n  <div class=\"file-bottom\">\n    <div class=\"file-end-title\">CONCLUSION 结语</div>\n    <div class=\"file-end-text\">—— {{bottom_card}}</div>\n\n    <div class=\"file-memory\">\n      <div class=\"file-memory-title\">MEMORY 记忆留存</div>\n      <div class=\"file-memory-text\">{{memory}}</div>\n    </div>\n  </div>\n\n</div>\n\n<script>\n(function(){\n\n  function safeText(value){\n    return String(value==null?'':value).replace(/[&<>\"']/g,function(c){\n      return {\n        '&':'&amp;',\n        '<':'&lt;',\n        '>':'&gt;',\n        '\"':'&quot;',\n        \"'\":'&#39;'\n      }[c];\n    });\n  }\n\n  /* 私聊与群聊 */\n  function parseChat(raw,boxId){\n    const box=document.getElementById(boxId);\n    if(!box||!raw)return;\n\n    let html='';\n    let sysNameStr=\"{{char_name}}\";\n    if(sysNameStr.indexOf(\"{{\")!==-1)sysNameStr='';\n\n    raw.replace(/\\r/g,'').split('\\n').forEach(function(line){\n      line=line.trim();\n      if(!line)return;\n\n      const match=line.match(/^(\\[ME\\]|\\[OTHER\\])?\\s*([^：:]+)[：:](.*)$/);\n\n      if(!match){\n        html+='<div class=\"chat-row left\"><div class=\"chat-bubble\" style=\"border:none;background:#f5f5f5;color:#666;\">'+safeText(line)+'</div></div>';\n        return;\n      }\n\n      const tag=match[1]||'';\n      const name=match[2].replace(/[\\[\\]【】]/g,'').trim();\n      const content=match[3].trim();\n\n      const isMe=(\n        tag==='[ME]'||\n        name.includes('玲奈')||\n        name.includes('Van')||\n        name.includes('我')||\n        (sysNameStr&&name.includes(sysNameStr))\n      );\n\n      html+='<div class=\"chat-row '+(isMe?'right':'left')+'\">'+\n        '<div class=\"chat-name\">'+safeText(name)+'</div>'+\n        '<div class=\"chat-bubble\">'+safeText(content)+'</div>'+\n        '</div>';\n    });\n\n    box.innerHTML=html;\n  }\n\n  /* 论坛：最多十条 */\n  function parseForum(raw){\n    const box=document.getElementById('forum-box');\n    if(!box)return;\n\n    raw=String(raw||'').replace(/\\r/g,'').trim();\n\n    if(!raw){\n      box.innerHTML='<div style=\"text-align:center;color:#999;\">暂无论坛内容</div>';\n      return;\n    }\n\n    const lines=raw.split('\\n');\n    const posts=[];\n    let current=null;\n\n    function savePost(){\n      if(current){\n        posts.push(current);\n        current=null;\n      }\n    }\n\n    lines.forEach(function(line){\n      line=line.trim();\n      if(!line)return;\n\n      const titleMatch=line.match(/^【(.+?)】/);\n\n      if(titleMatch){\n        savePost();\n        current={\n          title:titleMatch[1],\n          meta:'♡ 999',\n          body:''\n        };\n\n        let rest=line.replace(/^【.*?】\\s*/,'');\n        if(rest){\n          if(rest.match(/^(发帖人|赞[:：])/)){\n            let num=rest.match(/\\d+/);\n            if(num)current.meta='♡ '+num[0];\n          }else{\n            current.body+='<div style=\"margin-bottom:8px;font-weight:bold;\">'+safeText(rest)+'</div>';\n          }\n        }\n        return;\n      }\n\n      if(!current){\n        current={title:'匿名讨论',meta:'♡ 999',body:''};\n      }\n\n      if(line.match(/^(发帖人|赞[:：])/)){\n        let num=line.match(/\\d+/);\n        if(num)current.meta='♡ '+num[0];\n      }\n      else if(line.match(/^楼主[:：]/)){\n        current.body+='<div class=\"forum-lz\">'+\n          safeText(line.replace(/^楼主[:：]\\s*/,''))+\n          '</div>';\n      }\n      else if(line.match(/^(网友.*?[:：]|评论.*?[:：])/)){\n        let text=line.replace(/^.*?[:：]\\s*/,'');\n        let nameMatch=line.match(/^(网友.*?|评论.*?)[:：]/);\n        let name=nameMatch?nameMatch[1]:'网友';\n\n        current.body+='<div class=\"forum-reply\"><b>'+\n          safeText(name)+'：</b>'+safeText(text)+'</div>';\n      }\n      else{\n        current.body+='<div style=\"margin-bottom:8px;\">'+safeText(line)+'</div>';\n      }\n    });\n\n    savePost();\n\n    let html='';\n\n    posts.slice(0,10).forEach(function(post){\n      html+='<details class=\"forum-item\">'+\n        '<summary>'+\n        '<span class=\"forum-title\">'+safeText(post.title)+'</span>'+\n        '<span class=\"forum-meta\">'+safeText(post.meta)+'</span>'+\n        '</summary>'+\n        '<div class=\"forum-content\">'+\n        (post.body||'暂无详细内容')+\n        '</div>'+\n        '</details>';\n    });\n\n    box.innerHTML=html;\n  }\n\n  /* 热搜 */\n  function parseTrending(raw){\n    const box=document.getElementById('trending-box');\n    if(!box)return;\n\n    raw=String(raw||'').replace(/\\r/g,'').trim();\n\n    if(!raw){\n      box.innerHTML='<div style=\"text-align:center;color:#999;\">暂无热搜内容</div>';\n      return;\n    }\n\n    raw=raw.replace(/[ \\t]+(?=\\d{1,2}[.、．]\\s*)/g,'\\n');\n\n    const lines=raw.split('\\n');\n    const items=[];\n    let current=null;\n\n    lines.forEach(function(line){\n      line=line.trim();\n      if(!line)return;\n\n      const match=line.match(/^(\\d{1,2})[.、．]\\s*(.*)$/);\n\n      if(match){\n        if(current)items.push(current);\n        current={\n          rank:Number(match[1]),\n          text:match[2]\n        };\n      }\n      else if(current){\n        current.text+=' '+line;\n      }\n    });\n\n    if(current)items.push(current);\n\n    let html='';\n\n    items.forEach(function(item){\n      let text=item.text;\n      let heat='';\n      let likes='';\n      let comment='';\n\n      const parenMatch=text.match(/[（(](.*?)[）)]/);\n\n      if(parenMatch){\n        const inner=parenMatch[1];\n\n        const heatMatch=inner.match(/热度[:：]\\s*([\\d.]+[wW万]?)/);\n        if(heatMatch)heat=heatMatch[1];\n\n        const likeMatch=inner.match(/(点赞数|赞)[:：]\\s*([\\d.]+[wW万]?)/);\n        if(likeMatch)likes=likeMatch[2];\n\n        text=text.replace(parenMatch[0],'');\n      }\n\n      const commentMatch=text.match(/热评[:：]\\s*([\\s\\S]*)$/);\n\n      if(commentMatch){\n        comment=commentMatch[1].trim();\n        text=text.replace(commentMatch[0],'');\n      }\n\n      const title=text.replace(/[|｜]\\s*$/,'').trim();\n\n      const rankClass=\n        item.rank===1?'top1':\n        item.rank===2?'top2':\n        item.rank===3?'top3':'';\n\n      html+='<details class=\"hot-item\">'+\n        '<summary>'+\n        '<span class=\"hot-rank '+rankClass+'\">'+item.rank+'</span>'+\n        '<span class=\"hot-title\">'+safeText(title||'未命名')+'</span>'+\n        '<span class=\"hot-stats\">'+\n        (heat?'<span>🔥 '+safeText(heat)+'</span>':'')+\n        (likes?'<span>♡ '+safeText(likes)+'</span>':'')+\n        '</span>'+\n        '</summary>'+\n        '<div class=\"hot-detail\"><b>热评：</b>'+\n        safeText(comment||'暂无热评')+\n        '</div>'+\n        '</details>';\n    });\n\n    box.innerHTML=html;\n  }\n\n  /* 初始化 */\n  function initialize(){\n    parseChat(`{{private_chat}}`,'private-box');\n    parseChat(`{{group_chat}}`,'group-box');\n    parseForum(`{{forum}}`);\n    parseTrending(`{{trending}}`);\n  }\n\n  if(document.readyState==='loading'){\n    document.addEventListener('DOMContentLoaded',initialize);\n  }else{\n    initialize();\n  }\n\n})();\n</script>",
+      "updatedAt": 1794549909000
+    }
+  ]
+}
