@@ -1,7 +1,7 @@
 {
   "schema": "puff_share_index",
   "schemaVersion": 1,
-  "generatedAt": "2026-11-13T03:20:24.398Z",
+  "generatedAt": "2026-11-13T03:25:16.716Z",
   "folders": [
     {
       "name": "App",
@@ -37,7 +37,7 @@
     },
     {
       "name": "角色卡",
-      "count": 36
+      "count": 37
     },
     {
       "name": "预设",
@@ -3060,6 +3060,22 @@
       "images": [],
       "description": "Puff 资源集市测试资源。在 App 里点「一键应用」或浏览同目录下的文件即可。",
       "updatedAt": "2026-09-21T16:16:10+08:00"
+    },
+    {
+      "folder": "角色卡",
+      "name": "daddy能有什么坏心思",
+      "type": "dir",
+      "path": "资源/角色卡/daddy能有什么坏心思",
+      "files": [
+        "资源/角色卡/daddy能有什么坏心思/人设_失忆养父不要欲求不满了.docx",
+        "资源/角色卡/daddy能有什么坏心思/人设资料.json"
+      ],
+      "images": [
+        "资源/角色卡/daddy能有什么坏心思/10348.jpg",
+        "资源/角色卡/daddy能有什么坏心思/封面.jpg"
+      ],
+      "description": "",
+      "updatedAt": "2026-11-13T11:24:51+08:00"
     },
     {
       "folder": "角色卡",
