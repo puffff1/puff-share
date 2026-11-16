@@ -1,7 +1,7 @@
 {
   "schema": "puff_share_index",
   "schemaVersion": 1,
-  "generatedAt": "2026-11-13T06:19:54.133Z",
+  "generatedAt": "2026-11-16T10:44:46.694Z",
   "folders": [
     {
       "name": "App",
@@ -13,7 +13,7 @@
     },
     {
       "name": "世界书",
-      "count": 13
+      "count": 14
     },
     {
       "name": "其他",
@@ -376,6 +376,20 @@
       ],
       "description": "",
       "updatedAt": "2026-10-21T18:05:02+08:00"
+    },
+    {
+      "folder": "世界书",
+      "name": "【世界书·成熟年上的自然调情准则】by物候期",
+      "type": "dir",
+      "path": "资源/世界书/【世界书·成熟年上的自然调情准则】by物候期",
+      "files": [
+        "资源/世界书/【世界书·成熟年上的自然调情准则】by物候期/世界书_更适合年上char的调情与sweet_talk_by物候期.docx"
+      ],
+      "images": [
+        "资源/世界书/【世界书·成熟年上的自然调情准则】by物候期/封面.jpeg"
+      ],
+      "description": "",
+      "updatedAt": "2026-11-16T18:44:24+08:00"
     },
     {
       "folder": "世界书",
