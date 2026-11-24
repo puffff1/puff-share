@@ -1,7 +1,7 @@
 {
   "schema": "puff_share_index",
   "schemaVersion": 1,
-  "generatedAt": "2026-11-24T17:17:47.434Z",
+  "generatedAt": "2026-11-24T23:18:19.043Z",
   "folders": [
     {
       "name": "App",
@@ -9,7 +9,7 @@
     },
     {
       "name": "repo",
-      "count": 10
+      "count": 11
     },
     {
       "name": "世界书",
@@ -213,6 +213,18 @@
       ],
       "description": "",
       "updatedAt": "2026-09-28T23:49:38+08:00"
+    },
+    {
+      "folder": "repo",
+      "name": "QQ-猫猫by淮枝",
+      "type": "dir",
+      "path": "资源/repo/QQ-猫猫by淮枝",
+      "files": [],
+      "images": [
+        "资源/repo/QQ-猫猫by淮枝/1000018981.jpg"
+      ],
+      "description": "",
+      "updatedAt": "2026-11-25T07:17:48+08:00"
     },
     {
       "folder": "repo",
