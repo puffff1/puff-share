@@ -1,7 +1,7 @@
 {
   "schema": "puff_share_index",
   "schemaVersion": 1,
-  "generatedAt": "2026-11-20T15:49:16.767Z",
+  "generatedAt": "2026-11-24T17:13:11.991Z",
   "folders": [
     {
       "name": "App",
@@ -9,7 +9,7 @@
     },
     {
       "name": "repo",
-      "count": 10
+      "count": 11
     },
     {
       "name": "世界书",
@@ -334,6 +334,18 @@
       "images": [],
       "description": "",
       "updatedAt": "2026-11-04T19:28:22+08:00"
+    },
+    {
+      "folder": "repo",
+      "name": "长夜＆黑白漫画风『心声美化』",
+      "type": "dir",
+      "path": "资源/repo/长夜＆黑白漫画风『心声美化』",
+      "files": [
+        "资源/repo/长夜＆黑白漫画风『心声美化』/正文.txt"
+      ],
+      "images": [],
+      "description": "",
+      "updatedAt": "2026-11-25T01:12:42+08:00"
     },
     {
       "folder": "世界书",
